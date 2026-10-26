@@ -70,5 +70,8 @@ Rules: no scope creep (write follow-ups instead); never weaken a test; English o
 | SDD-17 | [balancing-sim](balancing-sim.md) | Sonnet (sim) + Haiku (reports) | PROTOTYPE |
 | SDD-18 | [testing-and-qa](testing-and-qa.md) | All | STRUCTURE onward |
 | SDD-19 | [release-and-deploy](release-and-deploy.md) | Coordinator | STRUCTURE |
+| SDD-20 | [meta-skill-tree](meta-skill-tree.md) | Sonnet (core) + Coordinator (view) | ALPHA |
+| SDD-21 | [events-and-treasure](events-and-treasure.md) | Opus (core) + Coordinator (scenes) | ALPHA |
+| SDD-22 | [act-2](act-2.md) | Sonnet | ALPHA |
 
 Human QA script: [`docs/qa/human-qa.md`](../qa/human-qa.md).

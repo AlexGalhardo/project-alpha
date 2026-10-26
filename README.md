@@ -2,11 +2,13 @@
 
 A roguelite deckbuilder with RPG progression, in pixel art, for the web first. You command a party of three condemned heroes on a descent into the Rift, a growing biomechanical wound beneath a ruined militant order's cathedral-fortress. Cards decide what happens; ranks decide who acts and who is hit.
 
-> Screenshot placeholder: gameplay capture to be added once the Act 1 build is playable.
+Screenshots are not committed. After `bunx playwright test tests/e2e/screens.spec.ts`, captures of each scene are written to `test-results/screens/`.
 
 ## Status
 
-Prototype in progress. Web build only (Phaser 4, TypeScript, Bun). Electron and Android come at the end of the Beta. The working title is not cleared for release (see `docs/gdd.md`, Q-NAME-CHECK).
+- Prototype (Act 1, web): feature-complete with generated pixel art (PixelLab batch 1) and generated audio (ElevenLabs, 4 music loops and 35 SFX). Manual QA is pending; see `docs/reports/2026-10-26-qa-prototype.md`.
+- Alpha in progress: Act 2, event and treasure nodes, the Legacy skill tree. Specs in `docs/sdd/` (SDD-20 to SDD-22).
+- Web build only (Phaser 4, TypeScript, Bun). Electron and Android come at the end of the Beta. The working title is not cleared for release (see `docs/gdd.md`, Q-NAME-CHECK).
 
 ## Quick start
 
@@ -17,9 +19,32 @@ bun install
 bun run dev          # local dev server
 bun test             # unit tests (tests/unit)
 bun run build        # production build
-bun run sim          # headless balancing simulation (planned, see docs/sdd/balancing.md)
-bun run test:smoke   # Playwright smoke test against the production build
+bun run ci           # lint, typecheck, unit tests, markdown lint, build
 ```
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `bun run sim -- --runs 1000 --seed 1 --party shieldbearer,confessor,marksman` | Headless balance simulation. Flags: `--runs`, `--seed`, `--party` (default: all 10 compositions), `--enemy-hp`, `--enemy-dmg`, `--hero-hp` (multipliers), `--json`. Dev only: `--set PATH=VALUE`. |
+| `bunx playwright test --project=desktop-1280x720` | E2E on 1280×720 at DPR 1 (`tests/e2e`, `tests/smoke`). |
+| `bunx playwright test --project=mobile-landscape-844x390` | E2E on 844×390 at DPR 3, touch. |
+| `bun run test:smoke` | Boot smoke test against the production build. |
+| `bunx playwright test tests/e2e/screens.spec.ts` | Writes scene captures to `test-results/screens/`. |
+| `bun run typecheck` / `bun run lint` / `bun run lint:md` | Typecheck, Biome, markdownlint. |
+
+Asset scripts (`scripts/assets/`). They read API keys from the environment; keys are never printed, logged or committed.
+
+| Script | Environment variable | Use |
+|---|---|---|
+| `bun scripts/assets/elevenlabs.ts [--only <key>]` | `ELEVEN_LABS_API_KEY` | Music and SFX; idempotent; writes `public/assets/audio/` and `art-src/audio/`. |
+| `bun scripts/assets/pixellab.ts [--group heroes\|enemies\|boss\|cards\|backgrounds\|icons\|all] [--only <key>] [--force]` | `PIXELLAB_KEY_OVERRIDE` or `PIXELLAB_API_KEY` | Pixel art; idempotent; writes `art-src/pixellab/` and `public/assets/sprites/`. |
+| `bun scripts/assets/sheet.ts <prefix> [scale] [cols] [out]` | `SHEET_DIR` (optional) | Contact sheet of generated sprites for review. |
+| `bun scripts/assets/prompts-doc.ts` | none | Renders `docs/assets-prompts-used.md` from the generation logs. Rerun after each batch. |
+
+Generated assets live in `public/assets/`. Generation logs (prompts, parameters, dates, status) and raw takes live in `art-src/`.
+
+Colour-vision audit: `bun scripts/a11y/colorblind.ts` writes `docs/reports/2026-10-26-colorblind.md`.
 
 ## Controls
 
@@ -51,6 +76,9 @@ bun run test:smoke   # Playwright smoke test against the production build
 | `docs/brainstorming.md` | Decisions (B-ids) and open questions |
 | `docs/web-research.md` | Research on genre, Phaser 4 and tools |
 | `docs/glossary.md` | One word per concept |
+| `docs/assets-prompts-used.md` | Every generation prompt, parameters and output, rendered from the logs |
+| `docs/reports/` | QA, simulation and audit reports, dated |
+| `docs/qa/human-qa.md` | Human QA script (manual items) |
 
 ## Tech stack
 

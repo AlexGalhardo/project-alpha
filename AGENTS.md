@@ -42,5 +42,7 @@
 - Deterministic core: seeded RNG; no `Math.random` or `Date` in `src/core/`.
 - Balancing numbers in `src/data/`; player-facing text in `src/i18n/` (EN default, PT-BR).
 - Paid generation (PixelLab, ElevenLabs) only after approval of the list and cost.
+- Asset scripts in `scripts/assets/` read keys from the environment (`ELEVEN_LABS_API_KEY`, `PIXELLAB_KEY_OVERRIDE` or `PIXELLAB_API_KEY`). Never print, log or commit a key.
+- Generated assets: `public/assets/`. Generation logs and raw takes: `art-src/`. After a batch, rerun `scripts/assets/prompts-doc.ts` to refresh `docs/assets-prompts-used.md`.
 - Not sure? Ask. Do not invent data; mark it "not verified".
 - Parallel agents: the coordinator (main session) delegates to three fixed agents (Opus review, Sonnet code, Haiku text/i18n/tests/simulations), integrates and commits. No worktrees unless explicitly requested.

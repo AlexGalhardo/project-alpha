@@ -16,6 +16,7 @@ Conventions:
 |---|---|---|---|
 | Run | run | A complete play session, from the start until the group wins or is defeated. | "A run ends when the group falls or the last boss is beaten." |
 | Ato | act | A map block of 10 rounds (one per map row); the last round is the boss (decided, B08). | "Act 1: rounds 1 to 10, boss at round 10." |
+| Transição de ato | act_transition | After the act boss, every hero heals 50 % of max HP and loses injuries; the next act map starts at row 1 (GDD 22.1). | "The descent continues. Act 2." |
 | Rodada | round | One encounter on the route, i.e. one map node the player chooses; 10 per act, boss at round 10 (decided by the developer). Not a combat turn; see Combat round. | "Round 4 of Act 1: normal combat." |
 | Linha do mapa | map_row | One of the 10 rows of an act; each row offers 2 to 3 nodes and the player picks one (B08). | "Row 9: rest or shop." |
 | Nó | node | A point on the map that the player chooses to visit; it is one round of the run (B09). | "Treasure node at round 5." |
@@ -119,6 +120,9 @@ Prototype node types are decided (B14): combat, elite, rest, shop and boss. Even
 | Desbloqueio | unlock | Unlocking a hero, card or option between runs. | "Unlock: Huntress." |
 | Metaprogressão | meta_progression | Progress that persists between runs. Every run, won or lost, grants legacy currency; no stat bonuses (B22). | "Meta-progression unlocks cards and hero variants." |
 | Moeda de legado | legacy_currency | Currency granted by every run (won or lost), spent on skill-tree branches, new cards and hero variants. Name: open (Q-LEGACY-NAME). No stat bonuses (B22). | "Legacy: 450 of 1,000." |
+| Brasas banked | embers_banking | Embers are added to the profile once per run seed, when the run ends (won or lost). Repeating the summary never adds them twice. Shown as "Brasas" in PT-BR (see Q-LEGACY-NAME). | "A finished run banks its Embers once." |
+| Tela de Legado | legacy_screen | Main-menu screen where banked Embers buy skill-tree nodes, per hero, in order. Nodes add options only (GDD 22.5). | "Buy Shieldbearer node I for 10 Embers." |
+| Início veterano | veteran_start | Option from skill-tree node III: at party select, the hero starts with card A in place of one starter Strike. | "Veteran start: Marksman begins with Ricochet." |
 
 ## Interface
 

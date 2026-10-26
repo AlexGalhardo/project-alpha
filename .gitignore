@@ -1,0 +1,44 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+out/
+coverage/
+.vite/
+
+# Ports
+release/
+android/app/build/
+android/.gradle/
+android/local.properties
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# Tests
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
+# Copyrighted source books (summaries live in docs/books and .claude/skills)
+*.pdf
+
+# Tooling
+graphify-out/
+.claude/settings.local.json
+.claude/worktrees/
+*.log
+.DS_Store
+Thumbs.db
+
+# Local notes for the developer
+
+# Third-party reference material (local only)
+references/

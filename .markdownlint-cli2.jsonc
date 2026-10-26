@@ -1,0 +1,22 @@
+{
+	// MD013: prose lines are not wrapped. MD060: table separator style is not enforced.
+	// MD010: code examples follow the project style (tabs).
+	"config": {
+		"MD013": false,
+		"MD060": false,
+		"MD010": { "code_blocks": false },
+		// Keep a Changelog repeats "Added", "Fixed"… under every version.
+		"MD024": { "siblings_only": true }
+	},
+	"ignores": [
+		"**/node_modules/**",
+		".claude/worktrees/**",
+		"playwright-report/**",
+		"test-results/**",
+		"dist/**",
+		"references/**",
+		".claude/skills/**",
+		"PROMPT-CREATE.md",
+		"CLAUDE.md"
+	]
+}

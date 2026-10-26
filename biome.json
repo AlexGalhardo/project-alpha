@@ -1,0 +1,67 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true,
+		"defaultBranch": "main"
+	},
+	"files": {
+		"includes": [
+			"**",
+			"!**/.claude",
+			"!**/dist",
+			"!**/references",
+			"!**/playwright-report",
+			"!**/test-results",
+			"!**/art-src",
+			"!**/public",
+			"!**/docs/reports",
+			"!**/*.md"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 4,
+		"lineWidth": 100,
+		"lineEnding": "lf"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"suspicious": {
+				"noExplicitAny": "error",
+				"noEmptyBlockStatements": "error"
+			},
+			"style": {
+				"noNonNullAssertion": "warn"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"trailingCommas": "all",
+			"semicolons": "always"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.yml", "**/*.yaml"],
+			"formatter": {
+				"indentStyle": "space",
+				"indentWidth": 2
+			}
+		}
+	]
+}

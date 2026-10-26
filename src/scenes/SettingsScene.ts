@@ -4,7 +4,7 @@ import { app } from '../view/app';
 import { setMusicVolume } from '../view/audio';
 import { t } from '../view/i18n';
 import type { Speed } from '../view/settings';
-import { Button, label, panel } from '../view/ui';
+import { Button, fitCamera, label, panel } from '../view/ui';
 
 interface SettingsData {
 	returnTo: string;
@@ -23,6 +23,7 @@ export class SettingsScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		this.add.rectangle(0, 0, 640, 360, 0x0e0d12, 0.85).setOrigin(0).setInteractive();
 		panel(this, 120, 24, 400, 312);
 		label(this, BASE_WIDTH / 2, 36, t('settings.title'), 'h2', 'gold2').setOrigin(0.5, 0);

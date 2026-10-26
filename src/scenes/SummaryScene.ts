@@ -5,7 +5,7 @@ import { stopMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { loadProfile, saveProfile } from '../view/profile';
 import { session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, label, panel } from '../view/ui';
 
 export class SummaryScene extends Phaser.Scene {
 	constructor() {
@@ -13,6 +13,7 @@ export class SummaryScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		stopMusic();
 		this.cameras.main.setBackgroundColor('#0e0d12');
 		backdrop(this, 'bg.menu', 0.6);
@@ -58,7 +59,9 @@ export class SummaryScene extends Phaser.Scene {
 				this,
 				BASE_WIDTH / 2,
 				256,
-				t('summary.riteWon', { n: rite, next: profile.unlockedRite }),
+				rite === 0
+					? t('summary.firstRite')
+					: t('summary.riteWon', { n: rite, next: profile.unlockedRite }),
 				'tiny',
 				'ember3',
 			)

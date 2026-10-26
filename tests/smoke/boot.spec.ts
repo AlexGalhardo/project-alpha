@@ -28,7 +28,7 @@ test('boots to the Title scene and opens the Menu on click', async ({ page }) =>
 
 	await page.waitForFunction(() => {
 		const game = (window as GameWindow).__game;
-		return game !== undefined && game.scene.isActive('Title');
+		return game?.scene.isActive('Title');
 	});
 
 	const box = await canvas.boundingBox();
@@ -39,7 +39,7 @@ test('boots to the Title scene and opens the Menu on click', async ({ page }) =>
 
 	await page.waitForFunction(() => {
 		const game = (window as GameWindow).__game;
-		return game !== undefined && game.scene.isActive('Menu');
+		return game?.scene.isActive('Menu');
 	});
 
 	expect(pageErrors).toEqual([]);

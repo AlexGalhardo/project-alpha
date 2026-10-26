@@ -5,7 +5,7 @@ import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { goNext, session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, label, panel } from '../view/ui';
 
 const GRID_X = 24;
 const GRID_Y = 40;
@@ -164,6 +164,7 @@ export class RestScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, 'bg.menu', 0.6);

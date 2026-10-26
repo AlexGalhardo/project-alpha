@@ -1,29 +1,14 @@
 import Phaser from 'phaser';
+import { VIEW_ZOOM } from '../platform/zoom';
 import { play } from './audio';
-import { type FontToken, fontKey, fontSize } from './fonts';
+import { FONT_FAMILY, FONT_PX, FONT_WEIGHT, type FontToken } from './fonts';
 import { css, P, type PaletteKey } from './palette';
+import { PLACEHOLDER_SPECS } from './placeholders';
 
 export type { FontToken } from './fonts';
 
-/**
- * 1-bit BitmapText (fonts built at boot, src/view/fonts.ts) with the few Text-style helpers the
- * scenes use, so callers stay the same. Colour is a tint on white glyphs.
- */
-export class PixelText extends Phaser.GameObjects.BitmapText {
-	setWordWrapWidth(width: number): this {
-		return this.setMaxWidth(width);
-	}
-
-	setAlign(align: 'left' | 'center' | 'right'): this {
-		if (align === 'center') return this.setCenterAlign();
-		if (align === 'right') return this.setRightAlign();
-		return this.setLeftAlign();
-	}
-
-	setColor(color: string): this {
-		return this.setTint(Number.parseInt(color.replace('#', ''), 16));
-	}
-}
+/** UI text: Roboto via Phaser Text, rendered at the camera zoom so glyphs stay sharp (ADR 0015). */
+export type UiText = Phaser.GameObjects.Text;
 
 export function label(
 	scene: Phaser.Scene,
@@ -32,10 +17,49 @@ export function label(
 	text: string,
 	font: FontToken = 'ui',
 	color: PaletteKey = 'bone2',
-): PixelText {
-	const t = new PixelText(scene, x, y, fontKey(font), text, fontSize(scene, font));
-	scene.add.existing(t);
-	return t.setOrigin(0, 0).setTint(P[color]);
+): UiText {
+	return scene.add
+		.text(x, y, text, {
+			fontFamily: FONT_FAMILY,
+			fontSize: `${FONT_PX[font]}px`,
+			fontStyle: FONT_WEIGHT[font] === '400' ? 'normal' : FONT_WEIGHT[font],
+			color: css(color),
+			resolution: VIEW_ZOOM,
+		})
+		.setOrigin(0, 0);
+}
+
+/** Every scene lays out in 640×360 and its camera zooms ×3 onto the 1920×1080 render (ADR 0015). */
+export function fitCamera(scene: Phaser.Scene): void {
+	scene.cameras.main.setZoom(VIEW_ZOOM).centerOn(320, 180);
+}
+
+const SPEC_SIZE = new Map(PLACEHOLDER_SPECS.map((s) => [s.key, { w: s.w, h: s.h }]));
+
+/**
+ * Logical (640×360-space) size of a texture: generated art may be drawn at 2× or 3× and is shown at
+ * this size, so higher-resolution textures add detail instead of growing (ADR 0015).
+ */
+export function logicalSize(scene: Phaser.Scene, key: string): { w: number; h: number } {
+	const spec = SPEC_SIZE.get(key);
+	if (spec) return spec;
+	if (key.startsWith('bg.')) return { w: 640, h: 360 };
+	if (key.startsWith('card.')) return { w: 60, h: 40 };
+	if (key.startsWith('icon.item.')) return { w: 16, h: 16 };
+	const f = scene.textures.getFrame(key);
+	return { w: f?.width ?? 1, h: f?.height ?? 1 };
+}
+
+/** Texture pixels per logical pixel for `key` (1 for placeholders, 3 for Full HD art). */
+export function texelScale(scene: Phaser.Scene, key: string): number {
+	const f = scene.textures.getFrame(key);
+	return f ? f.width / logicalSize(scene, key).w : 1;
+}
+
+/** An image shown at its logical size whatever the texture resolution. */
+export function sized<T extends Phaser.GameObjects.Image>(img: T): T {
+	const l = logicalSize(img.scene, img.texture.key);
+	return img.setDisplaySize(l.w, l.h);
 }
 
 export function panel(
@@ -76,13 +100,13 @@ export function itemIcon(
 ): Phaser.GameObjects.Image | null {
 	const key = `icon.item.${item}`;
 	if (!scene.textures.exists(key)) return null;
-	return scene.add.image(x, y, key).setOrigin(0, 0);
+	return sized(scene.add.image(x, y, key).setOrigin(0, 0));
 }
 
 /** Hover-free button: pressed state on pointerdown, action on pointerup inside (docs/art-bible.md §9.2). */
 export class Button extends Phaser.GameObjects.Container {
 	private readonly bg: Phaser.GameObjects.Graphics;
-	private readonly text: PixelText;
+	private readonly text: UiText;
 	private enabled = true;
 	private selected = false;
 	readonly w: number;
@@ -113,7 +137,7 @@ export class Button extends Phaser.GameObjects.Container {
 		}
 		this.text = text;
 		this.add([this.bg, this.text]);
-		if (iconKey) this.add(scene.add.image(12, Math.round(this.h / 2), iconKey));
+		if (iconKey) this.add(sized(scene.add.image(12, Math.round(this.h / 2), iconKey)));
 		this.setSize(this.w, this.h);
 		this.setInteractive(
 			new Phaser.Geom.Rectangle(this.w / 2, this.h / 2, this.w, this.h),
@@ -218,8 +242,8 @@ function opaqueBounds(scene: Phaser.Scene, key: string): Bounds {
 }
 
 /**
- * A w×h window of a sprite at 1× (art rules forbid fractional scale), taken from the top of its
- * opaque area so small slots show the head and shoulders. (x, y) is the window's top-left corner.
+ * A w×h (logical) window of a sprite, taken from the top of its opaque area so small slots show the
+ * head and shoulders. (x, y) is the window's top-left corner. Works at any texture resolution.
  */
 export function portrait(
 	scene: Phaser.Scene,
@@ -230,14 +254,16 @@ export function portrait(
 	h: number,
 ): Phaser.GameObjects.Image {
 	const b = opaqueBounds(scene, key);
-	const left = Math.max(0, b.headX - Math.floor(w / 2));
+	const k = texelScale(scene, key);
+	const left = Math.max(0, b.headX - Math.floor((w * k) / 2));
 	return scene.add
-		.image(x - left, y - b.top, key)
+		.image(x - left / k, y - b.top / k, key)
 		.setOrigin(0)
-		.setCrop(left, b.top, w, h);
+		.setScale(1 / k)
+		.setCrop(left, b.top, w * k, h * k);
 }
 
-/** A unit sprite at 1× whose opaque feet rest on `floorY` and whose opaque centre sits on `cx`. */
+/** A unit sprite at its logical size whose opaque feet rest on `floorY` and opaque centre on `cx`. */
 export function standing(
 	scene: Phaser.Scene,
 	key: string,
@@ -245,11 +271,16 @@ export function standing(
 	floorY: number,
 ): Phaser.GameObjects.Image {
 	const b = opaqueBounds(scene, key);
-	return scene.add.image(cx - b.cx, floorY - b.bottom - 1, key).setOrigin(0);
+	const k = texelScale(scene, key);
+	return scene.add
+		.image(cx - b.cx / k, floorY - (b.bottom + 1) / k, key)
+		.setOrigin(0)
+		.setScale(1 / k);
 }
 
+/** Full-scene background shown at 640×360 whatever its texture size, with an optional dim layer. */
 export function backdrop(scene: Phaser.Scene, key: string, dim = 0): void {
 	if (!scene.textures.exists(key)) return;
-	scene.add.image(0, 0, key).setOrigin(0).setDepth(-2);
+	scene.add.image(0, 0, key).setOrigin(0).setDisplaySize(640, 360).setDepth(-2);
 	if (dim > 0) scene.add.rectangle(0, 0, 640, 360, P.ash0, dim).setOrigin(0).setDepth(-1);
 }

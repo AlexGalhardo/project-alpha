@@ -17,7 +17,7 @@ import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { type css, P, type PaletteKey } from '../view/palette';
 import { session } from '../view/session';
-import { Button, backdrop, label, panel, portrait, standing } from '../view/ui';
+import { Button, backdrop, fitCamera, label, panel, portrait, sized, standing } from '../view/ui';
 
 const HERO_X = (rank: number): number => 16 + (3 - rank) * 88;
 const ENEMY_X = (rank: number): number => 304 + (rank - 1) * 80;
@@ -136,6 +136,7 @@ export class CombatScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, session.state?.act === 2 ? 'bg.combat.act2' : 'bg.combat.act1', 0.55);
 		app.applySpeed(this);
@@ -245,7 +246,7 @@ export class CombatScene extends Phaser.Scene {
 				this,
 				8,
 				6,
-				`${t('hud.act', { act: 1 })} · ${t('hud.round', { round: v.round })}`,
+				`${t('hud.act', { act: session.state?.act ?? 1 })} · ${t('hud.round', { round: v.round })}`,
 				'ui',
 			),
 		);
@@ -278,7 +279,7 @@ export class CombatScene extends Phaser.Scene {
 		for (const [key, n] of entries) {
 			if (n <= 0) continue;
 			const ix = x + i * 18;
-			const icon = this.add.image(ix, y, `icon.status.${key}`).setOrigin(0);
+			const icon = sized(this.add.image(ix, y, `icon.status.${key}`).setOrigin(0));
 			const num = label(this, ix + 10, y - 1, `${n}`, 'tiny', 'bone2');
 			icon.setInteractive().on('pointerup', () => this.tooltip(t(`status.${key}.tooltip`)));
 			this.layer.add([icon, num]);
@@ -467,14 +468,14 @@ export class CombatScene extends Phaser.Scene {
 		if (kind === 'stress') parts.push(`+${it.stress}`);
 		if (it.block > 0) parts.push(`${it.block}`);
 		const cx = x + w / 2;
-		const icon = this.add.image(cx - 14, 32, `icon.intent.${kind}`);
+		const icon = sized(this.add.image(cx - 14, 32, `icon.intent.${kind}`));
 		const txt = label(this, cx - 6, 26, parts.join(' '), 'ui', 'bone2');
 		icon.setInteractive().on('pointerup', () => this.tooltip(t(`intent.${it.intentId}`)));
 		this.layer.add([icon, txt]);
 		// Stress on top of another intent gets its own stress icon + "+n" (shape, not a letter).
 		if (kind !== 'stress' && it.stress > 0) {
 			const sx = txt.x + txt.width + 8;
-			const sIcon = this.add.image(sx, 32, 'icon.intent.stress');
+			const sIcon = sized(this.add.image(sx, 32, 'icon.intent.stress'));
 			const sTxt = label(this, sx + 8, 26, `+${it.stress}`, 'ui', 'rift2');
 			this.layer.add([sIcon, sTxt]);
 		}
@@ -542,29 +543,51 @@ export class CombatScene extends Phaser.Scene {
 		// hero/ally card: top-right over the enemies. 80% fill so the units stay visible.
 		const x = hitsEnemies || card.validTargets.length === 0 ? 8 : 464;
 		const y = 28;
-		this.layer.add(panel(this, x, y, 168, 120, 'ash1', 'gold1').setAlpha(0.8));
-		this.layer.add(
-			label(this, x + 6, y + 4, cardName(card.cardId, card.upgraded), 'ui', 'gold2'),
+		// The panel height grows to fit its lines, so it is added last, behind the labels.
+		const w = 168;
+		const px = x === 8 ? 8 : 632 - w;
+		const name = label(
+			this,
+			px + 6,
+			y + 4,
+			cardName(card.cardId, card.upgraded),
+			'ui',
+			'gold2',
 		);
-		this.layer.add(
-			label(
-				this,
-				x + 6,
-				y + 22,
-				cardText(card.cardId, card.upgraded),
-				'tiny',
-				'bone2',
-			).setWordWrapWidth(156),
-		);
+		const body = label(
+			this,
+			px + 6,
+			y + 22,
+			cardText(card.cardId, card.upgraded),
+			'tiny',
+			'bone2',
+		).setWordWrapWidth(w - 12);
+		this.layer.add([name, body]);
+		let bottom = body.y + body.height + 6;
 		const line = this.previewLine();
-		if (line) this.layer.add(label(this, x + 6, y + 90, line, 'tiny', 'gold2'));
+		if (line) {
+			const l = label(this, px + 6, bottom, line, 'tiny', 'gold2').setWordWrapWidth(w - 12);
+			this.layer.add(l);
+			bottom = l.y + l.height + 2;
+		}
 		const hint = !card.playable
 			? (card.reason ?? t('hud.unplayable'))
 			: card.autoTarget
 				? t('hud.tapAgain')
 				: t('hud.chooseTarget');
-		this.layer.add(
-			label(this, x + 6, y + 104, hint, 'tiny', card.playable ? 'ash5' : 'blood2'),
+		const h = label(
+			this,
+			px + 6,
+			bottom,
+			hint,
+			'tiny',
+			card.playable ? 'ash5' : 'blood2',
+		).setWordWrapWidth(w - 12);
+		this.layer.add(h);
+		const height = h.y + h.height + 4 - y;
+		this.layer.addAt(
+			panel(this, px, y, w, height, 'ash1', 'gold1').setAlpha(0.8),
+			this.layer.getIndex(name),
 		);
 	}
 

@@ -4,7 +4,7 @@ import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { goNext, session } from '../view/session';
-import { Button, backdrop, itemIcon, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, itemIcon, label, panel } from '../view/ui';
 
 /** Reward after a won fight (GDD §11, docs/art-bible.md §11.7): gold, pick 1 of 3 cards or skip. */
 export class RewardScene extends Phaser.Scene {
@@ -18,6 +18,7 @@ export class RewardScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.map');
 		play(this, 'sfx.flow.reward');
 		this.cameras.main.setBackgroundColor('#1b1a22');

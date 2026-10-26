@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { goNext, session } from '../view/session';
-import { Button, backdrop, itemIcon, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, itemIcon, label, panel } from '../view/ui';
 
 /** Treasure node (docs/gdd.md §22.4): the gold and the rolled item are shown, one tap claims them. */
 export class TreasureScene extends Phaser.Scene {
@@ -11,6 +11,7 @@ export class TreasureScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, 'bg.menu', 0.6);

@@ -3,7 +3,7 @@ import { BASE_HEIGHT, BASE_WIDTH } from '../platform/zoom';
 import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { session } from '../view/session';
-import { Button, backdrop, label } from '../view/ui';
+import { Button, backdrop, fitCamera, label } from '../view/ui';
 
 export class MenuScene extends Phaser.Scene {
 	constructor() {
@@ -11,6 +11,7 @@ export class MenuScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.menu');
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, 'bg.menu', 0.4);
@@ -57,7 +58,7 @@ export class MenuScene extends Phaser.Scene {
 			this,
 			BASE_WIDTH / 2,
 			300,
-			'Fonts: Jersey, Tiny5 (SIL OFL 1.1) · Engine: Phaser 4',
+			t('menu.creditsFonts'),
 			'tiny',
 			'ash5',
 		).setOrigin(0.5);

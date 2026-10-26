@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import { chooseBotCommand, combatView, type HeroClass } from './core';
-import { BASE_HEIGHT, BASE_WIDTH, pickZoom } from './platform/zoom';
+import { chooseBotCommand, combatView, type HeroClass, mapView } from './core';
+import { RENDER_HEIGHT, RENDER_WIDTH } from './platform/zoom';
 import { BootScene } from './scenes/BootScene';
 import { CampScene } from './scenes/CampScene';
 import { CombatScene } from './scenes/CombatScene';
@@ -19,17 +19,16 @@ import { TitleScene } from './scenes/TitleScene';
 import { TreasureScene } from './scenes/TreasureScene';
 import { session } from './view/session';
 
-const zoom = (): number =>
-	pickZoom(window.innerWidth, window.innerHeight, window.devicePixelRatio || 1);
-
 const game = new Phaser.Game({
 	type: Phaser.AUTO,
 	parent: 'game',
-	width: BASE_WIDTH,
-	height: BASE_HEIGHT,
-	pixelArt: true,
+	// 1920×1080 render, fitted to the viewport; scenes keep the 640×360 layout through a ×3 camera.
+	// Smooth sampling for Roboto text; pixel-art textures get nearest filtering at boot (ADR 0015).
+	width: RENDER_WIDTH,
+	height: RENDER_HEIGHT,
+	pixelArt: false,
 	backgroundColor: '#0e0d12',
-	scale: { mode: Phaser.Scale.NONE, zoom: zoom() },
+	scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
 	scene: [
 		BootScene,
 		TitleScene,
@@ -50,12 +49,6 @@ const game = new Phaser.Game({
 	],
 });
 
-const resize = (): void => {
-	game.scale.setZoom(zoom());
-};
-window.addEventListener('resize', resize);
-window.addEventListener('orientationchange', resize);
-
 // Test hooks for Playwright smoke/e2e: the running game, and one bot step that issues the same
 // commands a player could (chooseBotCommand) and moves to the matching scene.
 const hooks = window as unknown as {
@@ -63,9 +56,14 @@ const hooks = window as unknown as {
 	__botStep?: () => string;
 	__combat?: () => ReturnType<typeof combatView>;
 	__startRun?: (seed: number, party: HeroClass[]) => void;
+	__map?: () => ReturnType<typeof mapView>;
+	__run?: () => typeof session.state;
 };
 hooks.__game = game;
 hooks.__combat = () => (session.state ? combatView(session.state) : null);
+// Read-only views for e2e assertions; they never change state.
+hooks.__map = () => (session.state ? mapView(session.state) : null);
+hooks.__run = () => session.state;
 hooks.__startRun = (seed: number, party: HeroClass[]): void => {
 	session.start(party, seed);
 };

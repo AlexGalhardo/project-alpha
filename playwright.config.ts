@@ -21,6 +21,27 @@ export default defineConfig({
 		timeout: 120_000,
 	},
 	projects: [
+		// Primary target (ADR 0015): Full HD renders 1:1. Only the screen tour runs here and at 1366×768.
+		{
+			name: 'desktop-1920x1080',
+			testMatch: /screens\.spec\.ts/,
+			use: {
+				...devices['Desktop Chrome'],
+				channel: 'chromium',
+				viewport: { width: 1920, height: 1080 },
+				deviceScaleFactor: 1,
+			},
+		},
+		{
+			name: 'desktop-1366x768',
+			testMatch: /screens\.spec\.ts/,
+			use: {
+				...devices['Desktop Chrome'],
+				channel: 'chromium',
+				viewport: { width: 1366, height: 768 },
+				deviceScaleFactor: 1,
+			},
+		},
 		{
 			name: 'desktop-1280x720',
 			use: {

@@ -5,7 +5,7 @@ import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { goNext, session } from '../view/session';
-import { Button, backdrop, label, panel, portrait } from '../view/ui';
+import { Button, backdrop, fitCamera, label, panel, portrait, sized } from '../view/ui';
 
 /** Column centre for a round (docs/art-bible.md §11.4): x = 40 + (round − 1) × 62. */
 const COL_X = (round: number): number => 40 + (round - 1) * 62 + 12;
@@ -25,6 +25,7 @@ export class MapScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, session.state?.act === 2 ? 'bg.map.act2' : 'bg.map.act1', 0.4);
@@ -42,7 +43,13 @@ export class MapScene extends Phaser.Scene {
 		bar.fillStyle(P.ash1).fillRect(0, 0, 640, 24);
 		bar.fillStyle(P.gold0).fillRect(0, 23, 640, 1);
 		const round = Math.min(10, view.currentRow + 1);
-		label(this, 8, 6, `${t('hud.act', { act: 1 })} · ${t('hud.round', { round })}`, 'ui');
+		label(
+			this,
+			8,
+			6,
+			`${t('hud.act', { act: session.state?.act ?? 1 })} · ${t('hud.round', { round })}`,
+			'ui',
+		);
 		label(this, 488, 6, `${t('hud.gold')} ${state.gold}`, 'ui', 'gold2');
 		new Button(this, 608, 0, 'II', () => this.openPause(), {
 			w: 32,
@@ -81,7 +88,7 @@ export class MapScene extends Phaser.Scene {
 				const r = node.type === 'boss' ? 14 : 11;
 				if (open) this.add.circle(x, y, r + 2, P.ember3).setStrokeStyle(1, P.ash0);
 				else if (isCursor) this.add.circle(x, y, r + 2, P.bone2).setStrokeStyle(1, P.ash0);
-				const img = this.add.image(x, y, `icon.node.${node.type}`);
+				const img = sized(this.add.image(x, y, `icon.node.${node.type}`));
 				if (!open && !isCursor && node.row <= view.currentRow) img.setAlpha(0.35);
 				if (open) {
 					img.setInteractive().setName(`node-${node.row}-${node.index}`);
@@ -96,7 +103,7 @@ export class MapScene extends Phaser.Scene {
 		LEGEND.forEach((n, i) => {
 			const x = 432 + (i % 3) * 64;
 			const y = 294 + Math.floor(i / 3) * 20;
-			this.add.image(x + 8, y + 8, `icon.node.${n}`);
+			sized(this.add.image(x + 8, y + 8, `icon.node.${n}`));
 			label(this, x + 20, y + 2, t(`node.${n}`), 'tiny', 'ash5');
 		});
 

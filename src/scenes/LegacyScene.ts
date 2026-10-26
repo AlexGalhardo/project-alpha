@@ -6,7 +6,7 @@ import { playMusic } from '../view/audio';
 import { cardName } from '../view/cards';
 import { t } from '../view/i18n';
 import { loadProfile, saveProfile } from '../view/profile';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, label, panel, sized } from '../view/ui';
 
 const HEROES: HeroClass[] = ['shieldbearer', 'marksman', 'arcanist', 'confessor', 'bombardier'];
 
@@ -19,6 +19,7 @@ export class LegacyScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		this.profile = loadProfile();
 		playMusic(this, 'music.menu');
 		this.render();
@@ -40,7 +41,7 @@ export class LegacyScene extends Phaser.Scene {
 		HEROES.forEach((hero, i) => {
 			const x = 16 + i * 122;
 			panel(this, x, 56, 114, 236);
-			this.add.image(x + 57, 132, `hero.${hero}`).setOrigin(0.5, 1);
+			sized(this.add.image(x + 57, 132, `hero.${hero}`).setOrigin(0.5, 1));
 			label(this, x + 57, 136, t(`hero.${hero}.name`), 'ui').setOrigin(0.5, 0);
 			const owned = this.profile.nodes[hero];
 			const [cardA, cardB] = TREE.cards[hero];

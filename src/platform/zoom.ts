@@ -1,8 +1,7 @@
+// Layout space and render size (ADR 0015). Scenes lay out in a 640×360 logical space; the canvas
+// renders 1920×1080 (Full HD, the primary target) and each scene camera zooms ×3 onto that space.
 export const BASE_WIDTH = 640;
 export const BASE_HEIGHT = 360;
-
-/** Largest zoom that keeps an integer number of device pixels per game pixel (docs/art-bible.md §3.1). */
-export function pickZoom(viewportWidth: number, viewportHeight: number, dpr: number): number {
-	const fit = Math.min(viewportWidth / BASE_WIDTH, viewportHeight / BASE_HEIGHT);
-	return Math.max(1, Math.floor(fit * dpr)) / dpr;
-}
+export const VIEW_ZOOM = 3;
+export const RENDER_WIDTH = BASE_WIDTH * VIEW_ZOOM;
+export const RENDER_HEIGHT = BASE_HEIGHT * VIEW_ZOOM;

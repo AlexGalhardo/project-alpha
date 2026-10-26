@@ -5,7 +5,7 @@ import { playMusic } from '../view/audio';
 import { cardName } from '../view/cards';
 import { t } from '../view/i18n';
 import { goNext, session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, label, panel } from '../view/ui';
 import { openCardPicker } from './RestScene';
 
 /** Placeholders of `event.<id>.choice<n>` filled from the choice's own numbers. */
@@ -33,6 +33,7 @@ export class EventScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, 'bg.menu', 0.6);
@@ -58,10 +59,10 @@ export class EventScene extends Phaser.Scene {
 				sfx: i === def.choices.length - 1 ? 'sfx.ui.cancel' : 'sfx.ui.confirm',
 				testId: `event-choice-${i}`,
 			}).setEnabled(ok);
-			label(
+			const text = label(
 				this,
 				96,
-				y + 4,
+				y + 2,
 				t(`event.${ev.id}.choice${i + 1}`, choiceVars(choice)),
 				'tiny',
 				ok ? 'bone2' : 'ash4',
@@ -73,7 +74,15 @@ export class EventScene extends Phaser.Scene {
 				: poor
 					? t('shop.notEnoughGold')
 					: t('shop.soldOut');
-			if (detail) label(this, 96, y + 28, detail, 'tiny', ok ? 'gold2' : 'ash4');
+			if (detail)
+				label(
+					this,
+					96,
+					text.y + text.height + 3,
+					detail,
+					'tiny',
+					ok ? 'gold2' : 'ash4',
+				).setWordWrapWidth(496);
 		});
 
 		this.input.keyboard?.on('keydown', (e: KeyboardEvent) => {

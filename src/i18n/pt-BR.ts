@@ -168,6 +168,10 @@ export const ptBR: Strings = {
 			name: 'Bloqueio',
 			tooltip: 'Absorve dano dos golpes. Zera no início do turno do dono.',
 		},
+		enraged: {
+			name: 'Enfurecido',
+			tooltip: 'A partir do turno {turn}, todo inimigo ganha +1 de Força a cada turno.',
+		},
 		might: {
 			name: 'Força',
 			tooltip: 'Soma {stacks} de dano a cada golpe. Dura o combate.',
@@ -536,7 +540,7 @@ export const ptBR: Strings = {
 	},
 	rite: {
 		'1': 'Elites têm 20% mais vida.',
-		'2': 'Inimigos comuns causam 15% mais dano.',
+		'2': 'Inimigos comuns causam 7,5% mais dano.',
 		'3': 'Comece a corrida com 30 de ouro.',
 		'4': 'O chefe tem 20% mais vida.',
 		'5': 'Recuperar no descanso cura 20%, não 30%.',

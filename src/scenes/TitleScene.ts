@@ -3,7 +3,8 @@ import { BASE_HEIGHT, BASE_WIDTH } from '../platform/zoom';
 import { app } from '../view/app';
 import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
-import { backdrop, label } from '../view/ui';
+import { P } from '../view/palette';
+import { backdrop, fitCamera, label } from '../view/ui';
 
 export class TitleScene extends Phaser.Scene {
 	private started = false;
@@ -13,14 +14,17 @@ export class TitleScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.menu');
 		this.started = false;
 		this.cameras.main.setBackgroundColor('#0e0d12');
 		backdrop(this, 'bg.title', 0.35);
 		label(this, BASE_WIDTH / 2, 110, t('game.title'), 'display', 'gold2').setOrigin(0.5);
+		// Dark band so the intro reads over the bright backdrop.
+		this.add.rectangle(0, 146, BASE_WIDTH, 50, P.ash0, 0.6).setOrigin(0);
 		const lines = [t('intro.line1'), t('intro.line2'), t('intro.line3')];
 		lines.forEach((line, i) => {
-			label(this, BASE_WIDTH / 2, 160 + i * 14, line, 'tiny', 'ash5').setOrigin(0.5);
+			label(this, BASE_WIDTH / 2, 158 + i * 13, line, 'tiny', 'bone1').setOrigin(0.5);
 		});
 		const tap = label(this, BASE_WIDTH / 2, 240, t('menu.tapToBegin'), 'ui', 'bone2').setOrigin(
 			0.5,

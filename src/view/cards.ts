@@ -2,7 +2,7 @@ import type Phaser from 'phaser';
 import { cardDef, cardValues } from '../core';
 import { t } from './i18n';
 import { P, type PaletteKey } from './palette';
-import { label } from './ui';
+import { label, texelScale } from './ui';
 
 export const CARD_W = 64;
 export const CARD_H = 90;
@@ -85,7 +85,15 @@ export function drawCard(
 	// Generated 60×40 card art, cropped to the 56×26 window of the hand card (centre band).
 	const artKey = `card.${cardId}`;
 	if (scene.textures.exists(artKey)) {
-		c.add(scene.add.image(2, 7, artKey).setOrigin(0).setCrop(2, 7, 56, 26));
+		// Art may be drawn at 2-3× (ADR 0015): crop in texture pixels, show at the logical size.
+		const k = texelScale(scene, artKey);
+		c.add(
+			scene.add
+				.image(2, 7, artKey)
+				.setOrigin(0)
+				.setScale(1 / k)
+				.setCrop(2 * k, 7 * k, 56 * k, 26 * k),
+		);
 		const gem = scene.add.graphics();
 		gem.fillStyle(P.ember3).fillCircle(8, 8, 8);
 		c.add(gem);

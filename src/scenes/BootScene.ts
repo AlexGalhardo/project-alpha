@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { loadMusicInBackground, preloadAudio } from '../view/audio';
-import { buildPixelFonts } from '../view/fonts';
+import { waitForFonts } from '../view/fonts';
 import { generatePlaceholders } from '../view/placeholders';
 
 const SPRITE_MANIFEST = 'assets/sprites/manifest.json';
@@ -40,10 +40,13 @@ export class BootScene extends Phaser.Scene {
 	}
 
 	create(): void {
-		buildPixelFonts(this);
 		generatePlaceholders(this);
+		// Every texture so far is pixel art (sprites, backgrounds, icons, placeholders): nearest
+		// sampling keeps it sharp while the game itself renders smooth for Roboto (ADR 0015).
+		for (const key of this.textures.getTextureKeys())
+			this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
 		// Boot stays alive (it draws nothing) so its loader can stream the music in the background.
-		this.scene.launch('Title');
+		void waitForFonts().then(() => this.scene.launch('Title'));
 		loadMusicInBackground(this);
 	}
 }

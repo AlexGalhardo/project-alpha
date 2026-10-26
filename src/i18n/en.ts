@@ -169,6 +169,10 @@ export const en = {
 			name: 'Block',
 			tooltip: "Absorbs damage from hits. Resets at the start of its owner's turn.",
 		},
+		enraged: {
+			name: 'Enraged',
+			tooltip: 'From turn {turn}, every enemy gains +1 Might each turn.',
+		},
 		might: {
 			name: 'Might',
 			tooltip: 'Adds {stacks} damage to each hit. Lasts the combat.',
@@ -531,7 +535,7 @@ export const en = {
 	},
 	rite: {
 		'1': 'Elites have 20% more HP.',
-		'2': 'Common enemies deal 15% more damage.',
+		'2': 'Common enemies deal 7.5% more damage.',
 		'3': 'Start the run with 30 gold.',
 		'4': 'The boss has 20% more HP.',
 		'5': "Rest's Recover heals 20% instead of 30%.",

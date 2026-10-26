@@ -4,7 +4,7 @@ import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { session } from '../view/session';
-import { Button, backdrop, itemIcon, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, itemIcon, label, panel } from '../view/ui';
 import { openCardPicker } from './RestScene';
 
 /** Shop node (GDD §4.6, docs/art-bible.md §11.9): 5 cards, 2 equipment, one card removal per visit. */
@@ -18,6 +18,7 @@ export class ShopScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, 'bg.menu', 0.6);

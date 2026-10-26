@@ -128,7 +128,7 @@ test.describe('menu', () => {
 		expect(await isActive(page, 'Menu')).toBe(true);
 
 		await press(page, 'menu-credits');
-		expect((await texts(page, 'Menu')).some((t) => t.includes('Fonts:'))).toBe(true);
+		expect((await texts(page, 'Menu')).some((t) => t.includes('Roboto'))).toBe(true);
 
 		await press(page, 'menu-settings');
 		await waitActive(page, 'Settings');

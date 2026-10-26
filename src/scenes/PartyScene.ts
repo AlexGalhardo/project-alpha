@@ -8,7 +8,7 @@ import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { loadProfile } from '../view/profile';
 import { session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, label, panel, sized } from '../view/ui';
 
 const ROSTER: HeroClass[] = ['shieldbearer', 'marksman', 'arcanist', 'confessor', 'bombardier'];
 
@@ -24,6 +24,7 @@ export class PartyScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		fitCamera(this);
 		playMusic(this, 'music.menu');
 		this.picked = ['shieldbearer', 'confessor', 'marksman'];
 		this.rite = loadProfile().unlockedRite;
@@ -48,7 +49,7 @@ export class PartyScene extends Phaser.Scene {
 				rank >= 0 ? 'iron0' : 'ash2',
 				rank >= 0 ? 'gold2' : 'ash0',
 			);
-			this.add.image(x + 56, 140, `hero.${id}`).setOrigin(0.5, 1);
+			sized(this.add.image(x + 56, 140, `hero.${id}`).setOrigin(0.5, 1));
 			label(this, x + 56, 146, t(`hero.${id}.name`), 'ui').setOrigin(0.5, 0);
 			label(this, x + 56, 162, t(`hero.${id}.role`), 'tiny', 'ash5').setOrigin(0.5, 0);
 			label(this, x + 6, 178, t(`hero.${id}.identity`), 'tiny', 'ash5').setWordWrapWidth(100);

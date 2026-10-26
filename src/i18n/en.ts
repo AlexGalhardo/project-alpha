@@ -125,6 +125,7 @@ export const en = {
 		notEnoughGold: 'Not enough gold',
 	},
 	reward: {
+		skipConfirm: 'Press Esc again to skip the card.',
 		equipment: 'Equipment: {item}',
 		take: 'Take',
 		title: 'Reward',

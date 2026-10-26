@@ -123,6 +123,7 @@ export const ptBR: Strings = {
 		notEnoughGold: 'Ouro insuficiente',
 	},
 	reward: {
+		skipConfirm: 'Pressione Esc de novo para pular a carta.',
 		equipment: 'Equipamento: {item}',
 		take: 'Pegar',
 		title: 'Recompensa',

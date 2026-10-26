@@ -7,6 +7,7 @@ import { apply, createRun, deserialize, embers, preview, serialize } from '../..
 import type { Command, HeroClass, RunState } from '../../src/core/types.ts';
 import { combatView, currentScreen, mapView } from '../../src/core/views.ts';
 import {
+	ALPHA,
 	CARD_IDS,
 	CARDS,
 	ENCOUNTER_RULES,
@@ -47,7 +48,8 @@ function trios(): HeroClass[][] {
 
 describe('data integrity (GDD 8, 9)', () => {
 	test('45 cards, 9 per hero, starters are 4 cards with the first twice', () => {
-		expect(CARD_IDS).toHaveLength(45);
+		expect(CARD_IDS).toHaveLength(55);
+		expect(HERO_CLASSES.flatMap((h) => HEROES[h].pool)).toHaveLength(45);
 		for (const id of HERO_CLASSES) {
 			const h = HEROES[id];
 			expect(h.pool).toHaveLength(9);
@@ -58,7 +60,7 @@ describe('data integrity (GDD 8, 9)', () => {
 			expect(rar.filter((r) => r === 'rare')).toHaveLength(1);
 			expect(rar.filter((r) => r === 'uncommon')).toHaveLength(2);
 		}
-		expect(Object.keys(ENEMIES)).toHaveLength(11);
+		expect(Object.keys(ENEMIES)).toHaveLength(22);
 	});
 
 	test('upgrade table spot checks', () => {
@@ -132,9 +134,12 @@ describe('map (GDD 4.2)', () => {
 		expect(JSON.stringify(a)).not.toBe(JSON.stringify(c));
 	});
 
+	// Measured on the GDD 4.2 prototype map: event nodes (GDD 22.4) remove fights and are off here.
 	function coverage(): number {
 		let eligible = 0;
 		let complete = 0;
+		const events = ALPHA.events;
+		ALPHA.events = false;
 		for (let seed = 1; seed <= 1500; seed++) {
 			const s = createRun(seed, PARTY);
 			let idx = Math.floor(rand(s, 'meta') * (s.map[0]?.length ?? 1));
@@ -153,6 +158,7 @@ describe('map (GDD 4.2)', () => {
 				if (s.seenEnemies.length === 10) complete++;
 			}
 		}
+		ALPHA.events = events;
 		expect(eligible).toBeGreaterThan(1000);
 		return complete / eligible;
 	}

@@ -1,5 +1,6 @@
 // Map generation (GDD 4.2) and encounter selection (GDD 4.3).
-import { ENCOUNTER_RULES, ENCOUNTERS, MAP_LAYOUT, MAP_RULES } from '../data/index.ts';
+import { ALPHA, ENCOUNTER_RULES, ENCOUNTERS, MAP_LAYOUT, MAP_RULES } from '../data/index.ts';
+import { placeSpecialNodes } from './events.ts';
 import { pick, rand, randInt, shuffle } from './rng.ts';
 import type { MapNode, NodeType, RunState } from './types.ts';
 
@@ -64,6 +65,8 @@ export function generateMap(s: Pick<RunState, 'rng'>): MapNode[][] {
 		}
 		for (const n of row) n.next.sort((x, y) => x - y);
 	}
+	// Drawn after the edges so the base layout of a seed is the same with or without events.
+	if (ALPHA.events) placeSpecialNodes(s, rows);
 	return rows;
 }
 
@@ -74,11 +77,16 @@ export function generateMap(s: Pick<RunState, 'rng'>): MapNode[][] {
  * not come again). Ties prefer the row's own tier, then a seeded pick.
  */
 export function chooseEncounter(s: RunState, row: number, type: NodeType): string {
-	if (type === 'boss') return 'BOSS';
-	if (type === 'elite') return row <= 4 ? 'EL1' : 'EL2';
+	const act = s.act ?? 1;
+	if (type === 'boss') return act === 2 ? 'BOSS2' : 'BOSS';
+	if (type === 'elite') {
+		if (act === 2) return row <= 4 ? 'EL2-1' : 'EL2-2';
+		return row <= 4 ? 'EL1' : 'EL2';
+	}
 	const own = row <= 3 ? 'A' : 'B';
 	const pool = Object.values(ENCOUNTERS).filter(
 		(e) =>
+			(e.act ?? 1) === act &&
 			(e.pool === 'A' || e.pool === 'B') &&
 			(ENCOUNTER_RULES.offTierWeight > 0 || e.pool === own),
 	);

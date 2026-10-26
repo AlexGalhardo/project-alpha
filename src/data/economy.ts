@@ -89,3 +89,13 @@ export const ENCOUNTER_RULES = { offTierWeight: 0 };
 
 /** Edge generation (GDD 4.2): chance a node gets a second edge, and tries before the fallback layout. */
 export const MAP_RULES = { secondEdgeChance: 0.45, edgeAttempts: 300 } as const;
+
+/** GDD 4.3 and 22.1. `acts` is 1 for the prototype flow and 2 for Alpha (Act 2 is implemented but off by default). */
+export const ACT_RULES = {
+	acts: 1,
+	/** Share of max HP every hero heals between acts (injuries are cleared too). */
+	betweenActHealPct: 50,
+	/** Added per act after the first, for non-boss enemies (HP x1.2, damage x1.1 in Act 2). */
+	hpPerAct: 0.2,
+	dmgPerAct: 0.1,
+};

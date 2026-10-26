@@ -197,6 +197,180 @@ export const ENEMIES: Record<string, EnemyDef> = {
 			{ id: 'toll', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
 		],
 	},
+
+	// ---- Act 2 (docs/gdd.md 22.2). HP and damage are scaled by ACT_RULES at combat start. ----
+	vault_warden: {
+		key: 'vault_warden',
+		hp: 30,
+		speed: 2,
+		size: 1,
+		intents: [
+			atk('shield_bash', 7),
+			{ id: 'brace', target: 'front', effects: [{ kind: 'selfBlock', amount: 8 }] },
+			atk('shield_bash', 7),
+		],
+	},
+	bone_lancer: {
+		key: 'bone_lancer',
+		hp: 22,
+		speed: 4,
+		size: 1,
+		intents: [
+			atk('pierce', 6, undefined, 'frontTwo'),
+			atk('pierce', 6, undefined, 'frontTwo'),
+			{ id: 'withdraw', target: 'front', effects: [{ kind: 'moveToBack' }] },
+		],
+	},
+	censer_wraith: {
+		key: 'censer_wraith',
+		hp: 18,
+		speed: 5,
+		size: 1,
+		intents: [
+			atk('choke', 4, undefined, 'lowestHP'),
+			{
+				id: 'smoke',
+				target: 'all',
+				effects: [{ kind: 'status', status: 'weakened', amount: 1 }],
+			},
+		],
+	},
+	flesh_organ: {
+		key: 'flesh_organ',
+		hp: 28,
+		speed: 1,
+		size: 1,
+		intents: [
+			{ id: 'hymn', target: 'front', effects: [{ kind: 'mightAllEnemies', amount: 1 }] },
+			{ id: 'drone', target: 'all', effects: [{ kind: 'stress', amount: 1 }] },
+			{ id: 'hymn', target: 'front', effects: [{ kind: 'mightAllEnemies', amount: 1 }] },
+		],
+	},
+	gutter_crawler: {
+		key: 'gutter_crawler',
+		hp: 12,
+		speed: 6,
+		size: 1,
+		intents: [atk('gnaw', 3, 2)],
+	},
+	relic_thief: {
+		key: 'relic_thief',
+		hp: 20,
+		speed: 7,
+		size: 1,
+		intents: [
+			{
+				id: 'cut',
+				target: 'back',
+				effects: [
+					{ kind: 'damage', amount: 5 },
+					{ kind: 'status', status: 'bleed', amount: 2 },
+				],
+			},
+			{
+				id: 'cut',
+				target: 'back',
+				effects: [
+					{ kind: 'damage', amount: 5 },
+					{ kind: 'status', status: 'bleed', amount: 2 },
+				],
+			},
+			{ id: 'vanish', target: 'front', effects: [{ kind: 'selfBlock', amount: 10 }] },
+		],
+	},
+	mirror_saint: {
+		key: 'mirror_saint',
+		hp: 24,
+		speed: 3,
+		size: 1,
+		intents: [
+			{ id: 'reflect', target: 'front', effects: [{ kind: 'selfBlock', amount: 12 }] },
+			{
+				id: 'glare',
+				target: 'back',
+				effects: [{ kind: 'status', status: 'marked', amount: 2 }],
+			},
+			atk('smite', 8, undefined, 'marked'),
+		],
+	},
+	hollow_bishop: {
+		key: 'hollow_bishop',
+		hp: 26,
+		speed: 2,
+		size: 1,
+		intents: [
+			{ id: 'sermon', target: 'highestStress', effects: [{ kind: 'stress', amount: 2 }] },
+			atk('rebuke', 6),
+			{ id: 'sermon', target: 'highestStress', effects: [{ kind: 'stress', amount: 2 }] },
+		],
+	},
+	chain_golem: {
+		key: 'chain_golem',
+		hp: 52,
+		speed: 1,
+		size: 1,
+		intents: [
+			{ id: 'wind_up', target: 'front', effects: [{ kind: 'telegraph' }] },
+			atk('chain_sweep', 10, undefined, 'frontTwo'),
+			{
+				id: 'shove',
+				target: 'front',
+				effects: [{ kind: 'damage', amount: 6 }, { kind: 'swapFrontHeroes' }],
+			},
+		],
+	},
+	rot_cherub: {
+		key: 'rot_cherub',
+		hp: 16,
+		speed: 6,
+		size: 1,
+		intents: [
+			{
+				id: 'spit',
+				target: 'lowestHP',
+				effects: [
+					{ kind: 'damage', amount: 4 },
+					{ kind: 'status', status: 'bleed', amount: 2 },
+				],
+			},
+			{
+				id: 'spit',
+				target: 'lowestHP',
+				effects: [
+					{ kind: 'damage', amount: 4 },
+					{ kind: 'status', status: 'bleed', amount: 2 },
+				],
+			},
+			{ id: 'hover', target: 'front', effects: [{ kind: 'selfBlock', amount: 6 }] },
+		],
+	},
+	// Act 2 boss (docs/gdd.md 22.3): HP is final, not scaled by act.
+	gilded_penitent: {
+		key: 'gilded_penitent',
+		hp: 140,
+		speed: 3,
+		size: 2,
+		fixedStart: true,
+		phase2Hp: 70,
+		phase2Might: 2,
+		intents: [
+			atk('lash', 12),
+			{ id: 'confession', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
+			{
+				id: 'gild',
+				target: 'front',
+				effects: [
+					{ kind: 'selfBlock', amount: 15 },
+					{ kind: 'selfMight', amount: 1 },
+				],
+			},
+		],
+		phase2Intents: [
+			atk('scourge', 6, undefined, 'all'),
+			atk('lash', 16, undefined, 'highestStress'),
+			{ id: 'confession', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
+		],
+	},
 };
 
 /** GDD 10.3 (rank order E1 to E4) and 10.4 (elites). */
@@ -239,6 +413,81 @@ export const ENCOUNTERS: Record<string, EncounterDef> = {
 		enemies: [{ key: 'ossified_brute', elite: 'calcified' }, { key: 'wax_mourner' }],
 	},
 	BOSS: { id: 'BOSS', pool: 'boss', enemies: [{ key: 'bell_maw' }] },
+
+	// ---- Act 2 (docs/gdd.md 22.3) ----
+	'A2-1': {
+		id: 'A2-1',
+		act: 2,
+		pool: 'A',
+		enemies: [{ key: 'gutter_crawler' }, { key: 'gutter_crawler' }],
+	},
+	'A2-2': {
+		id: 'A2-2',
+		act: 2,
+		pool: 'A',
+		enemies: [{ key: 'bone_lancer' }, { key: 'censer_wraith' }],
+	},
+	'A2-3': {
+		id: 'A2-3',
+		act: 2,
+		pool: 'A',
+		enemies: [{ key: 'vault_warden' }, { key: 'rot_cherub' }],
+	},
+	'A2-4': {
+		id: 'A2-4',
+		act: 2,
+		pool: 'A',
+		enemies: [{ key: 'gutter_crawler' }, { key: 'relic_thief' }],
+	},
+	'A2-5': {
+		id: 'A2-5',
+		act: 2,
+		pool: 'A',
+		enemies: [{ key: 'vault_warden' }, { key: 'flesh_organ' }],
+	},
+	'B2-1': {
+		id: 'B2-1',
+		act: 2,
+		pool: 'B',
+		enemies: [{ key: 'vault_warden' }, { key: 'hollow_bishop' }, { key: 'censer_wraith' }],
+	},
+	'B2-2': {
+		id: 'B2-2',
+		act: 2,
+		pool: 'B',
+		enemies: [{ key: 'chain_golem' }, { key: 'rot_cherub' }],
+	},
+	'B2-3': {
+		id: 'B2-3',
+		act: 2,
+		pool: 'B',
+		enemies: [{ key: 'bone_lancer' }, { key: 'mirror_saint' }, { key: 'flesh_organ' }],
+	},
+	'B2-4': {
+		id: 'B2-4',
+		act: 2,
+		pool: 'B',
+		enemies: [{ key: 'relic_thief' }, { key: 'relic_thief' }, { key: 'hollow_bishop' }],
+	},
+	'B2-5': {
+		id: 'B2-5',
+		act: 2,
+		pool: 'B',
+		enemies: [{ key: 'chain_golem' }, { key: 'gutter_crawler' }, { key: 'mirror_saint' }],
+	},
+	'EL2-1': {
+		id: 'EL2-1',
+		act: 2,
+		pool: 'elite',
+		enemies: [{ key: 'vault_warden', elite: 'oathwall' }, { key: 'censer_wraith' }],
+	},
+	'EL2-2': {
+		id: 'EL2-2',
+		act: 2,
+		pool: 'elite',
+		enemies: [{ key: 'chain_golem', elite: 'calcified' }, { key: 'flesh_organ' }],
+	},
+	BOSS2: { id: 'BOSS2', act: 2, pool: 'boss', enemies: [{ key: 'gilded_penitent' }] },
 };
 
 /** GDD 10.4 */

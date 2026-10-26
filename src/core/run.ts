@@ -1,7 +1,8 @@
 // Run state, the command dispatcher (`apply`) and persistence (GDD 4, 11, 13.1, 18.1).
-import { CAMP, EMBERS, EQUIPMENT, GOLD, HEROES, REST, RULES } from '../data/index.ts';
+import { ACT_RULES, CAMP, EMBERS, EQUIPMENT, GOLD, HEROES, REST, RULES } from '../data/index.ts';
 import { cardDef } from './cards.ts';
 import { endTurn, playCard, startCombat } from './combat.ts';
+import { claimTreasure, openEvent, openTreasure, resolveEvent } from './events.ts';
 import { chooseEncounter, generateMap, markSeen } from './map.ts';
 import { type Ctx, maxHP } from './ops.ts';
 import { addToStash, makeCamp, makeShop, newCard, removalPrice } from './rewards.ts';
@@ -27,6 +28,7 @@ export function createRun(seed: number, party: HeroClass[], options: RunOptions 
 	};
 	const s: RunState = {
 		version: 1,
+		act: 1,
 		seed,
 		options: opts,
 		rng: {
@@ -123,6 +125,10 @@ function selectNode(c: Ctx, index: number): void {
 		s.phase = 'shop';
 	} else if (node.type === 'rest') {
 		s.phase = 'rest';
+	} else if (node.type === 'event') {
+		openEvent(s);
+	} else if (node.type === 'treasure') {
+		openTreasure(s);
 	} else {
 		const enc = chooseEncounter(s, row, node.type);
 		markSeen(s, enc);
@@ -134,9 +140,32 @@ function afterReward(c: Ctx): void {
 	const s = c.s;
 	const boss = s.reward?.boss ?? false;
 	s.reward = null;
-	if (boss) {
+	if (boss && (s.act ?? 1) >= ACT_RULES.acts) {
 		s.phase = 'victory';
-	} else enterCamp(c);
+		return;
+	}
+	if (boss) healBetweenActs(s);
+	enterCamp(c);
+}
+
+/** GDD 22.1: after an act boss every hero heals and loses any injury. */
+function healBetweenActs(s: RunState): void {
+	for (const h of s.party) {
+		h.injured = false;
+		h.hp = Math.min(
+			maxHP(h),
+			h.hp + Math.floor((maxHP(h) * ACT_RULES.betweenActHealPct) / 100),
+		);
+	}
+}
+
+/** Starts the next act's map once the camp after the previous act's boss is left. */
+function startNextAct(s: RunState): void {
+	s.act = (s.act ?? 1) + 1;
+	s.map = generateMap(s);
+	s.cursor = null;
+	s.currentNode = null;
+	s.seenEnemies = [];
 }
 
 function campBuy(c: Ctx, cmd: Extract<Command, { type: 'campBuy' }>): void {
@@ -415,6 +444,7 @@ function dispatch(c: Ctx, cmd: Command): void {
 			}
 			s.camp = null;
 			s.phase = 'map';
+			if (s.currentNode?.type === 'boss' && (s.act ?? 1) < ACT_RULES.acts) startNextAct(s);
 			return;
 		case 'shopBuy':
 			shopBuy(c, cmd);
@@ -457,6 +487,19 @@ function dispatch(c: Ctx, cmd: Command): void {
 			return;
 		case 'restChoose':
 			restChoose(c, cmd);
+			return;
+		case 'eventChoose': {
+			const next = resolveEvent(c, cmd);
+			if (!next) return;
+			s.roundsCleared += 1;
+			if (next === 'reward') s.phase = 'reward';
+			else enterCamp(c);
+			return;
+		}
+		case 'claimTreasure':
+			if (!claimTreasure(c)) return;
+			s.roundsCleared += 1;
+			enterCamp(c);
 			return;
 		case 'equip':
 			equip(c, cmd);
@@ -525,6 +568,7 @@ export function deserialize(text: string): RunState | null {
 				return null;
 			}
 		}
+		if (o.act === undefined) o.act = 1;
 		return o as RunState;
 	} catch {
 		return null;

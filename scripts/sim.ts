@@ -2,6 +2,7 @@
 // usage: bun run sim -- [--runs 1000] [--seed 1] [--party shieldbearer,confessor,marksman]
 //                       [--enemy-hp 1] [--enemy-dmg 1] [--hero-hp 1] [--json]
 //                       [--set ENEMIES.bell_maw.hp=80 ...]   (dev only: patch a data value in memory)
+//                       [--acts 2]   (play Act 1 and Act 2; the shipped default is ACT_RULES.acts)
 // --runs is per party composition (all 10 compositions of 3 out of 5 unless --party is given).
 import { isMainThread, parentPort, Worker, workerData } from 'node:worker_threads';
 import type { HeroClass, RunOptions, RunState } from '../src/core/index.ts';
@@ -21,6 +22,7 @@ interface PartyResult {
 	party: string;
 	runs: number;
 	wins: number;
+	act1Clears: number;
 	rounds: number;
 	collapseRuns: number;
 	falls: number;
@@ -66,6 +68,7 @@ function runParty(job: Job): PartyResult {
 		party: job.party.join('+'),
 		runs: job.runs,
 		wins: 0,
+		act1Clears: 0,
 		rounds: 0,
 		collapseRuns: 0,
 		falls: 0,
@@ -79,9 +82,10 @@ function runParty(job: Job): PartyResult {
 		res.falls += s.stats.falls;
 		if (s.stats.collapses > 0) res.collapseRuns++;
 		for (const c of s.stats.combats) res.turns[c.kind].push(c.turns);
+		if (s.bossesWon >= 1) res.act1Clears++;
 		if (s.phase === 'victory') res.wins++;
 		else {
-			const row = String(s.currentNode?.row ?? 0);
+			const row = `A${s.act ?? 1}R${s.currentNode?.row ?? 0}`;
 			res.deathRow[row] = (res.deathRow[row] ?? 0) + 1;
 		}
 		res.embers += s.roundsCleared * 2 + s.elitesWon * 5 + s.bossesWon * 15;
@@ -127,6 +131,7 @@ async function main(): Promise<void> {
 	const sets: string[] = [];
 	args.forEach((a, i) => {
 		if (a === '--set') sets.push(args[i + 1] ?? '');
+		if (a === '--acts') sets.push(`ACT_RULES.acts=${args[i + 1] ?? '1'}`);
 	});
 	const t0 = performance.now();
 	const parties = compositions(opt('--party', ''));
@@ -196,7 +201,13 @@ async function main(): Promise<void> {
 			`${r.party.padEnd(40)} ${f((r.wins / r.runs) * 100).padStart(5)}  ${f(r.rounds / r.runs).padStart(13)}  ${f((r.collapseRuns / r.runs) * 100).padStart(18)}`,
 		);
 	}
-	console.log(`\noverall win rate ${f((wins / total) * 100)}%   (target 35-60%)`);
+	const act1 = results.reduce((a, r) => a + r.act1Clears, 0);
+	console.log(
+		`\nrun win rate ${f((wins / total) * 100)}%   (target 35-60% for 1 act, 25-45% for 2 acts)`,
+	);
+	console.log(
+		`Act 1 cleared ${f((act1 / total) * 100)}%   run won when Act 1 cleared ${f(act1 ? (wins / act1) * 100 : 0)}%`,
+	);
 	console.log(`parties without the Shieldbearer win ${f(noTankWin * 100)}%   (target >= 25%)`);
 	console.log(`runs with >= 1 collapse ${f((collapseRuns / total) * 100)}%   (target >= 40%)`);
 	console.log(`hero falls per run ${f(falls / total, 2)}   embers per run ${f(embers / total)}`);
@@ -218,7 +229,7 @@ async function main(): Promise<void> {
 	console.log('\nrun ended in defeat at round (count)');
 	console.log(
 		Object.entries(deathRow)
-			.sort((a, b) => Number(a[0]) - Number(b[0]))
+			.sort((a, b) => a[0].localeCompare(b[0], undefined, { numeric: true }))
 			.map(([r, n]) => `${r}:${n}`)
 			.join('  '),
 	);

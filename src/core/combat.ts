@@ -1,5 +1,6 @@
 // Combat flow: setup, player turn, enemy phase, intents, combat end (GDD 5 and 10).
 import {
+	ACT_RULES,
 	ELITE,
 	ENCOUNTERS,
 	ENEMIES,
@@ -30,7 +31,7 @@ import {
 	moveEnemy,
 	swapHeroes,
 } from './ops.ts';
-import { addToStash, makeCardOffer, rollEquipment } from './rewards.ts';
+import { addToStash, makeCardOffer, ownedItems, rollEquipment } from './rewards.ts';
 import { randInt, shuffle } from './rng.ts';
 import type {
 	CombatState,
@@ -55,7 +56,10 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 		const def = ENEMIES[slot.key];
 		if (!def) throw new Error(`unknown enemy ${slot.key}`);
 		const elite = slot.elite ? ELITE.hpMul : 1;
-		const maxHP = Math.max(1, Math.round(def.hp * elite * s.options.enemyHpMul));
+		// Act scaling (GDD 4.3) applies to non-boss enemies only; boss HP is final.
+		const actHp = kind === 'boss' ? 1 : 1 + ACT_RULES.hpPerAct * ((s.act ?? 1) - 1);
+		const actDmg = kind === 'boss' ? 1 : 1 + ACT_RULES.dmgPerAct * ((s.act ?? 1) - 1);
+		const maxHP = Math.max(1, Math.round(def.hp * elite * actHp * s.options.enemyHpMul));
 		const list = def.intents;
 		enemies.push({
 			uid: uid++,
@@ -67,7 +71,7 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 			fx: emptyStatuses(),
 			intentIdx: def.fixedStart ? 0 : randInt(s, 'combat', 0, list.length - 1),
 			phase: 1,
-			dmgMul: (slot.elite ? ELITE.damageMul : 1) * s.options.enemyDmgMul,
+			dmgMul: (slot.elite ? ELITE.damageMul : 1) * actDmg * s.options.enemyDmgMul,
 			trait: slot.elite ?? null,
 			keg: 0,
 		});
@@ -466,7 +470,7 @@ function finishCombat(c: Ctx): void {
 	if (k.kind === 'boss') s.bossesWon += 1;
 	let eq: string | null = null;
 	if (k.kind === 'elite') eq = rollEquipment(s, EQUIPMENT_DROP.elite);
-	if (k.kind === 'boss') eq = 'eq_bell_clapper';
+	if (k.kind === 'boss' && !ownedItems(s).includes('eq_bell_clapper')) eq = 'eq_bell_clapper';
 	if (eq) addToStash(s, eq, c.ev);
 	const cards = makeCardOffer(s, k.kind);
 	c.ev.push({ type: 'rewardOffered', cards });

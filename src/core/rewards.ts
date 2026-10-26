@@ -30,6 +30,11 @@ export function partyPool(s: RunState, rarity: Tier): string[] {
 			if (CARDS[id]?.rarity === rarity) out.push(id);
 		}
 	}
+	// Skill-tree unlocks (docs/gdd.md §22.5) join the pool of their owner while it is in the party.
+	for (const id of s.unlocked ?? []) {
+		const card = CARDS[id];
+		if (card?.rarity === rarity && s.party.some((h) => h.id === card.owner)) out.push(id);
+	}
 	return out;
 }
 

@@ -162,6 +162,8 @@ export function resolveCard(c: Ctx, inst: CardInst, target: Target): void {
 	let damage = p.damage;
 	if (inst.cardId === 'shb_shield_slam')
 		damage = Math.min(fxOf(k, heroRef(owner)).block, p.cap ?? Number.POSITIVE_INFINITY);
+	if (inst.cardId === 'shb_riposte')
+		damage = Math.floor(fxOf(k, heroRef(owner)).block / 2) + (p.bonus ?? 0);
 	if (inst.cardId === 'mrk_killshot' && enemyTarget && enemyTarget.fx.marked > 0)
 		damage = (damage ?? 0) + (p.bonus ?? 0);
 	const idx = enemyTarget ? k.enemies.indexOf(enemyTarget) : -1;
@@ -206,7 +208,14 @@ export function resolveCard(c: Ctx, inst: CardInst, target: Target): void {
 	}
 
 	// ---- enemy riders ----
-	const riderTargets = d.target.kind === 'enemy' ? (enemyTarget ? [enemyTarget] : []) : struck;
+	const riderTargets =
+		d.target.kind === 'enemy'
+			? enemyTarget
+				? [enemyTarget]
+				: []
+			: d.target.kind === 'allEnemies'
+				? [...k.enemies]
+				: struck;
 	const live = (e: Enemy): boolean => k.enemies.includes(e);
 	for (const e of riderTargets) {
 		if (!live(e)) continue;
@@ -316,6 +325,10 @@ export function resolveCard(c: Ctx, inst: CardInst, target: Target): void {
 			});
 		c.ev.push({ type: 'rekindle', target: heroTarget });
 	}
+	if (inst.cardId === 'arc_cinder_ward' && p.burn && k.enemies[0]) {
+		addDebuff(c, enemyRef(k.enemies[0]), 'burn', p.burn);
+	}
+	if (p.selfRelief) addStress(c, owner, -p.selfRelief);
 	if (p.draw) drawCards(c, p.draw);
 	if (p.dread) addStress(c, owner, p.dread);
 }

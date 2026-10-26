@@ -47,6 +47,8 @@ export interface CardParams {
 	taunt?: number;
 	keepBlock?: number;
 	swapBehind?: number;
+	/** Stress the owner relieves when the card is played. */
+	selfRelief?: number;
 }
 
 export type CardTarget =
@@ -149,6 +151,8 @@ export type EliteTrait = 'oathwall' | 'calcified';
 
 export interface EncounterDef {
 	id: string;
+	/** Act the encounter belongs to; absent means Act 1. */
+	act?: number;
 	pool: 'A' | 'B' | 'elite' | 'boss';
 	enemies: { key: string; elite?: EliteTrait }[];
 }
@@ -210,7 +214,7 @@ export interface CombatState {
 }
 
 // ---- map ----
-export type NodeType = 'combat' | 'elite' | 'shop' | 'rest' | 'boss';
+export type NodeType = 'combat' | 'elite' | 'shop' | 'rest' | 'boss' | 'event' | 'treasure';
 export interface MapNode {
 	row: number;
 	index: number;
@@ -242,6 +246,20 @@ export interface CampState {
 	service: { kind: 'bind' | 'vigil'; price: number; sold: boolean };
 	swapped: boolean;
 }
+/** An open event node (docs/gdd.md §22.4). Random outcomes are rolled on entry so the preview shows them. */
+export interface EventState {
+	id: string;
+	/** Item a `relic` / `equipment` effect grants (null when nothing is left to give). */
+	item: string | null;
+	/** Cards a `cardOffer` effect offers. */
+	cards: string[];
+	/** Deck cards an `upgradeRandom` effect upgrades. */
+	upgradeUids: number[];
+}
+export interface TreasureState {
+	gold: number;
+	item: string | null;
+}
 export interface ShopState {
 	cards: CardOffer[];
 	equipment: EquipOffer[];
@@ -256,6 +274,8 @@ export type RunPhase =
 	| 'camp'
 	| 'shop'
 	| 'rest'
+	| 'event'
+	| 'treasure'
 	| 'victory'
 	| 'defeat';
 
@@ -274,6 +294,8 @@ export interface RunOptions {
 
 export interface RunState {
 	version: 1;
+	/** Current act, 1-based; absent in saves made before Act 2 (treated as 1). */
+	act?: number;
 	seed: number;
 	options: Required<RunOptions>;
 	rng: Record<RngStream, number>;
@@ -297,7 +319,13 @@ export interface RunState {
 	reward: RewardState | null;
 	camp: CampState | null;
 	shop: ShopState | null;
+	/** Absent in saves made before events existed. */
+	event?: EventState | null;
+	treasure?: TreasureState | null;
+	seenEvents?: string[];
 	stats: RunStats;
+	/** Cards unlocked by the skill tree for this run (docs/gdd.md §22.5); absent in old saves. */
+	unlocked?: string[];
 }
 
 // ---- commands and events ----
@@ -315,6 +343,8 @@ export type Command =
 	| { type: 'shopBuy'; kind: 'card' | 'equipment'; index: number }
 	| { type: 'shopRemoveCard'; cardUid: number }
 	| { type: 'leaveShop' }
+	| { type: 'eventChoose'; index: number; cardUids?: number[] }
+	| { type: 'claimTreasure' }
 	| { type: 'restChoose'; option: 'recover' | 'temper' | 'pray'; cardUid?: number }
 	| { type: 'equip'; heroId: HeroClass; slot: EquipSlot; item: string | null }
 	| { type: 'reorder'; order: HeroClass[] };
@@ -359,6 +389,8 @@ export type GameEvent =
 	| { type: 'rewardOffered'; cards: string[] }
 	| { type: 'equipmentGained'; item: string; kept: boolean }
 	| { type: 'bought'; what: string; price: number }
+	| { type: 'eventChosen'; id: string; index: number }
+	| { type: 'treasureClaimed'; gold: number; item: string | null }
 	| { type: 'removed'; cardUid: number }
 	| { type: 'upgraded'; cardUid: number }
 	| { type: 'swapped'; leave: HeroClass; join: HeroClass }
@@ -371,7 +403,16 @@ export interface ApplyResult {
 }
 
 // ---- view model (read-only selectors for the view layer) ----
-export type ScreenKey = 'map' | 'combat' | 'reward' | 'camp' | 'shop' | 'rest' | 'summary';
+export type ScreenKey =
+	| 'map'
+	| 'combat'
+	| 'reward'
+	| 'camp'
+	| 'shop'
+	| 'rest'
+	| 'event'
+	| 'treasure'
+	| 'summary';
 
 export interface StatusView {
 	block: number;

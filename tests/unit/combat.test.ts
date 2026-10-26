@@ -455,7 +455,7 @@ describe('enemies, elites and boss (GDD 10)', () => {
 			const s = combatRun(id);
 			expect(combat(s).enemies.reduce((a, e) => a + e.maxHP, 0)).toBe(hp);
 		}
-		expect(Object.keys(ENCOUNTERS)).toHaveLength(14);
+		expect(Object.keys(ENCOUNTERS)).toHaveLength(27);
 	});
 });
 

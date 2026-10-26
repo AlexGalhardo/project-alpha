@@ -1,7 +1,8 @@
 // Full-run bot used by the simulation: the combat policy of GDD 14.1 plus simple macro choices.
-import { EQUIPMENT, RULES } from '../data/index.ts';
+import { EQUIPMENT, EVENTS, RULES } from '../data/index.ts';
 import { chooseAutoCommand } from './auto.ts';
 import { cardDef } from './cards.ts';
+import { cardsToChoose, choiceAvailable } from './events.ts';
 import { availableNodes } from './map.ts';
 import { maxHP } from './ops.ts';
 import { removalPrice } from './rewards.ts';
@@ -75,6 +76,39 @@ function chooseNode(s: RunState): Command {
 	};
 	const best = [...nodes].sort((a, b) => rank(b) - rank(a) || a.index - b.index)[0] as MapNode;
 	return { type: 'selectNode', index: best.index };
+}
+
+/** First available event choice that does not hurt a weak party; the last choice (Leave) otherwise. */
+function eventCommand(s: RunState): Command | null {
+	const ev = s.event;
+	const def = ev ? EVENTS[ev.id] : undefined;
+	if (!def) return null;
+	const strained = s.party.some((h) => h.stress >= 6);
+	const weak = hpFraction(s) < 0.5;
+	for (let i = 0; i < def.choices.length - 1; i++) {
+		const choice = def.choices[i];
+		if (!choice || !choiceAvailable(s, i)) continue;
+		const hurts = choice.effects.some(
+			(e) =>
+				((e.kind === 'stressEach' || e.kind === 'stressH1') && e.amount > 0 && strained) ||
+				((e.kind === 'damageH1' || e.kind === 'damageLowest') && weak),
+		);
+		if (hurts) continue;
+		const need = Math.max(0, ...choice.effects.map((e) => cardsToChoose(s, e)));
+		if (need === 0) return { type: 'eventChoose', index: i };
+		const removing = choice.effects.some((e) => e.kind === 'removeChoose');
+		// Remove the weakest cards; upgrade the strongest ones.
+		const order = [...s.deck]
+			.filter((c) => removing || !c.upgraded)
+			.sort(
+				(a, b) =>
+					(RARITY_WEIGHT[cardDef(a.cardId).rarity] ?? 0) -
+					(RARITY_WEIGHT[cardDef(b.cardId).rarity] ?? 0),
+			);
+		const picked = (removing ? order : order.reverse()).slice(0, need).map((c) => c.uid);
+		return { type: 'eventChoose', index: i, cardUids: picked };
+	}
+	return { type: 'eventChoose', index: def.choices.length - 1 };
 }
 
 export function chooseBotCommand(s: RunState): Command | null {
@@ -177,6 +211,10 @@ export function chooseBotCommand(s: RunState): Command | null {
 			if (target) return { type: 'restChoose', option: 'temper', cardUid: target.uid };
 			return { type: 'restChoose', option: 'recover' };
 		}
+		case 'event':
+			return eventCommand(s);
+		case 'treasure':
+			return { type: 'claimTreasure' };
 		default:
 			return null;
 	}

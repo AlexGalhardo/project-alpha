@@ -2,6 +2,18 @@
 export { chooseAutoCommand } from './auto.ts';
 export { chooseBotCommand } from './bot.ts';
 export { cardDef, cardValues } from './cards.ts';
+export { cardsToChoose, choiceAvailable } from './events.ts';
+export {
+	applyMeta,
+	bankRun,
+	buyNode,
+	canVeteran,
+	emptyProfile,
+	nextNodeCost,
+	type Profile,
+	parseProfile,
+	unlockedCards,
+} from './meta.ts';
 export { maxHP } from './ops.ts';
 export { apply, createRun, deserialize, embers, preview, serialize } from './run.ts';
 export type {

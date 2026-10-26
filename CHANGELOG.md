@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.2] - 2026-10-26
+
+### Documentation
+
+- **research:** Add sourced web research and digest of the developer references ([9bf0701](https://github.com/AlexGalhardo/project-alpha/commit/9bf0701c20a05b1f8a0f87028d5721ccd1bc07d6))
+
 ## [0.0.1] - 2026-10-26
 
 ### Fixed
@@ -18,4 +24,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **books:** Apply Pixel Logic and The Art of Game Design to this genre ([f23593e](https://github.com/AlexGalhardo/project-alpha/commit/f23593e4a6fe9161b8ffef7d51a3aaae6b15eff1))
 - Keep the project kickoff prompt ([a45f73b](https://github.com/AlexGalhardo/project-alpha/commit/a45f73b2c5647b12cc2903c6a90d387d74d06e99))
 - **skills:** Retarget project skills from the previous tactics game to this deckbuilder ([f535621](https://github.com/AlexGalhardo/project-alpha/commit/f535621369a0d22543be6643489eff4cf8b0c8cf))
+[0.0.2]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.1...v0.0.2>
 [0.0.1]: <https://github.com/AlexGalhardo/project-alpha/releases/tag/v0.0.1>

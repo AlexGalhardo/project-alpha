@@ -1,0 +1,41 @@
+name: Deploy
+
+# Web build -> Vercel production (alpha.lekzera.xyz). Needs repository secrets
+# VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID (docs/adrs/0003-ci-cd-vercel.md).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      # hashFiles() is not allowed in a job-level `if`, so the gate is a step: no game yet
+      # (index.html arrives in the STRUCTURE phase) or no Vercel secrets means skip, not fail.
+      - id: gate
+        run: |
+          if [ -f index.html ] && [ -n "$VERCEL_TOKEN" ]; then echo "enabled=true" >> "$GITHUB_OUTPUT"; else echo "enabled=false" >> "$GITHUB_OUTPUT"; fi
+      - if: steps.gate.outputs.enabled == 'true'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - if: steps.gate.outputs.enabled == 'true'
+        run: bun install --frozen-lockfile && bun run ci
+      - if: steps.gate.outputs.enabled == 'true'
+        run: |
+          bunx vercel@65.3.1 pull --yes --environment=production
+          bunx vercel@65.3.1 build --prod
+          bunx vercel@65.3.1 deploy --prebuilt --prod

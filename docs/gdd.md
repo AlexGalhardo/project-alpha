@@ -558,7 +558,7 @@ Unlocked one at a time by winning at the previous Rite; cumulative.
 | Rite | Rule |
 |---|---|
 | 1 | Elites +20% HP |
-| 2 | Common enemies deal +15% damage |
+| 2 | Common enemies deal +7.5% damage (⚖ tweaked 2026-10-26 from +15% after sim-rites report) |
 | 3 | Start the run with 30 gold |
 | 4 | Boss +20% HP |
 | 5 | Rest "Recover" heals 20% instead of 30% |
@@ -841,3 +841,63 @@ New cards (10) ⚖:
 | bmb_flashbang | Bombardier | Flashbang | 1 | Attack | uncommon | H2–3 | all | 2 damage and 1 Weakened to each enemy | 3 / 2 |
 
 Card A / card B per hero, in table order: Shieldbearer rampart/riposte, Marksman ricochet/deadeye, Arcanist cinder_ward/inferno, Confessor penance/last_rites, Bombardier shrapnel/flashbang.
+
+## 23. Act 3 and the final boss (1.0 content, specified 2026-10-26)
+
+Everything here is ⚖. Numbers below are the shipped data after the sim pass of 2026-10-26 (Act 3 HP × 0.75 and damage × 0.5 of the first draft, final boss 160 HP): a 3-act run wins 21.9% (`bun run sim -- --runs 200 --seed 1`, target 18–35%).
+
+### 23.1 Run flow with three acts
+
+- `ACT_RULES.acts = 3` ships. After the Act 2 boss reward the camp opens, then the Act 3 map starts at row 1; between acts every hero heals 50% of max HP and loses any injury (§22.1).
+- Victory = Act 3 boss defeated; the run summary shows the final epilogue (`boss.rift_mother.epilogue`).
+- Act scaling (§4.3, `ACT_RULES`): non-boss enemies get HP × (1 + 0.2 × (act − 1)) and damage × (1 + 0.1 × (act − 1)), so Act 3 is HP × 1.4 and damage × 1.2. Boss HP is final.
+- Setting: **the Iron Sepulchre**, the vault under the cathedral where the Rift was first sealed and where it is born again.
+
+### 23.2 Act 3 enemies (10)
+
+| Key | Name | Ranks | HP | Speed | Intent cycle |
+|---|---|---|---|---|---|
+| iron_mourner | Iron Mourner | E1 | 27 | 2 | Toll-Hammer 4 (front) → Brace: 10 Block → Toll-Hammer 4 + 1 stress (front) |
+| grave_cur | Grave Cur | E1–2 | 18 | 7 | Snap 2 ×2 (front) → Rend 2 + 3 Bleed (lowest-HP) → Snap 2 ×2 |
+| ash_cantor | Ash Cantor | E3–4 | 16 | 3 | Lament: +2 stress (highest-stress) → Kindle: +1 Might to all enemies → Ember 3 (back) |
+| bronze_scribe | Bronze Scribe | E2–3 | 20 | 4 | Mark the Name: 2 Marked (front) → Etch 4 (marked) → Seal: 1 Ward to every enemy |
+| hollow_choir | Hollow Choir | E4 | 22 | 1 | Dirge: +1 stress to every hero → Hush: 1 Weakened to every hero → Dirge |
+| sepulchre_knight | Sepulchre Knight | E1 | 36 | 2 | Wind-up (telegraph) → Execution 9 (front) → Iron Wall: 14 Block |
+| wax_saint | Wax Saint | E2–4 | 15 | 5 | Drip 2 + 2 Bleed (lowest-HP) → Mend Wax: heals itself 8 → Drip |
+| chain_wraith | Chain Wraith | E2–3 | 16 | 6 | Drag 2, swaps H1 and H2 (front) → Lash 3 to H1 and H2 → Fade: 8 Block, moves to E4 |
+| marrow_butcher | Marrow Butcher | E1–2 | 24 | 4 | Cleave 4 to H1 and H2 → Frenzy: +2 Might → Cleave 4 to H1 and H2 |
+| rift_spawn | Rift Spawn | E1–3 | 8 | 6 | Bite 2 ×2 (front) |
+
+### 23.3 Act 3 encounters and elites
+
+| Id | Pool | Enemies (E1→E4) |
+|---|---|---|
+| A3-1 | Tier A | rift_spawn, rift_spawn, ash_cantor |
+| A3-2 | Tier A | iron_mourner, wax_saint |
+| A3-3 | Tier A | grave_cur, bronze_scribe |
+| A3-4 | Tier A | marrow_butcher, hollow_choir |
+| A3-5 | Tier A | grave_cur, chain_wraith |
+| B3-1 | Tier B | sepulchre_knight, bronze_scribe, ash_cantor |
+| B3-2 | Tier B | iron_mourner, chain_wraith, hollow_choir |
+| B3-3 | Tier B | marrow_butcher, grave_cur, wax_saint |
+| B3-4 | Tier B | sepulchre_knight, rift_spawn, rift_spawn |
+| B3-5 | Tier B | marrow_butcher, bronze_scribe, hollow_choir |
+| EL3-1 | Elite row 4 | iron_mourner (elite, Oathwall), wax_saint |
+| EL3-2 | Elite row 7 | sepulchre_knight (elite, Calcified), ash_cantor |
+| BOSS3 | Row 10 | rift_mother (E1+E2) |
+
+### 23.4 Final boss: the Rift Mother
+
+The Rift Mother (`rift_mother`, "A Mãe da Fenda"): the wound itself grown a body, a cathedral-sized mass of bone, wax and machinery cradled in the sepulchre's iron ribs. Occupies E1+E2, HP 160 (final), Speed 3. She is the only enemy with **three phases** (allowed for the final boss only). Each phase change clears her debuffs, grants +2 Might and replaces the current intent with the new phase's first intent, shown before the player continues (§10.5); one hit that crosses both thresholds enters phase 3 directly (both banners play).
+
+| Phase | Trigger | Intent cycle |
+|---|---|---|
+| 1 | start | Embrace 7 (front) → Wail: +2 stress to every hero → Coil: 15 Block |
+| 2 | HP ≤ 110 | Rend the Veil 3 to every hero → Devour 9 (highest-stress) → Wail |
+| 3 | HP ≤ 55 | Unmaking: 4 to every hero and +1 stress each → Devour 10 (lowest-HP) → Heartbeat: heals 15, 10 Block |
+
+Rite 10 (§13.3) adds Embrace to her phase-2 and phase-3 cycles.
+
+### 23.5 Epilogue (text budget §16.2)
+
+Three short paragraphs on the victory summary: the Rift closes from the inside; the sepulchre falls silent and the Order seals it with the party's names; the last line keeps the run-based tone (the cathedral bell rings once, and no one rings it).

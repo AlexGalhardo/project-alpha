@@ -1,0 +1,2802 @@
+[
+  {
+    "key": "hero.shieldbearer.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art character, full body, standing ready pose, facing right. A heavy black riveted plate knight with a tall rectangular shield with a red cross-shaped boss, a jagged sword in the other hand, a short tattered crimson cape. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art character, full body, standing ready pose, facing right. A heavy black riveted plate knight with a tall rectangular shield with a red cross-shaped boss, a jagged sword in the other hand, a short tattered crimson cape. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "east",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:31:49.574Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "hero.marksman.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art character, full body, standing ready pose, facing right. A slim hooded archer in charcoal leather, a narrow angular mask, a long recurve bow held at rest, a quiver of dark arrows on the back. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art character, full body, standing ready pose, facing right. A slim hooded archer in charcoal leather, a narrow angular mask, a long recurve bow held at rest, a quiver of dark arrows on the back. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "east",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:32:47.225Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "hero.arcanist.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art character, full body, standing ready pose, facing right. A tall figure in layered dark violet robes, a faceless metal mask, a spiked staff with a glowing ember rune at its head. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art character, full body, standing ready pose, facing right. A tall figure in layered dark violet robes, a faceless metal mask, a spiked staff with a glowing ember rune at its head. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "east",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:33:31.650Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "hero.confessor.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art character, full body, standing ready pose, facing right. A slender priest in ash-white robes, an engraved mask, a lantern-staff with pale green light, a leather satchel on the hip. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art character, full body, standing ready pose, facing right. A slender priest in ash-white robes, an engraved mask, a lantern-staff with pale green light, a leather satchel on the hip. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "east",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:33:55.727Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "hero.bombardier.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art character, full body, standing ready pose, facing right. A stocky armoured gunner with a riveted iron breathing helmet, ammunition belts across the chest, a short hand cannon held low. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art character, full body, standing ready pose, facing right. A stocky armoured gunner with a riveted iron breathing helmet, ammunition belts across the chest, a short hand cannon held low. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "east",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:34:16.608Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_hack",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Heavy sword cut across a plated shoulder. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Heavy sword cut across a plated shoulder. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:34:57.078Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.husk_penitent.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A gaunt man in a torn penitent shift, wrapped in cords, a flail of knotted chain in one hand. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A gaunt man in a torn penitent shift, wrapped in cords, a flail of knotted chain in one hand. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:34:57.080Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_brace",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Shield raised, feet braced on stone. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Shield raised, feet braced on stone. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:35:11.485Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.chitter_swarm.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A knot of small pale many-legged things fused into one body, a crown of mouths. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A knot of small pale many-legged things fused into one body, a crown of mouths. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:35:18.495Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_hold_the_line",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Shield wall at a broken gate. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Shield wall at a broken gate. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:35:30.215Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_shield_slam",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Shield edge driving into a face. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Shield edge driving into a face. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:35:43.686Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_iron_stance",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Armoured figure planted, sparks at the boots. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Armoured figure planted, sparks at the boots. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:35:56.722Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.ash_acolyte.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A cloaked woman holding a brazier on a chain, ash streaming from her sleeves. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A cloaked woman holding a brazier on a chain, ash streaming from her sleeves. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:35:41.827Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_shove",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Shield hitting a body, dust burst. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Shield hitting a body, dust burst. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:36:11.864Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.graft_hound.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A quadruped of stitched dog and human parts, a row of extra eyes along the spine. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A quadruped of stitched dog and human parts, a row of extra eyes along the spine. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:36:16.985Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_bulwark",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A tall shield wall of riveted iron. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "A tall shield wall of riveted iron. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:36:30.131Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.wax_mourner.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A hooded mourner whose face is a slow wax mask dripping down the chest. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A hooded mourner whose face is a slow wax mask dripping down the chest. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:36:38.298Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_vow_of_iron",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Gauntlet raised with a vow scroll. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Gauntlet raised with a vow scroll. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:36:44.376Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.rust_templar.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A hollow knight in rust-eaten plate, helmet fused shut, a broken processional banner used as a spear. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A hollow knight in rust-eaten plate, helmet fused shut, a broken processional banner used as a spear. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:36:59.424Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_last_bastion",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A line of shields lit from behind. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "A line of shields lit from behind. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:37:02.624Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_aimed_shot",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Bow drawn, arrow on target. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Bow drawn, arrow on target. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:37:21.653Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.lantern_leech.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A sack-shaped creature with a lantern set in its body, long feeding tendrils. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A sack-shaped creature with a lantern set in its body, long feeding tendrils. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:37:17.396Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_sidestep",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Hooded archer stepping aside, cloak trailing. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Hooded archer stepping aside, cloak trailing. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:37:38.736Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_mark_prey",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Crosshair sigil painted on a figure. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Crosshair sigil painted on a figure. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:37:49.736Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.choir_thing.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A tall throatless figure with open mouths along the arms, bent forward as if singing. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A tall throatless figure with open mouths along the arms, bent forward as if singing. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 80,
+        "height": 112
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:37:40.350Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_piercing_bolt",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Bolt passing through two figures in a line. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Bolt passing through two figures in a line. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:38:01.941Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_quick_draw",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Arrow nocked in one motion. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Arrow nocked in one motion. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:38:16.813Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.ossified_brute.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A hulking figure of bone grown over bone, a heavy crushing fist, slow and patient. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A hulking figure of bone grown over bone, a heavy crushing fist, slow and patient. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 80,
+        "height": 112
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:38:06.389Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_pinning_shot",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Arrow pinning a cloak to a wall. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Arrow pinning a cloak to a wall. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:38:34.006Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.rift_stalker.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A thin long-limbed shape between folds of dark light, sharp blade-like forelimbs. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A thin long-limbed shape between folds of dark light, sharp blade-like forelimbs. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 80,
+        "height": 112
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:38:35.349Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_volley",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Many arrows arcing over a field. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Many arrows arcing over a field. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:38:49.413Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.bell_maw.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Front view pixel art boss monster, fills the canvas. A cathedral bell grown into a biomechanical mouth, with a rim of teeth of bone, rooted in cracked stone, brass machinery visible on the sides, a dark opening at the front. Palette: bone, worn gold, ember rim. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Front view pixel art boss monster, fills the canvas. A cathedral bell grown into a biomechanical mouth, with a rim of teeth of bone, rooted in cracked stone, brass machinery visible on the sides, a dark opening at the front. Palette: bone, worn gold, ember rim. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 160,
+        "height": 144
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:38:58.973Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_hunters_focus",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Narrowed eye through a lens. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Narrowed eye through a lens. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:39:01.387Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "bg.title",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A ruined gothic citadel on a cliff under a dark red moon, chains hanging from broken towers, a small stone overlook in the foreground. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+    "params": {
+      "description": "A ruined gothic citadel on a cliff under a dark red moon, chains hanging from broken towers, a small stone overlook in the foreground. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+      "image_size": {
+        "width": 320,
+        "height": 180
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:39:19.415Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "generated at 320x180 (API max 400x400) and upscaled 2x nearest to 640x360"
+  },
+  {
+    "key": "card.mrk_killshot",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Arrow piercing a marked sigil. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Arrow piercing a marked sigil. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:39:20.562Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "bg.menu",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A vast cathedral hall, tall crimson stained-glass windows, a long stone staircase, candles along the walls. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+    "params": {
+      "description": "A vast cathedral hall, tall crimson stained-glass windows, a long stone staircase, candles along the walls. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+      "image_size": {
+        "width": 320,
+        "height": 180
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:39:36.757Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "generated at 320x180 (API max 400x400) and upscaled 2x nearest to 640x360"
+  },
+  {
+    "key": "bg.map.act1",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A dark gothic cloister seen from above, corridors and stone arches, a faint red glow under the floor. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+    "params": {
+      "description": "A dark gothic cloister seen from above, corridors and stone arches, a faint red glow under the floor. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+      "image_size": {
+        "width": 320,
+        "height": 180
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:39:55.903Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "generated at 320x180 (API max 400x400) and upscaled 2x nearest to 640x360"
+  },
+  {
+    "key": "card.arc_ember_bolt",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Small glowing ember flying from a staff. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Small glowing ember flying from a staff. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:39:51.232Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "bg.combat.act1",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A ruined cathedral nave, collapsed arches, a broken altar at the back, shafts of cold light, ash on the flagstones. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+    "params": {
+      "description": "A ruined cathedral nave, collapsed arches, a broken altar at the back, shafts of cold light, ash on the flagstones. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+      "image_size": {
+        "width": 320,
+        "height": 180
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:15.877Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "generated at 320x180 (API max 400x400) and upscaled 2x nearest to 640x360"
+  },
+  {
+    "key": "icon.status.block",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a shield.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a shield.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:37.733Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.status.might",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a raised fist.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a raised fist.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:39.078Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "card.arc_ash_veil",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Ash cloud forming a veil around an ally. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Ash cloud forming a veil around an ally. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:19.468Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.status.ward",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a ring with a rune.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a ring with a rune.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:40.539Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.status.marked",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a crosshair.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a crosshair.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:41.707Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.status.weakened",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a broken blade.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a broken blade.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:42.799Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.status.bleed",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a blood droplet.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a blood droplet.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:44.183Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.status.burn",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a flame.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a flame.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:45.438Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.status.stunned",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a spiral.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a spiral.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:46.688Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.node.combat",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows two crossed swords.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows two crossed swords.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:48.419Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.node.elite",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a horned skull.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a horned skull.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:49.708Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.node.shop",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a coin purse.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a coin purse.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:50.902Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.node.rest",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a campfire.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a campfire.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:52.289Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.node.boss",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bell with teeth.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bell with teeth.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:53.363Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.item.eq_notched_blade",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a notched short sword.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a notched short sword.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:54.863Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.item.eq_heavy_pavise",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a heavy tower shield.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a heavy tower shield.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:57.167Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.item.eq_bone_reliquary",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bone reliquary box.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bone reliquary box.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:58.513Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.item.eq_ember_focus",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a glowing ember crystal on a rod.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a glowing ember crystal on a rod.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:59.541Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.item.eq_votive_candle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a votive candle.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a votive candle.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:01.143Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.item.eq_iron_rosary",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows an iron rosary.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows an iron rosary.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:02.891Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.item.eq_hunters_lens",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a hunter lens monocle.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a hunter lens monocle.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:05.221Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.item.eq_bell_clapper",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bronze bell clapper.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bronze bell clapper.",
+      "image_size": {
+        "width": 24,
+        "height": 24
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:07.678Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "card.arc_rift_spark",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Spark jumping between cracks in the air. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Spark jumping between cracks in the air. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:40:40.980Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.arc_burn_hex",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Hex sigil burning on the ground. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Hex sigil burning on the ground. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:10.257Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.arc_channel",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Hands gathering light over a staff. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Hands gathering light over a staff. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:24.506Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.arc_cinder_lance",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Lance of ember driving forward. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Lance of ember driving forward. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:43.081Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.status.block",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a shield.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a shield.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:44.847Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  },
+  {
+    "key": "card.arc_firestorm",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Column of fire across a field. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Column of fire across a field. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:41:52.172Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.status.might",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a raised fist.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a raised fist.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:42:13.305Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  },
+  {
+    "key": "icon.status.ward",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a ring with a rune.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a ring with a rune.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:42:33.260Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "card.arc_unseal",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A seal breaking open with light inside. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "A seal breaking open with light inside. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:42:19.580Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.arc_rift_rupture",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A rupture of violet light in the air. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "A rupture of violet light in the air. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:42:42.627Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.status.marked",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a crosshair.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a crosshair.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:42:34.548Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  },
+  {
+    "key": "icon.status.weakened",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a broken blade.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a broken blade.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:43:03.410Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.status.bleed",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a blood droplet.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a blood droplet.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:43:04.794Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "card.cnf_censer_strike",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Swinging censer leaving a smoke arc. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Swinging censer leaving a smoke arc. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:42:58.731Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.status.burn",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a flame.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a flame.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:43:05.873Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  },
+  {
+    "key": "card.cnf_sanctuary",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pale circle of light around a figure. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Pale circle of light around a figure. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:43:14.588Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.cnf_mend",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Hands stitching a wound with thread of light. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Hands stitching a wound with thread of light. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:43:27.145Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.status.stunned",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a spiral.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a spiral.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:43:25.936Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  },
+  {
+    "key": "icon.node.combat",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows two crossed swords.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows two crossed swords.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:43:45.250Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.cnf_absolve",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Dark marks lifting from a body like smoke. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Dark marks lifting from a body like smoke. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:43:44.830Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.cnf_litany",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Open book with rising lines of light. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Open book with rising lines of light. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:44:11.107Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.node.elite",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a horned skull.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a horned skull.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:44:10.717Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.cnf_rebuke",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Lantern thrust forward against a dark form. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Lantern thrust forward against a dark form. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:44:33.434Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.status.ward",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a ring with a rune.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a ring with a rune.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:06.436Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "icon.status.weakened",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a broken blade.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a broken blade.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:07.621Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "card.cnf_mass_mend",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Several figures lit by one bright cross. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Several figures lit by one bright cross. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:44:49.954Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.status.bleed",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a blood droplet.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a blood droplet.",
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:08.738Z",
+    "status": "failed",
+    "httpStatus": 422,
+    "error": "{\"detail\":\"Canvas must be size 32x32 area or larger\"}"
+  },
+  {
+    "key": "card.cnf_steadfast_hymn",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Choir of mouths singing around a shield. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Choir of mouths singing around a shield. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:09.135Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.node.shop",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a coin purse.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a coin purse.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:09.975Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.cnf_rekindle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Fallen figure rising in a ring of embers. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Fallen figure rising in a ring of embers. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:27.077Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.node.rest",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a campfire.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a campfire.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:31.099Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.bmb_grapeshot",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Cannon spraying shot over two targets. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Cannon spraying shot over two targets. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:44.597Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.node.boss",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bell with teeth.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bell with teeth.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:48.577Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.bmb_sandbags",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Sandbags stacked in a battlement. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Sandbags stacked in a battlement. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:45:56.339Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.item.eq_notched_blade",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a notched short sword.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a notched short sword.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:46:11.323Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.bmb_shell",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Shell arcing toward a line of enemies. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Shell arcing toward a line of enemies. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:46:14.396Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.item.eq_heavy_pavise",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a heavy tower shield.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a heavy tower shield.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:46:31.255Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.bmb_incendiary",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Fire bursting from a shell. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Fire bursting from a shell. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:46:33.936Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.item.eq_bone_reliquary",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bone reliquary box.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bone reliquary box.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:46:44.505Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.bmb_reload",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Ammunition being loaded into a cannon. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Ammunition being loaded into a cannon. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:46:50.758Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.item.eq_ember_focus",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a glowing ember crystal on a rod.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a glowing ember crystal on a rod.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:47:04.564Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.bmb_concussion_round",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Shockwave ring from an impact. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Shockwave ring from an impact. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:47:06.087Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.item.eq_votive_candle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a votive candle.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a votive candle.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:47:24.907Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.bmb_barrage",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Three bursts in a diagonal. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Three bursts in a diagonal. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:47:32.668Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.item.eq_iron_rosary",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows an iron rosary.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows an iron rosary.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:47:41.831Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "card.bmb_powder_keg",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Keg with a fuse, tied to a stake. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Keg with a fuse, tied to a stake. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:47:48.583Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.bmb_siege_mortar",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Mortar firing upward, bright flash. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+    "params": {
+      "description": "Mortar firing upward, bright flash. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:48:04.163Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "icon.item.eq_hunters_lens",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a hunter lens monocle.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a hunter lens monocle.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:48:03.116Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "icon.item.eq_bell_clapper",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bronze bell clapper.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a bronze bell clapper.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:48:28.286Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: kept as 32x32 master (24x24 by hand)"
+  },
+  {
+    "key": "icon.status.ward",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a ring with a rune.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a ring with a rune.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:50:02.927Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  },
+  {
+    "key": "icon.status.weakened",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a broken blade.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a broken blade.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:50:32.987Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  },
+  {
+    "key": "icon.status.bleed",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a blood droplet.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a blood droplet.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:50:47.763Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  }
+]

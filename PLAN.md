@@ -7,8 +7,8 @@ The onboarding document for every session and agent. Read **Current status** fir
 | Field | Value |
 |---|---|
 | Phase | 2 PROTOTYPE — Act 1 playable end to end in the browser with placeholder art and synthesized SFX |
-| Current group | P2.5 Prototype gate (balance pass running) |
-| Version | 0.0.4 (last release) |
+| Current group | A3 Alpha content (Act 2, events, skill tree done; Rites in progress) |
+| Version | 0.0.5 (live at https://alpha.lekzera.xyz) |
 | Next step | Balance pass to GDD §20 targets (`docs/reports/`), then asset generation once `docs/asset-request.md` is approved |
 | Blockers | Paid asset generation waits for developer approval (`docs/asset-request.md`, `questions-to-dev.md` local only); Vercel secrets missing (no deploy); 1.0 RC items (Acts 2–3, Electron, Android, Steam) are later phases |
 
@@ -142,17 +142,17 @@ Total PixelLab ≈ 356 generations (≈ 11% of the 3,400 remaining the developer
 
 ## 5. Phase 3 — ALPHA
 
-- [ ] A3.1 Act 2 content (10 enemies, 2 elites, boss) and act scaling §4.3
-- [ ] A3.2 Events and treasure nodes, 12 events EN/PT-BR
-- [ ] A3.3 Skill tree + Embers spending (§13.2)
+- [x] A3.1 Act 2 content (10 enemies, 2 elites, boss) and act scaling §4.3 — done 2026-10-26 (art generated; run win 29.4% over 2 acts, `docs/reports/2026-10-26-sim-prototype.md`)
+- [ ] A3.2 Events and treasure nodes, 12 events EN/PT-BR — 6 of 12 events + treasure done (GDD §22.4, tests/unit/events.test.ts); 6 more events pending
+- [x] A3.3 Skill tree + Embers spending (§13.2) — skill tree v1 (GDD §22.5): Legacy screen, Veteran start, tests/unit/meta.test.ts + tests/e2e/legacy.spec.ts
 - [ ] A3.4 Animations (idle, attack, hit) per Art Bible
-- [ ] A3.5 Text scale + colorblind check
+- [ ] A3.5 Text scale + colorblind check — colorblind audit done (`docs/reports/2026-10-26-colorblind.md`), text scale pending
 - [ ] A3.6 Alpha gate: sim matrix, e2e, human QA, deploy
 
 ## 6. Phase 4 — BETA
 
 - [ ] B4.1 Act 3 + final boss
-- [ ] B4.2 Difficulty ladder (10 Rites, §13.3)
+- [ ] B4.2 Difficulty ladder (10 Rites, §13.3) — in progress (core + profile unlocks committed)
 - [ ] B4.3 Polish pass (VFX, juice, audio mix)
 - [ ] B4.4 Desktop build with Electron (pinned stable) — assert: installer runs on Windows
 - [ ] B4.5 Android build with Capacitor (pinned stable) — assert: APK runs on a device

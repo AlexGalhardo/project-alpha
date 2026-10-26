@@ -3,10 +3,11 @@
 //                       [--enemy-hp 1] [--enemy-dmg 1] [--hero-hp 1] [--json]
 //                       [--set ENEMIES.bell_maw.hp=80 ...]   (dev only: patch a data value in memory)
 //                       [--acts 2]   (play Act 1 and Act 2; the shipped default is ACT_RULES.acts)
+//                       [--rite 0]   (difficulty Rite 0–10, docs/gdd.md §13.3)
 // --runs is per party composition (all 10 compositions of 3 out of 5 unless --party is given).
 import { isMainThread, parentPort, Worker, workerData } from 'node:worker_threads';
 import type { HeroClass, RunOptions, RunState } from '../src/core/index.ts';
-import { apply, chooseBotCommand, createRun } from '../src/core/index.ts';
+import { apply, applyRite, chooseBotCommand, createRun } from '../src/core/index.ts';
 import * as data from '../src/data/index.ts';
 import { HERO_CLASSES, HEROES } from '../src/data/index.ts';
 
@@ -16,6 +17,8 @@ interface Job {
 	seed0: number;
 	options: RunOptions;
 	sets: string[];
+	/** Difficulty Rite 0–10 (docs/gdd.md §13.3). */
+	rite: number;
 }
 
 interface PartyResult {
@@ -46,8 +49,8 @@ function applySets(sets: string[]): void {
 	}
 }
 
-function playRun(seed: number, party: HeroClass[], options: RunOptions): RunState {
-	let s = createRun(seed, party, options);
+function playRun(seed: number, party: HeroClass[], options: RunOptions, rite = 0): RunState {
+	let s = applyRite(createRun(seed, party, options), rite);
 	for (let steps = 0; steps < 50000; steps++) {
 		const cmd = chooseBotCommand(s);
 		if (!cmd) return s;
@@ -77,7 +80,7 @@ function runParty(job: Job): PartyResult {
 		deathRow: {},
 	};
 	for (let i = 0; i < job.runs; i++) {
-		const s = playRun(job.seed0 + i, job.party, job.options);
+		const s = playRun(job.seed0 + i, job.party, job.options, job.rite);
 		res.rounds += s.roundsCleared;
 		res.falls += s.stats.falls;
 		if (s.stats.collapses > 0) res.collapseRuns++;
@@ -123,6 +126,7 @@ async function main(): Promise<void> {
 	};
 	const runs = Number(opt('--runs', '1000'));
 	const seed0 = Number(opt('--seed', '1'));
+	const rite = Number(opt('--rite', '0'));
 	const options: RunOptions = {
 		enemyHpMul: Number(opt('--enemy-hp', '1')),
 		enemyDmgMul: Number(opt('--enemy-dmg', '1')),
@@ -140,7 +144,7 @@ async function main(): Promise<void> {
 			(party) =>
 				new Promise<PartyResult>((resolve, reject) => {
 					const w = new Worker(new URL(import.meta.url), {
-						workerData: { party, runs, seed0, options, sets } satisfies Job,
+						workerData: { party, runs, seed0, options, sets, rite } satisfies Job,
 					});
 					w.on('message', (m: PartyResult) => resolve(m));
 					w.on('error', reject);

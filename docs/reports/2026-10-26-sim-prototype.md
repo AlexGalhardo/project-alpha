@@ -91,3 +91,38 @@ bun run sim -- --runs 200 --set ELITE.hpMul=1.5 --set ENEMIES.bell_maw.hp=120
 `--set path=value` patches one numeric data value in memory (dev only). One worker runs per composition; 10 000 runs take about 30 s.
 
 Control sample (seeds 5001-6000): win 52.0%, no Shieldbearer 28.3%, Collapse 55.5%, turns 4.0 / 6.6 / 8.9.
+
+## Act 2
+
+Date: 2026-10-26. Same tool with `--acts 2` (`bun run sim -- --runs 1000 --seed 1 --acts 2`), 10 compositions x 1000 runs. Alpha ships `ACT_RULES.acts = 2`. Target for a two-act run: win rate 25-45% (GDD 20).
+
+| Metric | GDD draft (HP x1.5, damage x1.3) | Tuned (HP x1.2, damage x1.1) |
+|---|---|---|
+| Run win rate | 11.6% | **29.4%** |
+| Act 1 cleared | 59.6% | 60.6% |
+| Run won when Act 1 cleared | 19.5% | 48.5% |
+| Runs with at least 1 Collapse | 73.4% | 73.7% |
+| Common combat, turns (mean) | 4.6 | 4.4 |
+| Elite combat, turns | 7.2 | 7.0 |
+| Boss combat, turns | 9.0 | 9.3 |
+
+The draft column is a 200-run sample; the tuned column is 1000 runs per composition.
+
+Data change: `ACT_RULES.hpPerAct` 0.5 to 0.2 and `dmgPerAct` 0.3 to 0.1 (`src/data/economy.ts`). The Gilded Penitent keeps 140 HP with phase 2 at 70 and +2 Might: 100 or 120 HP moved the win rate by about 1 point, so the boss is not the bottleneck.
+
+Win rate by composition, two acts (tuned):
+
+| Party | Win rate |
+|---|---|
+| shieldbearer + marksman + arcanist | 18.1% |
+| shieldbearer + confessor + marksman | 72.8% |
+| shieldbearer + marksman + bombardier | 15.9% |
+| shieldbearer + confessor + arcanist | 72.3% |
+| shieldbearer + arcanist + bombardier | 16.6% |
+| shieldbearer + confessor + bombardier | 68.3% |
+| confessor + marksman + arcanist | 11.6% |
+| marksman + arcanist + bombardier | 0.3% |
+| confessor + marksman + bombardier | 7.9% |
+| confessor + arcanist + bombardier | 10.3% |
+
+Hero share of winning parties: Shieldbearer 89.8%, Confessor 82.7%, Arcanist 43.9%, Marksman 43.0%, Bombardier 40.6% (all above 15%). Parties without the Shieldbearer win 7.5% over two acts; the gap grows with the second act, so the front-rank rule is the next balance topic. Defeats by act and row: Act 1 rows 4-10 (388, 229, 386, 1147, 697, 1093), Act 2 rows 4-10 (243, 330, 502, 1080, 517, 443).

@@ -26,6 +26,9 @@ import {
 	setHand,
 } from './helpers.ts';
 
+/** The act count the game ships with; tests that change it restore this. */
+const SHIPPED_ACTS = ACT_RULES.acts;
+
 const ACT2_ENEMIES = [
 	'vault_warden',
 	'bone_lancer',
@@ -182,7 +185,7 @@ describe('Act 2 enemies and boss', () => {
 
 describe('Act flow (GDD 22.1)', () => {
 	afterEach(() => {
-		ACT_RULES.acts = 1;
+		ACT_RULES.acts = SHIPPED_ACTS;
 	});
 
 	test('ACTS=2: the Act 1 boss opens the camp, then a fresh Act 2 map; heroes heal 50% and lose injuries', () => {

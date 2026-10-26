@@ -65,7 +65,7 @@ describe('i18n dictionaries (ADR 0009)', () => {
 	});
 
 	test('card rules text stays within 12 words before placeholder substitution', () => {
-		const tooLong = [...enLeaves]
+		const tooLong = [...enLeaves, ...ptLeaves]
 			.filter(([key]) => key.startsWith('card.') && key.endsWith('.text'))
 			.filter(([, value]) => value.replace(/\{\w+\}/g, 'N').split(/\s+/).length > 12)
 			.map(([key]) => key);

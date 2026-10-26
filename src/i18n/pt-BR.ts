@@ -132,7 +132,7 @@ export const ptBR: Strings = {
 		notEnoughGold: 'Ouro insuficiente',
 	},
 	reward: {
-		skipConfirm: 'Pressione Esc de novo para pular a carta.',
+		skipConfirm: 'Toque de novo ou Esc para pular a carta.',
 		equipment: 'Equipamento: {item}',
 		take: 'Pegar',
 		title: 'Recompensa',
@@ -168,7 +168,7 @@ export const ptBR: Strings = {
 			tooltip: 'Absorve dano dos golpes. Zera no início do turno do dono.',
 		},
 		might: {
-			name: 'Vigor',
+			name: 'Força',
 			tooltip: 'Soma {stacks} de dano a cada golpe. Dura o combate.',
 		},
 		marked: {
@@ -258,7 +258,7 @@ export const ptBR: Strings = {
 		bombardier: {
 			name: 'Bombardeiro',
 			role: 'Artilharia',
-			identity: 'Respingo, golpes na retaguarda, Atordoar.',
+			identity: 'Respingo, golpes na retaguarda, atordoa.',
 		},
 	},
 	enemy: {
@@ -375,7 +375,7 @@ export const ptBR: Strings = {
 		},
 		eq_heavy_pavise: {
 			name: 'Pavês Pesado',
-			effect: 'Os valores de bloqueio do dono +2.',
+			effect: 'O bloqueio do dono aumenta em 2.',
 		},
 		eq_bone_reliquary: {
 			name: 'Relicário de Osso',
@@ -403,8 +403,8 @@ export const ptBR: Strings = {
 		},
 	},
 	equip: {
-		weapon: 'Arma (vazio)',
-		relic: 'Relíquia (vazio)',
+		weapon: 'Arma (vazia)',
+		relic: 'Relíquia (vazia)',
 	},
 	cardType: {
 		attack: 'Ataque',
@@ -423,7 +423,7 @@ export const ptBR: Strings = {
 		ev_weeping_font: {
 			title: 'A Fonte que Chora',
 			text: 'Uma pia de pedra fica na nave. A água escorre pelo rosto dela sem parar.\nA água é fria e tem gosto de sal. Alguém deixou frascos vazios ao lado.\nO grupo pode beber, encher os frascos ou seguir em frente.',
-			choice1: 'Beber: cada herói cura {heal}% do HP máximo e ganha {stress} de estresse.',
+			choice1: 'Beber: cada herói cura {heal}% da vida máxima e ganha {stress} de estresse.',
 			choice2: 'Encher os frascos: ganhe {gold} de ouro.',
 			choice3: 'Sair.',
 		},
@@ -437,9 +437,9 @@ export const ptBR: Strings = {
 		},
 		ev_chained_penitent: {
 			title: 'O Penitente Acorrentado',
-			text: 'Um homem ajoelha com os pulsos presos ao chão. Ele não levanta a cabeça.\nPede para ser libertado. Diz que já pagou por isso.\nA corrente é de ferro bom. Poderia ser levada.',
+			text: 'Um homem ajoelha com os pulsos presos ao chão. Ele não levanta a cabeça.\nPede para ser libertado. Diz que já pagou por isso.\nA corrente é de bom ferro. Poderia ser levada.',
 			choice1:
-				'Libertá-lo: o primeiro herói perde {cost} de HP; escolha 1 de 3 cartas incomuns.',
+				'Libertá-lo: o primeiro herói perde {cost} de vida; escolha 1 de 3 cartas incomuns.',
 			choice2: 'Pegar a corrente dele: aprimore uma carta aleatória.',
 			choice3: 'Sair.',
 		},
@@ -447,7 +447,7 @@ export const ptBR: Strings = {
 			title: 'Armaria Esquecida',
 			text: 'Uma porta atrás do altar abre para prateleiras de equipamento antigo, com ferrugem em cada lâmina.\nAlgo se move na escuridão entre as prateleiras.\nUma boa peça pode ainda estar sob a poeira. Algo mais também pode.',
 			choice1:
-				'Vasculhar: ganhe um equipamento comum; o herói com menos HP perde {cost} de HP.',
+				'Vasculhar: ganhe um equipamento comum; o herói com menos vida perde {cost} de vida.',
 			choice2: 'Sair.',
 		},
 		ev_whispering_choir: {
@@ -461,7 +461,7 @@ export const ptBR: Strings = {
 			title: 'Peregrino da Brasa',
 			text: 'Um peregrino senta junto a um fogo de brasas que nunca se apagam.\nCaminhou muito e quer descansar.\nTroca o fogo por ouro ou divide-o de graça.',
 			choice1: 'Trocar: pague {gold} de ouro; aprimore duas cartas (você escolhe).',
-			choice2: 'Dividir o fogo: cada herói cura {heal} de HP.',
+			choice2: 'Dividir o fogo: cada herói cura {heal} de vida.',
 			choice3: 'Sair.',
 		},
 	},
@@ -485,19 +485,19 @@ export const ptBR: Strings = {
 		transition: 'A descida continua. Ato {act}.',
 	},
 	rite: {
-		'1': 'Elites têm 20% mais HP.',
+		'1': 'Elites têm 20% mais vida.',
 		'2': 'Inimigos comuns causam 15% mais dano.',
 		'3': 'Comece a corrida com 30 de ouro.',
-		'4': 'O chefe tem 20% mais HP.',
+		'4': 'O chefe tem 20% mais vida.',
 		'5': 'Recuperar no descanso cura 20%, não 30%.',
 		'6': 'Heróis começam a corrida com 2 de estresse.',
 		'7': 'Preços da loja e do acampamento sobem 15%.',
 		'8': 'Todo inimigo começa o combate com 1 de Força.',
-		'9': 'Ferimento custa 35% do HP máximo.',
+		'9': 'Ferimento custa 35% da vida máxima.',
 		'10': 'A fase 2 do chefe ganha uma quarta intenção.',
 	},
 	intent: {
-		ambush: 'Ataca uma emboscada contra um herói da retaguarda.',
+		ambush: 'Ataca de emboscada um herói da retaguarda.',
 		ash_strike: 'Golpeia o herói da frente com cinza ardente.',
 		bite: 'Morde o herói da frente, duas vezes.',
 		clapper: 'Balança o badalo contra o herói da frente.',
@@ -510,7 +510,7 @@ export const ptBR: Strings = {
 		flail: 'Golpeia o herói da frente.',
 		gather: 'Reúne forças. Algo pesado está vindo.',
 		hum: 'Zumbe: todos os inimigos ganham Proteção.',
-		kindle: 'Alimenta o fogo: todos os inimigos ganham Vigor.',
+		kindle: 'Alimenta o fogo: todos os inimigos ganham Força.',
 		lunge: 'Avança sobre o herói da frente.',
 		lure: 'Atrai um herói da retaguarda e o marca.',
 		mutter: 'Murmura, corroendo os nervos do herói da frente.',
@@ -518,13 +518,13 @@ export const ptBR: Strings = {
 		raise_shield: 'Ergue um escudo e ganha bloqueio.',
 		rake: 'Retalha os heróis da retaguarda, duas vezes.',
 		rend: 'Dilacera o herói da frente e deixa Sangramento.',
-		resonance: 'O sino ressoa: ganha bloqueio e Vigor.',
+		resonance: 'O sino ressoa: ganha bloqueio e Força.',
 		shove: 'Empurra um herói e troca os dois da frente.',
 		shriek: 'Grita: todos os heróis ficam estressados e enfraquecidos.',
 		swallow: 'Engole o herói mais estressado.',
 		toll: 'O sino toca: todos os heróis ganham estresse.',
 		shield_bash: 'Golpeia o herói da frente com o escudo.',
-		brace: 'Firma-se atrás do escudo e ganha Bloqueio.',
+		brace: 'Firma-se atrás do escudo e ganha bloqueio.',
 		pierce: 'Perfura os dois primeiros heróis.',
 		withdraw: 'Recua para as fileiras de trás.',
 		choke: 'Sufoca o herói mais fraco.',
@@ -533,8 +533,8 @@ export const ptBR: Strings = {
 		drone: 'Zumbe sem parar: todos os heróis ganham estresse.',
 		gnaw: 'Rói o herói da frente, duas vezes.',
 		cut: 'Corta um herói por trás e deixa Sangramento.',
-		vanish: 'Escorrega para a escuridão e ganha Bloqueio.',
-		reflect: 'Reflete golpes e ganha Bloqueio.',
+		vanish: 'Escorrega para a escuridão e ganha bloqueio.',
+		reflect: 'Reflete golpes e ganha bloqueio.',
 		glare: 'Encara os heróis de trás e marca um.',
 		smite: 'Golpeia o herói marcado.',
 		sermon: 'Prega para o herói mais estressado.',
@@ -542,10 +542,10 @@ export const ptBR: Strings = {
 		wind_up: 'Prepara o golpe. Algo pesado vem aí.',
 		chain_sweep: 'Varre correntes sobre os dois primeiros heróis.',
 		spit: 'Cospe podridão no herói mais fraco e deixa Sangramento.',
-		hover: 'Paira e ganha Bloqueio.',
+		hover: 'Paira e ganha bloqueio.',
 		lash: 'Açoita o herói da frente.',
 		confession: 'Força uma confissão: todos os heróis ganham estresse.',
-		gild: 'Dourada-se: ganha Bloqueio e Força.',
+		gild: 'Recobre-se de ouro: ganha bloqueio e Força.',
 		scourge: 'Açoita todos os heróis.',
 	},
 	card: {
@@ -566,7 +566,7 @@ export const ptBR: Strings = {
 			text: 'Causa dano igual ao seu bloqueio, até 24.',
 		},
 		shb_iron_stance: {
-			name: 'Postura de Ferro',
+			name: 'Postura',
 			text: 'Ganha {block} de bloqueio. Exaustão.',
 		},
 		shb_shove: {
@@ -598,7 +598,7 @@ export const ptBR: Strings = {
 			text: 'Causa {damage} de dano. Aplica {stacks} de Marcado.',
 		},
 		mrk_piercing_bolt: {
-			name: 'Virote Perfurante',
+			name: 'Virote',
 			text: 'Causa {damage} de dano ao alvo e ao inimigo atrás dele.',
 		},
 		mrk_quick_draw: {
@@ -606,7 +606,7 @@ export const ptBR: Strings = {
 			text: 'Causa {damage} de dano. Compra 1.',
 		},
 		mrk_pinning_shot: {
-			name: 'Tiro de Imobilização',
+			name: 'Imobilização',
 			text: 'Causa {damage} de dano. Aplica 2 de Enfraquecido.',
 		},
 		mrk_volley: {
@@ -615,7 +615,7 @@ export const ptBR: Strings = {
 		},
 		mrk_hunters_focus: {
 			name: 'Foco do Caçador',
-			text: 'Seu primeiro ataque no turno contra um inimigo Marcado causa +{bonus} de dano.',
+			text: 'Primeiro ataque do turno contra um inimigo Marcado causa +{bonus} de dano.',
 		},
 		mrk_killshot: {
 			name: 'Golpe Final',
@@ -630,11 +630,11 @@ export const ptBR: Strings = {
 			text: 'Dá {block} de bloqueio a um aliado.',
 		},
 		arc_rift_spark: {
-			name: 'Centelha da Fenda',
+			name: 'Centelha',
 			text: 'Causa {damage} de dano em cada inimigo. Temor 1.',
 		},
 		arc_burn_hex: {
-			name: 'Feitiço de Queima',
+			name: 'Feitiço',
 			text: 'Aplica {stacks} de Queimadura.',
 		},
 		arc_channel: {
@@ -646,7 +646,7 @@ export const ptBR: Strings = {
 			text: 'Causa {damage} de dano ao inimigo da frente.',
 		},
 		arc_firestorm: {
-			name: 'Tempestade de Fogo',
+			name: 'Tempestade',
 			text: 'Causa {damage} de dano em cada inimigo. Temor 2.',
 		},
 		arc_unseal: {
@@ -654,11 +654,11 @@ export const ptBR: Strings = {
 			text: 'Compra {draw}. Temor 1.',
 		},
 		arc_rift_rupture: {
-			name: 'Ruptura da Fenda',
+			name: 'Ruptura',
 			text: 'Causa {damage} de dano. Temor 3. Exaustão.',
 		},
 		cnf_censer_strike: {
-			name: 'Golpe do Turíbulo',
+			name: 'Turíbulo',
 			text: 'Causa {damage} de dano. Cura o herói com menos vida em {heal}.',
 		},
 		cnf_sanctuary: {
@@ -671,7 +671,7 @@ export const ptBR: Strings = {
 		},
 		cnf_absolve: {
 			name: 'Absolvição',
-			text: 'Remove todos os debuffs de um aliado. Alivia {stress} de estresse.',
+			text: 'Remove todos os efeitos negativos de um aliado. Alivia {stress} de estresse.',
 		},
 		cnf_litany: {
 			name: 'Ladainha',
@@ -687,7 +687,7 @@ export const ptBR: Strings = {
 		},
 		cnf_steadfast_hymn: {
 			name: 'Hino Firme',
-			text: 'No início de cada turno, o herói com menos vida ganha {block} de bloqueio.',
+			text: 'No início do turno, o herói mais fraco ganha {block} de bloqueio.',
 		},
 		cnf_rekindle: {
 			name: 'Reacender',
@@ -703,55 +703,55 @@ export const ptBR: Strings = {
 		},
 		bmb_shell: {
 			name: 'Granada',
-			text: 'Causa {damage} de dano a um inimigo na posição 2 a 4. Respingo {splash}.',
+			text: 'Causa {damage} de dano na posição 2 a 4. Respingo {splash}.',
 		},
 		bmb_incendiary: {
 			name: 'Incendiário',
-			text: 'Causa {damage} de dano e aplica 3 de Queimadura no alvo e nos vizinhos.',
+			text: 'Causa {damage} de dano. Aplica 3 de Queimadura no alvo e vizinhos.',
 		},
 		bmb_reload: {
 			name: 'Recarregar',
-			text: 'Compra 1. Seu próximo ataque do Bombardeiro neste turno causa +{bonus} de dano.',
+			text: 'Compra 1. Próximo ataque do Bombardeiro neste turno causa +{bonus} de dano.',
 		},
 		bmb_concussion_round: {
-			name: 'Projétil de Concussão',
-			text: 'Causa {damage} de dano. Atordoar.',
+			name: 'Concussão',
+			text: 'Causa {damage} de dano. Aplica Atordoado.',
 		},
 		bmb_barrage: {
 			name: 'Barragem',
 			text: 'Causa {damage} de dano três vezes, cada golpe em um inimigo aleatório.',
 		},
 		bmb_powder_keg: {
-			name: 'Barril de Pólvora',
-			text: 'Planta um barril. O próximo golpe nesse inimigo também atinge os vizinhos por 10.',
+			name: 'Barril',
+			text: 'Planta um barril. O próximo golpe nele atinge os vizinhos por 10.',
 		},
 		bmb_siege_mortar: {
-			name: 'Morteiro de Cerco',
+			name: 'Morteiro',
 			text: 'Causa {damage} de dano em cada inimigo. Temor 2. Exaustão.',
 		},
 		shb_rampart: {
 			name: 'Muralha',
-			text: 'Dê {block} de Bloqueio a cada herói.',
+			text: 'Dá {block} de bloqueio a cada herói.',
 		},
 		shb_riposte: {
 			name: 'Revide',
-			text: 'Cause dano igual à metade do seu Bloqueio, mais {damage}.',
+			text: 'Causa dano igual à metade do seu bloqueio, mais {damage}.',
 		},
 		mrk_ricochet: {
 			name: 'Ricochete',
-			text: 'Cause {damage} de dano duas vezes a inimigos aleatórios.',
+			text: 'Causa {damage} de dano duas vezes a inimigos aleatórios.',
 		},
 		mrk_deadeye: {
 			name: 'Olho Certeiro',
-			text: 'Marque cada inimigo {stacks} vezes.',
+			text: 'Marca cada inimigo {stacks} vezes.',
 		},
 		arc_cinder_ward: {
 			name: 'Guarda de Brasa',
-			text: 'Dê {block} de Bloqueio a um aliado. Aplique {stacks} Queimadura ao primeiro inimigo.',
+			text: 'Dá {block} de bloqueio a um aliado. Aplica {stacks} Queimadura à frente.',
 		},
 		arc_inferno: {
 			name: 'Inferno',
-			text: 'Cause {damage} de dano três vezes a cada inimigo. Esgota.',
+			text: 'Causa {damage} de dano três vezes em cada inimigo. Exaustão.',
 		},
 		cnf_penance: {
 			name: 'Penitência',
@@ -759,15 +759,15 @@ export const ptBR: Strings = {
 		},
 		cnf_last_rites: {
 			name: 'Últimos Ritos',
-			text: 'Cura o herói com menos HP em {heal}. Esgota.',
+			text: 'Cura o herói com menos vida em {heal}. Exaustão.',
 		},
 		bmb_shrapnel: {
 			name: 'Estilhaços',
-			text: 'Cause {damage} de dano a cada inimigo.',
+			text: 'Causa {damage} de dano a cada inimigo.',
 		},
 		bmb_flashbang: {
 			name: 'Granada de Luz',
-			text: 'Cause {damage} de dano e aplique {stacks} Enfraquecido a cada inimigo.',
+			text: 'Causa {damage} de dano e aplica {stacks} de Enfraquecido a cada inimigo.',
 		},
 	},
 };

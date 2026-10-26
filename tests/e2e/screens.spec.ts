@@ -77,6 +77,24 @@ async function walkRun(page: Page, dir: string, order: number, seen: Set<string>
 		}
 		if (scene === 'Combat' && !pausedOnce) {
 			pausedOnce = true;
+			// Select the first playable targeted card to capture the result preview (GDD invariant).
+			const selected = await page.evaluate(() => {
+				type CardLike = { playable: boolean; autoTarget: boolean };
+				type CombatLike = { view: { hand: CardLike[] }; onCardTap(card: CardLike): void };
+				const g = (
+					window as unknown as { __game?: { scene: { getScene(k: string): unknown } } }
+				).__game;
+				const combat = g?.scene.getScene('Combat') as CombatLike | undefined;
+				const card = combat?.view.hand.find((c) => c.playable && !c.autoTarget);
+				if (!combat || !card) return false;
+				combat.onCardTap(card);
+				return true;
+			});
+			if (selected) {
+				index += 1;
+				await shot(page, dir, `${String(index).padStart(2, '0')}-combat-preview.png`);
+				await page.keyboard.press('Escape');
+			}
 			await page.evaluate(() => {
 				const g = (window as unknown as Hooks).__game;
 				g?.scene.pause('Combat');

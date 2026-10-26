@@ -4,6 +4,8 @@ import { BASE_HEIGHT, BASE_WIDTH, pickZoom } from './platform/zoom';
 import { BootScene } from './scenes/BootScene';
 import { CampScene } from './scenes/CampScene';
 import { CombatScene } from './scenes/CombatScene';
+import { EventScene } from './scenes/EventScene';
+import { LegacyScene } from './scenes/LegacyScene';
 import { MapScene } from './scenes/MapScene';
 import { MenuScene } from './scenes/MenuScene';
 import { PartyScene } from './scenes/PartyScene';
@@ -14,6 +16,7 @@ import { SettingsScene } from './scenes/SettingsScene';
 import { ShopScene } from './scenes/ShopScene';
 import { SummaryScene } from './scenes/SummaryScene';
 import { TitleScene } from './scenes/TitleScene';
+import { TreasureScene } from './scenes/TreasureScene';
 import { session } from './view/session';
 
 const zoom = (): number =>
@@ -39,7 +42,10 @@ const game = new Phaser.Game({
 		CampScene,
 		ShopScene,
 		RestScene,
+		EventScene,
+		TreasureScene,
 		SummaryScene,
+		LegacyScene,
 		PauseScene,
 	],
 });

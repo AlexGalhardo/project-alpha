@@ -13,7 +13,7 @@ export class MenuScene extends Phaser.Scene {
 	create(): void {
 		playMusic(this, 'music.menu');
 		this.cameras.main.setBackgroundColor('#1b1a22');
-		backdrop(this, 'bg.menu');
+		backdrop(this, 'bg.menu', 0.4);
 		label(this, BASE_WIDTH / 2, 48, t('game.title'), 'h1', 'gold2').setOrigin(0.5);
 		const x = BASE_WIDTH / 2 - 80;
 		let y = 120;
@@ -26,6 +26,7 @@ export class MenuScene extends Phaser.Scene {
 		add(t('menu.continue'), () => this.continueRun(), 'menu-continue', session.hasSave());
 		add(t('menu.newRun'), () => this.scene.start('Party'), 'menu-new');
 		add(t('menu.settings'), () => this.openSettings(), 'menu-settings');
+		add(t('menu.legacy'), () => this.scene.start('Legacy'), 'menu-legacy');
 		add(t('menu.credits'), () => this.showCredits(), 'menu-credits');
 		const onSettingsClosed = (): void => {
 			this.scene.restart();

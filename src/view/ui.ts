@@ -146,6 +146,90 @@ export class Button extends Phaser.GameObjects.Container {
 }
 
 /** Full-screen background (src/view/pixelgen.ts keys) behind everything, with an optional dim layer. */
+interface Bounds {
+	top: number;
+	bottom: number;
+	cx: number;
+	/** Mean x of the top rows: the head of a humanoid or a beast. */
+	headX: number;
+}
+
+const opaqueCache = new Map<string, Bounds>();
+const HEAD_ROWS = 16;
+
+/** Top and bottom rows and horizontal centre of the opaque pixels of a texture (cached per key). */
+function opaqueBounds(scene: Phaser.Scene, key: string): Bounds {
+	const hit = opaqueCache.get(key);
+	if (hit) return hit;
+	const src = scene.textures.get(key).getSourceImage();
+	let top = -1;
+	let bottom = -1;
+	let minX = src.width;
+	let maxX = -1;
+	let headSum = 0;
+	let headN = 0;
+	for (let y = 0; y < src.height; y++) {
+		for (let x = 0; x < src.width; x++) {
+			if ((scene.textures.getPixelAlpha(x, y, key) ?? 0) === 0) continue;
+			if (top < 0) top = y;
+			bottom = y;
+			minX = Math.min(minX, x);
+			maxX = Math.max(maxX, x);
+			if (y < top + HEAD_ROWS) {
+				headSum += x;
+				headN += 1;
+			}
+		}
+	}
+	const out: Bounds =
+		top < 0
+			? {
+					top: 0,
+					bottom: src.height - 1,
+					cx: Math.floor(src.width / 2),
+					headX: Math.floor(src.width / 2),
+				}
+			: {
+					top,
+					bottom,
+					cx: Math.floor((minX + maxX) / 2),
+					headX: Math.round(headSum / headN),
+				};
+	opaqueCache.set(key, out);
+	return out;
+}
+
+/**
+ * A w×h window of a sprite at 1× (art rules forbid fractional scale), taken from the top of its
+ * opaque area so small slots show the head and shoulders. (x, y) is the window's top-left corner.
+ */
+export function portrait(
+	scene: Phaser.Scene,
+	key: string,
+	x: number,
+	y: number,
+	w: number,
+	h: number,
+): Phaser.GameObjects.Image {
+	const b = opaqueBounds(scene, key);
+	const left = Math.max(0, b.headX - Math.floor(w / 2));
+	return scene.add
+		.image(x - left, y - b.top, key)
+		.setOrigin(0)
+		.setCrop(left, b.top, w, h);
+}
+
+/** A unit sprite at 1× whose opaque feet rest on `floorY` and whose opaque centre sits on `cx`. */
+export function standing(
+	scene: Phaser.Scene,
+	key: string,
+	cx: number,
+	floorY: number,
+): Phaser.GameObjects.Image {
+	const b = opaqueBounds(scene, key);
+	return scene.add.image(cx - b.cx, floorY - b.bottom - 1, key).setOrigin(0);
+}
+
 export function backdrop(scene: Phaser.Scene, key: string, dim = 0): void {
 	if (!scene.textures.exists(key)) return;
 	scene.add.image(0, 0, key).setOrigin(0).setDepth(-2);

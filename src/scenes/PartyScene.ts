@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
-import type { HeroClass } from '../core';
+import { applyMeta, canVeteran, type HeroClass } from '../core';
 import { HEROES } from '../data/heroes';
 import { BASE_WIDTH } from '../platform/zoom';
 import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
+import { loadProfile } from '../view/profile';
 import { session } from '../view/session';
 import { Button, backdrop, label, panel } from '../view/ui';
 
@@ -12,6 +13,7 @@ const ROSTER: HeroClass[] = ['shieldbearer', 'marksman', 'arcanist', 'confessor'
 /** Pick 3 of 5; the order of picking sets ranks 1→3 (B02, docs/art-bible.md §11.3). */
 export class PartyScene extends Phaser.Scene {
 	private picked: HeroClass[] = [];
+	private veteran = true;
 
 	constructor() {
 		super('Party');
@@ -73,12 +75,27 @@ export class PartyScene extends Phaser.Scene {
 			sfx: 'sfx.ui.confirm',
 			testId: 'party-start',
 		}).setEnabled(this.picked.length === 3);
+		// Veteran start is an option, offered only when a picked hero owns node III (GDD §22.5).
+		const profile = loadProfile();
+		if (this.picked.some((h) => canVeteran(profile, h))) {
+			const caption = `${t('party.veteran')}: ${this.veteran ? t('settings.on') : t('settings.off')}`;
+			new Button(this, BASE_WIDTH - 196, 320, caption, () => this.toggleVeteran(), {
+				w: 180,
+				h: 28,
+				testId: 'party-veteran',
+			}).setSelected(this.veteran);
+		}
 		new Button(this, 16, 320, t('settings.back'), () => this.scene.start('Menu'), {
 			w: 80,
 			h: 28,
 			sfx: 'sfx.ui.cancel',
 			testId: 'party-back',
 		});
+	}
+
+	private toggleVeteran(): void {
+		this.veteran = !this.veteran;
+		this.render();
 	}
 
 	private toggle(id: HeroClass): void {
@@ -90,6 +107,14 @@ export class PartyScene extends Phaser.Scene {
 	private startRun(): void {
 		if (this.picked.length !== 3) return;
 		session.start(this.picked);
+		// Skill-tree options (docs/gdd.md §22.5): unlocked cards always join the pools; heroes with
+		// node III take the Veteran start when the player keeps the option on.
+		const profile = loadProfile();
+		const veteran = this.veteran ? this.picked.filter((h) => canVeteran(profile, h)) : [];
+		if (session.state) {
+			session.state = applyMeta(session.state, profile, veteran);
+			session.save();
+		}
 		this.scene.start(session.sceneForScreen());
 	}
 }

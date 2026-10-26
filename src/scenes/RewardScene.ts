@@ -40,7 +40,11 @@ export class RewardScene extends Phaser.Scene {
 		this.layer.removeAll(true);
 		this.layer.add(panel(this, 96, 40, 448, 280));
 		this.layer.add(label(this, 320, 48, t('reward.title'), 'h2', 'gold2').setOrigin(0.5, 0));
-		this.layer.add(label(this, 112, 76, t('reward.gold', { gold: view.gold }), 'ui', 'gold2'));
+		// Event card offers (GDD 22.4) give no gold.
+		if (view.gold > 0)
+			this.layer.add(
+				label(this, 112, 76, t('reward.gold', { gold: view.gold }), 'ui', 'gold2'),
+			);
 		if (view.equipmentGained) {
 			this.layer.add(
 				label(

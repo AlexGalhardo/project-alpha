@@ -17,7 +17,7 @@ import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { type css, P, type PaletteKey } from '../view/palette';
 import { session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel, portrait, standing } from '../view/ui';
 
 const HERO_X = (rank: number): number => 16 + (3 - rank) * 88;
 const ENEMY_X = (rank: number): number => 304 + (rank - 1) * 80;
@@ -103,6 +103,9 @@ function targetKey(target: Target): UnitKey | null {
 
 /** Combat screen (GDD §5, docs/art-bible.md §11.5). Rules come from src/core; this only draws and animates. */
 // Core status names to generated sound keys; statuses without a sound stay silent.
+/** Feet line of every unit (docs/art-bible.md combat layout). */
+const FLOOR_Y = 190;
+
 const STATUS_SFX: Record<string, string> = {
 	marked: 'sfx.status.marked',
 	weakened: 'sfx.status.weakened',
@@ -117,6 +120,8 @@ export class CombatScene extends Phaser.Scene {
 	private layer!: Phaser.GameObjects.Container;
 	private selected: HandCardView | null = null;
 	private busy = false;
+	/** One command tapped during an animation; it runs when the animation ends (latest wins). */
+	private queued: Command | null = null;
 	private unitPos = new Map<UnitKey, { x: number; y: number; w: number }>();
 	private autoTimer: Phaser.Time.TimerEvent | null = null;
 	private speedBtn!: Button;
@@ -132,7 +137,7 @@ export class CombatScene extends Phaser.Scene {
 
 	create(): void {
 		this.cameras.main.setBackgroundColor('#1b1a22');
-		backdrop(this, 'bg.combat.act1');
+		backdrop(this, 'bg.combat.act1', 0.55);
 		app.applySpeed(this);
 		this.layer = this.add.container(0, 0);
 		this.buildStatic();
@@ -148,6 +153,7 @@ export class CombatScene extends Phaser.Scene {
 			this.events.off('resume', onResume);
 			this.autoTimer = null;
 			this.busy = false;
+			this.queued = null;
 			this.selected = null;
 		});
 	}
@@ -160,7 +166,7 @@ export class CombatScene extends Phaser.Scene {
 		g.fillStyle(P.gold0).fillRect(0, 23, 640, 1);
 		g.fillStyle(P.ash1).fillRect(0, 222, 640, 138);
 		g.fillStyle(P.ash0).fillRect(0, 222, 640, 1);
-		g.fillStyle(P.ash0).fillRect(0, 190, 640, 1);
+		g.fillStyle(P.ash0).fillRect(0, FLOOR_Y, 640, 1);
 		new Button(this, 608, 0, 'II', () => this.openPause(), {
 			w: 32,
 			h: 24,
@@ -247,8 +253,11 @@ export class CombatScene extends Phaser.Scene {
 			const e = v.enemies.find((x) => x.uid === uid);
 			if (!e) return;
 			const x = 200 + i * 22;
-			const frame = this.add.rectangle(x, 2, 20, 20, i === 0 ? P.gold2 : P.ash3).setOrigin(0);
-			const img = this.add.image(x + 10, 12, `enemy.${e.key}`).setDisplaySize(18, 18);
+			const frame = this.add
+				.rectangle(x, 2, 20, 20, P.ash1)
+				.setOrigin(0)
+				.setStrokeStyle(1, i === 0 ? P.gold2 : P.ash3);
+			const img = portrait(this, `enemy.${e.key}`, x + 1, 3, 18, 18);
 			this.layer.add([frame, img]);
 		});
 		this.layer.add(label(this, 488, 6, `${t('hud.gold')} ${state?.gold ?? 0}`, 'ui', 'gold2'));
@@ -297,7 +306,7 @@ export class CombatScene extends Phaser.Scene {
 	private drawHero(h: HeroView): void {
 		const x = HERO_X(h.rank);
 		this.unitPos.set(`h:${h.id}`, { x, y: 24, w: SLOT_W });
-		const img = this.add.image(x + 40, 190, `hero.${h.id}`).setOrigin(0.5, 1);
+		const img = standing(this, `hero.${h.id}`, x + 40, FLOOR_Y);
 		this.layer.add(img);
 		if (h.taunt)
 			this.layer.add(this.add.rectangle(x + 40, 104, 70, 150).setStrokeStyle(1, P.gold1));
@@ -324,10 +333,8 @@ export class CombatScene extends Phaser.Scene {
 		const x = ENEMY_X(e.rank);
 		const w = SLOT_W * e.size;
 		this.unitPos.set(`e:${e.uid}`, { x, y: 24, w });
-		const img = this.add
-			.image(x + w / 2, 190, `enemy.${e.key}`)
-			.setOrigin(0.5, 1)
-			.setOrigin(0.5, 1); // enemy sprites are drawn facing left (src/view/pixelgen.ts)
+		// Enemy sprites are drawn facing left; a size-2 boss is centred across its two slots.
+		const img = standing(this, `enemy.${e.key}`, x + Math.floor(w / 2), FLOOR_Y);
 		if (e.trait) img.setTint(P.ember3);
 		this.layer.add(img);
 		if (e.trait)
@@ -576,7 +583,16 @@ export class CombatScene extends Phaser.Scene {
 	}
 
 	private onCardTap(card: HandCardView): void {
-		if (this.busy) return;
+		if (this.busy) {
+			// Input stays live during animations: select at once, queue the play for when it ends.
+			if (this.selected?.uid === card.uid) {
+				if (card.playable && card.autoTarget) this.play(card, null);
+				else this.selected = null;
+			} else this.selected = card;
+			this.raiseSelected();
+			play(this, 'sfx.ui.tap');
+			return;
+		}
 		if (this.selected?.uid === card.uid) {
 			if (card.playable && card.autoTarget) this.play(card, null);
 			else this.selected = null;
@@ -587,17 +603,33 @@ export class CombatScene extends Phaser.Scene {
 	}
 
 	private onUnitTap(target: Target): void {
-		if (this.busy || !this.selected) return;
+		if (!this.selected) return;
 		if (this.validTargetFor(target)) this.play(this.selected, target);
 	}
 
 	private play(card: HandCardView, target: Target): void {
 		this.selected = null;
+		if (this.busy) this.raiseSelected();
 		this.send({ type: 'playCard', cardUid: card.uid, target });
 	}
 
+	/** Moves the selected hand card up without a full redraw (used while an animation runs). */
+	private raiseSelected(): void {
+		this.view.hand.forEach((card, i) => {
+			const obj = this.layer.getByName(`card-${i}`) as Phaser.GameObjects.Container | null;
+			obj?.setY(this.selected?.uid === card.uid ? 242 : 258);
+		});
+	}
+
 	private onKey(e: KeyboardEvent): void {
-		if (this.busy || !this.scene.isActive()) return;
+		if (!this.scene.isActive()) return;
+		// During an animation only card, play and end-turn keys act (they queue); the rest wait.
+		if (this.busy && !/^[0-9 ]$|^Enter$|^Escape$/.test(e.key)) return;
+		if (this.busy && e.key === 'Escape') {
+			this.selected = null;
+			this.raiseSelected();
+			return;
+		}
 		const hand = this.view.hand;
 		if (e.key >= '1' && e.key <= '9') {
 			const card = hand[Number(e.key) - 1];
@@ -622,7 +654,11 @@ export class CombatScene extends Phaser.Scene {
 
 	// ---------- commands + animation ----------
 	private send(cmd: Command): void {
-		if (this.busy) return;
+		if (this.busy) {
+			this.queued = cmd;
+			play(this, 'sfx.ui.tap');
+			return;
+		}
 		const result = session.send(cmd);
 		if (!result) return;
 		const invalid = result.events.some((e) => e.type === 'invalid');
@@ -666,12 +702,16 @@ export class CombatScene extends Phaser.Scene {
 						e.type === 'victory',
 				)
 			) {
+				this.queued = null;
 				this.time.delayedCall(app.ms(500), () =>
 					this.scene.start(session.sceneForScreen()),
 				);
 				return;
 			}
 			this.refresh();
+			const next = this.queued;
+			this.queued = null;
+			if (next) this.send(next);
 		});
 	}
 
@@ -748,8 +788,9 @@ export class CombatScene extends Phaser.Scene {
 			text = t('fallen.label');
 			color = 'blood2';
 		} else if (ev.type === 'bossPhase') {
-			text = t('boss.phase2');
-			color = 'ember3';
+			// Per-boss banner (boss.<key>.phase2) with the generic one as fallback.
+			const key = `boss.${this.view.enemies.find((e) => e.uid === ev.uid)?.key}.phase2`;
+			this.phaseBanner(t(key) === key ? t('boss.phase2') : t(key));
 			this.shake(true);
 			this.flashAt(pos, true);
 		} else if (ev.type === 'enemyDied') {
@@ -771,6 +812,23 @@ export class CombatScene extends Phaser.Scene {
 	private shake(big = false): void {
 		if (app.settings.reduceShake) return;
 		this.cameras.main.shake(big ? 220 : 90, big ? 0.008 : 0.004);
+	}
+
+	/** Full-width banner over the stage for a boss phase change; it holds long enough to be read. */
+	private phaseBanner(text: string): void {
+		const band = this.add.rectangle(0, 92, 640, 40, P.ash0, 0.9).setOrigin(0).setDepth(60);
+		const line = this.add.rectangle(0, 92, 640, 1, P.ember3).setOrigin(0).setDepth(60);
+		const line2 = this.add.rectangle(0, 131, 640, 1, P.ember3).setOrigin(0).setDepth(60);
+		const banner = label(this, 320, 112, text, 'h2', 'ember3').setOrigin(0.5).setDepth(61);
+		this.tweens.add({
+			targets: [band, line, line2, banner],
+			alpha: 0,
+			delay: app.ms(1400),
+			duration: app.ms(300),
+			onComplete: () => {
+				for (const o of [band, line, line2, banner]) o.destroy();
+			},
+		});
 	}
 
 	private flashAt(pos: { x: number; y: number }, big = false): void {

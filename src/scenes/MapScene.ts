@@ -5,14 +5,14 @@ import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { goNext, session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel, portrait } from '../view/ui';
 
 /** Column centre for a round (docs/art-bible.md §11.4): x = 40 + (round − 1) × 62. */
 const COL_X = (round: number): number => 40 + (round - 1) * 62 + 12;
 /** Node centres per row size: 3 nodes at y 88/152/216, 2 at 120/184, 1 (boss) at 152. */
 const NODE_Y: Record<number, number[]> = { 1: [152], 2: [120, 184], 3: [88, 152, 216] };
 const nodeY = (index: number, count: number): number => NODE_Y[count]?.[index] ?? 152;
-const LEGEND = ['combat', 'elite', 'shop', 'rest', 'boss'];
+const LEGEND = ['combat', 'elite', 'shop', 'rest', 'event', 'treasure', 'boss'];
 
 /** Act map: 10 columns left to right, one per round (GDD §4.2, docs/art-bible.md §11.4). */
 export class MapScene extends Phaser.Scene {
@@ -27,7 +27,7 @@ export class MapScene extends Phaser.Scene {
 	create(): void {
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
-		backdrop(this, 'bg.map.act1');
+		backdrop(this, 'bg.map.act1', 0.4);
 		this.focus = 0;
 		const state = session.state;
 		const view = state ? mapView(state) : null;
@@ -95,7 +95,7 @@ export class MapScene extends Phaser.Scene {
 		// Legend (bottom right).
 		LEGEND.forEach((n, i) => {
 			const x = 432 + (i % 3) * 64;
-			const y = 300 + Math.floor(i / 3) * 24;
+			const y = 294 + Math.floor(i / 3) * 20;
 			this.add.image(x + 8, y + 8, `icon.node.${n}`).setScale(0.5);
 			label(this, x + 20, y + 2, t(`node.${n}`), 'tiny', 'ash5');
 		});
@@ -168,8 +168,7 @@ export class MapScene extends Phaser.Scene {
 		party.forEach((h, i) => {
 			const x = 16 + i * 136;
 			const y = 296;
-			// 64×80 placeholder at exactly 1/4 scale (integer ratio) until icon.queue.* exists.
-			this.add.image(x + 10, y + 12, `hero.${h.id}`).setDisplaySize(16, 20);
+			portrait(this, `hero.${h.id}`, x, y, 20, 22);
 			label(this, x + 24, y, t(`hero.${h.id}.name`), 'tiny', 'bone2');
 			const max = maxHP(h);
 			const bar = this.add.graphics();

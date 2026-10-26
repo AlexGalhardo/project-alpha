@@ -13,7 +13,7 @@ import { cardName } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel, portrait } from '../view/ui';
 
 /**
  * Camp after every round except the boss (GDD §4.4, docs/art-bible.md §11.8): swap a hero, buy one
@@ -87,7 +87,7 @@ export class CampScene extends Phaser.Scene {
 		const sel = this.hero === h.id;
 		const frame = this.add.rectangle(x, y, 72, 96, sel ? P.gold2 : P.ash0).setOrigin(0);
 		const inner = this.add.rectangle(x + 1, y + 1, 70, 94, P.ash1).setOrigin(0);
-		const img = this.add.image(x + 36, y + 30, `hero.${h.id}`).setDisplaySize(40, 50);
+		const img = portrait(this, `hero.${h.id}`, x + 16, y + 4, 40, 50);
 		inner.setInteractive().setName(`camp-hero-${h.id}`);
 		inner.on('pointerup', () => {
 			this.hero = h.id;

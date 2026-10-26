@@ -23,6 +23,8 @@ const SCENE_FOR: Record<ScreenKey, string> = {
 	camp: 'Camp',
 	shop: 'Shop',
 	rest: 'Rest',
+	event: 'Event',
+	treasure: 'Treasure',
 	summary: 'Summary',
 };
 

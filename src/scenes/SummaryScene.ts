@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
-import { summaryView } from '../core';
+import { bankRun, summaryView } from '../core';
 import { BASE_WIDTH } from '../platform/zoom';
 import { stopMusic } from '../view/audio';
 import { t } from '../view/i18n';
+import { loadProfile, saveProfile } from '../view/profile';
 import { session } from '../view/session';
 import { Button, backdrop, label, panel } from '../view/ui';
 
@@ -20,6 +21,8 @@ export class SummaryScene extends Phaser.Scene {
 			this.scene.start('Menu');
 			return;
 		}
+		// Bank this run's Embers once (the profile remembers the seed).
+		if (session.state) saveProfile(bankRun(loadProfile(), session.state.seed, view.embers));
 		panel(this, 160, 40, 320, 280);
 		const title = view.victory ? t('hud.victory') : t('hud.defeat');
 		label(this, BASE_WIDTH / 2, 56, title, 'h1', view.victory ? 'gold2' : 'blood2').setOrigin(

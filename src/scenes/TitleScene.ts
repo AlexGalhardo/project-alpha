@@ -16,7 +16,7 @@ export class TitleScene extends Phaser.Scene {
 		playMusic(this, 'music.menu');
 		this.started = false;
 		this.cameras.main.setBackgroundColor('#0e0d12');
-		backdrop(this, 'bg.title');
+		backdrop(this, 'bg.title', 0.35);
 		label(this, BASE_WIDTH / 2, 110, t('game.title'), 'display', 'gold2').setOrigin(0.5);
 		const lines = [t('intro.line1'), t('intro.line2'), t('intro.line3')];
 		lines.forEach((line, i) => {

@@ -140,7 +140,7 @@ Edge rules:
 - Every node is reachable from row 1 and reaches row 10.
 - Hover-free: the full map is visible from the start; the current row is highlighted.
 
-Resulting path: 7 combats + up to 2 elites + 1–2 shops + 1 rest + 1 boss. Elites are always optional (a combat sibling exists).
+Resulting path: 7 combats + up to 2 elites + 1–2 shops + 1 rest + 1 boss. Elites are always optional (a combat sibling exists). Every path has at least 6 fights before the boss: rows 1, 2, 3 and 6 are combat-only and rows 4 and 7 are combat or elite; the map validator asserts this minimum (SDD-07).
 
 ### 4.3 Encounter selection ⚖
 
@@ -168,7 +168,7 @@ Exclusive choice of one:
 
 | Option | Effect |
 |---|---|
-| Recover | Each hero heals 30% of max HP (rounded down) and loses any injury. |
+| Recover | Each hero first loses any injury (max HP restored), then heals 30% of the restored max HP (rounded down) (SDD-08 AC-6). |
 | Temper | Upgrade 1 card. |
 | Pray | Each hero −5 stress. |
 
@@ -427,6 +427,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 - An intent shows: icon (shape + color), exact number(s) after modifiers, and target marker on the hero(es).
 - Default targeting: the front-most hero in reach. Variants: `back` (H3, else front-most), `highest-stress`, `lowest-HP`, `marked` (a Marked hero, else front-most), `all`.
 - If the target moves or falls before the enemy acts, the intent retargets by the same rule; the displayed intent updates immediately.
+- A Stunned enemy skips its action without advancing its intent cycle: after the stun it performs the intent it had shown (SDD-06).
 
 ### 10.2 Act 1 enemies (10) ⚖
 

@@ -10,7 +10,7 @@ type Bump = 'patch' | 'minor' | 'major';
 function run(cmd: string[], inherit = false): string {
 	const r = Bun.spawnSync(cmd, { stdout: inherit ? 'inherit' : 'pipe', stderr: 'inherit' });
 	if (r.exitCode !== 0) throw new Error(`failed: ${cmd.join(' ')}`);
-	return inherit ? '' : r.stdout.toString().trim();
+	return inherit ? '' : (r.stdout?.toString() ?? '').trim();
 }
 
 function succeeds(cmd: string[]): boolean {

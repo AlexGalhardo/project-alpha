@@ -20,7 +20,9 @@ const SCREEN_DIR = join('test-results', 'screens');
 const SETTINGS_KEY = 'ossuary.settings.v1';
 
 function hooks(page: Page): Promise<void> {
-	return page.waitForFunction(() => (window as unknown as Hooks).__game !== undefined).then(() => undefined);
+	return page
+		.waitForFunction(() => (window as unknown as Hooks).__game !== undefined)
+		.then(() => undefined);
 }
 
 async function isActive(page: Page, key: string): Promise<boolean> {
@@ -38,8 +40,10 @@ async function waitActive(page: Page, key: string): Promise<void> {
 }
 
 async function shot(page: Page, dir: string, name: string): Promise<void> {
-	mkdirSync(join(SCREEN_DIR, dir), { recursive: true });
-	await page.screenshot({ path: join(SCREEN_DIR, dir, name) });
+	// One folder per Playwright project so the desktop and mobile tours do not overwrite each other.
+	const out = join(SCREEN_DIR, test.info().project.name, dir);
+	mkdirSync(out, { recursive: true });
+	await page.screenshot({ path: join(out, name) });
 }
 
 function trackErrors(page: Page): string[] {

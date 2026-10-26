@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { play } from './audio';
 import { css, P, type PaletteKey } from './palette';
 
 // shortcut: Phaser Text (browser-rasterised) until the BitmapText atlases of docs/art-bible.md §8
@@ -85,7 +86,10 @@ export class Button extends Phaser.GameObjects.Container {
 		this.on('pointerout', () => this.draw(false));
 		this.on('pointerup', () => {
 			this.draw(false);
-			if (this.enabled) onClick();
+			if (this.enabled) {
+				play(scene, 'sfx.ui.tap');
+				onClick();
+			}
 		});
 		this.draw(false);
 		scene.add.existing(this);

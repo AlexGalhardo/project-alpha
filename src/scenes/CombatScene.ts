@@ -12,6 +12,7 @@ import {
 	type Target,
 } from '../core';
 import { app } from '../view/app';
+import { play } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { css, P } from '../view/palette';
@@ -431,6 +432,12 @@ export class CombatScene extends Phaser.Scene {
 		if (this.busy) return;
 		const result = session.send(cmd);
 		if (!result) return;
+		const invalid = result.events.some((e) => e.type === 'invalid');
+		if (invalid) play(this, 'sfx.card.invalid');
+		else if (cmd.type === 'playCard') play(this, 'sfx.card.play');
+		else if (cmd.type === 'endTurn') play(this, 'sfx.ui.end_turn');
+		if (result.events.some((e) => e.type === 'combatWon')) play(this, 'sfx.flow.victory');
+		if (result.events.some((e) => e.type === 'defeat')) play(this, 'sfx.flow.defeat');
 		this.animate(result.events);
 	}
 
@@ -486,6 +493,19 @@ export class CombatScene extends Phaser.Scene {
 	}
 
 	private popFor(ev: GameEvent, pos: { x: number; y: number }): void {
+		const sfx: Partial<Record<GameEvent['type'], string>> = {
+			hit: ev.type === 'hit' && ev.hpLost === 0 ? 'sfx.block.absorb' : 'sfx.hit.blunt',
+			dot: 'sfx.status.burn',
+			block: 'sfx.block.gain',
+			heal: 'sfx.unit.heal',
+			stress: 'sfx.stress.gain',
+			collapse: 'sfx.stress.collapse',
+			fall: 'sfx.unit.fall',
+			enemyDied: 'sfx.unit.enemy_death',
+			bossPhase: 'sfx.unit.boss_phase',
+		};
+		const key = sfx[ev.type];
+		if (key) play(this, key);
 		let text = '';
 		let color: Parameters<typeof css>[0] = 'bone2';
 		if (ev.type === 'hit') {

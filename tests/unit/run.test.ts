@@ -60,7 +60,7 @@ describe('data integrity (GDD 8, 9)', () => {
 			expect(rar.filter((r) => r === 'rare')).toHaveLength(1);
 			expect(rar.filter((r) => r === 'uncommon')).toHaveLength(2);
 		}
-		expect(Object.keys(ENEMIES)).toHaveLength(22);
+		expect(Object.keys(ENEMIES)).toHaveLength(33);
 	});
 
 	test('upgrade table spot checks', () => {

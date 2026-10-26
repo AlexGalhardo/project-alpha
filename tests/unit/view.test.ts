@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test';
-import { pickZoom } from '../../src/platform/zoom';
+import {
+	BASE_HEIGHT,
+	BASE_WIDTH,
+	RENDER_HEIGHT,
+	RENDER_WIDTH,
+	VIEW_ZOOM,
+} from '../../src/platform/zoom';
 import { detectLocale, getLocale, setLocale, t } from '../../src/view/i18n';
 import { defaultSettings, loadSettings, type Settings } from '../../src/view/settings';
 
@@ -21,25 +27,11 @@ function stubLocalStorage(): Map<string, string> {
 	return store;
 }
 
-describe('pickZoom (ADR 0013)', () => {
-	test('1280×720 at dpr 1 gives zoom 2', () => {
-		expect(pickZoom(1280, 720, 1)).toBe(2);
-	});
-
-	test('1920×1080 at dpr 1 gives zoom 3', () => {
-		expect(pickZoom(1920, 1080, 1)).toBe(3);
-	});
-
-	test('1920×1080 at dpr 1.25 snaps to 3 device pixels: 3 / 1.25 = 2.4', () => {
-		expect(pickZoom(1920, 1080, 1.25)).toBe(2.4);
-	});
-
-	test('844×390 at dpr 3 gives 1 (3 device pixels per game pixel)', () => {
-		expect(pickZoom(844, 390, 3)).toBe(1);
-	});
-
-	test('a tiny viewport never goes below 1', () => {
-		expect(pickZoom(100, 50, 1)).toBe(1);
+describe('render size (ADR 0015)', () => {
+	test('1920×1080 render is the 640×360 layout at an integer camera zoom', () => {
+		expect([RENDER_WIDTH, RENDER_HEIGHT]).toEqual([1920, 1080]);
+		expect(RENDER_WIDTH / BASE_WIDTH).toBe(VIEW_ZOOM);
+		expect(RENDER_HEIGHT / BASE_HEIGHT).toBe(VIEW_ZOOM);
 	});
 });
 

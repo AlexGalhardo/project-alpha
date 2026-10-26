@@ -1,5 +1,5 @@
 // Read-only selectors for the view layer. Pure functions of RunState.
-import { CAMP, HERO_CLASSES } from '../data/index.ts';
+import { CAMP, HERO_CLASSES, RULES } from '../data/index.ts';
 import { costOf, playableReason, validTargets } from './cards.ts';
 import { intentView, turnQueue } from './combat.ts';
 import { availableNodes } from './map.ts';
@@ -112,6 +112,8 @@ export function combatView(s: RunState): CombatView | null {
 	if (!k) return null;
 	return {
 		turn: k.turn,
+		enraged: k.turn >= RULES.enrageTurn,
+		enrageTurn: RULES.enrageTurn,
 		phase: k.phase,
 		kind: k.kind,
 		energy: k.energy,

@@ -78,10 +78,10 @@ export function generateMap(s: Pick<RunState, 'rng'>): MapNode[][] {
  */
 export function chooseEncounter(s: RunState, row: number, type: NodeType): string {
 	const act = s.act ?? 1;
-	if (type === 'boss') return act === 2 ? 'BOSS2' : 'BOSS';
+	if (type === 'boss') return act === 1 ? 'BOSS' : `BOSS${act}`;
 	if (type === 'elite') {
-		if (act === 2) return row <= 4 ? 'EL2-1' : 'EL2-2';
-		return row <= 4 ? 'EL1' : 'EL2';
+		if (act === 1) return row <= 4 ? 'EL1' : 'EL2';
+		return row <= 4 ? `EL${act}-1` : `EL${act}-2`;
 	}
 	const own = row <= 3 ? 'A' : 'B';
 	const pool = Object.values(ENCOUNTERS).filter(

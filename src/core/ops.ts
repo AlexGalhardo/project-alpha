@@ -232,16 +232,25 @@ export function killEnemy(c: Ctx, e: Enemy): void {
 	if (k.enemies.length === 0 && k.phase === 'player') k.phase = 'won';
 }
 
-/** Enters boss phase 2 when HP crosses the threshold (GDD 10.5). Stunned is kept. */
+/**
+ * Enters the next boss phase when HP crosses its threshold (GDD 10.5, 23.4): debuffs cleared, Might
+ * gained, the new cycle starts at its first intent. Stunned is kept. One hit can cross both thresholds.
+ */
 function bossPhaseCheck(c: Ctx, e: Enemy): void {
 	const def = ENEMIES[e.key];
-	if (!def || def.phase2Hp === undefined || e.phase !== 1 || e.hp <= 0 || e.hp > def.phase2Hp)
-		return;
-	e.phase = 2;
-	clearDebuffs(e.fx);
-	e.fx.might += def.phase2Might ?? 0;
-	e.intentIdx = 0;
-	c.ev.push({ type: 'bossPhase', uid: e.uid, phase: 2 });
+	if (!def || e.hp <= 0) return;
+	const steps: [1 | 2, 2 | 3, number | undefined, number | undefined][] = [
+		[1, 2, def.phase2Hp, def.phase2Might],
+		[2, 3, def.phase3Hp, def.phase3Might],
+	];
+	for (const [from, to, hp, might] of steps) {
+		if (e.phase !== from || hp === undefined || e.hp > hp) continue;
+		e.phase = to;
+		clearDebuffs(e.fx);
+		e.fx.might += might ?? 0;
+		e.intentIdx = 0;
+		c.ev.push({ type: 'bossPhase', uid: e.uid, phase: to });
+	}
 }
 
 export interface HitOpts {

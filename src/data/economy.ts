@@ -11,7 +11,10 @@ export const RULES = {
 	fallenReturnHP: 1,
 	markedMul: 1.5,
 	weakenedMul: 0.75,
-	turnCap: 60,
+	turnCap: 30,
+	// From this combat turn every enemy gains enrageMight Might at the start of each turn (GDD 5.2).
+	enrageTurn: 10,
+	enrageMight: 1,
 	stashMax: 6,
 	partySize: 3,
 	rows: 10,
@@ -92,7 +95,7 @@ export const MAP_RULES = { secondEdgeChance: 0.45, edgeAttempts: 300 } as const;
 
 /** GDD 4.3 and 22.1. `acts` is 1 for the prototype flow and 2 for Alpha (Alpha ships both acts). */
 export const ACT_RULES = {
-	acts: 2,
+	acts: 3,
 	/** Share of max HP every hero heals between acts (injuries are cleared too). */
 	betweenActHealPct: 50,
 	/** Added per act after the first, for non-boss enemies (HP x1.2, damage x1.1 in Act 2). */

@@ -37,7 +37,7 @@ describe('Rites (GDD 13.3)', () => {
 		}
 	});
 
-	test('2: common enemies deal +15% damage; elites and bosses do not', () => {
+	test('2: common enemies deal +7.5% damage; elites and bosses do not', () => {
 		const s = at(2);
 		startCombat(ctxOf(s), 'EL1', 'elite');
 		const [elite, escort] = combat(s).enemies;

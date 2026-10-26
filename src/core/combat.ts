@@ -135,11 +135,14 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 export function intentOf(e: Enemy): IntentDef {
 	const def = ENEMIES[e.key];
 	if (!def) throw new Error(`unknown enemy ${e.key}`);
-	let list = e.phase === 2 && def.phase2Intents ? def.phase2Intents : def.intents;
+	let list =
+		e.phase === 3 && def.phase3Intents
+			? def.phase3Intents
+			: e.phase >= 2 && def.phase2Intents
+				? def.phase2Intents
+				: def.intents;
 	const extra =
-		e.phase === 2 && e.extraIntent
-			? def.intents.find((i) => i.id === e.extraIntent)
-			: undefined;
+		e.phase >= 2 && e.extraIntent ? def.intents.find((i) => i.id === e.extraIntent) : undefined;
 	if (extra) list = [...list, extra];
 	return list[e.intentIdx % list.length] as IntentDef;
 }
@@ -366,6 +369,18 @@ function beginPlayerTurn(c: Ctx): void {
 		}
 	}
 	if (k.phase !== 'player') return;
+	// Applied at turn start, not in the enemy phase, so the intents shown already include it (P3).
+	if (k.turn >= RULES.enrageTurn) {
+		for (const e of k.enemies) {
+			e.fx.might += RULES.enrageMight;
+			c.ev.push({
+				type: 'status',
+				target: enemyRef(e),
+				status: 'enraged',
+				amount: RULES.enrageMight,
+			});
+		}
+	}
 	let energy = Math.max(0, RULES.energy - k.collapsePending) + k.energyNext;
 	k.collapsePending = 0;
 	k.energyNext = 0;

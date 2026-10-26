@@ -371,6 +371,198 @@ export const ENEMIES: Record<string, EnemyDef> = {
 			{ id: 'confession', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
 		],
 	},
+	// Act 3, the Iron Sepulchre (docs/gdd.md §23.2). Act scaling applies to all but the boss.
+	iron_mourner: {
+		key: 'iron_mourner',
+		hp: 27,
+		speed: 2,
+		size: 1,
+		intents: [
+			atk('toll_hammer', 4),
+			{ id: 'brace', target: 'front', effects: [{ kind: 'selfBlock', amount: 10 }] },
+			{
+				id: 'toll_hammer',
+				target: 'front',
+				effects: [
+					{ kind: 'damage', amount: 4 },
+					{ kind: 'stress', amount: 1 },
+				],
+			},
+		],
+	},
+	grave_cur: {
+		key: 'grave_cur',
+		hp: 18,
+		speed: 7,
+		size: 1,
+		intents: [
+			atk('snap', 2, 2),
+			{
+				id: 'rend',
+				target: 'lowestHP',
+				effects: [
+					{ kind: 'damage', amount: 2 },
+					{ kind: 'status', status: 'bleed', amount: 3 },
+				],
+			},
+			atk('snap', 2, 2),
+		],
+	},
+	ash_cantor: {
+		key: 'ash_cantor',
+		hp: 16,
+		speed: 3,
+		size: 1,
+		intents: [
+			{ id: 'lament', target: 'highestStress', effects: [{ kind: 'stress', amount: 2 }] },
+			{ id: 'kindle', target: 'front', effects: [{ kind: 'mightAllEnemies', amount: 1 }] },
+			atk('ember', 3, undefined, 'back'),
+		],
+	},
+	bronze_scribe: {
+		key: 'bronze_scribe',
+		hp: 20,
+		speed: 4,
+		size: 1,
+		intents: [
+			{
+				id: 'mark_the_name',
+				target: 'front',
+				effects: [{ kind: 'status', status: 'marked', amount: 2 }],
+			},
+			atk('etch', 4, undefined, 'marked'),
+			{ id: 'seal', target: 'front', effects: [{ kind: 'wardAllEnemies', amount: 1 }] },
+		],
+	},
+	hollow_choir: {
+		key: 'hollow_choir',
+		hp: 22,
+		speed: 1,
+		size: 1,
+		intents: [
+			{ id: 'dirge', target: 'all', effects: [{ kind: 'stress', amount: 1 }] },
+			{
+				id: 'hush',
+				target: 'all',
+				effects: [{ kind: 'status', status: 'weakened', amount: 1 }],
+			},
+			{ id: 'dirge', target: 'all', effects: [{ kind: 'stress', amount: 1 }] },
+		],
+	},
+	sepulchre_knight: {
+		key: 'sepulchre_knight',
+		hp: 36,
+		speed: 2,
+		size: 1,
+		intents: [
+			{ id: 'wind_up', target: 'front', effects: [{ kind: 'telegraph' }] },
+			atk('execution', 9),
+			{ id: 'iron_wall', target: 'front', effects: [{ kind: 'selfBlock', amount: 14 }] },
+		],
+	},
+	wax_saint: {
+		key: 'wax_saint',
+		hp: 15,
+		speed: 5,
+		size: 1,
+		intents: [
+			{
+				id: 'drip',
+				target: 'lowestHP',
+				effects: [
+					{ kind: 'damage', amount: 2 },
+					{ kind: 'status', status: 'bleed', amount: 2 },
+				],
+			},
+			{ id: 'mend_wax', target: 'front', effects: [{ kind: 'selfHeal', amount: 8 }] },
+			{
+				id: 'drip',
+				target: 'lowestHP',
+				effects: [
+					{ kind: 'damage', amount: 2 },
+					{ kind: 'status', status: 'bleed', amount: 2 },
+				],
+			},
+		],
+	},
+	chain_wraith: {
+		key: 'chain_wraith',
+		hp: 16,
+		speed: 6,
+		size: 1,
+		intents: [
+			{
+				id: 'drag',
+				target: 'front',
+				effects: [{ kind: 'damage', amount: 2 }, { kind: 'swapFrontHeroes' }],
+			},
+			atk('lash', 3, undefined, 'frontTwo'),
+			{
+				id: 'fade',
+				target: 'front',
+				effects: [{ kind: 'selfBlock', amount: 8 }, { kind: 'moveToBack' }],
+			},
+		],
+	},
+	marrow_butcher: {
+		key: 'marrow_butcher',
+		hp: 24,
+		speed: 4,
+		size: 1,
+		intents: [
+			atk('cleave', 4, undefined, 'frontTwo'),
+			{ id: 'frenzy', target: 'front', effects: [{ kind: 'selfMight', amount: 2 }] },
+			atk('cleave', 4, undefined, 'frontTwo'),
+		],
+	},
+	rift_spawn: {
+		key: 'rift_spawn',
+		hp: 8,
+		speed: 6,
+		size: 1,
+		intents: [atk('bite', 2, 2)],
+	},
+	// Final boss (docs/gdd.md §23.4): the only enemy with three phases. HP is final.
+	rift_mother: {
+		key: 'rift_mother',
+		hp: 160,
+		speed: 3,
+		size: 2,
+		fixedStart: true,
+		phase2Hp: 110,
+		phase2Might: 2,
+		phase3Hp: 55,
+		phase3Might: 2,
+		intents: [
+			atk('embrace', 7),
+			{ id: 'wail', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
+			{ id: 'coil', target: 'front', effects: [{ kind: 'selfBlock', amount: 15 }] },
+		],
+		phase2Intents: [
+			atk('rend_the_veil', 3, undefined, 'all'),
+			atk('devour', 9, undefined, 'highestStress'),
+			{ id: 'wail', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
+		],
+		phase3Intents: [
+			{
+				id: 'unmaking',
+				target: 'all',
+				effects: [
+					{ kind: 'damage', amount: 4 },
+					{ kind: 'stress', amount: 1 },
+				],
+			},
+			atk('devour', 10, undefined, 'lowestHP'),
+			{
+				id: 'heartbeat',
+				target: 'front',
+				effects: [
+					{ kind: 'selfHeal', amount: 15 },
+					{ kind: 'selfBlock', amount: 10 },
+				],
+			},
+		],
+	},
 };
 
 /** GDD 10.3 (rank order E1 to E4) and 10.4 (elites). */
@@ -488,6 +680,80 @@ export const ENCOUNTERS: Record<string, EncounterDef> = {
 		enemies: [{ key: 'chain_golem', elite: 'calcified' }, { key: 'flesh_organ' }],
 	},
 	BOSS2: { id: 'BOSS2', act: 2, pool: 'boss', enemies: [{ key: 'gilded_penitent' }] },
+	// Act 3 (docs/gdd.md §23.3).
+	'A3-1': {
+		id: 'A3-1',
+		act: 3,
+		pool: 'A',
+		enemies: [{ key: 'rift_spawn' }, { key: 'rift_spawn' }, { key: 'ash_cantor' }],
+	},
+	'A3-2': {
+		id: 'A3-2',
+		act: 3,
+		pool: 'A',
+		enemies: [{ key: 'iron_mourner' }, { key: 'wax_saint' }],
+	},
+	'A3-3': {
+		id: 'A3-3',
+		act: 3,
+		pool: 'A',
+		enemies: [{ key: 'grave_cur' }, { key: 'bronze_scribe' }],
+	},
+	'A3-4': {
+		id: 'A3-4',
+		act: 3,
+		pool: 'A',
+		enemies: [{ key: 'marrow_butcher' }, { key: 'hollow_choir' }],
+	},
+	'A3-5': {
+		id: 'A3-5',
+		act: 3,
+		pool: 'A',
+		enemies: [{ key: 'grave_cur' }, { key: 'chain_wraith' }],
+	},
+	'B3-1': {
+		id: 'B3-1',
+		act: 3,
+		pool: 'B',
+		enemies: [{ key: 'sepulchre_knight' }, { key: 'bronze_scribe' }, { key: 'ash_cantor' }],
+	},
+	'B3-2': {
+		id: 'B3-2',
+		act: 3,
+		pool: 'B',
+		enemies: [{ key: 'iron_mourner' }, { key: 'chain_wraith' }, { key: 'hollow_choir' }],
+	},
+	'B3-3': {
+		id: 'B3-3',
+		act: 3,
+		pool: 'B',
+		enemies: [{ key: 'marrow_butcher' }, { key: 'grave_cur' }, { key: 'wax_saint' }],
+	},
+	'B3-4': {
+		id: 'B3-4',
+		act: 3,
+		pool: 'B',
+		enemies: [{ key: 'sepulchre_knight' }, { key: 'rift_spawn' }, { key: 'rift_spawn' }],
+	},
+	'B3-5': {
+		id: 'B3-5',
+		act: 3,
+		pool: 'B',
+		enemies: [{ key: 'marrow_butcher' }, { key: 'bronze_scribe' }, { key: 'hollow_choir' }],
+	},
+	'EL3-1': {
+		id: 'EL3-1',
+		act: 3,
+		pool: 'elite',
+		enemies: [{ key: 'iron_mourner', elite: 'oathwall' }, { key: 'wax_saint' }],
+	},
+	'EL3-2': {
+		id: 'EL3-2',
+		act: 3,
+		pool: 'elite',
+		enemies: [{ key: 'sepulchre_knight', elite: 'calcified' }, { key: 'ash_cantor' }],
+	},
+	BOSS3: { id: 'BOSS3', act: 3, pool: 'boss', enemies: [{ key: 'rift_mother' }] },
 };
 
 /** GDD 10.4 */

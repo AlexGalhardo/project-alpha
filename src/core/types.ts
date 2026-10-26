@@ -146,6 +146,10 @@ export interface EnemyDef {
 	phase2Hp?: number;
 	/** Might gained on entering phase 2. */
 	phase2Might?: number;
+	/** Third phase (final boss only, docs/gdd.md §23.4). */
+	phase3Intents?: IntentDef[];
+	phase3Hp?: number;
+	phase3Might?: number;
 	fixedStart?: boolean;
 }
 
@@ -181,7 +185,7 @@ export interface Enemy {
 	size: 1 | 2;
 	fx: Statuses;
 	intentIdx: number;
-	phase: 1 | 2;
+	phase: 1 | 2 | 3;
 	dmgMul: number;
 	trait: EliteTrait | null;
 	keg: number;
@@ -388,7 +392,7 @@ export type GameEvent =
 	| { type: 'enemyAction'; uid: number; intentId: string }
 	| { type: 'enemyStunned'; uid: number }
 	| { type: 'moved'; unit: UnitRef; from: number; to: number }
-	| { type: 'bossPhase'; uid: number; phase: 2 }
+	| { type: 'bossPhase'; uid: number; phase: 2 | 3 }
 	| { type: 'combatWon' }
 	| { type: 'combatLost' }
 	| { type: 'gold'; amount: number }
@@ -470,7 +474,7 @@ export interface EnemyView {
 	intent: IntentView | null;
 	trait: EliteTrait | null;
 	keg: number;
-	phase: 1 | 2;
+	phase: 1 | 2 | 3;
 	stunned: boolean;
 }
 
@@ -489,6 +493,9 @@ export interface HandCardView {
 
 export interface CombatView {
 	turn: number;
+	/** Enemies gain Might every turn from `enrageTurn` (GDD 5.2). */
+	enraged: boolean;
+	enrageTurn: number;
 	phase: 'player' | 'won' | 'lost';
 	kind: 'common' | 'elite' | 'boss';
 	energy: number;

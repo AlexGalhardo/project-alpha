@@ -1,0 +1,611 @@
+[
+  {
+    "key": "sfx.ui.tap",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Small wooden tick, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.2,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:22:41.708Z",
+    "status": "failed",
+    "httpStatus": 400,
+    "error": "{\"detail\":{\"status\":\"invalid_generation_settings\",\"message\":\"Invalid setting for duration_seconds received, expected to be greater or equal to 0.5 and less or equal to 30, received 0.2.\"}}"
+  },
+  {
+    "key": "sfx.ui.tap",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Small wooden tick, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.2,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:22:42.064Z",
+    "status": "failed",
+    "httpStatus": 400,
+    "error": "{\"detail\":{\"status\":\"invalid_generation_settings\",\"message\":\"Invalid setting for duration_seconds received, expected to be greater or equal to 0.5 and less or equal to 30, received 0.2.\"}}"
+  },
+  {
+    "key": "sfx.ui.tap",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Small wooden tick, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:23:34.439Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "music.menu",
+    "kind": "music",
+    "endpoint": "/music",
+    "prompt": "Instrumental loop. Dark ambient, wordless low choir pad, distant bell, cello drone, solemn and cold, 60 BPM, D minor. Seamless loop: the end flows into the start with no reverb tail.",
+    "params": {
+      "music_length_ms": 60000,
+      "force_instrumental": true
+    },
+    "date": "2026-10-26T22:23:40.228Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 961350
+  },
+  {
+    "key": "music.map",
+    "kind": "music",
+    "endpoint": "/music",
+    "prompt": "Instrumental loop. Sparse liturgical chant over low strings, soft frame drum, wary travel, 72 BPM, D Dorian. Seamless loop: the end flows into the start with no reverb tail.",
+    "params": {
+      "music_length_ms": 60000,
+      "force_instrumental": true
+    },
+    "date": "2026-10-26T22:23:56.103Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 961350
+  },
+  {
+    "key": "music.combat",
+    "kind": "music",
+    "endpoint": "/music",
+    "prompt": "Instrumental loop. Low string ostinato, industrial percussion with metal hits and chains, muted brass stabs, tense and steady with no climax, 104 BPM, D Phrygian. Seamless loop.",
+    "params": {
+      "music_length_ms": 60000,
+      "force_instrumental": true
+    },
+    "date": "2026-10-26T22:24:12.425Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 961350
+  },
+  {
+    "key": "music.boss",
+    "kind": "music",
+    "endpoint": "/music",
+    "prompt": "Instrumental loop. Wordless full choir, pounding drums, bell tolls on the downbeat, distorted low brass, dread and urgency, 124 BPM, C# minor. Seamless loop.",
+    "params": {
+      "music_length_ms": 60000,
+      "force_instrumental": true
+    },
+    "date": "2026-10-26T22:24:38.132Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 961350
+  },
+  {
+    "key": "sfx.card.draw",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Card slid from a stack over parchment, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:24:55.200Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.card.play",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Card slapped onto stone, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:24:58.500Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.card.exhaust",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Card torn and thrown into a dark pile, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:00.562Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 10492,
+    "characterCost": "7"
+  },
+  {
+    "key": "sfx.card.upgrade",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Metal click with a rising chime, short, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:06.654Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 10492,
+    "characterCost": "7"
+  },
+  {
+    "key": "sfx.card.invalid",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Dull wooden knock, rejected, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:09.466Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.hit.slash",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Blade cutting through cloth and flesh, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:11.443Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.hit.blunt",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Heavy mace hitting rusted plate, dull crunch, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:13.591Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.hit.pierce",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Bolt punching through wood with a short whistle, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:15.865Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.hit.fire",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Burst of fire with a hiss, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:18.665Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 10492,
+    "characterCost": "7"
+  },
+  {
+    "key": "sfx.hit.multi",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Three rapid metal knocks, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:21.892Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 13835,
+    "characterCost": "9"
+  },
+  {
+    "key": "sfx.block.gain",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Shield being raised, metallic slide, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:24.320Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.block.absorb",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Blow stopped by shield, short ring, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:26.456Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.block.break",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Shield cracking, splintering, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:30.172Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 10492,
+    "characterCost": "7"
+  },
+  {
+    "key": "sfx.status.marked",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Sharp metal click, sigil lock, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:32.446Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.status.weakened",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Low sagging tone, air leaking, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:35.243Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 10492,
+    "characterCost": "7"
+  },
+  {
+    "key": "sfx.status.bleed",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Wet drip with a faint hiss, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:37.645Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.status.burn",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Crackle of fire, short, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:43.719Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 10492,
+    "characterCost": "7"
+  },
+  {
+    "key": "sfx.status.ward",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Soft bell-like shimmer, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:46.768Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.status.stun",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Dull thud with a ringing overtone, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:49.310Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 10492,
+    "characterCost": "7"
+  },
+  {
+    "key": "sfx.stress.gain",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Low breath tightening into a tremor, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:55.697Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 13835,
+    "characterCost": "9"
+  },
+  {
+    "key": "sfx.stress.collapse",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Cracked glass and a heavy fall, dark, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:25:58.562Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 20105,
+    "characterCost": "13"
+  },
+  {
+    "key": "sfx.stress.relief",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Long exhale with a soft chime, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:01.379Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 13835,
+    "characterCost": "9"
+  },
+  {
+    "key": "sfx.unit.hero_fall",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Armour hitting stone, a bell-like echo, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:03.394Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 20105,
+    "characterCost": "13"
+  },
+  {
+    "key": "sfx.unit.enemy_death",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Brittle collapse, bones scattering, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.9,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:06.649Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 15089,
+    "characterCost": "10"
+  },
+  {
+    "key": "sfx.unit.boss_phase",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Deep cathedral bell crack followed by a shockwave, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 2,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:09.679Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 33061,
+    "characterCost": "22"
+  },
+  {
+    "key": "sfx.ui.confirm",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Two-note low chime, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:12.148Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.ui.cancel",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Falling single note, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:14.037Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.ui.open",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Stone panel sliding open, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:16.132Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.ui.close",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Stone panel closing, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:25.147Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.ui.coin",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Few coins clinking, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:26.956Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 8820,
+    "characterCost": "6"
+  },
+  {
+    "key": "sfx.ui.end_turn",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Heavy iron bell tap, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:28.697Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 13835,
+    "characterCost": "9"
+  },
+  {
+    "key": "sfx.flow.victory",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Bell chord, short and grim, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 2,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:31.363Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 33061,
+    "characterCost": "22"
+  },
+  {
+    "key": "sfx.flow.defeat",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Low sustained drone falling away, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 2,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:34.757Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 33061,
+    "characterCost": "22"
+  },
+  {
+    "key": "sfx.flow.reward",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Rising three-note sting, dry, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 1,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-26T22:26:37.262Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 17179,
+    "characterCost": "11"
+  }
+]

@@ -50,6 +50,7 @@ export const en = {
 		start: 'Descend',
 		selected: '{count} of 3 chosen',
 		defaultHint: 'First run: Shieldbearer in rank 1, Confessor in rank 2, Marksman in rank 3.',
+		noFrontWarning: 'No one holds the front rank: enemies will strike your rank 1 hero first.',
 	},
 	hud: {
 		chooseTarget: 'Tap a highlighted target.',

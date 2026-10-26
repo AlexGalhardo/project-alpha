@@ -48,6 +48,8 @@ export const ptBR: Strings = {
 		start: 'Descer',
 		selected: '{count} de 3 escolhidos',
 		defaultHint: 'Primeira run: Escudeiro na posição 1, Confessor na 2, Atirador na 3.',
+		noFrontWarning:
+			'Ninguém segura a linha de frente: os inimigos golpeiam primeiro o herói na posição 1.',
 	},
 	hud: {
 		chooseTarget: 'Toque em um alvo destacado.',

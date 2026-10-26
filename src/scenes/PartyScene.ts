@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import type { HeroClass } from '../core';
+import { HEROES } from '../data/heroes';
 import { BASE_WIDTH } from '../platform/zoom';
 import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
@@ -60,6 +61,12 @@ export class PartyScene extends Phaser.Scene {
 			'ui',
 		).setOrigin(0.5, 0);
 		label(this, BASE_WIDTH / 2, 256, t('party.defaultHint'), 'tiny', 'ash5').setOrigin(0.5, 0);
+		// Allowed but weak (balance report: three back-liners win about 2%), so warn instead of block.
+		if (this.picked.length === 3 && !this.picked.some((id) => HEROES[id].frontOrder <= 1))
+			label(this, BASE_WIDTH / 2, 272, `▲ ${t('party.noFrontWarning')}`, 'tiny', 'ember3')
+				.setOrigin(0.5, 0)
+				.setWordWrapWidth(600)
+				.setName('party-no-front');
 		new Button(this, BASE_WIDTH / 2 - 70, 296, t('party.start'), () => this.startRun(), {
 			w: 140,
 			h: 32,

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { preloadAudio } from '../view/audio';
+import { loadMusicInBackground, preloadAudio } from '../view/audio';
 import { buildPixelFonts } from '../view/fonts';
 import { generatePlaceholders } from '../view/placeholders';
 
@@ -11,6 +11,16 @@ export class BootScene extends Phaser.Scene {
 	}
 
 	preload(): void {
+		// Loading bar (fonts are not built yet, so shapes only): ash frame, ember fill.
+		const frame = this.add.rectangle(320, 180, 244, 12).setStrokeStyle(2, 0x45424d);
+		const bar = this.add.rectangle(200, 180, 1, 8, 0xf08a3a).setOrigin(0, 0.5);
+		this.load.on('progress', (value: number) => {
+			bar.width = Math.max(1, Math.round(240 * value));
+		});
+		this.load.once('complete', () => {
+			frame.destroy();
+			bar.destroy();
+		});
 		preloadAudio(this);
 		// Generated art is listed in a manifest so only files that exist are requested; any key not
 		// listed keeps its procedural placeholder (same key and size, .claude/rules/assets.md).
@@ -32,6 +42,8 @@ export class BootScene extends Phaser.Scene {
 	create(): void {
 		buildPixelFonts(this);
 		generatePlaceholders(this);
-		this.scene.start('Title');
+		// Boot stays alive (it draws nothing) so its loader can stream the music in the background.
+		this.scene.launch('Title');
+		loadMusicInBackground(this);
 	}
 }

@@ -100,9 +100,27 @@ export const AUDIO_KEYS = [
 
 /** Queue the generated files; missing files only log a load error and fall back to synthesis. */
 export function preloadAudio(scene: Phaser.Scene): void {
+	// Music (~1 MB per loop) is streamed in after the title appears; only SFX block the boot.
 	for (const key of AUDIO_KEYS) {
+		if (key.startsWith('music.')) continue;
 		scene.load.audio(key, [`assets/audio/${key}.ogg`, `assets/audio/${key}.mp3`]);
 	}
+}
+
+let musicLoading = false;
+
+/** Loads the music loops in the background; the requested track starts when its file arrives. */
+export function loadMusicInBackground(scene: Phaser.Scene): void {
+	if (musicLoading) return;
+	musicLoading = true;
+	for (const key of AUDIO_KEYS) {
+		if (!key.startsWith('music.') || scene.cache.audio.exists(key)) continue;
+		scene.load.audio(key, [`assets/audio/${key}.ogg`, `assets/audio/${key}.mp3`]);
+	}
+	scene.load.on('filecomplete', (key: string) => {
+		if (key === currentMusicKey && !currentMusic) playMusic(scene, key);
+	});
+	scene.load.start();
 }
 
 // Older code keys mapped to the generated set.
@@ -116,7 +134,7 @@ let currentMusicKey = '';
 
 /** Loops one music track for the whole game; switching keys crossfades by stopping the old one. */
 export function playMusic(scene: Phaser.Scene, key: string): void {
-	if (currentMusicKey === key && currentMusic?.isPlaying) return;
+	if (currentMusicKey === key && currentMusic) return;
 	currentMusic?.stop();
 	currentMusic = null;
 	currentMusicKey = key;

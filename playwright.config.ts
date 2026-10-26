@@ -4,6 +4,7 @@ const PORT = 4173;
 
 export default defineConfig({
 	testDir: 'tests',
+	testIgnore: ['**/unit/**'],
 	fullyParallel: true,
 	forbidOnly: Boolean(process.env.CI),
 	retries: 0,

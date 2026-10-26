@@ -668,10 +668,10 @@ No voice acting (`.claude/rules/assets.md`). Everything is generated with Eleven
 
 | Key | Screen | Genre and instrumentation | BPM | Key / mode | Length | Mood |
 |---|---|---|---|---|---|---|
-| `music.menu` | Title, menu, party select | Dark ambient, wordless low choir pad, distant bell, cello drone | 60 | D minor | 90 s loop | Solemn, cold |
-| `music.map` | Map, camp, shop, rest | Sparse liturgical chant over low strings, soft frame drum | 72 | D Dorian | 90 s loop | Wary travel |
-| `music.combat` | Combat | Low string ostinato, industrial percussion (metal hits, chains), muted brass stabs | 104 | D Phrygian | 120 s loop | Tense, steady, no climax |
-| `music.boss` | Boss combat | Full choir (wordless), pounding drums, bell tolls on downbeats, distorted low brass | 124 | C# minor | 120 s loop | Dread, urgency |
+| `music.menu` | Title, menu, party select | Dark ambient, wordless low choir pad, distant bell, cello drone | 60 | D minor | 60 s (generated 2026-10-26); target 90–120 s in Alpha | Solemn, cold |
+| `music.map` | Map, camp, shop, rest | Sparse liturgical chant over low strings, soft frame drum | 72 | D Dorian | 60 s (generated 2026-10-26); target 90–120 s in Alpha | Wary travel |
+| `music.combat` | Combat | Low string ostinato, industrial percussion (metal hits, chains), muted brass stabs | 104 | D Phrygian | 60 s (generated 2026-10-26); target 90–120 s in Alpha | Tense, steady, no climax |
+| `music.boss` | Boss combat | Full choir (wordless), pounding drums, bell tolls on downbeats, distorted low brass | 124 | C# minor | 60 s (generated 2026-10-26); target 90–120 s in Alpha | Dread, urgency |
 
 Loop rules: start and end at the same bar with no reverb tail crossing the seam; a 1-bar musical lead-in is cut off; crossfade between screens 800 ms.
 

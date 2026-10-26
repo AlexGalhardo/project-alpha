@@ -2798,5 +2798,105 @@
       "generations": 1
     },
     "note": "API minimum is 32x32: 12x12 master to be redrawn by hand"
+  },
+  {
+    "key": "card.arc_burn_hex",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A hex sigil of jagged ember lines burning on cracked stone, no star, no pentagram, no letters. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A hex sigil of jagged ember lines burning on cracked stone, no star, no pentagram, no letters. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:52:32.249Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_killshot",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A single heavy crossbow bolt piercing a cracked iron helm, ember sparks, dark nave. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A single heavy crossbow bolt piercing a cracked iron helm, ember sparks, dark nave. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:52:48.586Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.arc_unseal",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A broken wax seal on an ancient tome, violet light leaking from the crack. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A broken wax seal on an ancient tome, violet light leaking from the crack. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:53:05.959Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.arc_burn_hex",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Jagged glowing ember cracks spreading across a stone floor, an irregular scorch mark with a curse-like tangle of lines, no star, no hexagram, no pentagram, no geometric symbol, no letters. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "Jagged glowing ember cracks spreading across a stone floor, an irregular scorch mark with a curse-like tangle of lines, no star, no hexagram, no pentagram, no geometric symbol, no letters. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T22:53:34.994Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
   }
 ]

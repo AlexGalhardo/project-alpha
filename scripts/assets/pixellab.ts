@@ -393,7 +393,7 @@ const backgrounds: [string, string][] = [
 ];
 
 const CARD_COMMON =
-	'Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no text.';
+	'Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.';
 const cards: [string, string][] = [
 	['shb_hack', 'Heavy sword cut across a plated shoulder'],
 	['shb_brace', 'Shield raised, feet braced on stone'],
@@ -412,15 +412,15 @@ const cards: [string, string][] = [
 	['mrk_pinning_shot', 'Arrow pinning a cloak to a wall'],
 	['mrk_volley', 'Many arrows arcing over a field'],
 	['mrk_hunters_focus', 'Narrowed eye through a lens'],
-	['mrk_killshot', 'Arrow piercing a marked sigil'],
+	['mrk_killshot', 'A single heavy crossbow bolt piercing a cracked iron helm, ember sparks, dark nave'],
 	['arc_ember_bolt', 'Small glowing ember flying from a staff'],
 	['arc_ash_veil', 'Ash cloud forming a veil around an ally'],
 	['arc_rift_spark', 'Spark jumping between cracks in the air'],
-	['arc_burn_hex', 'Hex sigil burning on the ground'],
+	['arc_burn_hex', 'Jagged glowing ember cracks spreading across a stone floor, an irregular scorch mark with a curse-like tangle of lines, no star, no hexagram, no pentagram, no geometric symbol, no letters'],
 	['arc_channel', 'Hands gathering light over a staff'],
 	['arc_cinder_lance', 'Lance of ember driving forward'],
 	['arc_firestorm', 'Column of fire across a field'],
-	['arc_unseal', 'A seal breaking open with light inside'],
+	['arc_unseal', 'A broken wax seal on an ancient tome, violet light leaking from the crack'],
 	['arc_rift_rupture', 'A rupture of violet light in the air'],
 	['cnf_censer_strike', 'Swinging censer leaving a smoke arc'],
 	['cnf_sanctuary', 'Pale circle of light around a figure'],

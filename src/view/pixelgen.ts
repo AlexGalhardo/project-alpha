@@ -473,3 +473,70 @@ export function spriteCanvas(key: string): HTMLCanvasElement | null {
 	ctx.putImageData(new ImageData(pix.toRGBA(), spec.w, spec.h), 0, 0);
 	return canvas;
 }
+
+// ---------- backgrounds (docs/art-bible.md §4: background inks only, no unit/UI accents) ----------
+
+/** Deterministic hash noise so backgrounds are identical every session. */
+function noise(x: number, y: number, seed: number): number {
+	let h = (x * 374761393 + y * 668265263 + seed * 2147483647) | 0;
+	h = (h ^ (h >>> 13)) * 1274126177;
+	return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
+}
+
+function fillBg(data: Uint8ClampedArray, w: number, x: number, y: number, c: number): void {
+	const i = (y * w + x) * 4;
+	data[i] = (c >> 16) & 255;
+	data[i + 1] = (c >> 8) & 255;
+	data[i + 2] = c & 255;
+	data[i + 3] = 255;
+}
+
+/** Ruined nave: back wall bands, pillars and arches, Rift glow low in the centre, ordered dither. */
+function nave(w: number, h: number, seed: number, rift: number): Uint8ClampedArray {
+	const data = new Uint8ClampedArray(w * h * 4);
+	const bayer = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+	for (let y = 0; y < h; y++) {
+		for (let x = 0; x < w; x++) {
+			const t = y / h;
+			const d = (bayer[(y % 4) * 4 + (x % 4)] ?? 0) / 16;
+			let c: number = t + d * 0.15 < 0.45 ? P.ash1 : t + d * 0.15 < 0.8 ? P.ash2 : P.ash1;
+			// Pillars every 96 px with arches between them.
+			const px = (x + 24) % 96;
+			const pillar = px < 14;
+			const archY = 70 + Math.abs(px - 55) * 0.9;
+			if (pillar && y > 40) c = px < 3 ? P.ash3 : px > 11 ? P.ash1 : P.ash2;
+			else if (!pillar && y < archY && y > 30) c = P.iron0;
+			if (!pillar && y < archY && y > archY - 3 && y > 30) c = P.ash3;
+			// Rift glow near the floor centre.
+			const gx = (x - w / 2) / (w * 0.35);
+			const gy = (y - h * 0.85) / (h * 0.25);
+			const glow = 1 - (gx * gx + gy * gy);
+			if (glow > 0.55 + d * 0.3) c = rift === 0 ? P.rift0 : P.rot0;
+			if (y > h * 0.86) c = noise(x >> 2, y >> 2, seed) > 0.85 ? P.ash3 : P.ash2;
+			if (noise(x, y, seed) > 0.995 && y < h * 0.8) c = P.ash3;
+			fillBg(data, w, x, y, c);
+		}
+	}
+	return data;
+}
+
+const BACKGROUNDS: Record<string, (w: number, h: number) => Uint8ClampedArray> = {
+	'bg.combat.act1': (w, h) => nave(w, h, 7, 0),
+	'bg.title': (w, h) => nave(w, h, 3, 1),
+	'bg.menu': (w, h) => nave(w, h, 5, 0),
+	'bg.map.act1': (w, h) => nave(w, h, 11, 1),
+};
+
+export const BACKGROUND_KEYS = Object.keys(BACKGROUNDS);
+
+export function backgroundCanvas(key: string, w = 640, h = 360): HTMLCanvasElement | null {
+	const make = BACKGROUNDS[key];
+	if (!make || typeof document === 'undefined') return null;
+	const canvas = document.createElement('canvas');
+	canvas.width = w;
+	canvas.height = h;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return null;
+	ctx.putImageData(new ImageData(make(w, h), w, h), 0, 0);
+	return canvas;
+}

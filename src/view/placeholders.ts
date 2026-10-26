@@ -1,6 +1,6 @@
 import type Phaser from 'phaser';
 import { P } from './palette';
-import { spriteCanvas } from './pixelgen';
+import { BACKGROUND_KEYS, backgroundCanvas, spriteCanvas } from './pixelgen';
 
 // Procedural placeholders with the final keys and canvas sizes of docs/art-bible.md §7, so the
 // swap to real pixel art never touches logic (.claude/rules/assets.md). Each silhouette differs
@@ -212,6 +212,10 @@ const ICONS: Spec[] = [
 export const PLACEHOLDER_SPECS: readonly Spec[] = [...HEROES, ...ENEMIES, ...ICONS];
 
 export function generatePlaceholders(scene: Phaser.Scene): void {
+	for (const key of BACKGROUND_KEYS) {
+		const bg = scene.textures.exists(key) ? null : backgroundCanvas(key);
+		if (bg) scene.textures.addCanvas(key, bg);
+	}
 	for (const spec of PLACEHOLDER_SPECS) {
 		if (scene.textures.exists(spec.key)) continue;
 		const pixel = spriteCanvas(spec.key);

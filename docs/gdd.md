@@ -160,7 +160,7 @@ Opens after every round except the boss, including after rest and shop nodes. On
 | Service (1 of 2, seeded) | 12 | "Bind wounds": heal 15% max HP of every hero; or "Vigil": −3 stress on one hero. |
 | Reorder ranks | free | Drag heroes between ranks 1–3. |
 
-The player may buy any subset they can afford; "Leave camp" continues. With a full stash (6), buying equipment and equipping or unequipping are blocked.
+The player may buy any subset they can afford; "Leave camp" continues. With a full stash (6), buying equipment and unequipping are blocked (§12.1).
 
 ### 4.5 Rest (row 9, B15) ⚖
 
@@ -194,7 +194,7 @@ Exclusive choice of one:
 |---|---|
 | Start of player turn | Hero Block → 0; start-of-turn statuses tick (Bleed); energy = 3 (−1 per Collapse pending, min 0); draw 5. |
 | Player phase | Play cards in any order while energy allows. Cards of fallen heroes are unplayable (greyed). |
-| End turn | Button or `Space`. Unplayed cards go to discard (except Retain). End-of-turn statuses tick for heroes (Burn, Marked/Weakened decay). |
+| End turn | Button or `Space`. Unplayed cards go to discard. End-of-turn statuses tick for heroes (Burn, Marked/Weakened decay). |
 | Enemy phase | Enemy Block → 0 at the start of each enemy's own action; each enemy performs its intent in **turn-queue order**; end-of-action ticks per enemy. |
 | New intents | At the end of the enemy phase every living enemy reveals its next intent (§10.1). |
 
@@ -271,7 +271,6 @@ Status icons pair a color with a distinct shape (Art Bible). Stacks show as a nu
 | Keyword | Meaning |
 |---|---|
 | Exhaust | After play, goes to the exhaust pile for the rest of the combat. |
-| Retain | Not discarded at the end of turn. |
 | Power | Stays in play for the combat after being played (its effect is ongoing). |
 | Dread N | When played, the owner gains N stress. |
 | Push N / Pull N | Moves the target enemy N ranks back / forward. |
@@ -376,7 +375,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | mrk_quick_draw | Quick Draw | 0 | Attack | common | H2–3 | any | 3 damage; draw 1 | 5 |
 | mrk_pinning_shot | Pinning Shot | 1 | Attack | common | H2–3 | any | 4 damage; 2 Weakened | 6 |
 | mrk_volley | Volley | 2 | Attack | uncommon | H2–3 | all | 4 damage ×2 to each enemy | 5 ×2 |
-| mrk_hunters_focus | Hunter's Focus | 1 | Power | uncommon | any | self | First attack each turn against a Marked enemy +5 damage (owner's own attacks only) | +7 |
+| mrk_hunters_focus | Hunter's Focus | 1 | Power | uncommon | any | self | First hit each turn against a Marked enemy +5 damage (owner's own attacks only) | +7 |
 | mrk_killshot | Killshot | 2 | Attack | rare | H2–3 | any | 14 damage; +14 if Marked; Exhaust | 18 / +18 |
 
 **Arcanist** (`arc_`)
@@ -415,7 +414,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | bmb_sandbags | Sandbags | 1 | Skill | starter | any | self | 6 Block to self; 3 Block to the adjacent hero | 9 / 4 |
 | bmb_shell | Shell | 2 | Attack | starter | H3 | E2–4 | 11 damage; Splash 4 | 15 / 6 |
 | bmb_incendiary | Incendiary | 1 | Attack | common | H2–3 | any | 3 damage and 3 Burn to target and adjacent enemies | 4 / 4 |
-| bmb_reload | Reload | 0 | Skill | common | any | self | Draw 1; next attack by this hero this turn +4 damage (owner's own attacks only) | +6 |
+| bmb_reload | Reload | 0 | Skill | common | any | self | Draw 1; each hit of this hero's next attack card this turn +4 damage | +6 |
 | bmb_concussion_round | Concussion Round | 2 | Attack | common | H2–3 | any | 6 damage; Stun | 9 |
 | bmb_barrage | Barrage | 3 | Attack | uncommon | H3 | random | 6 damage ×3, each to a random enemy (seeded) | 8 ×3 |
 | bmb_powder_keg | Powder Keg | 1 | Skill | uncommon | H2–3 | any | Plant a Keg: next time that enemy is hit, it and adjacent enemies take 10 (hit formula; does not chain) | 14 |
@@ -525,7 +524,7 @@ After the boss reward is taken, the run ends in victory.
 ### 12.1 Rules (B19)
 
 - 2 slots per hero: **weapon** (modifies that hero's card numbers) and **relic** (passive effect). Any hero can equip any item.
-- Equip/unequip freely at camp and after rewards; unequipped items wait in the stash (max 6). Reward equipment that does not fit in a full stash is lost.
+- Equip, unequip and reorder ranks at any time outside combat (map, reward, camp, shop, rest); unequipped items wait in the stash (max 6). Equipping from a full stash is allowed because it never grows the stash; buying or unequipping into a full stash is blocked. Reward equipment that does not fit in a full stash is lost.
 
 ### 12.2 Prototype items (8) ⚖
 
@@ -534,10 +533,10 @@ After the boss reward is taken, the run ends in victory.
 | eq_notched_blade | Notched Blade | weapon | common | Owner's attacks +1 damage per hit |
 | eq_heavy_pavise | Heavy Pavise | weapon | common | Owner's Block values +2 |
 | eq_bone_reliquary | Bone Reliquary | relic | common | Owner +6 max HP |
-| eq_ember_focus | Ember Focus | weapon | uncommon | Owner's first attack each turn also applies 2 Burn |
+| eq_ember_focus | Ember Focus | weapon | uncommon | Owner's first attack card each turn also applies 2 Burn to every enemy it hits |
 | eq_votive_candle | Votive Candle | relic | uncommon | Owner −1 stress at the end of each combat |
 | eq_iron_rosary | Iron Rosary | relic | uncommon | Owner gains 6 Block after the turn-1 Block reset (lasts through the first enemy phase) |
-| eq_hunters_lens | Hunter's Lens | weapon | rare | Owner's first attack each combat applies 2 Marked |
+| eq_hunters_lens | Hunter's Lens | weapon | rare | Owner's first attack card each combat applies 2 Marked to every enemy it hits |
 | eq_bell_clapper | Bell Clapper | relic | legendary | Once per turn, if any hero has ≥ 7 stress at the start of the turn, gain 1 energy |
 
 ## 13. Meta-progression and difficulty

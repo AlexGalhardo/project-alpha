@@ -12,8 +12,8 @@ sprite must never touch game logic. Final art goes through `alpha-art-assets` an
 `.claude/rules/ip-and-tone.md`, Art Bible (`docs/art-bible.md`).
 
 Placeholders are written by code (a Bun script emits the SVG text), never drawn by hand, so a
-rebuild gives the same bytes. Generator and validators: `bun scripts/assets/...`, a criar
-(PLAN, fase PROTÓTIPO). Tooling is Bun + Inkscape only (no Python, no Node).
+rebuild gives the same bytes. Generator and validators: `bun scripts/assets/...`, to be created
+(PLAN, PROTOTYPE phase). Tooling is Bun + Inkscape only (no Python, no Node).
 
 ## Placeholder contract
 
@@ -70,7 +70,7 @@ quit
 
 Only if the Art Bible ever adds an isometric map (not planned): follow `pixel-logic`.
 
-## Validators (Bun, a criar)
+## Validators (Bun, to be created)
 
 Fail on: root size or `viewBox` different from the Art Bible size for that key; a key with no
 matching final-asset entry; a colour outside the palette; `<image>`, `<text>`, `<filter>`,

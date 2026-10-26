@@ -12,7 +12,7 @@ model: sonnet
 
 > (CCGS automatic config removed: this project has no `production/` and no CCGS hooks; use the skill's defaults.)
 
-Para decidir quando perguntar ao usuário e quando prosseguir, siga `AGENTS.md`.
+To decide when to ask the user and when to proceed, follow `AGENTS.md`.
 
 ## Insufficient input — check this before producing any report
 

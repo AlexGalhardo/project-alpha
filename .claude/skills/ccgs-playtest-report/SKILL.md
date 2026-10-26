@@ -17,7 +17,7 @@ model: sonnet
 ## Phase 1: Parse Arguments
 
 
-Para decidir quando perguntar ao usuário e quando prosseguir, siga `AGENTS.md`.
+To decide when to ask the user and when to proceed, follow `AGENTS.md`.
 
 Determine the mode:
 

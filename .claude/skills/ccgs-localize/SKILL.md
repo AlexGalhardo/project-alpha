@@ -38,7 +38,7 @@ If no subcommand is provided, output usage and stop. Verdict: **FAIL** — missi
 
 ---
 
-Para decidir quando perguntar ao usuário e quando prosseguir, siga `AGENTS.md`.
+To decide when to ask the user and when to proceed, follow `AGENTS.md`.
 
 ## Phase 2A: Scan Mode
 

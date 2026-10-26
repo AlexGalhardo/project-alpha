@@ -9,7 +9,7 @@ description: >
 
 > **project-alpha:** third-party skill (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4, Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`.
 >
-> **Scope here:** Electron build; apenas Beta em diante. A Alpha roda só no navegador.
+> **Scope here:** Electron build; Beta onward only. Alpha runs in the browser only.
 
 
 # Steam Publish (Steamworks + SteamPipe)

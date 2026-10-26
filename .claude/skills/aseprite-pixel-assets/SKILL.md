@@ -19,9 +19,9 @@ everything around it (build, validation, review sheets, publishing) is a Bun scr
 
 | Piece | Role | Status |
 |---|---|---|
-| `art-src/aseprite/scripts/*.lua` | Palette loader, renderer, one script per asset family (characters, card art, icons, UI) | a criar (PLAN, fase PROTÓTIPO) |
-| Character descriptions in data (JSON) | Parts, poses and timings read by the Lua renderer | a criar (PLAN, fase PROTÓTIPO) |
-| `bun scripts/assets/...` | Build (calls `aseprite -b`), validators, review sheets, publish to `public/assets/` | a criar (PLAN, fase PROTÓTIPO) |
+| `art-src/aseprite/scripts/*.lua` | Palette loader, renderer, one script per asset family (characters, card art, icons, UI) | to be created (PLAN, PROTOTYPE phase) |
+| Character descriptions in data (JSON) | Parts, poses and timings read by the Lua renderer | to be created (PLAN, PROTOTYPE phase) |
+| `bun scripts/assets/...` | Build (calls `aseprite -b`), validators, review sheets, publish to `public/assets/` | to be created (PLAN, PROTOTYPE phase) |
 
 Binary: path from the `ASEPRITE` environment variable. The trial cannot save or run scripts;
 never work around it. Never commit the binary or its source.
@@ -152,7 +152,7 @@ every Lua script prints last.
 5. Re-anchor the feet, redo the outline (renderer rules 6-7), run the validators, then retouch
    by hand in Aseprite what the 1x review shows (face, weapon, hands).
 
-## Validators (Bun, a criar)
+## Validators (Bun, to be created)
 
 Size per key; every colour in the master palette; colour budget per sprite and across the
 frames of its atlas; alpha only 0 or 255; character anchors (feet on the sole row, centred,

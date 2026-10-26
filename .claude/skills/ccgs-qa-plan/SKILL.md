@@ -29,7 +29,7 @@ plan.
 
 ---
 
-Para decidir quando perguntar ao usuário e quando prosseguir, siga `AGENTS.md`.
+To decide when to ask the user and when to proceed, follow `AGENTS.md`.
 
 **Workflow tier**: resolve per the GDD's system as each is read: `workflow_overrides.system_overrides.<system>`
 if the block lists one, else the project value. It sets how many GDD sections
@@ -328,7 +328,7 @@ Silently append to `production/session-state/active.md` (create the file if it d
 
 ## Collaborative Protocol
 
-**Applies in `collaborative` mode (the default).** Em qualquer outro caso, siga `AGENTS.md`.
+**Applies in `collaborative` mode (the default).** In any other case, follow `AGENTS.md`.
 
 - **Never write the plan without asking** — Phase 5 requires explicit approval.
 - **Classify conservatively**: when a story is ambiguous between Logic and

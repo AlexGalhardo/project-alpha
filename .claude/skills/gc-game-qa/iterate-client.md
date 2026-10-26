@@ -1,6 +1,6 @@
 # Iterate Client -- Quick Feedback Loop
 
-> **project-alpha:** `scripts/iterate-client.js` does not exist here; create it only if a PLAN task asks for it, run it with `bun` (never `node`), and add the `test*` scripts when the Playwright config is recreated in the STRUCTURE phase (fase ESTRUTURA).
+> **project-alpha:** `scripts/iterate-client.js` does not exist here; create it only if a PLAN task asks for it, run it with `bun` (never `node`), and add the `test*` scripts when the Playwright config is recreated in the STRUCTURE phase.
 
 The standalone iterate client (`scripts/iterate-client.js`) is designed for tight implement-then-test cycles during development. Use it after **every meaningful code change** to catch issues immediately, rather than waiting for the full `@playwright/test` suite.
 

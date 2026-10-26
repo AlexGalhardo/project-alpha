@@ -3,7 +3,7 @@
 ## Language
 
 - All repository content is English: docs, code, comments, keys, commit messages.
-- PT-BR appears only as in-game localization in `src/i18n/`. English is the default locale.
+- PT-BR appears only as in-game localization in `src/i18n/`, plus verbatim quotes of third-party or developer reference material (screen strings, titles) followed by an English gloss. English is the default locale.
 
 ## Layers
 

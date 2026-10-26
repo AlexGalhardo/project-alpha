@@ -11,7 +11,7 @@ description: >
 
 > **project-alpha:** third-party skill (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4, Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`.
 >
-> **Scope here:** as seções de steering e movimento em tempo real estão fora de escopo (jogo por turnos). O que vale: pontuação por utilidade (utility scoring) para escolher ações e pathfinding em grid com altura.
+> **Scope here:** the steering and real-time movement sections are out of scope (turn-based game, no movement on a grid). What applies: utility scoring to choose actions (enemy intents and the auto battle policy), with seeded, deterministic tie-breaks.
 
 
 # Game AI: decisions, steering, and pathfinding

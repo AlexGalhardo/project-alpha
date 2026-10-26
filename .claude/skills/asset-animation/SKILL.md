@@ -19,7 +19,7 @@ project is Phaser **4.2.1**. Tooling is Bun + Aseprite only (no Python, no Node)
   (90/180/-90 only) and rotated pixels smear. A limb in a new angle is rendered again from
   the description, with shading, outline and clean-up applied to that pose.
 - **One timing table** for every character, kept as data next to the descriptions
-  (location: a criar, PLAN fase PROTÓTIPO).
+  (location: to be created, PLAN PROTOTYPE phase).
 - **Hurt and death are code**, not drawings: flash, shake, knockback, fade. They work on
   every character at once and need no frames.
 - **Side view:** heroes face right, enemies face left. Enemies are the same descriptions
@@ -58,7 +58,7 @@ Principles behind the numbers, at pixel scale:
 2. `idle` comes from the shared timing table; a character may override it.
 3. `attack` (and `cast`) is a list of absolute poses timed by the table.
 4. Secondary motion (cloth lag, bob, flame flicker) is part of the description, per frame.
-5. Rebuild with the Bun build (a criar) and review every frame at 4x, then the loop at 1x.
+5. Rebuild with the Bun build (to be created) and review every frame at 4x, then the loop at 1x.
 6. Nothing may leave the cell: the build fails when a frame touches the canvas edge. Shorten
    the reach or shift the hips in that frame; do not grow the canvas.
 

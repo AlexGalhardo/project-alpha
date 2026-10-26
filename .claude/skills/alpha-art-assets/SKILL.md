@@ -5,8 +5,8 @@ description: "Use when creating, regenerating, animating, cleaning or replacing 
 
 # project-alpha — art assets
 
-Read first: `docs/gdd.md` (direção de arte) and `.claude/rules/assets.md`.
-Numbers (resolução base, tamanhos de célula, paleta, formatos): a definir na Art Bible
+Read first: `docs/gdd.md` (art direction) and `.claude/rules/assets.md`.
+Numbers (base resolution, cell sizes, palette, formats): to be defined in the Art Bible
 (`docs/art-bible.md`, not created yet). Until then, no fixed size or color applies through this skill;
 if any number appears here, it is provisional and the Art Bible prevails.
 

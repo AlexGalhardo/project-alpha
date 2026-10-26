@@ -16,7 +16,7 @@ model: sonnet
 
 
 
-Para decidir quando perguntar ao usuário e quando prosseguir, siga `AGENTS.md`.
+To decide when to ask the user and when to proceed, follow `AGENTS.md`.
 
 ## Insufficient input — check this before producing any report
 

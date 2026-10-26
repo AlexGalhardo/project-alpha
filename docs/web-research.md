@@ -35,7 +35,7 @@ Implications:
 
 - 2D side view is the cheapest framing for pixel art: one sprite per unit facing one side (mirroring for the enemy side is optional).
 - Ranks turn position into a decision without a grid — compatible with touch (few, large targets).
-- A card hand at the bottom plus units above requires reserving ~35–40% of the height for the hand at 480×270 (our own layout estimate, not from a source).
+- A card hand at the bottom plus units above requires reserving ~35–40% of the height for the hand (our own layout estimate, not from a source; at the chosen 640×360 base the action band is 138 px, see `docs/brainstorming.md` B28).
 - Enemies on the right with intent above the head (StS) is a genre convention; keep it.
 
 ---
@@ -52,9 +52,9 @@ Implications:
 | StS1 | Hand-drawn art, libGDX engine (Java) | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
 | StS2 | Godot engine (migration from Unity after the runtime-fee controversy) | [Wikipedia StS – Sequel](https://en.wikipedia.org/wiki/Slay_the_Spire), [Game Developer](https://gamedeveloper.com/business/slay-the-spire-devs-followed-through-on-abandoning-unity) |
 
-### 3.2 Pixel art considerations (base 480×270 as a hypothesis; decision in task 2)
+### 3.2 Pixel art considerations (base decided: 640×360, `docs/brainstorming.md` B28)
 
-- 480×270 × 4 = 1920×1080; × 3 = 1440×810; × 2 = 960×540 — all integers (arithmetic).
+- 640×360 × 2 = 1280×720; × 3 = 1920×1080; × 4 = 2560×1440 — all integers (arithmetic). The alternative studied, 480×270, gives × 4 = 1920×1080 and × 2 = 960×540.
 - Phaser `pixelArt: true` enables nearest-neighbor and rounds positions ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)).
 - Phaser 4 (rc.3) added a per-object `vertexRoundMode` (`off`, `safe`, `safeAuto` default, `full`, `fullAuto`) — `full` can make sprites "shake" when rotated ([releases](https://github.com/phaserjs/phaser/releases)).
 - Phaser 4 added a `Blocky` filter (pixelates while preserving the palette) — useful for transitions/effects, not for base art ([releases](https://github.com/phaserjs/phaser/releases)).
@@ -333,7 +333,9 @@ Note: there is a rarity "offset" (pity) that is only affected by card rewards, n
 ### 12.3 Scale
 
 - Modes: `NONE`, `FIT` (keeps the ratio, may leave borders), `ENVELOP` (covers, may crop), `WIDTH_CONTROLS_HEIGHT`, etc.; `zoom` = canvas size = game size × zoom; `autoCenter: CENTER_BOTH` ([Scale Manager](https://docs.phaser.io/phaser/concepts/scale-manager)).
-- `FIT` scales by fractions → breaks the rule "integer scale always". Approach: `mode: NONE`, `width: 480, height: 270`, and recompute `zoom = max(1, floor(min(innerWidth/480, innerHeight/270)))` on resize; center via CSS. Integer-scale mode in Phaser 4: the local skill `scale-and-responsive` documents `Phaser.Scale.MAX_ZOOM` (automatic zoom: the largest integer that fits the parent), `setMaxZoom()` and `getMaxZoom()` (source: local skill `.claude/skills/scale-and-responsive/SKILL.md`, not a URL). Behavior with `FIT` and fractional DPR: under test (see §12.7).
+- `FIT` scales by fractions → breaks the rule "integer scale always".
+- Phaser 4 has a built-in integer zoom: `Phaser.Scale.MAX_ZOOM` (the largest integer zoom that fits the parent), `setMaxZoom()` and `getMaxZoom()` (source: local skill `.claude/skills/scale-and-responsive/SKILL.md`, not a URL). It snaps in **CSS pixels and ignores the device pixel ratio**, measured in the local spike (§12.7), so on a DPR 3 phone it can leave the art at a non-integer number of device pixels per game pixel or waste screen.
+- Recommendation (B28): `mode: Phaser.Scale.NONE`, `width: 640, height: 360`, and on every resize apply `zoom = max(1, floor(fit × dpr)) / dpr` with `fit = min(innerWidth / 640, innerHeight / 360)` through `game.scale.setZoom()`; center via CSS. The invariant is an integer number of **device** pixels per game pixel (§12.7).
 - Relevant fix: ScaleManager did not resize to the parent container (#7213), fixed in a v4 release ([releases](https://github.com/phaserjs/phaser/releases)).
 
 ### 12.4 Textures and atlases
@@ -561,7 +563,7 @@ How to evoke the tone without copying (aligned with `.claude/rules/ip-and-tone.m
 1. **Energy 3 / draw 5 as a starting point**, then double/halve through simulation; it is the most tested pairing in the genre (§7.1).
 2. **Guaranteed hits**: DD2 proved that removing accuracy works in a dark RPG; keep the invariant and move the uncertainty to card draws and intents (§7.4).
 3. **Ranks 1–4 per side** in side view: an ability/card declares origin and target ranks; movement is a card effect (§2, §7.3).
-4. **Stress on a short scale (0–10)** like DD2, not 0–200: it fits readable pips at 480×270 and on a tap (§7.4).
+4. **Stress on a short scale (0–10)** like DD2, not 0–200: it fits readable pips at the 640×360 base and on a tap (§7.4).
 5. At 10 stress: a binary result announced in advance (e.g. meltdown vs. resolve) with the chance shown in the preview — respects "visible damage before deciding" (§7.3, §7.4).
 6. **Enemy intent with an icon per effect + a number**, without reusing icons; a distinct shape beyond color (§5.1).
 7. **Draw pile visible, order hidden**, a clickable exhaust counter (§5.1).
@@ -578,7 +580,7 @@ How to evoke the tone without copying (aligned with `.claude/rules/ip-and-tone.m
 18. **Difficulty as a cumulative ladder** (Ascension) + optional modifiers (Dam) for players who want to tune (§8.2, §8.3).
 19. **Metrics from the first playable**: a log of choices/pick rate per card and win rate per node; this is MegaCrit's documented method and matches `bun run sim` (§10).
 20. **Shared daily seed** — trivial with the injected RNG the core already requires (§11).
-21. **Phaser pinned to 4.2.1**, `pixelArt: true`, `Scale.NONE` + an integer zoom computed on resize (§12.1–12.3).
+21. **Phaser pinned to 4.2.1**, `pixelArt: true`, 640×360 base, `Scale.NONE` + a zoom snapped to whole device pixels on resize, not `MAX_ZOOM` (§12.1–12.3, §12.7).
 22. **SVG placeholders rasterized at the final size**, never scaled by the browser (§12.4).
 23. **Audio unlocked on the first tap** ("Tap to start"); the game works with `sound.locked` (§12.5).
 24. **No spoken narrator**: short text + a sound sting on stress/death events (§4).
@@ -606,7 +608,7 @@ Full digest, image by image: [`docs/research/developer-references.md`](research/
 | # | Topic | Conflict |
 |---|---|---|
 | 1 | Name | DARKEON (references) × "project-alpha" × vocabulary inherited from the previous project |
-| 2 | Resolution | 1920×1080 with 960×540 production (ChatGPT) × 480×270 base (inherited rules) |
+| 2 | Resolution | 1920×1080 with 960×540 production (ChatGPT) × 480×270 base (inherited rules); resolved: 640×360 (`docs/brainstorming.md` B28) |
 | 3 | Hand | 5 × 6 cards across screens |
 | 4 | Combat duration | "ROUND XX/10" × 5 to 8 rounds |
 | 5 | Hit chance | "25% DODGE" and condition chance × guaranteed-hit invariant |

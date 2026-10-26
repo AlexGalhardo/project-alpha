@@ -9,11 +9,11 @@ model: sonnet
 
 > **project-alpha:** third-party skill (`Donchitos/Claude-Code-Game-Studios`, MIT). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4, Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`. It assumes the `design/` and `production/` folders of Claude-Code-Game-Studios. **Map:** `design/gdd/*` → `docs/gdd.md` e `docs/sdd/balancing.md`; `design/art/*` → `docs/art-bible.md`; `production/*` → `docs/reports/<skill>-<data>.md`; sprints/milestones → `PLAN.md`. Do not invoke agents that do not exist here.
 >
-> **Scope here:** sem consoles. Alpha é só navegador (`cert_tier: none`); Electron (PC) e Capacitor (mobile) entram na Beta. Os itens de certificação de console foram removidos.
+> **Scope here:** no consoles. Alpha is browser only (`cert_tier: none`); Electron (PC) and Capacitor (mobile) come in Beta. Console certification items were removed.
 
 > (CCGS automatic config removed: this project has no `production/` and no CCGS hooks; use the skill's defaults.)
 
-Para decidir quando perguntar ao usuário e quando escrever arquivos sem confirmar, siga `AGENTS.md`.
+To decide when to ask the user and when to write files without confirmation, follow `AGENTS.md`.
 
 **Scope this checklist to the project.** Emitting every item for every platform
 trains the reader to skip the list, which defeats the gate:

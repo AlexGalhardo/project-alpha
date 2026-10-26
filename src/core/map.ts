@@ -1,5 +1,5 @@
 // Map generation (GDD 4.2) and encounter selection (GDD 4.3).
-import { ENCOUNTERS, ENEMIES, MAP_LAYOUT } from '../data/index.ts';
+import { ENCOUNTER_RULES, ENCOUNTERS, MAP_LAYOUT } from '../data/index.ts';
 import { pick, rand, randInt, shuffle } from './rng.ts';
 import type { MapNode, NodeType, RunState } from './types.ts';
 
@@ -67,22 +67,38 @@ export function generateMap(s: Pick<RunState, 'rng'>): MapNode[][] {
 	return rows;
 }
 
-/** Encounter with the most enemy types the run has not seen; ties are a seeded pick. */
+/**
+ * Encounter that adds the most enemy types the run has not seen (GDD 4.3). Candidates are the common
+ * encounters of both tiers, but one from the other tier than the row's (A rows 1-3, B rows 4-8) counts
+ * ENCOUNTER_RULES.offTierWeight (0 = never chosen). A type found in few encounters counts more (it may
+ * not come again). Ties prefer the row's own tier, then a seeded pick.
+ */
 export function chooseEncounter(s: RunState, row: number, type: NodeType): string {
 	if (type === 'boss') return 'BOSS';
 	if (type === 'elite') return row <= 4 ? 'EL1' : 'EL2';
-	const poolKey = row <= 3 ? 'A' : 'B';
-	const pool = Object.values(ENCOUNTERS).filter((e) => e.pool === poolKey);
+	const own = row <= 3 ? 'A' : 'B';
+	const pool = Object.values(ENCOUNTERS).filter(
+		(e) =>
+			(e.pool === 'A' || e.pool === 'B') &&
+			(ENCOUNTER_RULES.offTierWeight > 0 || e.pool === own),
+	);
+	const typesOf = (id: string): Set<string> =>
+		new Set((ENCOUNTERS[id]?.enemies ?? []).map((x) => x.key));
+	const supply = (key: string): number => pool.filter((e) => typesOf(e.id).has(key)).length;
 	const novelty = (id: string): number => {
-		const enc = ENCOUNTERS[id];
-		const keys = new Set((enc?.enemies ?? []).map((x) => x.key));
 		let n = 0;
-		for (const k of keys) if (!s.seenEnemies.includes(k) && ENEMIES[k]) n += 1;
-		return n;
+		for (const k of typesOf(id)) if (!s.seenEnemies.includes(k)) n += 1 / supply(k);
+		return ENCOUNTERS[id]?.pool === own ? n : n * ENCOUNTER_RULES.offTierWeight;
 	};
 	const best = Math.max(...pool.map((e) => novelty(e.id)));
-	const ties = pool.filter((e) => novelty(e.id) === best).map((e) => e.id);
-	return pick(s, 'meta', ties);
+	let ties = pool.filter((e) => Math.abs(novelty(e.id) - best) < 1e-9);
+	const inTier = ties.filter((e) => e.pool === own);
+	if (inTier.length > 0) ties = inTier;
+	return pick(
+		s,
+		'meta',
+		ties.map((e) => e.id),
+	);
 }
 
 export function markSeen(s: RunState, encounterId: string): void {

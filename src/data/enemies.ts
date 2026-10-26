@@ -168,11 +168,11 @@ export const ENEMIES: Record<string, EnemyDef> = {
 	},
 	bell_maw: {
 		key: 'bell_maw',
-		hp: 160,
+		hp: 100,
 		speed: 3,
 		size: 2,
 		fixedStart: true,
-		phase2Hp: 80,
+		phase2Hp: 50,
 		intents: [
 			{
 				id: 'toll',
@@ -203,6 +203,8 @@ export const ENCOUNTERS: Record<string, EncounterDef> = {
 	A2: { id: 'A2', pool: 'A', enemies: [{ key: 'graft_hound' }, { key: 'chitter_swarm' }] },
 	A3: { id: 'A3', pool: 'A', enemies: [{ key: 'husk_penitent' }, { key: 'ash_acolyte' }] },
 	A4: { id: 'A4', pool: 'A', enemies: [{ key: 'husk_penitent' }, { key: 'wax_mourner' }] },
+	A5: { id: 'A5', pool: 'A', enemies: [{ key: 'chitter_swarm' }, { key: 'lantern_leech' }] },
+	A6: { id: 'A6', pool: 'A', enemies: [{ key: 'husk_penitent' }, { key: 'choir_thing' }] },
 	B1: { id: 'B1', pool: 'B', enemies: [{ key: 'rust_templar' }, { key: 'ash_acolyte' }] },
 	B2: {
 		id: 'B2',
@@ -237,7 +239,10 @@ export const ENCOUNTERS: Record<string, EncounterDef> = {
 	BOSS: { id: 'BOSS', pool: 'boss', enemies: [{ key: 'bell_maw' }] },
 };
 
-export const ELITE_HP_MUL = 1.75;
-export const ELITE_DAMAGE_MUL = 1.25;
-export const CALCIFIED_REDUCTION = 2;
-export const OATHWALL_BLOCK = 5;
+/** GDD 10.4 */
+export const ELITE = {
+	hpMul: 1.25,
+	damageMul: 1.25,
+	calcifiedReduction: 2,
+	oathwallBlock: 5,
+};

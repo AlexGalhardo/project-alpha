@@ -1,6 +1,6 @@
 // Combat primitives shared by cards, enemies and the turn flow. Mutates the state it is given;
 // `apply` always hands it a private copy.
-import { ENEMIES, EQUIPMENT_NUMBERS, OATHWALL_BLOCK, RULES } from '../data/index.ts';
+import { ELITE, ENEMIES, EQUIPMENT_NUMBERS, RULES } from '../data/index.ts';
 import { rand, shuffle } from './rng.ts';
 import type {
 	CombatState,
@@ -143,8 +143,8 @@ export function gainBlock(c: Ctx, ref: UnitRef, amount: number): void {
 		if (e && e.trait === 'oathwall') {
 			for (const o of cs(c).enemies) {
 				if (o !== e) {
-					o.fx.block += OATHWALL_BLOCK;
-					c.ev.push({ type: 'block', target: enemyRef(o), amount: OATHWALL_BLOCK });
+					o.fx.block += ELITE.oathwallBlock;
+					c.ev.push({ type: 'block', target: enemyRef(o), amount: ELITE.oathwallBlock });
 				}
 			}
 		}
@@ -259,7 +259,7 @@ export function hitEnemy(c: Ctx, e: Enemy, base: number, opts: HitOpts = {}): nu
 	if (!k.enemies.includes(e)) return 0;
 	const attacker = opts.source ? (k.heroFx[opts.source] as HeroFx) : null;
 	let dmg = hitDamage(base + (opts.extra ?? 0), attacker, e.fx);
-	if (e.trait === 'calcified' && dmg > 0) dmg = Math.max(1, dmg - 2);
+	if (e.trait === 'calcified' && dmg > 0) dmg = Math.max(1, dmg - ELITE.calcifiedReduction);
 	const absorbed = opts.ignoreBlock ? 0 : Math.min(e.fx.block, dmg);
 	e.fx.block -= absorbed;
 	const lost = Math.min(e.hp, dmg - absorbed);

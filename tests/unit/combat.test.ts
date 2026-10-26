@@ -373,21 +373,21 @@ describe('enemies, elites and boss (GDD 10)', () => {
 	test('elite: HP x1.75, damage x1.25, Oathwall and Calcified traits', () => {
 		const s = combatRun('EL1', PARTY, 1, 'elite');
 		const t = combat(s).enemies[0];
-		expect(t?.maxHP).toBe(60);
+		expect(t?.maxHP).toBe(43);
 		if (!t) throw new Error('no enemy');
 		t.intentIdx = 1;
 		const view = intentView(s, t);
 		expect(view.damage.map((d) => d.perHit)).toEqual([10, 10]);
 		const b = combatRun('EL2', PARTY, 1, 'elite');
 		const brute = combat(b).enemies[0];
-		expect(brute?.maxHP).toBe(81);
+		expect(brute?.maxHP).toBe(58);
 		const [uid] = setHand(b, ['shb_hack']);
 		const r = run(b, {
 			type: 'playCard',
 			cardUid: uid as number,
 			target: enemyTarget(brute?.uid as number),
 		});
-		expect(combat(r.s).enemies[0]?.hp).toBe(81 - 4);
+		expect(combat(r.s).enemies[0]?.hp).toBe(58 - 4);
 		void uid;
 	});
 
@@ -407,7 +407,7 @@ describe('enemies, elites and boss (GDD 10)', () => {
 		const s = combatRun('BOSS', PARTY, 1, 'boss');
 		const boss = combat(s).enemies[0];
 		if (!boss) throw new Error('no boss');
-		boss.hp = 84;
+		boss.hp = 54;
 		boss.fx.marked = 3;
 		const [uid] = setHand(s, ['mrk_aimed_shot']);
 		const r = run(s, {
@@ -421,7 +421,7 @@ describe('enemies, elites and boss (GDD 10)', () => {
 		expect(after?.fx.marked).toBe(0);
 		expect(after?.fx.might).toBe(2);
 		expect(after?.intentIdx).toBe(0);
-		expect(after?.maxHP).toBe(160);
+		expect(after?.maxHP).toBe(100);
 		const view = intentView(r.s, after ?? boss);
 		expect(view.intentId).toBe('peal');
 		expect(view.targets).toEqual(PARTY);
@@ -455,7 +455,7 @@ describe('enemies, elites and boss (GDD 10)', () => {
 			const s = combatRun(id);
 			expect(combat(s).enemies.reduce((a, e) => a + e.maxHP, 0)).toBe(hp);
 		}
-		expect(Object.keys(ENCOUNTERS)).toHaveLength(12);
+		expect(Object.keys(ENCOUNTERS)).toHaveLength(14);
 	});
 });
 

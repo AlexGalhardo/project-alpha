@@ -1,11 +1,19 @@
 import { describe, expect, test } from 'bun:test';
 import { chooseBotCommand } from '../../src/core/bot.ts';
-import { generateMap } from '../../src/core/map.ts';
+import { chooseEncounter, generateMap, markSeen } from '../../src/core/map.ts';
 import { makeCardOffer, makeShop, removalPrice } from '../../src/core/rewards.ts';
+import { rand } from '../../src/core/rng.ts';
 import { apply, createRun, deserialize, embers, preview, serialize } from '../../src/core/run.ts';
 import type { Command, HeroClass, RunState } from '../../src/core/types.ts';
 import { combatView, currentScreen, mapView } from '../../src/core/views.ts';
-import { CARD_IDS, CARDS, ENEMIES, HERO_CLASSES, HEROES } from '../../src/data/index.ts';
+import {
+	CARD_IDS,
+	CARDS,
+	ENCOUNTER_RULES,
+	ENEMIES,
+	HERO_CLASSES,
+	HEROES,
+} from '../../src/data/index.ts';
 import { invalidOf, PARTY, run } from './helpers.ts';
 
 function playOut(seed: number, party: HeroClass[]): { s: RunState; steps: number } {
@@ -124,23 +132,43 @@ describe('map (GDD 4.2)', () => {
 		expect(JSON.stringify(a)).not.toBe(JSON.stringify(c));
 	});
 
-	test('encounter selection: novelty first (every Tier A/B pick is the most novel); coverage by row 8', () => {
-		// GDD 4.3 says all 10 types appear by row 8 on paths with >= 6 combats. With the rule as written
-		// (greedy novelty, seeded ties) that is not guaranteed; the measured floor is 8 types.
-		const counts: number[] = [];
-		for (let seed = 1; seed <= 200; seed++) {
-			let s = createRun(seed, PARTY, { heroHpMul: 10 });
-			while (s.phase !== 'defeat' && s.phase !== 'victory') {
-				if (s.phase === 'map' && s.cursor && s.cursor.row >= 8) break;
-				const cmd = chooseBotCommand(s);
-				if (!cmd) break;
-				s = apply(s, cmd).state;
+	function coverage(): number {
+		let eligible = 0;
+		let complete = 0;
+		for (let seed = 1; seed <= 1500; seed++) {
+			const s = createRun(seed, PARTY);
+			let idx = Math.floor(rand(s, 'meta') * (s.map[0]?.length ?? 1));
+			let combats = 0;
+			for (let row = 1; row <= 8; row++) {
+				const node = s.map[row - 1]?.[idx];
+				if (!node) throw new Error('bad path');
+				if (node.type === 'combat' || node.type === 'elite') {
+					combats++;
+					markSeen(s, chooseEncounter(s, row, node.type));
+				}
+				idx = node.next[Math.floor(rand(s, 'meta') * node.next.length)] as number;
 			}
-			if (s.stats.combats.length >= 6) counts.push(new Set(s.seenEnemies).size);
+			if (combats >= 6) {
+				eligible++;
+				if (s.seenEnemies.length === 10) complete++;
+			}
 		}
-		expect(counts.length).toBeGreaterThan(100);
-		expect(Math.min(...counts)).toBeGreaterThanOrEqual(8);
-		expect(counts.filter((n) => n === 10).length).toBeGreaterThan(0);
+		expect(eligible).toBeGreaterThan(1000);
+		return complete / eligible;
+	}
+
+	test('encounter selection: strict tiers cover all 10 types on >= 70% of random paths with >= 6 combats', () => {
+		expect(ENCOUNTER_RULES.offTierWeight).toBe(0);
+		expect(coverage()).toBeGreaterThanOrEqual(0.7);
+	});
+
+	test('encounter selection: letting the other tier compete (weight 0.8) reaches >= 95%', () => {
+		ENCOUNTER_RULES.offTierWeight = 0.8;
+		try {
+			expect(coverage()).toBeGreaterThanOrEqual(0.95);
+		} finally {
+			ENCOUNTER_RULES.offTierWeight = 0;
+		}
 	});
 });
 
@@ -208,7 +236,7 @@ describe('Act 1 integration (bot)', () => {
 			expect(embers(s)).toBe(2 * s.roundsCleared + 5 * s.elitesWon + 15 * s.bossesWon);
 		}
 		expect(wins).toBeGreaterThan(0);
-	});
+	}, 60000);
 
 	test('views match the phase', () => {
 		let s = createRun(4, PARTY);

@@ -145,7 +145,7 @@ Resulting path: 7 combats + up to 2 elites + 1–2 shops + 1 rest + 1 boss. Elit
 ### 4.3 Encounter selection ⚖
 
 - Encounters come from two pools: **Tier A** (rows 1–3) and **Tier B** (rows 4–8) (§10.3).
-- Selection rule: pick the encounter with the most enemy types the run has not seen yet; ties → seeded pick. This guarantees the 10 types appear by row 8 on any path with ≥ 6 combats (B11).
+- Selection rule: pick the encounter of the row's tier (rows 1–3 Tier A, rows 4–8 Tier B) with the most enemy types the run has not seen yet, weighting types that appear in few encounters higher; ties → seeded pick. Measured: 72.6% of paths with ≥ 6 combats see all 10 types by row 8 (4,000 seeds, `docs/reports/2026-10-26-sim-prototype.md`). Decision 2026-10-26: keep the difficulty ramp of strict tiers over full coverage; `ENCOUNTER_RULES.offTierWeight` = 0.8 would reach ≥ 95% but puts Tier B fights in rows 1–3 (B11 relaxed).
 - Act scaling for Acts 2–3 (Alpha/Beta): enemy HP × (1 + 0.5 × (act − 1)), enemy damage × (1 + 0.3 × (act − 1)), rounded.
 
 ### 4.4 Camp (B10) ⚖
@@ -454,18 +454,20 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | A2 | Tier A | graft_hound, chitter_swarm | 30 |
 | A3 | Tier A | husk_penitent, ash_acolyte | 40 |
 | A4 | Tier A | husk_penitent, wax_mourner | 34 |
+| A5 | Tier A | chitter_swarm, lantern_leech | 24 |
+| A6 | Tier A | husk_penitent, choir_thing | 44 |
 | B1 | Tier B | rust_templar, ash_acolyte | 56 |
 | B2 | Tier B | graft_hound, lantern_leech, lantern_leech | 48 |
 | B3 | Tier B | husk_penitent, husk_penitent, choir_thing | 62 |
 | B4 | Tier B | ossified_brute, chitter_swarm, chitter_swarm | 66 |
 | B5 | Tier B | husk_penitent, rift_stalker, wax_mourner | 64 |
-| EL1 | Elite, row 4 | rust_templar (elite), ash_acolyte | 82 |
-| EL2 | Elite, row 7 | ossified_brute (elite), wax_mourner | 97 |
-| BOSS | Row 10 | bell_maw (E1+E2) | 160 |
+| EL1 | Elite, row 4 | rust_templar (elite), ash_acolyte | 65 |
+| EL2 | Elite, row 7 | ossified_brute (elite), wax_mourner | 74 |
+| BOSS | Row 10 | bell_maw (E1+E2) | 100 |
 
 ### 10.4 Elites (B12) ⚖
 
-Elite = base enemy with: HP × 1.75 (round), every damage number × 1.25 (round; damage only, not stress), a gold frame/aura (no new sprite) and one trait:
+Elite = base enemy with: HP × 1.25 (round; was 1.75 before the 2026-10-26 balance pass), every damage number × 1.25 (round; damage only, not stress), a gold frame/aura (no new sprite) and one trait:
 
 | Elite | Trait |
 |---|---|
@@ -474,12 +476,12 @@ Elite = base enemy with: HP × 1.75 (round), every damage number × 1.25 (round;
 
 ### 10.5 Boss: Bell-Maw (B13) ⚖
 
-A cathedral bell grown into a biomechanical mouth, rooted in the Rift. Occupies E1+E2, HP 160, Speed 3.
+A cathedral bell grown into a biomechanical mouth, rooted in the Rift. Occupies E1+E2, HP 100 (was 160 before the 2026-10-26 balance pass), Speed 3.
 
 | Phase | Trigger | Intent cycle |
 |---|---|---|
 | 1 | start | Toll: +2 stress to every hero → Clapper 14 (front) → Resonance: 15 Block and +1 Might |
-| 2 | HP ≤ 80 (checked after each hit) | On entering: removes its debuffs, +2 Might, screen flash + shake + text "THE BELL CRACKS"; cycle: Peal 5 to every hero → Swallow 18 (highest-stress) → Toll |
+| 2 | HP ≤ 50 (checked after each hit) | On entering: removes its debuffs, +2 Might, screen flash + shake + text "THE BELL CRACKS"; cycle: Peal 5 to every hero → Swallow 18 (highest-stress) → Toll |
 
 Phase change happens immediately; the current intent is replaced by phase 2's first intent and shown before the player continues.
 

@@ -80,3 +80,6 @@ export const MAP_LAYOUT: { nodes: [number, number]; types: string[] }[] = [
 	{ nodes: [2, 2], types: ['rest', 'shop'] },
 	{ nodes: [1, 1], types: ['boss'] },
 ];
+
+/** GDD 4.3. Weight of an encounter from the other tier when choosing by novelty (0 = tiers are strict). */
+export const ENCOUNTER_RULES = { offTierWeight: 0 };

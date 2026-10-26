@@ -1,7 +1,6 @@
 // Combat flow: setup, player turn, enemy phase, intents, combat end (GDD 5 and 10).
 import {
-	ELITE_DAMAGE_MUL,
-	ELITE_HP_MUL,
+	ELITE,
 	ENCOUNTERS,
 	ENEMIES,
 	EQUIPMENT_DROP,
@@ -56,7 +55,7 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 	for (const slot of enc.enemies) {
 		const def = ENEMIES[slot.key];
 		if (!def) throw new Error(`unknown enemy ${slot.key}`);
-		const elite = slot.elite ? ELITE_HP_MUL : 1;
+		const elite = slot.elite ? ELITE.hpMul : 1;
 		const maxHP = Math.max(1, Math.round(def.hp * elite * s.options.enemyHpMul));
 		const list = def.intents;
 		enemies.push({
@@ -69,7 +68,7 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 			fx: emptyStatuses(),
 			intentIdx: def.fixedStart ? 0 : randInt(s, 'combat', 0, list.length - 1),
 			phase: 1,
-			dmgMul: (slot.elite ? ELITE_DAMAGE_MUL : 1) * s.options.enemyDmgMul,
+			dmgMul: (slot.elite ? ELITE.damageMul : 1) * s.options.enemyDmgMul,
 			trait: slot.elite ?? null,
 			keg: 0,
 		});

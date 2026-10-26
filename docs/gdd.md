@@ -156,7 +156,7 @@ Opens after every round except the boss, including after rest and shop nodes. On
 |---|---|---|
 | Swap a hero | 30 | One swap per camp visit. Choose 1 of the 2 heroes not in the party; they join at full HP and 0 stress with their 4 starter cards; the leaving hero's cards leave the deck and their equipment goes to the stash. |
 | Card for sale (1) | common 35 / uncommon 55 / rare 90 | Drawn from the party heroes' pools. Rarity odds 65 / 30 / 5 (common / uncommon / rare). |
-| Equipment for sale (1) | common 50 / uncommon 85 | Odds 60 / 40 (common / uncommon). A full stash (6) blocks buying. |
+| Equipment for sale (1) | common 50 / uncommon 85 / rare 140 | Odds 60 / 40 (common / uncommon). Rare appears only as a fallback when every common and uncommon item is owned. A full stash (6) blocks buying. |
 | Service (1 of 2, seeded) | 12 | "Bind wounds": heal 15% max HP of every hero; or "Vigil": −3 stress on one hero. |
 | Reorder ranks | free | Drag heroes between ranks 1–3. |
 
@@ -440,7 +440,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | graft_hound | Graft Hound | E1–2 | 20 | 6 | Lunge 7 (front) → Rend 3 + 3 Bleed (front) → Lunge 7 |
 | wax_mourner | Wax Mourner | E3–4 | 16 | 1 | Dirge: +2 stress (highest-stress) → Drip 4 (lowest-HP) → Dirge |
 | rust_templar | Rust Templar | E1 | 34 | 2 | Raise Shield: 10 Block → Cleave 8 to H1 and H2 → Cleave 8 to H1 and H2 |
-| lantern_leech | Lantern Leech | E2–4 | 14 | 4 | Drain 5, heals itself 5 (lowest-HP) → Lure: 1 Marked (back) → Drain |
+| lantern_leech | Lantern Leech | E2–4 | 14 | 4 | Drain 5, heals itself 5 (lowest-HP) → Lure: 2 Marked (back) → Drain |
 | choir_thing | Choir-Thing | E4 | 26 | 1 | Shriek: +1 stress and 1 Weakened to every hero → Hum: 1 Ward to every enemy → Shriek |
 | ossified_brute | Ossified Brute | E1–2 | 46 | 1 | Gather (telegraph "Crush next") → Crush 16 (front) → Shove 6, swaps H1 and H2 |
 | rift_stalker | Rift Stalker | E2–4 | 30 | 7 | Fade: 12 Block, moves to E4 → Ambush 11 (back) → Rake 4 ×2 (back) |
@@ -740,3 +740,96 @@ Playtest questions: Did you understand why you took damage? Which hero did you m
 | Q-LEGACY-NAME | Final name of the legacy currency (provisional "Embers") | Coordinator | 2026-11-02 |
 | Q-ZOOM | Integer zoom on real phones with browser UI visible | Coordinator (prototype spike) | 2026-11-09 |
 | Q-BALANCE-1 | First simulation pass on every ⚖ value of §5–§12 | Coordinator | end of prototype group "combat core" |
+
+## 22. Alpha content (specified 2026-10-26, coordinator)
+
+Everything here is ⚖ and enters behind the same rules as §4–§14. Act scaling of §4.3 applies to Act 2 enemies (HP × 1.5, damage × 1.3, rounded); boss HP below is final, not scaled.
+
+### 22.1 Run flow with two acts
+
+- After the Act 1 boss reward the camp opens, then the Act 2 map starts at row 1. Between acts every hero heals 50% of max HP and loses any injury.
+- Victory = Act 2 boss defeated. The prototype flag `ACTS = 1` keeps the old flow; Alpha sets `ACTS = 2`.
+
+### 22.2 Act 2 enemies (10)
+
+| Key | Name | Ranks | HP | Speed | Intent cycle |
+|---|---|---|---|---|---|
+| vault_warden | Vault Warden | E1 | 30 | 2 | Shield Bash 7 (front) → Brace: 8 Block → Shield Bash 7 |
+| bone_lancer | Bone Lancer | E1–2 | 22 | 4 | Pierce 6 to H1 and H2 → Pierce 6 to H1 and H2 → Withdraw: moves to E4 |
+| censer_wraith | Censer Wraith | E2–4 | 18 | 5 | Choke 4 (lowest-HP) → Smoke: 1 Weakened to every hero |
+| flesh_organ | Flesh Organ | E4 | 28 | 1 | Hymn: +1 Might to all enemies → Drone: +1 stress to every hero → Hymn |
+| gutter_crawler | Gutter Crawler | E1–3 | 12 | 6 | Gnaw 3 ×2 (front) |
+| relic_thief | Relic Thief | E2–3 | 20 | 7 | Cut 5 + 2 Bleed (back) → Cut 5 + 2 Bleed (back) → Vanish: 10 Block |
+| mirror_saint | Mirror Saint | E3–4 | 24 | 3 | Reflect: 12 Block → Glare: 2 Marked (back) → Smite 8 (marked) |
+| hollow_bishop | Hollow Bishop | E2–3 | 26 | 2 | Sermon: +2 stress (highest-stress) → Rebuke 6 (front) → Sermon |
+| chain_golem | Chain Golem | E1–2 | 52 | 1 | Wind-up (telegraph) → Chain Sweep 10 to H1 and H2 → Shove 6, swaps H1 and H2 |
+| rot_cherub | Rot Cherub | E2–4 | 16 | 6 | Spit 4 + 2 Bleed (lowest-HP) → Spit 4 + 2 Bleed (lowest-HP) → Hover: 6 Block |
+
+### 22.3 Act 2 encounters, elites and boss
+
+| Id | Pool | Enemies (E1→E4) |
+|---|---|---|
+| A2-1 | Tier A | gutter_crawler, gutter_crawler |
+| A2-2 | Tier A | bone_lancer, censer_wraith |
+| A2-3 | Tier A | vault_warden, rot_cherub |
+| A2-4 | Tier A | gutter_crawler, relic_thief |
+| A2-5 | Tier A | vault_warden, flesh_organ |
+| B2-1 | Tier B | vault_warden, hollow_bishop, censer_wraith |
+| B2-2 | Tier B | chain_golem, rot_cherub |
+| B2-3 | Tier B | bone_lancer, mirror_saint, flesh_organ |
+| B2-4 | Tier B | relic_thief, relic_thief, hollow_bishop |
+| B2-5 | Tier B | chain_golem, gutter_crawler, mirror_saint |
+| EL2-1 | Elite row 4 | vault_warden (elite, Oathwall), censer_wraith |
+| EL2-2 | Elite row 7 | chain_golem (elite, Calcified), flesh_organ |
+| BOSS2 | Row 10 | gilded_penitent (E1+E2) |
+
+Boss **Gilded Penitent** (`gilded_penitent`): a giant reliquary-statue of a kneeling saint, gold leaf over rot. HP 140, Speed 3, phase 2 at HP ≤ 70 with +2 Might on entering.
+
+| Phase | Intent cycle |
+|---|---|
+| 1 | Lash 12 (front) → Confession: +2 stress to every hero → Gild: 15 Block and +1 Might |
+| 2 | Scourge 6 to every hero → Lash 16 (highest-stress) → Confession |
+
+### 22.4 Event and treasure nodes
+
+Map changes (Acts 1 and 2 in Alpha): in rows 2, 3, 5, 6 and 8 one combat node becomes an **event** with seeded chance 40%; in rows 5–6 one non-shop node becomes a **treasure** with seeded chance 35% (at most 1 treasure per act). Every node still counts as a round; each path keeps ≥ 5 combats.
+
+Treasure: 25 gold + 1 equipment (uncommon 60%, rare 40%).
+
+Events show every outcome before the choice (no hidden chance, P3):
+
+| Id | Name | Choices (all outcomes shown) |
+|---|---|---|
+| ev_weeping_font | The Weeping Font | Drink: heal 20% max HP each hero, +2 stress each · Fill vials: +40 gold · Leave |
+| ev_ossuary_shrine | Ossuary Shrine | Offer 30 gold: −3 stress each hero · Take a bone: gain a random common relic, +2 stress to the H1 hero · Leave |
+| ev_chained_penitent | Chained Penitent | Free him: H1 hero loses 6 HP, choose 1 of 3 uncommon cards · Take his chain: upgrade 1 random card · Leave |
+| ev_forgotten_armory | Forgotten Armory | Search: gain 1 common equipment, the lowest-HP hero loses 8 HP · Leave |
+| ev_whispering_choir | Whispering Choir | Listen: remove 1 card (choose), +2 stress each hero · Leave |
+| ev_ember_pilgrim | Ember Pilgrim | Trade: pay 25 gold, upgrade 2 cards (choose) · Share the fire: heal 10 HP each hero · Leave |
+
+### 22.5 Skill tree v1 (Embers, B21)
+
+Per hero one branch of 3 nodes, bought in order with banked Embers in a new **Legacy** screen (main menu). Nodes add options only.
+
+| Node | Cost | Effect |
+|---|---|---|
+| I | 10 | Unlock card A in the hero's reward pool |
+| II | 25 | Unlock card B in the hero's reward pool |
+| III | 45 | Option "Veteran start": at party select the player may replace one starter Strike of this hero with card A |
+
+New cards (10) ⚖:
+
+| Id | Hero | Name | Cost | Type | Rarity | From | Target | Effect | + |
+|---|---|---|---|---|---|---|---|---|---|
+| shb_rampart | Shieldbearer | Rampart | 1 | Skill | common | H1 | all heroes | 4 Block to each hero | 6 |
+| shb_riposte | Shieldbearer | Riposte | 1 | Attack | uncommon | H1 | E1 | Damage equal to half own Block + 4 | +7 |
+| mrk_ricochet | Marksman | Ricochet | 1 | Attack | common | H2–3 | random | 4 damage ×2, each to a random enemy | 6 ×2 |
+| mrk_deadeye | Marksman | Deadeye | 1 | Skill | uncommon | H2–3 | all | 1 Marked to every enemy | 2 Marked |
+| arc_cinder_ward | Arcanist | Cinder Ward | 1 | Skill | common | any | ally | 6 Block to an ally; 2 Burn to E1 | 9 / 3 |
+| arc_inferno | Arcanist | Inferno | 3 | Attack | rare | H2–3 | all | 6 damage ×3 to each enemy; Dread 3; Exhaust | 8 ×3 |
+| cnf_penance | Confessor | Penance | 1 | Attack | common | H1–3 | E1–2 | 6 damage; owner −1 stress | 9 |
+| cnf_last_rites | Confessor | Last Rites | 1 | Skill | uncommon | any | lowest-HP hero | Heal 10; Exhaust | 14 |
+| bmb_shrapnel | Bombardier | Shrapnel | 1 | Attack | common | H2–3 | all | 3 damage to each enemy | 5 |
+| bmb_flashbang | Bombardier | Flashbang | 1 | Attack | uncommon | H2–3 | all | 2 damage and 1 Weakened to each enemy | 3 / 2 |
+
+Card A / card B per hero, in table order: Shieldbearer rampart/riposte, Marksman ricochet/deadeye, Arcanist cinder_ward/inferno, Confessor penance/last_rites, Bombardier shrapnel/flashbang.

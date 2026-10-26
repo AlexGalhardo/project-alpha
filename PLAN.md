@@ -144,7 +144,7 @@ Total PixelLab ≈ 356 generations (≈ 11% of the 3,400 remaining the developer
 ## 5. Phase 3 — ALPHA
 
 - [x] A3.1 Act 2 content (10 enemies, 2 elites, boss) and act scaling §4.3 — done 2026-10-26 (art generated; run win 29.4% over 2 acts, `docs/reports/2026-10-26-sim-prototype.md`)
-- [ ] A3.2 Events and treasure nodes, 12 events EN/PT-BR — 6 of 12 events + treasure done (GDD §22.4, tests/unit/events.test.ts); 6 more events pending
+- [x] A3.2 Events and treasure nodes, 12 events EN/PT-BR + treasure — GDD §22.4 lists all 12; i18n EN and PT-BR for all 12 and treasure; tests/unit/events.test.ts, tests/unit/i18n.test.ts, tests/e2e/alpha.spec.ts (event, treasure)
 - [x] A3.3 Skill tree + Embers spending (§13.2) — skill tree v1 (GDD §22.5): Legacy screen, Veteran start, tests/unit/meta.test.ts + tests/e2e/legacy.spec.ts
 - [ ] A3.4 Animations (idle, attack, hit) per Art Bible
 - [ ] A3.5 Text scale + colorblind check — colorblind audit done (`docs/reports/2026-10-26-colorblind.md`), text scale pending

@@ -17,6 +17,7 @@
 		"references/**",
 		".claude/skills/**",
 		"PROMPT-CREATE.md",
+		"questions-to-dev.md",
 		"CLAUDE.md"
 	]
 }

@@ -19,6 +19,7 @@ export const en = {
 		credits: 'Credits',
 		tapToBegin: 'Tap to begin',
 		version: 'Version {version}',
+		legacy: 'Legacy',
 	},
 	pause: {
 		confirm: 'Confirm',
@@ -51,6 +52,7 @@ export const en = {
 		selected: '{count} of 3 chosen',
 		defaultHint: 'First run: Shieldbearer in rank 1, Confessor in rank 2, Marksman in rank 3.',
 		noFrontWarning: 'No one holds the front rank: enemies will strike your rank 1 hero first.',
+		veteran: 'Veteran start',
 	},
 	hud: {
 		chooseTarget: 'Tap a highlighted target.',
@@ -86,6 +88,8 @@ export const en = {
 		shop: 'Shop',
 		boss: 'Boss',
 		camp: 'Camp',
+		event: 'Event',
+		treasure: 'Treasure',
 	},
 	camp: {
 		rank: 'Rank {rank}',
@@ -295,6 +299,46 @@ export const en = {
 			name: 'Rift Stalker',
 			lore: 'It walks between the folds of the Rift and steps out behind you.',
 		},
+		vault_warden: {
+			name: 'Vault Warden',
+			lore: 'Still guarding a door that was opened long ago.',
+		},
+		bone_lancer: {
+			name: 'Bone Lancer',
+			lore: 'Its spear is a rib. It remembers whose.',
+		},
+		censer_wraith: {
+			name: 'Censer Wraith',
+			lore: 'Smoke from a censer that no one lit.',
+		},
+		flesh_organ: {
+			name: 'Flesh Organ',
+			lore: 'A pipe organ grown from the choir. It still plays.',
+		},
+		gutter_crawler: {
+			name: 'Gutter Crawler',
+			lore: 'Small, fast, hungry for what the rain washes down.',
+		},
+		relic_thief: {
+			name: 'Relic Thief',
+			lore: 'It takes the relics first and the hands second.',
+		},
+		mirror_saint: {
+			name: 'Mirror Saint',
+			lore: 'A saint of polished glass. It shows you your own face, too late.',
+		},
+		hollow_bishop: {
+			name: 'Hollow Bishop',
+			lore: 'It preaches from an empty mitre and expects you to listen.',
+		},
+		chain_golem: {
+			name: 'Chain Golem',
+			lore: "Forged from the chains of the Penitent's flock. It has no mouth to pray.",
+		},
+		rot_cherub: {
+			name: 'Rot Cherub',
+			lore: "A child's shape with wings of mould.",
+		},
 	},
 	elite: {
 		templar_captain: {
@@ -312,6 +356,11 @@ export const en = {
 			name: 'Bell-Maw',
 			epilogue:
 				'The bell stops. The Rift does not.\nThe party climbs back up the stairs, fewer than they were.\nBelow, something answers the silence.',
+		},
+		gilded_penitent: {
+			name: 'Gilded Penitent',
+			epilogue:
+				'The gold comes off in sheets. Under it, the same wood as before.\nThe party carries nothing out of the chapel.\nThe Rift keeps the rest.',
 		},
 	},
 	item: {
@@ -365,6 +414,68 @@ export const en = {
 		page: 'Page {page}/{pages}',
 		tapAgain: 'Tap again to choose.',
 	},
+	event: {
+		ev_weeping_font: {
+			title: 'The Weeping Font',
+			text: 'A stone font stands in the nave. Water runs down its face and never stops.\nThe water is cold and tastes of salt. Someone left empty vials beside it.\nThe party can drink, fill the vials, or walk on.',
+			choice1: 'Drink: each hero heals {heal}% max HP and gains {stress} stress.',
+			choice2: 'Fill the vials: gain {gold} gold.',
+			choice3: 'Leave.',
+		},
+		ev_ossuary_shrine: {
+			title: 'Ossuary Shrine',
+			text: 'Bones are stacked into a shrine, each one tagged with a name scratched off.\nA votive bell hangs above them, silent. A coin tray sits at its base.\nOne bone lies loose at the front. Nobody has claimed it.',
+			choice1: 'Offer {gold} gold: each hero loses {relief} stress.',
+			choice2:
+				'Take a bone: gain a random common relic; the first hero gains {stress} stress.',
+			choice3: 'Leave.',
+		},
+		ev_chained_penitent: {
+			title: 'The Chained Penitent',
+			text: 'A man kneels with his wrists chained to the floor. He does not look up.\nHe asks to be freed. He says he has already paid for it.\nThe chain is good iron. It could be taken.',
+			choice1: 'Free him: the first hero loses {cost} HP; choose 1 of 3 uncommon cards.',
+			choice2: 'Take his chain: upgrade one random card.',
+			choice3: 'Leave.',
+		},
+		ev_forgotten_armory: {
+			title: 'Forgotten Armory',
+			text: 'A door behind the altar opens onto racks of old equipment, rust on every blade.\nSomething moves in the dark between the racks.\nA good piece may still lie under the dust. So may something else.',
+			choice1: 'Search: gain one common equipment; the lowest-HP hero loses {cost} HP.',
+			choice2: 'Leave.',
+		},
+		ev_whispering_choir: {
+			title: 'Whispering Choir',
+			text: 'Voices hum in the walls of an empty chapel. They sing a hymn with no words.\nThe words are in your head, and they are yours.\nThe choir offers to take one memory from your deck.',
+			choice1: 'Listen: remove one card (you choose); each hero gains {stress} stress.',
+			choice2: 'Leave.',
+		},
+		ev_ember_pilgrim: {
+			title: 'Ember Pilgrim',
+			text: 'A pilgrim sits by a fire of coals that never burn down.\nHe has walked a long way and wants to rest.\nHe will trade his fire for gold, or share it for free.',
+			choice1: 'Trade: pay {gold} gold; upgrade two cards (you choose).',
+			choice2: 'Share the fire: each hero heals {heal} HP.',
+			choice3: 'Leave.',
+		},
+	},
+	treasure: {
+		title: 'Treasure',
+		text: 'A reliquary chest lies under the dust. The lock is broken.\nInside: {gold} gold and a piece of equipment.',
+		claim: 'Take the treasure',
+	},
+	legacy: {
+		title: 'Legacy',
+		embers: 'Embers: {count}',
+		node: {
+			unlockCard: 'Unlock {card}',
+			veteran: 'Veteran start: begin with {card}',
+		},
+		buy: 'Buy',
+		owned: 'Owned',
+		locked: 'Locked',
+	},
+	act: {
+		transition: 'The descent continues. Act {act}.',
+	},
 	intent: {
 		ambush: 'Ambushes a hero from the back.',
 		ash_strike: 'Strikes the front hero with burning ash.',
@@ -392,6 +503,30 @@ export const en = {
 		shriek: 'Shrieks: every hero is stressed and weakened.',
 		swallow: 'Swallows the most stressed hero.',
 		toll: 'The bell tolls: every hero gains stress.',
+		shield_bash: 'Bashes the front hero with a shield.',
+		brace: 'Braces behind its shield and gains Block.',
+		pierce: 'Pierces the first two heroes.',
+		withdraw: 'Withdraws to the back ranks.',
+		choke: 'Chokes the weakest hero.',
+		smoke: 'Fills the room with smoke: every hero is weakened.',
+		hymn: 'Hymns: every enemy gains Might.',
+		drone: 'Drones on: every hero gains stress.',
+		gnaw: 'Gnaws at the front hero, twice.',
+		cut: 'Cuts a hero from behind and leaves a Bleed.',
+		vanish: 'Slips into the dark and gains Block.',
+		reflect: 'Reflects blows and gains Block.',
+		glare: 'Glares at the back heroes and marks one.',
+		smite: 'Smites the marked hero.',
+		sermon: 'Preaches at the most stressed hero.',
+		rebuke: 'Rebukes the front hero.',
+		wind_up: 'Winds up. Something heavy is coming.',
+		chain_sweep: 'Sweeps chains across the first two heroes.',
+		spit: 'Spits rot at the weakest hero and leaves a Bleed.',
+		hover: 'Hovers, gaining Block.',
+		lash: 'Lashes the front hero.',
+		confession: 'Forces a confession: every hero gains stress.',
+		gild: 'Gilds itself: gains Block and Might.',
+		scourge: 'Scourges every hero.',
 	},
 	card: {
 		shb_hack: {
@@ -573,6 +708,46 @@ export const en = {
 		bmb_siege_mortar: {
 			name: 'Siege Mortar',
 			text: 'Deal {damage} damage to each enemy. Dread 2. Exhaust.',
+		},
+		shb_rampart: {
+			name: 'Rampart',
+			text: 'Give each hero {block} Block.',
+		},
+		shb_riposte: {
+			name: 'Riposte',
+			text: 'Deal damage equal to half your Block, plus {damage}.',
+		},
+		mrk_ricochet: {
+			name: 'Ricochet',
+			text: 'Deal {damage} damage twice to random enemies.',
+		},
+		mrk_deadeye: {
+			name: 'Deadeye',
+			text: 'Mark every enemy {stacks} times.',
+		},
+		arc_cinder_ward: {
+			name: 'Cinder Ward',
+			text: 'Give an ally {block} Block. Apply {stacks} Burn to the first enemy.',
+		},
+		arc_inferno: {
+			name: 'Inferno',
+			text: 'Deal {damage} damage three times to each enemy. Exhaust.',
+		},
+		cnf_penance: {
+			name: 'Penance',
+			text: 'Deal {damage} damage. Its owner loses {stress} stress.',
+		},
+		cnf_last_rites: {
+			name: 'Last Rites',
+			text: 'Heal the lowest-HP hero for {heal}. Exhaust.',
+		},
+		bmb_shrapnel: {
+			name: 'Shrapnel',
+			text: 'Deal {damage} damage to each enemy.',
+		},
+		bmb_flashbang: {
+			name: 'Flashbang',
+			text: 'Deal {damage} damage and apply {stacks} Weakened to each enemy.',
 		},
 	},
 } as const;

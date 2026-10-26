@@ -17,6 +17,7 @@ export const ptBR: Strings = {
 		credits: 'Créditos',
 		tapToBegin: 'Toque para começar',
 		version: 'Versão {version}',
+		legacy: 'Legado',
 	},
 	pause: {
 		confirm: 'Confirmar',
@@ -50,6 +51,7 @@ export const ptBR: Strings = {
 		defaultHint: 'Primeira run: Escudeiro na posição 1, Confessor na 2, Atirador na 3.',
 		noFrontWarning:
 			'Ninguém segura a linha de frente: os inimigos golpeiam primeiro o herói na posição 1.',
+		veteran: 'Início veterano',
 	},
 	hud: {
 		chooseTarget: 'Toque em um alvo destacado.',
@@ -85,6 +87,8 @@ export const ptBR: Strings = {
 		shop: 'Loja',
 		boss: 'Chefe',
 		camp: 'Acampamento',
+		event: 'Evento',
+		treasure: 'Tesouro',
 	},
 	camp: {
 		rank: 'Posição {rank}',
@@ -294,6 +298,46 @@ export const ptBR: Strings = {
 			name: 'Espreitador da Fenda',
 			lore: 'Anda entre as dobras da Fenda e surge atrás de você.',
 		},
+		vault_warden: {
+			name: 'Guardião da Câmara',
+			lore: 'Ainda guarda uma porta aberta há muito tempo.',
+		},
+		bone_lancer: {
+			name: 'Lanceiro de Osso',
+			lore: 'A lança é uma costela. Lembra de quem era.',
+		},
+		censer_wraith: {
+			name: 'Espectro do Turíbulo',
+			lore: 'Fumaça de um turíbulo que ninguém acendeu.',
+		},
+		flesh_organ: {
+			name: 'Órgão de Carne',
+			lore: 'Um órgão de tubos cultivado do coro. Ainda toca.',
+		},
+		gutter_crawler: {
+			name: 'Rastejante da Sarjeta',
+			lore: 'Pequeno, rápido, faminto pelo que a chuva arrasta.',
+		},
+		relic_thief: {
+			name: 'Ladrão de Relíquias',
+			lore: 'Leva as relíquias primeiro e as mãos depois.',
+		},
+		mirror_saint: {
+			name: 'Santo do Espelho',
+			lore: 'Um santo de vidro polido. Mostra o seu próprio rosto, tarde demais.',
+		},
+		hollow_bishop: {
+			name: 'Bispo Oco',
+			lore: 'Prega de uma mitra vazia e espera que você escute.',
+		},
+		chain_golem: {
+			name: 'Golem de Correntes',
+			lore: 'Forjado das correntes do rebanho do Penitente. Não tem boca para rezar.',
+		},
+		rot_cherub: {
+			name: 'Querubim Podre',
+			lore: 'Forma de criança com asas de mofo.',
+		},
 	},
 	elite: {
 		templar_captain: {
@@ -311,6 +355,11 @@ export const ptBR: Strings = {
 			name: 'Boca-do-Sino',
 			epilogue:
 				'O sino para. A Fenda não.\nO grupo sobe de volta a escada, menor do que era.\nLá embaixo, algo responde ao silêncio.',
+		},
+		gilded_penitent: {
+			name: 'Penitente Dourado',
+			epilogue:
+				'O ouro se solta em lâminas. Por baixo, a mesma madeira de antes.\nO grupo não leva nada da capela.\nA Fenda guarda o resto.',
 		},
 	},
 	item: {
@@ -364,6 +413,71 @@ export const ptBR: Strings = {
 		page: 'Página {page}/{pages}',
 		tapAgain: 'Toque de novo para escolher.',
 	},
+	event: {
+		ev_weeping_font: {
+			title: 'A Fonte que Chora',
+			text: 'Uma pia de pedra fica na nave. A água escorre pelo rosto dela sem parar.\nA água é fria e tem gosto de sal. Alguém deixou frascos vazios ao lado.\nO grupo pode beber, encher os frascos ou seguir em frente.',
+			choice1: 'Beber: cada herói cura {heal}% do HP máximo e ganha {stress} de estresse.',
+			choice2: 'Encher os frascos: ganhe {gold} de ouro.',
+			choice3: 'Sair.',
+		},
+		ev_ossuary_shrine: {
+			title: 'Santuário do Ossário',
+			text: 'Ossos empilhados formam um santuário, cada um com um nome riscado.\nUm sino votivo pende acima, em silêncio. Há uma bandeja de moedas na base.\nUm osso solto fica na frente. Ninguém o reivindicou.',
+			choice1: 'Oferecer {gold} de ouro: cada herói perde {relief} de estresse.',
+			choice2:
+				'Pegar um osso: ganhe uma relíquia comum aleatória; o primeiro herói ganha {stress} de estresse.',
+			choice3: 'Sair.',
+		},
+		ev_chained_penitent: {
+			title: 'O Penitente Acorrentado',
+			text: 'Um homem ajoelha com os pulsos presos ao chão. Ele não levanta a cabeça.\nPede para ser libertado. Diz que já pagou por isso.\nA corrente é de ferro bom. Poderia ser levada.',
+			choice1:
+				'Libertá-lo: o primeiro herói perde {cost} de HP; escolha 1 de 3 cartas incomuns.',
+			choice2: 'Pegar a corrente dele: aprimore uma carta aleatória.',
+			choice3: 'Sair.',
+		},
+		ev_forgotten_armory: {
+			title: 'Armaria Esquecida',
+			text: 'Uma porta atrás do altar abre para prateleiras de equipamento antigo, com ferrugem em cada lâmina.\nAlgo se move na escuridão entre as prateleiras.\nUma boa peça pode ainda estar sob a poeira. Algo mais também pode.',
+			choice1:
+				'Vasculhar: ganhe um equipamento comum; o herói com menos HP perde {cost} de HP.',
+			choice2: 'Sair.',
+		},
+		ev_whispering_choir: {
+			title: 'Coro Sussurrante',
+			text: 'Vozes zumbem nas paredes de uma capela vazia. Cantam um hino sem palavras.\nAs palavras estão na sua cabeça, e são suas.\nO coro oferece levar uma lembrança do seu baralho.',
+			choice1:
+				'Ouvir: remova uma carta (você escolhe); cada herói ganha {stress} de estresse.',
+			choice2: 'Sair.',
+		},
+		ev_ember_pilgrim: {
+			title: 'Peregrino da Brasa',
+			text: 'Um peregrino senta junto a um fogo de brasas que nunca se apagam.\nCaminhou muito e quer descansar.\nTroca o fogo por ouro ou divide-o de graça.',
+			choice1: 'Trocar: pague {gold} de ouro; aprimore duas cartas (você escolhe).',
+			choice2: 'Dividir o fogo: cada herói cura {heal} de HP.',
+			choice3: 'Sair.',
+		},
+	},
+	treasure: {
+		title: 'Tesouro',
+		text: 'Um baú relicário repousa sob a poeira. A fechadura está quebrada.\nDentro: {gold} de ouro e uma peça de equipamento.',
+		claim: 'Pegar o tesouro',
+	},
+	legacy: {
+		title: 'Legado',
+		embers: 'Brasas: {count}',
+		node: {
+			unlockCard: 'Desbloquear {card}',
+			veteran: 'Início veterano: começa com {card}',
+		},
+		buy: 'Comprar',
+		owned: 'Adquirido',
+		locked: 'Bloqueado',
+	},
+	act: {
+		transition: 'A descida continua. Ato {act}.',
+	},
 	intent: {
 		ambush: 'Ataca uma emboscada contra um herói da retaguarda.',
 		ash_strike: 'Golpeia o herói da frente com cinza ardente.',
@@ -391,6 +505,30 @@ export const ptBR: Strings = {
 		shriek: 'Grita: todos os heróis ficam estressados e enfraquecidos.',
 		swallow: 'Engole o herói mais estressado.',
 		toll: 'O sino toca: todos os heróis ganham estresse.',
+		shield_bash: 'Golpeia o herói da frente com o escudo.',
+		brace: 'Firma-se atrás do escudo e ganha Bloqueio.',
+		pierce: 'Perfura os dois primeiros heróis.',
+		withdraw: 'Recua para as fileiras de trás.',
+		choke: 'Sufoca o herói mais fraco.',
+		smoke: 'Enche a sala de fumaça: todos os heróis ficam enfraquecidos.',
+		hymn: 'Entoa um hino: todos os inimigos ganham Força.',
+		drone: 'Zumbe sem parar: todos os heróis ganham estresse.',
+		gnaw: 'Rói o herói da frente, duas vezes.',
+		cut: 'Corta um herói por trás e deixa Sangramento.',
+		vanish: 'Escorrega para a escuridão e ganha Bloqueio.',
+		reflect: 'Reflete golpes e ganha Bloqueio.',
+		glare: 'Encara os heróis de trás e marca um.',
+		smite: 'Golpeia o herói marcado.',
+		sermon: 'Prega para o herói mais estressado.',
+		rebuke: 'Repreende o herói da frente.',
+		wind_up: 'Prepara o golpe. Algo pesado vem aí.',
+		chain_sweep: 'Varre correntes sobre os dois primeiros heróis.',
+		spit: 'Cospe podridão no herói mais fraco e deixa Sangramento.',
+		hover: 'Paira e ganha Bloqueio.',
+		lash: 'Açoita o herói da frente.',
+		confession: 'Força uma confissão: todos os heróis ganham estresse.',
+		gild: 'Dourada-se: ganha Bloqueio e Força.',
+		scourge: 'Açoita todos os heróis.',
 	},
 	card: {
 		shb_hack: {
@@ -572,6 +710,46 @@ export const ptBR: Strings = {
 		bmb_siege_mortar: {
 			name: 'Morteiro de Cerco',
 			text: 'Causa {damage} de dano em cada inimigo. Temor 2. Exaustão.',
+		},
+		shb_rampart: {
+			name: 'Muralha',
+			text: 'Dê {block} de Bloqueio a cada herói.',
+		},
+		shb_riposte: {
+			name: 'Revide',
+			text: 'Cause dano igual à metade do seu Bloqueio, mais {damage}.',
+		},
+		mrk_ricochet: {
+			name: 'Ricochete',
+			text: 'Cause {damage} de dano duas vezes a inimigos aleatórios.',
+		},
+		mrk_deadeye: {
+			name: 'Olho Certeiro',
+			text: 'Marque cada inimigo {stacks} vezes.',
+		},
+		arc_cinder_ward: {
+			name: 'Guarda de Brasa',
+			text: 'Dê {block} de Bloqueio a um aliado. Aplique {stacks} Queimadura ao primeiro inimigo.',
+		},
+		arc_inferno: {
+			name: 'Inferno',
+			text: 'Cause {damage} de dano três vezes a cada inimigo. Esgota.',
+		},
+		cnf_penance: {
+			name: 'Penitência',
+			text: 'Cause {damage} de dano. O dono perde {stress} de estresse.',
+		},
+		cnf_last_rites: {
+			name: 'Últimos Ritos',
+			text: 'Cura o herói com menos HP em {heal}. Esgota.',
+		},
+		bmb_shrapnel: {
+			name: 'Estilhaços',
+			text: 'Cause {damage} de dano a cada inimigo.',
+		},
+		bmb_flashbang: {
+			name: 'Granada de Luz',
+			text: 'Cause {damage} de dano e aplique {stacks} Enfraquecido a cada inimigo.',
 		},
 	},
 };

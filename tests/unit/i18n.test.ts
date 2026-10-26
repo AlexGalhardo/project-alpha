@@ -54,7 +54,8 @@ describe('i18n dictionaries (ADR 0009)', () => {
 	test('every card has a name and a rules text', () => {
 		const cardKeys = [...enLeaves.keys()].filter((key) => key.startsWith('card.'));
 		const cardIds = new Set(cardKeys.map((key) => key.split('.')[1] ?? ''));
-		expect(cardIds.size).toBe(45);
+		// 45 prototype cards (GDD 9) + 10 Alpha cards (GDD 22.5).
+		expect(cardIds.size).toBe(55);
 		for (const id of cardIds) {
 			expect(enLeaves.has(`card.${id}.name`)).toBe(true);
 			expect(enLeaves.has(`card.${id}.text`)).toBe(true);

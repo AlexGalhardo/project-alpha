@@ -82,6 +82,14 @@ export function drawCard(
 		g.fillTriangle(cx, 16, cx + 9, 27, cx - 9, 27).fillTriangle(cx - 9, 27, cx + 9, 27, cx, 38);
 	g.fillStyle(P.ember3).fillCircle(8, 8, 8);
 	c.add(g);
+	// Generated 60×40 card art, cropped to the 56×26 window of the hand card (centre band).
+	const artKey = `card.${cardId}`;
+	if (scene.textures.exists(artKey)) {
+		c.add(scene.add.image(2, 7, artKey).setOrigin(0).setCrop(2, 7, 56, 26));
+		const gem = scene.add.graphics();
+		gem.fillStyle(P.ember3).fillCircle(8, 8, 8);
+		c.add(gem);
+	}
 	c.add(
 		label(scene, 8, 8, `${opts.cost ?? costOf(cardId, upgraded)}`, 'ui', 'ash0').setOrigin(0.5),
 	);

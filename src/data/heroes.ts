@@ -1,0 +1,98 @@
+import type { HeroClass, HeroDef } from '../core/types.ts';
+
+export const HERO_CLASSES: HeroClass[] = [
+	'shieldbearer',
+	'marksman',
+	'arcanist',
+	'confessor',
+	'bombardier',
+];
+
+/** GDD 8.1 and 9.2. The first starter id is the x2 card. */
+export const HEROES: Record<HeroClass, HeroDef> = {
+	shieldbearer: {
+		key: 'shieldbearer',
+		maxHP: 60,
+		frontOrder: 1,
+		starters: ['shb_hack', 'shb_hack', 'shb_brace', 'shb_hold_the_line'],
+		pool: [
+			'shb_hack',
+			'shb_brace',
+			'shb_hold_the_line',
+			'shb_shield_slam',
+			'shb_iron_stance',
+			'shb_shove',
+			'shb_bulwark',
+			'shb_vow_of_iron',
+			'shb_last_bastion',
+		],
+	},
+	marksman: {
+		key: 'marksman',
+		maxHP: 42,
+		frontOrder: 3,
+		starters: ['mrk_aimed_shot', 'mrk_aimed_shot', 'mrk_sidestep', 'mrk_mark_prey'],
+		pool: [
+			'mrk_aimed_shot',
+			'mrk_sidestep',
+			'mrk_mark_prey',
+			'mrk_piercing_bolt',
+			'mrk_quick_draw',
+			'mrk_pinning_shot',
+			'mrk_volley',
+			'mrk_hunters_focus',
+			'mrk_killshot',
+		],
+	},
+	arcanist: {
+		key: 'arcanist',
+		maxHP: 38,
+		frontOrder: 3.5,
+		starters: ['arc_ember_bolt', 'arc_ember_bolt', 'arc_ash_veil', 'arc_rift_spark'],
+		pool: [
+			'arc_ember_bolt',
+			'arc_ash_veil',
+			'arc_rift_spark',
+			'arc_burn_hex',
+			'arc_channel',
+			'arc_cinder_lance',
+			'arc_firestorm',
+			'arc_unseal',
+			'arc_rift_rupture',
+		],
+	},
+	confessor: {
+		key: 'confessor',
+		maxHP: 44,
+		frontOrder: 2,
+		starters: ['cnf_censer_strike', 'cnf_censer_strike', 'cnf_sanctuary', 'cnf_mend'],
+		pool: [
+			'cnf_censer_strike',
+			'cnf_sanctuary',
+			'cnf_mend',
+			'cnf_absolve',
+			'cnf_litany',
+			'cnf_rebuke',
+			'cnf_mass_mend',
+			'cnf_steadfast_hymn',
+			'cnf_rekindle',
+		],
+	},
+	bombardier: {
+		key: 'bombardier',
+		maxHP: 48,
+		frontOrder: 4,
+		starters: ['bmb_grapeshot', 'bmb_grapeshot', 'bmb_sandbags', 'bmb_shell'],
+		pool: [
+			'bmb_grapeshot',
+			'bmb_sandbags',
+			'bmb_shell',
+			'bmb_incendiary',
+			'bmb_reload',
+			'bmb_concussion_round',
+			'bmb_barrage',
+			'bmb_powder_keg',
+			'bmb_siege_mortar',
+		],
+	},
+};

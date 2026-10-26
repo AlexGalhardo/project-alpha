@@ -91,8 +91,8 @@ Goal: a new player finishes or fails Act 1 in 20–30 min and wants another run 
 
 ### P2.2 Run layer
 
-- [ ] Map generation §4.2 — assert: invariants test (reachability, no crossing, elites rows 4/7, rest/shop row 9, boss row 10) on 500 seeds
-- [ ] Encounter selection §4.3 — assert: all 10 enemy types seen by row 8 on ≥ 6-combat paths
+- [x] Map generation §4.2 — assert: invariants test (reachability, no crossing, elites rows 4/7, rest/shop row 9, boss row 10) on 500 seeds
+- [ ] Encounter selection §4.3 — assert: all 10 enemy types seen by row 8 on ≥ 6-combat paths — measured 72.6% with strict tiers; decision 2026-10-26: keep tiers (GDD §4.3)
 - [x] Rewards (rarity odds + pity), camp, shop, rest, equipment, embers — assert: unit tests §4.4–§4.6, §11–§13
 - [x] Save/load with schema version + migration — assert: round-trip test + corrupt-save test
 - [x] `bun run sim` CLI — assert: prints GDD §20 metrics for 1000 seeds
@@ -100,12 +100,12 @@ Goal: a new player finishes or fails Act 1 in 20–30 min and wants another run 
 ### P2.3 Presentation (Phaser scenes, placeholders)
 
 - [x] Boot/Preload with procedural placeholder textures (same keys and sizes as final art) — assert: smoke loads with 0 console errors
-- [ ] Title ("tap to begin" unlocks audio) + Main menu + Settings + Pause — assert: e2e navigates every button
+- [x] Title ("tap to begin" unlocks audio) + Main menu + Settings + Pause — assert: e2e navigates every button
 - [x] Party select (3 of 5, ranks) — assert: e2e
-- [ ] Map scene — assert: e2e selects a node
-- [ ] Combat scene: units row, intents, HUD, hand, detail panel, preview, targeting, End turn — assert: e2e plays a full combat
-- [ ] Auto battle toggle + speed 1x/2x/3x in HUD and Settings — assert: e2e same seed same result at 1x/3x
-- [ ] Reward, camp, shop, rest, run summary — assert: e2e full Act 1 with auto battle at 3x
+- [x] Map scene — assert: e2e selects a node
+- [x] Combat scene: units row, intents, HUD, hand, detail panel, preview, targeting, End turn — assert: e2e plays a full combat
+- [x] Auto battle toggle + speed 1x/2x/3x in HUD and Settings — assert: e2e same seed same result at 1x/3x
+- [x] Reward, camp, shop, rest, run summary — assert: e2e full Act 1 with auto battle at 3x
 - [x] i18n EN/PT-BR wired (`src/i18n`) — assert: test every key exists in both locales; language switch e2e
 - [ ] Code-driven feedback (flash, shake, lunge, number pop) scaled by speed — assert: visual check + reduce-shake setting test
 
@@ -129,15 +129,15 @@ Assets for rounds 1–10 only: 5 heroes, 10 enemies, 1 boss (static, no animatio
 
 Total PixelLab ≈ 356 generations (≈ 11% of the 3,400 remaining the developer reported; the MCP showed the subscription as expired on 2026-10-25 — confirm). ElevenLabs fits the developer's current credits. Estimated cash cost if paying from zero: PixelLab entry plan ≈ US$ 10–12/month (not verified) + ElevenLabs Starter ≈ US$ 5–6/month ⇒ **≈ US$ 20 for the prototype** (estimate, `docs/web-research.md` §13).
 
-- [ ] Present the asset list + estimate and get approval (cost gate) — assert: approval noted in `docs/brainstorming.md`
-- [ ] Generate, clean at 1×, log prompts in `art-src/` — assert: every key in Art Bible list present, ≤ color budget
-- [ ] Audio generated, loudness-normalized, ogg + mp3 — assert: loops seamless (listen) + game works muted
+- [x] Present the asset list + estimate and get approval (cost gate) — assert: approval noted in `docs/brainstorming.md` — approved by the developer 2026-10-26 ~19:16 (`docs/asset-request.md`)
+- [ ] Generate, clean at 1×, log prompts in `art-src/` — assert: every key in Art Bible list present, ≤ color budget — done for units, boss, 4 backgrounds, 45 cards (88 generations); icons are 32×32 masters awaiting the hand pass
+- [x] Audio generated, loudness-normalized, ogg + mp3 — assert: loops seamless (listen) + game works muted
 
 ### P2.5 Prototype gate (end of phase)
 
-- [ ] Simulation matrix report `docs/reports/<date>-sim-prototype.md` — assert: GDD §20 targets 2–6
-- [ ] Smoke + e2e green, human QA script run — assert: report in `docs/reports/`
-- [ ] Deploy to alpha.lekzera.xyz (after Vercel secrets) — assert: URL loads on phone + desktop
+- [x] Simulation matrix report `docs/reports/<date>-sim-prototype.md` — assert: GDD §20 targets 2–6
+- [ ] Smoke + e2e green, human QA script run — assert: report in `docs/reports/` — automated part done (`docs/reports/2026-10-26-qa-prototype.md`, 43 of 203 items automated); human run pending
+- [ ] Deploy to alpha.lekzera.xyz (after Vercel secrets) — assert: URL loads on phone + desktop — BLOCKED: Vercel project and secrets (developer)
 - [ ] Go/no-go decision by the developer
 
 ## 5. Phase 3 — ALPHA

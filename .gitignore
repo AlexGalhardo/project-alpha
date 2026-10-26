@@ -42,3 +42,6 @@ Thumbs.db
 
 # Third-party reference material (local only)
 references/
+
+# Local notes for the developer
+questions-to-dev.md

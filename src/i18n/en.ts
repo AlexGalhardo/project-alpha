@@ -354,11 +354,13 @@ export const en = {
 		phase2: 'THE BELL CRACKS',
 		bell_maw: {
 			name: 'Bell-Maw',
+			phase2: 'THE BELL CRACKS',
 			epilogue:
 				'The bell stops. The Rift does not.\nThe party climbs back up the stairs, fewer than they were.\nBelow, something answers the silence.',
 		},
 		gilded_penitent: {
 			name: 'Gilded Penitent',
+			phase2: 'THE GILT SPLITS',
 			epilogue:
 				'The gold comes off in sheets. Under it, the same wood as before.\nThe party carries nothing out of the chapel.\nThe Rift keeps the rest.',
 		},

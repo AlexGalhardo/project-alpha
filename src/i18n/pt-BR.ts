@@ -353,11 +353,13 @@ export const ptBR: Strings = {
 		phase2: 'O SINO RACHA',
 		bell_maw: {
 			name: 'Boca-do-Sino',
+			phase2: 'O SINO RACHA',
 			epilogue:
 				'O sino para. A Fenda não.\nO grupo sobe de volta a escada, menor do que era.\nLá embaixo, algo responde ao silêncio.',
 		},
 		gilded_penitent: {
 			name: 'Penitente Dourado',
+			phase2: 'O OURO SE PARTE',
 			epilogue:
 				'O ouro se solta em lâminas. Por baixo, a mesma madeira de antes.\nO grupo não leva nada da capela.\nA Fenda guarda o resto.',
 		},

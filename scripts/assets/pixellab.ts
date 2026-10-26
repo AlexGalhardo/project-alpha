@@ -33,7 +33,7 @@ const LOG_PATH = join(ROOT, 'art-src', 'pixellab', 'generation-log.json');
 const API = 'https://api.pixellab.ai/v2';
 
 // ---------- PNG (decode and encode, no dependencies) ----------
-interface Img {
+export interface Img {
 	w: number;
 	h: number;
 	/** RGBA, 4 bytes per pixel. */
@@ -163,7 +163,7 @@ export function encodePng(img: Img): Uint8Array {
 }
 
 // ---------- post-processing (palette snap, transparency, exact canvas) ----------
-const PALETTE: [number, number, number][] = Object.values(P).map((c) => [
+export const PALETTE: [number, number, number][] = Object.values(P).map((c) => [
 	(c >> 16) & 255,
 	(c >> 8) & 255,
 	c & 255,
@@ -216,7 +216,7 @@ function floodBackground(img: Img): void {
 	for (let p = 0; p < w * h; p++) if (seen[p]) d[p * 4 + 3] = 0;
 }
 
-function snap(img: Img, wantTransparent: boolean): Img {
+export function snap(img: Img, wantTransparent: boolean): Img {
 	if (wantTransparent) {
 		let opaque = true;
 		for (let i = 3; i < img.d.length; i += 4) if ((img.d[i] as number) < 250) opaque = false;
@@ -238,7 +238,7 @@ function snap(img: Img, wantTransparent: boolean): Img {
 }
 
 /** Crop or pad to the exact canvas: centred horizontally, bottom aligned (units) or centred (others). */
-function fitCanvas(img: Img, w: number, h: number, bottomAligned: boolean): Img {
+export function fitCanvas(img: Img, w: number, h: number, bottomAligned: boolean): Img {
 	if (img.w === w && img.h === h) return img;
 	const out = new Uint8Array(w * h * 4);
 	const ox = Math.floor((w - img.w) / 2);
@@ -293,10 +293,10 @@ interface Job {
 	note?: string;
 }
 
-const CHAR_COMMON =
+export const CHAR_COMMON =
 	'Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.';
 
-const heroes: [string, string][] = [
+export const heroes: [string, string][] = [
 	[
 		'shieldbearer',
 		'A heavy black riveted plate knight with a tall rectangular shield with a red cross-shaped boss, a jagged sword in the other hand, a short tattered crimson cape.',
@@ -319,7 +319,7 @@ const heroes: [string, string][] = [
 	],
 ];
 
-const enemies: [string, [number, number], string][] = [
+export const enemies: [string, [number, number], string][] = [
 	[
 		'husk_penitent',
 		[64, 80],
@@ -372,7 +372,7 @@ const enemies: [string, [number, number], string][] = [
 	],
 ];
 
-const enemiesAct2: [string, [number, number], string][] = [
+export const enemiesAct2: [string, [number, number], string][] = [
 	[
 		'vault_warden',
 		[64, 80],
@@ -425,7 +425,7 @@ const enemiesAct2: [string, [number, number], string][] = [
 	],
 ];
 
-const backgroundsAct2: [string, string][] = [
+export const backgroundsAct2: [string, string][] = [
 	[
 		'bg.combat.act2',
 		'A flooded crypt vault beneath a cathedral, rows of gilded sarcophagi, dripping stone arches, a sickly green glow on dark water, ash and rot.',
@@ -436,7 +436,7 @@ const backgroundsAct2: [string, string][] = [
 	],
 ];
 
-const cardsAct2: [string, string][] = [
+export const cardsAct2: [string, string][] = [
 	['shb_rampart', 'A low wall of tower shields lined up across a corridor'],
 	['shb_riposte', 'A shield catching a blade with sparks, a counter-thrust below'],
 	['mrk_ricochet', 'A bolt bouncing off two stone walls with sparks'],
@@ -454,7 +454,7 @@ const cardsAct2: [string, string][] = [
 
 const BG_COMMON =
 	'Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.';
-const backgrounds: [string, string][] = [
+export const backgrounds: [string, string][] = [
 	[
 		'bg.title',
 		'A ruined gothic citadel on a cliff under a dark red moon, chains hanging from broken towers, a small stone overlook in the foreground.',
@@ -475,7 +475,7 @@ const backgrounds: [string, string][] = [
 
 const CARD_COMMON =
 	'Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.';
-const cards: [string, string][] = [
+export const cards: [string, string][] = [
 	['shb_hack', 'Heavy sword cut across a plated shoulder'],
 	['shb_brace', 'Shield raised, feet braced on stone'],
 	['shb_hold_the_line', 'Shield wall at a broken gate'],
@@ -786,7 +786,7 @@ function buildJobs(): Job[] {
 }
 
 // ---------- API access through curl ----------
-function apiKey(): string {
+export function apiKey(): string {
 	const key = process.env.PIXELLAB_KEY_OVERRIDE || process.env.PIXELLAB_API_KEY;
 	if (!key) {
 		console.error(
@@ -804,7 +804,7 @@ interface HttpResult {
 
 // curl is used instead of fetch because Bun's TLS store rejects the local certificate chain.
 // The key travels only through curl's stdin config; it is never written to a file or logged.
-async function http(
+export async function http(
 	method: 'GET' | 'POST',
 	path: string,
 	body: unknown,
@@ -854,7 +854,7 @@ async function http(
 	}
 }
 
-function paletteImage(): { type: 'base64'; base64: string; format: 'png' } {
+export function paletteImage(): { type: 'base64'; base64: string; format: 'png' } {
 	const w = PALETTE.length;
 	const d = new Uint8Array(w * 4);
 	for (const [i, c] of PALETTE.entries()) d.set([c[0], c[1], c[2], 255], i * 4);
@@ -866,7 +866,7 @@ function paletteImage(): { type: 'base64'; base64: string; format: 'png' } {
 }
 
 // ---------- log ----------
-interface LogEntry {
+export interface LogEntry {
 	key: string;
 	endpoint: string;
 	prompt: string;
@@ -881,7 +881,7 @@ interface LogEntry {
 }
 
 /** Read-modify-write of the log under a lock file, so parallel runs do not lose entries. */
-function appendLog(entry: LogEntry): void {
+export function appendLog(entry: LogEntry): void {
 	mkdirSync(join(ROOT, 'art-src', 'pixellab'), { recursive: true });
 	const lock = `${LOG_PATH}.lock`;
 	for (let i = 0; ; i++) {

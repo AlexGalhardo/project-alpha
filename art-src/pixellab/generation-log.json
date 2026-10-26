@@ -3548,5 +3548,275 @@
       "generations": 1
     },
     "note": "32x32 master, reduced to 16x16 by icons16.ts"
+  },
+  {
+    "key": "hero.shieldbearer.idle",
+    "endpoint": "/animate-pixminimax",
+    "prompt": "idle, standing in place, subtle breathing and a slight sway, looping, the feet stay planted",
+    "params": {
+      "description": "idle, standing in place, subtle breathing and a slight sway, looping, the feet stay planted",
+      "frame_count": 4,
+      "no_background": true,
+      "view": "side",
+      "subject_description": "a heavy armoured knight with a tall shield and a sword",
+      "initial_pose": "standing ready with the shield at the side",
+      "direction": "east"
+    },
+    "date": "2026-10-26T23:26:11.959Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "jobId": "149b3fa5-9336-4499-a496-56732afdbacc"
+  },
+  {
+    "key": "hero.shieldbearer.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A heavy knight in black riveted plate armour with gold trim, a horned helm with a red plume and a red scarf, a tall kite shield with a red cross, a broad jagged sword held low, a short tattered crimson cape. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A heavy knight in black riveted plate armour with gold trim, a horned helm with a red plume and a red scarf, a tall kite shield with a red cross, a broad jagged sword held low, a short tattered crimson cape. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-heroes.png",
+      "subject_ref": "hero-shieldbearer.png",
+      "palette": "master 33"
+    },
+    "date": "2026-10-26T23:40:17.769Z",
+    "httpStatus": 200,
+    "jobId": "e2be97db-ab6b-4182-af5f-c0d8f7f4affb",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.husk_penitent.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the left of the image (facing left). A gaunt man in a torn penitent shift, wrapped in cords, a flail of knotted chain in one hand. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the left of the image (facing left). A gaunt man in a torn penitent shift, wrapped in cords, a flail of knotted chain in one hand. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-26T23:41:54.764Z",
+    "httpStatus": 200,
+    "jobId": "efaddda8-88e1-4a87-a51b-894837b38070",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.shb_hack",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Heavy sword cut across a plated shoulder. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Heavy sword cut across a plated shoulder. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-26T23:42:40.392Z",
+    "httpStatus": 200,
+    "jobId": "b22ddb8f-73c8-491e-8e56-a57a3f3c471d",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.shb_hack",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Heavy sword cut across a plated shoulder. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Heavy sword cut across a plated shoulder. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-26T23:47:18.196Z",
+    "httpStatus": 200,
+    "jobId": "e223f5da-fc32-4c8f-a404-0aa2629554ee",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "hero.marksman.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A slim hooded archer in charcoal leather and scale, a narrow bone mask under the hood, a tall recurve bow held in the front hand, a quiver of arrows over the shoulder, a torn dark red sash. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A slim hooded archer in charcoal leather and scale, a narrow bone mask under the hood, a tall recurve bow held in the front hand, a quiver of arrows over the shoulder, a torn dark red sash. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-heroes.png",
+      "subject_ref": "hero-marksman.png",
+      "palette": "master 33"
+    },
+    "date": "2026-10-26T23:48:19.587Z",
+    "httpStatus": 200,
+    "jobId": "20648307-5aef-4019-9c7b-2be6057e85b5",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "hero.arcanist.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A tall figure in layered dark violet robes with a deep hood, a faceless metal mask, a long staff topped by a spiked glowing violet orb held upright, small floating shards at the hem. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A tall figure in layered dark violet robes with a deep hood, a faceless metal mask, a long staff topped by a spiked glowing violet orb held upright, small floating shards at the hem. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-heroes.png",
+      "subject_ref": "hero-arcanist.png",
+      "palette": "master 33"
+    },
+    "date": "2026-10-26T23:49:30.895Z",
+    "httpStatus": 200,
+    "jobId": "26ead888-f6e4-49e6-9dbf-7e6b5f177e35",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "hero.confessor.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A priest in long ash-white robes with a tall hood and a thin golden halo ring, a plague-like beaked mask, a tall brass lantern-staff with pale green light held upright, a leather satchel and a book on the hip. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A priest in long ash-white robes with a tall hood and a thin golden halo ring, a plague-like beaked mask, a tall brass lantern-staff with pale green light held upright, a leather satchel and a book on the hip. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-heroes.png",
+      "subject_ref": "hero-confessor.png",
+      "palette": "master 33"
+    },
+    "date": "2026-10-26T23:50:40.000Z",
+    "httpStatus": 200,
+    "jobId": "f88366b2-5b11-4d65-b3e8-242afd3bd681",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "hero.bombardier.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A stocky gunner in dark riveted iron armour with a breathing helmet and a red scarf, a huge brass-banded hand cannon resting on the shoulder, shell belts across the chest, a red banner tabard. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the right of the image (facing right). A stocky gunner in dark riveted iron armour with a breathing helmet and a red scarf, a huge brass-banded hand cannon resting on the shoulder, shell belts across the chest, a red banner tabard. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-heroes.png",
+      "subject_ref": "hero-bombardier.png",
+      "palette": "master 33"
+    },
+    "date": "2026-10-26T23:52:03.153Z",
+    "httpStatus": 200,
+    "jobId": "bf93c237-d76e-4c72-be4b-8460e1d2770a",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
   }
 ]

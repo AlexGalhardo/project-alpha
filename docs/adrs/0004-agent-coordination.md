@@ -29,3 +29,13 @@ The developer asked for 3 permanent parallel agents, with models assigned by rol
 
 - Edit conflicts are avoided by splitting files, not by branches.
 - Every agent output is reviewed by the coordinator before the commit.
+
+## Amendment (2026-10-26, 20:30)
+
+At the developer's request after the first playtest, a fourth agent was added:
+
+| Agent | Model | Role |
+|---|---|---|
+| QA playtester | Claude Opus 5.5 | Plays the game repeatedly through Playwright (real clicks, several viewports and parties), captures screenshots and writes prioritised findings to `docs/reports/*-qa-playtest-*.md`; implements fixes only when the coordinator assigns them |
+
+The coordinator still integrates and commits; the QA agent's first pass is read-only on `src/` while the rendering overhaul is in progress.

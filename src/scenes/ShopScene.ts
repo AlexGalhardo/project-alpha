@@ -10,6 +10,7 @@ import { openCardPicker } from './RestScene';
 export class ShopScene extends Phaser.Scene {
 	private layer!: Phaser.GameObjects.Container;
 	private selected: number | null = null;
+	private picker: Phaser.GameObjects.Container | null = null;
 
 	constructor() {
 		super('Shop');
@@ -18,8 +19,11 @@ export class ShopScene extends Phaser.Scene {
 	create(): void {
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		this.selected = null;
+		this.picker = null;
 		this.layer = this.add.container(0, 0);
 		this.refresh();
+		// Keys: 1–5 select a card, Enter buys it (or leaves when nothing is selected), R removes a card, Esc leaves.
+		this.input.keyboard?.on('keydown', (e: KeyboardEvent) => this.onKey(e));
 	}
 
 	private refresh(): void {
@@ -144,13 +148,34 @@ export class ShopScene extends Phaser.Scene {
 	private openRemoval(): void {
 		const state = session.state;
 		if (!state) return;
-		openCardPicker(this, {
+		this.picker = openCardPicker(this, {
 			title: t('shop.chooseRemoval'),
 			cards: state.deck,
 			testPrefix: 'shop-remove-card',
 			onPick: (card) => this.send({ type: 'shopRemoveCard', cardUid: card.uid }),
-			onBack: () => this.refresh(),
+			onBack: () => {
+				this.picker = null;
+				this.refresh();
+			},
 		});
+	}
+
+	private onKey(e: KeyboardEvent): void {
+		if (this.picker?.active) return; // the picker handles its own keys
+		const state = session.state;
+		const view = state ? shopView(state) : null;
+		if (!view) return;
+		const n = Number.parseInt(e.key, 10);
+		if (n >= 1 && n <= view.cards.length) {
+			this.selected = n - 1;
+			this.refresh();
+		} else if (e.key === 'Enter') {
+			const offer = this.selected === null ? undefined : view.cards[this.selected];
+			if (offer && !offer.sold && view.gold >= offer.price && this.selected !== null) {
+				this.send({ type: 'shopBuy', kind: 'card', index: this.selected });
+			} else if (this.selected === null) this.send({ type: 'leaveShop' });
+		} else if (e.key.toLowerCase() === 'r' && view.canRemove) this.openRemoval();
+		else if (e.key === 'Escape') this.send({ type: 'leaveShop' });
 	}
 
 	/** Re-renders in place while still in the shop; otherwise moves to the next screen. */

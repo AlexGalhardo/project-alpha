@@ -35,6 +35,16 @@ export class CampScene extends Phaser.Scene {
 		this.reorderFrom = null;
 		this.layer = this.add.container(0, 0);
 		this.refresh();
+		// Keys: 1–3 select a party hero (target of swap, Vigil, equip), Enter or Esc leaves the camp.
+		this.input.keyboard?.on('keydown', (e: KeyboardEvent) => {
+			const party = session.state?.party ?? [];
+			const n = Number.parseInt(e.key, 10);
+			const hero = party[n - 1];
+			if (hero) {
+				this.hero = hero.id;
+				this.refresh();
+			} else if (e.key === 'Enter' || e.key === 'Escape') this.send({ type: 'campLeave' });
+		});
 	}
 
 	private refresh(): void {

@@ -58,17 +58,7 @@ export function openCardPicker(
 				Phaser.Geom.Rectangle.Contains,
 			);
 			c.setName(`${opts.testPrefix}-${index}`);
-			c.on('pointerup', () => {
-				if (selected === index) {
-					opts.onPick(card);
-					return;
-				}
-				selected = index;
-				detail.setText(
-					`${cardName(card.cardId, card.upgraded)}: ${cardText(card.cardId, card.upgraded)}  ${t('picker.tapAgain')}`,
-				);
-				render();
-			});
+			c.on('pointerup', () => select(index));
 			grid.add(c);
 		});
 		pageLabel.setText(
@@ -76,6 +66,20 @@ export function openCardPicker(
 				? t('picker.empty')
 				: t('picker.page', { page: page + 1, pages }),
 		);
+	};
+	const select = (index: number): void => {
+		const card = opts.cards[index];
+		if (!card) return;
+		if (selected === index) {
+			opts.onPick(card);
+			return;
+		}
+		selected = index;
+		page = Math.floor(index / PER_PAGE);
+		detail.setText(
+			`${cardName(card.cardId, card.upgraded)}: ${cardText(card.cardId, card.upgraded)}  ${t('picker.tapAgain')}`,
+		);
+		render();
 	};
 	const turn = (delta: number): void => {
 		const next = Phaser.Math.Clamp(page + delta, 0, pages - 1);
@@ -111,6 +115,33 @@ export function openCardPicker(
 		turn(dy > 0 ? 1 : -1);
 	scene.input.on('wheel', onWheel);
 	root.once('destroy', () => scene.input.off('wheel', onWheel));
+	// Keys: arrows move the selection, PageUp/PageDown turn pages, Enter picks, Esc goes back.
+	const onKey = (e: KeyboardEvent): void => {
+		const total = opts.cards.length;
+		const moves: Record<string, number> = {
+			ArrowRight: 1,
+			ArrowLeft: -1,
+			ArrowDown: COLS,
+			ArrowUp: -COLS,
+		};
+		const move = moves[e.key];
+		if (move !== undefined && total > 0) {
+			const from = selected ?? page * PER_PAGE;
+			const to = Phaser.Math.Clamp(from + (selected === null ? 0 : move), 0, total - 1);
+			selected = null;
+			select(to);
+		} else if (e.key === 'PageDown') turn(1);
+		else if (e.key === 'PageUp') turn(-1);
+		else if (e.key === 'Enter' && selected !== null) {
+			const card = opts.cards[selected];
+			if (card) opts.onPick(card);
+		} else if (e.key === 'Escape') {
+			root.destroy();
+			opts.onBack();
+		}
+	};
+	scene.input.keyboard?.on('keydown', onKey);
+	root.once('destroy', () => scene.input.keyboard?.off('keydown', onKey));
 	let dragStart: number | null = null;
 	blocker.on('pointerdown', (p: Phaser.Input.Pointer) => {
 		dragStart = p.y;
@@ -125,6 +156,8 @@ export function openCardPicker(
 
 /** Rest node, row 9 (GDD §4.5, docs/art-bible.md §11.10): exclusive Recover / Temper / Pray. */
 export class RestScene extends Phaser.Scene {
+	private picker: Phaser.GameObjects.Container | null = null;
+
 	constructor() {
 		super('Rest');
 	}
@@ -186,6 +219,14 @@ export class RestScene extends Phaser.Scene {
 			});
 			if (o.option === 'temper' && upgradable.length === 0) btn.setEnabled(false);
 		});
+		// Keys: 1 Recover, 2 Temper (opens the picker), 3 Pray; the picker handles its own keys.
+		this.picker = null;
+		this.input.keyboard?.on('keydown', (e: KeyboardEvent) => {
+			if (this.picker?.active) return;
+			const option = options[Number.parseInt(e.key, 10) - 1]?.option;
+			if (!option || (option === 'temper' && upgradable.length === 0)) return;
+			this.choose(option);
+		});
 	}
 
 	private choose(option: 'recover' | 'temper' | 'pray'): void {
@@ -195,7 +236,7 @@ export class RestScene extends Phaser.Scene {
 			this.send({ type: 'restChoose', option });
 			return;
 		}
-		openCardPicker(this, {
+		this.picker = openCardPicker(this, {
 			title: t('rest.chooseCard'),
 			cards: state.deck.filter((c) => !c.upgraded),
 			testPrefix: 'rest-card',

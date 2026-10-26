@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { chooseBotCommand } from './core';
+import { chooseBotCommand, combatView } from './core';
 import { BASE_HEIGHT, BASE_WIDTH, pickZoom } from './platform/zoom';
 import { BootScene } from './scenes/BootScene';
 import { CampScene } from './scenes/CampScene';
@@ -52,8 +52,13 @@ window.addEventListener('orientationchange', resize);
 
 // Test hooks for Playwright smoke/e2e: the running game, and one bot step that issues the same
 // commands a player could (chooseBotCommand) and moves to the matching scene.
-const hooks = window as unknown as { __game?: Phaser.Game; __botStep?: () => string };
+const hooks = window as unknown as {
+	__game?: Phaser.Game;
+	__botStep?: () => string;
+	__combat?: () => ReturnType<typeof combatView>;
+};
 hooks.__game = game;
+hooks.__combat = () => (session.state ? combatView(session.state) : null);
 hooks.__botStep = (): string => {
 	const state = session.state;
 	const cmd = state ? chooseBotCommand(state) : null;

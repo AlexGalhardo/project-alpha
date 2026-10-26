@@ -62,7 +62,8 @@ export class CombatScene extends Phaser.Scene {
 
 	// ---------- static HUD ----------
 	private buildStatic(): void {
-		const g = this.add.graphics();
+		// Background bands sit under the dynamic layer; buttons stay above it.
+		const g = this.add.graphics().setDepth(-1);
 		g.fillStyle(P.ash1).fillRect(0, 0, 640, 24);
 		g.fillStyle(P.gold0).fillRect(0, 23, 640, 1);
 		g.fillStyle(P.ash1).fillRect(0, 222, 640, 138);

@@ -41,7 +41,11 @@ export class MapScene extends Phaser.Scene {
 		const round = Math.min(10, view.currentRow + 1);
 		label(this, 8, 6, `${t('hud.act', { act: 1 })} · ${t('hud.round', { round })}`, 'ui');
 		label(this, 488, 6, `${t('hud.gold')} ${state.gold}`, 'ui', 'gold2');
-		new Button(this, 608, 0, 'II', () => this.openPause(), { w: 32, h: 24, testId: 'map-pause' });
+		new Button(this, 608, 0, 'II', () => this.openPause(), {
+			w: 32,
+			h: 24,
+			testId: 'map-pause',
+		});
 
 		panel(this, 16, 32, 608, 256, 'ash1');
 		label(this, 24, 36, t('map.choose'), 'tiny', 'ash5');
@@ -104,7 +108,8 @@ export class MapScene extends Phaser.Scene {
 		});
 		const first = view.available[0];
 		// Auto battle at 3x also walks the map, so testers can play a whole act unattended.
-		if (app.auto && app.speed === 3 && first) this.time.delayedCall(app.ms(400), () => this.pick(first.index));
+		if (app.auto && app.speed === 3 && first)
+			this.time.delayedCall(app.ms(400), () => this.pick(first.index));
 	}
 
 	private dotted(
@@ -165,9 +170,20 @@ export class MapScene extends Phaser.Scene {
 			const bar = this.add.graphics();
 			bar.fillStyle(P.ash0).fillRect(x + 23, y + 11, 66, 7);
 			bar.fillStyle(P.blood0).fillRect(x + 24, y + 12, 64, 5);
-			bar.fillStyle(P.blood2).fillRect(x + 24, y + 12, Math.round((64 * Math.max(0, h.hp)) / Math.max(1, max)), 5);
+			bar.fillStyle(P.blood2).fillRect(
+				x + 24,
+				y + 12,
+				Math.round((64 * Math.max(0, h.hp)) / Math.max(1, max)),
+				5,
+			);
 			label(this, x + 92, y + 9, `${h.hp}/${max}`, 'tiny', h.injured ? 'blood2' : 'bone2');
-			for (let s = 0; s < 10; s += 1) bar.fillStyle(s < h.stress ? P.rift2 : P.rift0).fillRect(x + 24 + s * 5, y + 22, 4, 3);
+			for (let s = 0; s < 10; s += 1)
+				bar.fillStyle(s < h.stress ? P.rift2 : P.rift0).fillRect(
+					x + 24 + s * 5,
+					y + 22,
+					4,
+					3,
+				);
 		});
 	}
 

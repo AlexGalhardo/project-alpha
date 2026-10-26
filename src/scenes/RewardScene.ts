@@ -10,6 +10,7 @@ export class RewardScene extends Phaser.Scene {
 	private view!: RewardView;
 	private layer!: Phaser.GameObjects.Container;
 	private selected: number | null = null;
+	private skipArmed = false;
 
 	constructor() {
 		super('Reward');
@@ -17,6 +18,7 @@ export class RewardScene extends Phaser.Scene {
 
 	create(): void {
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		this.skipArmed = false;
 		this.selected = null;
 		this.layer = this.add.container(0, 0);
 		this.refresh();
@@ -87,6 +89,9 @@ export class RewardScene extends Phaser.Scene {
 				testId: 'reward-skip',
 			}),
 		);
+		if (this.skipArmed) {
+			this.layer.add(label(this, 112, 250, t('reward.skipConfirm'), 'tiny', 'ember3'));
+		}
 		const take = new Button(this, 432, 264, t('reward.take'), () => this.take(), {
 			w: 96,
 			h: 44,
@@ -111,12 +116,26 @@ export class RewardScene extends Phaser.Scene {
 		if (card) this.send({ type: 'chooseReward', index: card.index });
 	}
 
+	/** Keys: 1–3 select, arrows move, Enter takes (or skips when there is no card), Esc clears, Esc twice skips. */
 	private onKey(e: KeyboardEvent): void {
+		const count = this.view.cards.length;
 		const n = Number.parseInt(e.key, 10);
-		if (n >= 1 && n <= this.view.cards.length) this.tapCard(n - 1);
-		else if (e.key === 'Enter') this.take();
-		else if (e.key === 'Escape') {
-			this.selected = null;
+		if (n >= 1 && n <= count) this.tapCard(n - 1);
+		else if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && count > 0) {
+			const step = e.key === 'ArrowRight' ? 1 : count - 1;
+			this.selected = this.selected === null ? 0 : (this.selected + step) % count;
+			this.refresh();
+		} else if (e.key === 'Enter') {
+			if (count === 0) this.send({ type: 'skipReward' });
+			else this.take();
+		} else if (e.key === 'Escape') {
+			if (this.selected !== null) {
+				this.selected = null;
+				this.skipArmed = false;
+			} else if (this.skipArmed) {
+				this.send({ type: 'skipReward' });
+				return;
+			} else this.skipArmed = true;
 			this.refresh();
 		}
 	}

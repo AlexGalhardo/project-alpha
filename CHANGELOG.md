@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.6] - 2026-10-26
+
+### Added
+
+- **balance:** Enable Act 2 by default with tuned act scaling ([8cfcc24](https://github.com/AlexGalhardo/project-alpha/commit/8cfcc244213eb696e2b525992fd089590673276a))
+- **art:** Add 16 px node and item icons reduced from PixelLab masters ([dc7001d](https://github.com/AlexGalhardo/project-alpha/commit/dc7001dac9f620dcebf62d59fb87a2ff1e3d0bda))
+- **core:** Add the Rites difficulty ladder core and profile unlocks (in progress) ([dfced1a](https://github.com/AlexGalhardo/project-alpha/commit/dfced1a1baf38f98880617e1fb5b20283d97e793))
+- **rites:** Add the 10-level difficulty ladder with profile unlocks and party selector ([5ac5826](https://github.com/AlexGalhardo/project-alpha/commit/5ac58266c52e3d616e2cb5c5c7ba5e975ff5d5aa))
+- **view:** 16 px node icons on the map and item icons in camp, shop, treasure and reward ([fd58085](https://github.com/AlexGalhardo/project-alpha/commit/fd58085cc2efee60aae2e9b19409ac213fb61f99))
+- **events:** Add six more events to reach twelve, in English and Portuguese ([fa20477](https://github.com/AlexGalhardo/project-alpha/commit/fa20477b602338168546577dc040770fc984a786))
+- **content:** Add Act 3 with the three-phase final boss and the turn-limit enrage ([75abc2f](https://github.com/AlexGalhardo/project-alpha/commit/75abc2f461ba5b3079a6318f9cd71fc986524ff7))
+- **view:** Fill the viewport at 1920x1080 with Roboto text and size-agnostic art ([e955060](https://github.com/AlexGalhardo/project-alpha/commit/e95506088c2a885a3936501b9d54f6a2138576bf))
+- **art:** Add native-resolution art in progress ([9919705](https://github.com/AlexGalhardo/project-alpha/commit/99197057e40904e5f86726a7b8af27d466d1060c))
+
+### Changed
+
+- **view:** Show a loading bar and stream music after the title appears ([5d2f02a](https://github.com/AlexGalhardo/project-alpha/commit/5d2f02a02d919e3aee5cd72b72964501fb301e38))
+
+### Fixed
+
+- **i18n:** Polish Brazilian Portuguese wording and enforce the card word limit in both locales ([fcf8e6e](https://github.com/AlexGalhardo/project-alpha/commit/fcf8e6e0f53cfe01c128e0510a5391150c21a956))
+
+### Documentation
+
+- **plan:** Record Alpha progress and the live deployment ([09ce776](https://github.com/AlexGalhardo/project-alpha/commit/09ce7768c674c4e10dbff4d6714aa3e7492765c9))
+- **adr:** Add the QA playtester agent to the coordination model ([f17ec92](https://github.com/AlexGalhardo/project-alpha/commit/f17ec927af7d2c490d8e5a398b80ca94d14c07e1))
+- Record the render overhaul decision (B40) and native-resolution asset rules ([4d10dbc](https://github.com/AlexGalhardo/project-alpha/commit/4d10dbcef87c37e472fe40b7369f0c07285891e7))
+- Add a how-to-play guide and mark twelve events done ([1758ded](https://github.com/AlexGalhardo/project-alpha/commit/1758ded83e075e980c33d6d20e39c7bf1c0d49a9))
+- **reports:** Add the first QA playtest and the Rites simulation sweep ([b0f340c](https://github.com/AlexGalhardo/project-alpha/commit/b0f340ca9f1dd65f851bec20709152b2ed1cf0dc))
+- **plan:** Record desktop and Android packaging status ([3e0162d](https://github.com/AlexGalhardo/project-alpha/commit/3e0162d051ef49d2a4dbbe9e35e5b60b6f05c6cc))
+- Add the render ADR, Act 3 design and balance reports ([eff0ead](https://github.com/AlexGalhardo/project-alpha/commit/eff0eadb66a107aa954c7057c7a6b3e3be7ee31e))
+
 ## [0.0.5] - 2026-10-26
 
 ### Added
@@ -97,6 +129,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **books:** Apply Pixel Logic and The Art of Game Design to this genre ([f23593e](https://github.com/AlexGalhardo/project-alpha/commit/f23593e4a6fe9161b8ffef7d51a3aaae6b15eff1))
 - Keep the project kickoff prompt ([a45f73b](https://github.com/AlexGalhardo/project-alpha/commit/a45f73b2c5647b12cc2903c6a90d387d74d06e99))
 - **skills:** Retarget project skills from the previous tactics game to this deckbuilder ([f535621](https://github.com/AlexGalhardo/project-alpha/commit/f535621369a0d22543be6643489eff4cf8b0c8cf))
+[0.0.6]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.5...v0.0.6>
 [0.0.5]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.4...v0.0.5>
 [0.0.4]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.3...v0.0.4>
 [0.0.3]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.2...v0.0.3>

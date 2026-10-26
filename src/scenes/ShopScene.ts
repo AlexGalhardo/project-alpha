@@ -91,8 +91,8 @@ export class ShopScene extends Phaser.Scene {
 		}
 
 		view.equipment.forEach((offer, i) => {
-			const x = 40 + i * 136;
-			this.layer.add(panel(this, x, 192, 128, 56, 'ash1'));
+			const x = 40 + i * 200;
+			this.layer.add(panel(this, x, 192, 192, 72, 'ash1'));
 			this.layer.add(label(this, x + 6, 196, t(`item.${offer.item}.name`), 'tiny', 'bone2'));
 			this.layer.add(
 				label(
@@ -102,17 +102,17 @@ export class ShopScene extends Phaser.Scene {
 					t(`item.${offer.item}.effect`),
 					'tiny',
 					'ash5',
-				).setWordWrapWidth(68),
+				).setWordWrapWidth(120),
 			);
 			const caption = offer.sold ? t('shop.soldOut') : t('camp.price', { gold: offer.price });
 			const b = new Button(
 				this,
-				x + 76,
-				200,
+				x + 132,
+				206,
 				caption,
 				() => this.send({ type: 'shopBuy', kind: 'equipment', index: i }),
 				{
-					w: 48,
+					w: 56,
 					h: 44,
 					font: 'tiny',
 					testId: `shop-buy-equipment-${i}`,

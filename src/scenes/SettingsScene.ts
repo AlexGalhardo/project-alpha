@@ -87,7 +87,7 @@ export class SettingsScene extends Phaser.Scene {
 			],
 		];
 		rows.forEach(([name, value, action], i) => {
-			const y = 70 + i * 30;
+			const y = 64 + i * 28;
 			label(this, 136, y + 6, name, 'ui').setData('row', true);
 			new Button(
 				this,
@@ -101,7 +101,7 @@ export class SettingsScene extends Phaser.Scene {
 				{ w: 128, h: 24, testId: `settings-${i}` },
 			).setData('row', true);
 		});
-		new Button(this, BASE_WIDTH / 2 - 60, 304, t('settings.back'), () => this.close(), {
+		new Button(this, BASE_WIDTH / 2 - 60, 296, t('settings.back'), () => this.close(), {
 			testId: 'settings-back',
 		}).setData('row', true);
 	}

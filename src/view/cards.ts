@@ -65,24 +65,75 @@ export function drawCard(
 	} else if (def.rarity === 'legendary') {
 		g.fillStyle(P.ember3).fillTriangle(CARD_W / 2 - 6, 0, CARD_W / 2 + 6, 0, CARD_W / 2, -6);
 	}
-	g.fillStyle(P[OWNER_BAND[def.owner] ?? 'ash4']).fillRect(3, CARD_H - 8, CARD_W - 6, 5);
-	g.fillStyle(P.ash1).fillRect(5, 16, CARD_W - 10, 24);
+	const band = P[OWNER_BAND[def.owner] ?? 'ash4'];
+	g.fillStyle(band).fillRect(3, CARD_H - 8, CARD_W - 6, 5);
+	// Art window (60×26) with a type emblem in the owner colour until card art exists (B29):
+	// Attack = blade, Skill = shield, Power = diamond.
+	g.fillStyle(P.ash1).fillRect(4, 14, CARD_W - 8, 26);
+	g.fillStyle(band);
+	const cx = CARD_W / 2;
+	if (def.type === 'attack')
+		g.fillRect(cx - 1, 17, 3, 16)
+			.fillRect(cx - 6, 31, 13, 2)
+			.fillRect(cx - 1, 33, 3, 4);
+	else if (def.type === 'skill')
+		g.fillRect(cx - 7, 18, 15, 10).fillTriangle(cx - 7, 28, cx + 8, 28, cx, 37);
+	else
+		g.fillTriangle(cx, 16, cx + 9, 27, cx - 9, 27).fillTriangle(cx - 9, 27, cx + 9, 27, cx, 38);
 	g.fillStyle(P.ember3).fillCircle(8, 8, 8);
 	c.add(g);
 	c.add(
 		label(scene, 8, 8, `${opts.cost ?? costOf(cardId, upgraded)}`, 'ui', 'ash0').setOrigin(0.5),
 	);
-	c.add(
-		label(scene, 4, 42, cardName(cardId, upgraded), 'tiny', 'bone2').setWordWrapWidth(
-			CARD_W - 8,
-		),
+	const name = label(scene, 4, 41, cardName(cardId, upgraded), 'tiny', 'bone2').setWordWrapWidth(
+		CARD_W - 8,
 	);
-	c.add(
-		label(scene, 4, 62, t(`hero.${def.owner}.name`), 'tiny', 'ash5').setWordWrapWidth(
-			CARD_W - 8,
-		),
-	);
-	c.add(label(scene, CARD_W - 4, 20, t(`cardType.${def.type}`), 'tiny', 'ash5').setOrigin(1, 0));
+	c.add(name);
+	// Value chips: shape + colour + number (art bible §5 tokens), so the card reads without its text.
+	const v = cardValues(cardId, upgraded);
+	const hits = (upgraded ? def.upgrade.hits : undefined) ?? def.params.hits ?? 1;
+	const chips: [string, number][] = [];
+	if (v.damage !== undefined) chips.push(['damage', v.damage]);
+	if (v.block !== undefined) chips.push(['block', v.block]);
+	if (v.heal !== undefined) chips.push(['heal', v.heal]);
+	if (v.stacks !== undefined) chips.push(['stacks', v.stacks]);
+	if (v.draw !== undefined) chips.push(['draw', v.draw]);
+	const chipY = name.height > 12 ? 62 : 54;
+	const cg = scene.add.graphics();
+	let x = 4;
+	for (const [kind, n] of chips.slice(0, 3)) {
+		const color =
+			kind === 'damage'
+				? P.blood2
+				: kind === 'block'
+					? P.ward1
+					: kind === 'heal'
+						? P.rot2
+						: kind === 'stacks'
+							? P.rift2
+							: P.bone1;
+		cg.fillStyle(color);
+		if (kind === 'damage') cg.fillTriangle(x, chipY + 7, x + 6, chipY + 7, x + 3, chipY + 1);
+		else if (kind === 'block') cg.fillRect(x, chipY + 1, 6, 6);
+		else if (kind === 'heal') cg.fillRect(x + 2, chipY, 2, 7).fillRect(x, chipY + 2, 6, 2);
+		else if (kind === 'stacks')
+			cg.fillTriangle(x + 3, chipY, x + 6, chipY + 4, x, chipY + 4).fillTriangle(
+				x,
+				chipY + 4,
+				x + 6,
+				chipY + 4,
+				x + 3,
+				chipY + 8,
+			);
+		else cg.fillRect(x + 1, chipY, 4, 7);
+		const text = kind === 'damage' && hits > 1 ? `${n}x${hits}` : `${n}`;
+		const t2 = label(scene, x + 8, chipY - 1, text, 'tiny', 'bone2');
+		c.add(t2);
+		x += 10 + t2.width + 2;
+	}
+	c.add(cg);
+	// Owner name only when the card name fits on one line; the owner band always shows.
+	if (chipY === 54) c.add(label(scene, 4, 68, t(`hero.${def.owner}.name`), 'tiny', 'ash5'));
 	c.setSize(CARD_W, CARD_H);
 	return c;
 }

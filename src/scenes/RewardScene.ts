@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { type Command, type RewardView, rewardView } from '../core';
-import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
+import { CARD_H, CARD_W, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { goNext, session } from '../view/session';
 import { Button, label, panel } from '../view/ui';
@@ -53,11 +53,26 @@ export class RewardScene extends Phaser.Scene {
 			label(this, 320, 100, t('reward.pickCard'), 'tiny', 'ash5').setOrigin(0.5, 0),
 		);
 		const n = view.cards.length;
-		const startX = 320 - (n * CARD_W + (n - 1) * 8) / 2;
+		// 120 px pitch leaves room for each card's full text under it (readable without a tap).
+		const PITCH = 120;
+		const startX = 320 - ((n - 1) * PITCH + CARD_W) / 2;
 		view.cards.forEach((card, i) => {
 			const sel = this.selected === i;
 			const c = drawCard(this, card.cardId, false, { selected: sel });
-			c.setPosition(startX + i * (CARD_W + 8), sel ? 108 : 114);
+			c.setPosition(startX + i * PITCH, sel ? 108 : 114);
+			this.layer.add(
+				label(
+					this,
+					startX + i * PITCH + CARD_W / 2,
+					210,
+					cardText(card.cardId, false),
+					'tiny',
+					'ash5',
+				)
+					.setOrigin(0.5, 0)
+					.setAlign('center')
+					.setWordWrapWidth(PITCH - 8),
+			);
 			c.setInteractive(
 				new Phaser.Geom.Rectangle(CARD_W / 2, CARD_H / 2, CARD_W, CARD_H),
 				Phaser.Geom.Rectangle.Contains,
@@ -67,20 +82,9 @@ export class RewardScene extends Phaser.Scene {
 			this.layer.add(c);
 		});
 		if (this.selected !== null) {
-			const card = view.cards[this.selected];
-			if (card) {
-				this.layer.add(label(this, 112, 212, cardName(card.cardId, false), 'ui', 'gold2'));
-				this.layer.add(
-					label(
-						this,
-						112,
-						228,
-						`${cardText(card.cardId, false)}  ${t('picker.tapAgain')}`,
-						'tiny',
-						'bone2',
-					).setWordWrapWidth(416),
-				);
-			}
+			this.layer.add(
+				label(this, 320, 252, t('picker.tapAgain'), 'tiny', 'gold2').setOrigin(0.5, 0),
+			);
 		}
 		this.layer.add(
 			new Button(this, 112, 264, t('reward.skip'), () => this.send({ type: 'skipReward' }), {

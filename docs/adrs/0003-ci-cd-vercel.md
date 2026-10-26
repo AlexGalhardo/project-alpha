@@ -9,7 +9,7 @@ Deploy web na Vercel em `alpha.lekzera.xyz` durante a fase protótipo, disparado
 
 ## Decisão
 
-- `.github/workflows/ci.yml`: push em `main` e PR → `bun install --frozen-lockfile` → `bun run ci`. Bun fixado em `1.4.4`, `permissions: contents: read`.
+- `.github/workflows/ci.yml`: push em `main` e PR → `bun install --frozen-lockfile` → `bun run ci`. Bun fixado em `1.4.4`, actions fixadas por SHA de commit (`actions/checkout` v7.0.1, `oven-sh/setup-bun` v2.2.0), `permissions: contents: read`, segredos só nos passos que os usam.
 - `.github/workflows/deploy.yml`: push em `main` → CI → `vercel pull/build/deploy --prebuilt --prod` com `vercel@65.3.1` fixado. O job só roda quando `index.html` existe (o jogo nasce na fase ESTRUTURA).
 - Segredos do repositório exigidos: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
 - Domínio `alpha.lekzera.xyz` adicionado ao projeto Vercel e CNAME `alpha` → `cname.vercel-dns.com` no DNS de `lekzera.xyz`.

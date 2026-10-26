@@ -3496,5 +3496,57 @@
       "generations": 1
     },
     "note": "generated at 320x180 (API max 400x400) and upscaled 2x nearest to 640x360"
+  },
+  {
+    "key": "icon.node.event",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows an open ancient book with a glowing page.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows an open ancient book with a glowing page.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:18:48.800Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "32x32 master, reduced to 16x16 by icons16.ts"
+  },
+  {
+    "key": "icon.node.treasure",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a closed iron-bound treasure chest with gold trim.",
+    "params": {
+      "description": "Pixel art icon, centred, shape clearly readable at small size, 1 px dark outline, few colours, transparent background, no text. The icon shows a closed iron-bound treasure chest with gold trim.",
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "outline": "single color outline",
+      "shading": "basic shading",
+      "detail": "low detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:19:30.647Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "32x32 master, reduced to 16x16 by icons16.ts"
   }
 ]

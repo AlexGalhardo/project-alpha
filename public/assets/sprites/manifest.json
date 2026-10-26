@@ -98,6 +98,8 @@
   "icon.node.boss",
   "icon.node.combat",
   "icon.node.elite",
+  "icon.node.event",
   "icon.node.rest",
-  "icon.node.shop"
+  "icon.node.shop",
+  "icon.node.treasure"
 ]

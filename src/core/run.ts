@@ -1,11 +1,22 @@
 // Run state, the command dispatcher (`apply`) and persistence (GDD 4, 11, 13.1, 18.1).
-import { ACT_RULES, CAMP, EMBERS, EQUIPMENT, GOLD, HEROES, REST, RULES } from '../data/index.ts';
+import {
+	ACT_RULES,
+	CAMP,
+	EMBERS,
+	EQUIPMENT,
+	GOLD,
+	HEROES,
+	REST,
+	RITES,
+	RULES,
+} from '../data/index.ts';
 import { cardDef } from './cards.ts';
 import { endTurn, playCard, startCombat } from './combat.ts';
 import { claimTreasure, openEvent, openTreasure, resolveEvent } from './events.ts';
 import { chooseEncounter, generateMap, markSeen } from './map.ts';
 import { type Ctx, maxHP } from './ops.ts';
 import { addToStash, makeCamp, makeShop, newCard, removalPrice } from './rewards.ts';
+import { riteOn, ritePrice } from './rites.ts';
 import { streamSeed } from './rng.ts';
 import type {
 	ApplyResult,
@@ -246,7 +257,7 @@ function campSwap(c: Ctx, cmd: Extract<Command, { type: 'campSwap' }>): void {
 		invalid(c, 'already-swapped');
 		return;
 	}
-	if (s.gold < CAMP.swapPrice) {
+	if (s.gold < ritePrice(s, CAMP.swapPrice)) {
 		invalid(c, 'not-enough-gold');
 		return;
 	}
@@ -274,7 +285,7 @@ function campSwap(c: Ctx, cmd: Extract<Command, { type: 'campSwap' }>): void {
 		relic: null,
 	};
 	for (const cid of HEROES[cmd.join].starters) s.deck.push(newCard(s, cid));
-	s.gold -= CAMP.swapPrice;
+	s.gold -= ritePrice(s, CAMP.swapPrice);
 	camp.swapped = true;
 	c.ev.push({ type: 'swapped', leave: cmd.leave, join: cmd.join });
 }
@@ -328,9 +339,10 @@ function restChoose(c: Ctx, cmd: Extract<Command, { type: 'restChoose' }>): void
 		return;
 	}
 	if (cmd.option === 'recover') {
+		const recoverPct = riteOn(s, 'recoverHeal') ? RITES.recoverHealPct : REST.recoverHealPct;
 		for (const h of s.party) {
 			h.injured = false;
-			h.hp = Math.min(maxHP(h), h.hp + Math.floor((maxHP(h) * REST.recoverHealPct) / 100));
+			h.hp = Math.min(maxHP(h), h.hp + Math.floor((maxHP(h) * recoverPct) / 100));
 		}
 	} else if (cmd.option === 'temper') {
 		const card = s.deck.find((x) => x.uid === cmd.cardUid);

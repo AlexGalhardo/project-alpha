@@ -26,3 +26,4 @@ export {
 	TREASURE,
 } from './events.ts';
 export { HERO_CLASSES, HEROES } from './heroes.ts';
+export { RITE_LEVEL, RITES } from './rites.ts';

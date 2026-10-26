@@ -10,6 +10,7 @@ import {
 	SHOP,
 } from '../data/index.ts';
 import { cardDef } from './cards.ts';
+import { ritePrice } from './rites.ts';
 import { pick, rand, randInt } from './rng.ts';
 import type { CampState, CardInst, GameEvent, Rarity, RunState, ShopState } from './types.ts';
 
@@ -127,16 +128,27 @@ export function makeCamp(s: RunState): CampState {
 	const vigil = rand(s, 'meta') < CAMP.vigilChance;
 	return {
 		card: cardId
-			? { cardId, price: CAMP.cardPrice[tierOf(cardDef(cardId).rarity)], sold: false }
+			? {
+					cardId,
+					price: ritePrice(s, CAMP.cardPrice[tierOf(cardDef(cardId).rarity)]),
+					sold: false,
+				}
 			: null,
 		equipment: item
 			? {
 					item,
-					price: CAMP.equipmentPrice[tierOf(EQUIPMENT[item]?.rarity ?? 'common')],
+					price: ritePrice(
+						s,
+						CAMP.equipmentPrice[tierOf(EQUIPMENT[item]?.rarity ?? 'common')],
+					),
 					sold: false,
 				}
 			: null,
-		service: { kind: vigil ? 'vigil' : 'bind', price: CAMP.servicePrice, sold: false },
+		service: {
+			kind: vigil ? 'vigil' : 'bind',
+			price: ritePrice(s, CAMP.servicePrice),
+			sold: false,
+		},
 		swapped: false,
 	};
 }
@@ -151,7 +163,11 @@ export function makeShop(s: RunState): ShopState {
 			if (!id) continue;
 			taken.push(id);
 			const [lo, hi] = SHOP.cardPrice[tierOf(cardDef(id).rarity)];
-			cards.push({ cardId: id, price: randInt(s, 'meta', lo, hi), sold: false });
+			cards.push({
+				cardId: id,
+				price: ritePrice(s, randInt(s, 'meta', lo, hi)),
+				sold: false,
+			});
 		}
 	}
 	const equipment: ShopState['equipment'] = [];
@@ -162,7 +178,7 @@ export function makeShop(s: RunState): ShopState {
 		exclude.push(item);
 		equipment.push({
 			item,
-			price: SHOP.equipmentPrice[tierOf(EQUIPMENT[item]?.rarity ?? 'common')],
+			price: ritePrice(s, SHOP.equipmentPrice[tierOf(EQUIPMENT[item]?.rarity ?? 'common')]),
 			sold: false,
 		});
 	}
@@ -170,5 +186,5 @@ export function makeShop(s: RunState): ShopState {
 }
 
 export function removalPrice(s: RunState): number {
-	return SHOP.removalBase + SHOP.removalStep * s.removals;
+	return ritePrice(s, SHOP.removalBase + SHOP.removalStep * s.removals);
 }

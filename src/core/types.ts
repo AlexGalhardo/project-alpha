@@ -100,6 +100,8 @@ export interface HeroState {
 	hp: number;
 	stress: number;
 	injured: boolean;
+	/** Max HP multiplier of the current injury (Rite 9 makes it harsher); absent means the base rule. */
+	injuryMul?: number;
 	weapon: string | null;
 	relic: string | null;
 }
@@ -183,6 +185,8 @@ export interface Enemy {
 	dmgMul: number;
 	trait: EliteTrait | null;
 	keg: number;
+	/** Phase-1 intent id appended to the phase-2 cycle (Rite 10). */
+	extraIntent?: string;
 }
 
 export interface CombatState {
@@ -324,6 +328,8 @@ export interface RunState {
 	treasure?: TreasureState | null;
 	seenEvents?: string[];
 	stats: RunStats;
+	/** Difficulty ladder level 0–10 (docs/gdd.md §13.3); absent in old saves (= 0). */
+	rite?: number;
 	/** Cards unlocked by the skill tree for this run (docs/gdd.md §22.5); absent in old saves. */
 	unlocked?: string[];
 }

@@ -53,6 +53,9 @@ export const en = {
 		defaultHint: 'First run: Shieldbearer in rank 1, Confessor in rank 2, Marksman in rank 3.',
 		noFrontWarning: 'No one holds the front rank: enemies will strike your rank 1 hero first.',
 		veteran: 'Veteran start',
+		rite: 'Rite {n}',
+		riteNone: 'No Rite',
+		riteLocked: 'Win at Rite {n} to unlock',
 	},
 	hud: {
 		chooseTarget: 'Tap a highlighted target.',
@@ -147,6 +150,7 @@ export const en = {
 		bosses: 'Bosses won: {count}',
 		embers: 'Embers earned: {count}',
 		mainMenu: 'Main menu',
+		riteWon: 'Rite {n} conquered. Rite {next} unlocked.',
 	},
 	stress: {
 		label: 'Stress',
@@ -477,6 +481,18 @@ export const en = {
 	},
 	act: {
 		transition: 'The descent continues. Act {act}.',
+	},
+	rite: {
+		'1': 'Elites have 20% more HP.',
+		'2': 'Common enemies deal 15% more damage.',
+		'3': 'Start the run with 30 gold.',
+		'4': 'The boss has 20% more HP.',
+		'5': "Rest's Recover heals 20% instead of 30%.",
+		'6': 'Heroes start the run with 2 stress.',
+		'7': 'Shop and camp prices rise 15%.',
+		'8': 'Every enemy starts combat with 1 Might.',
+		'9': 'Injury costs 35% max HP.',
+		'10': "The boss's phase 2 gains a fourth intent.",
 	},
 	intent: {
 		ambush: 'Ambushes a hero from the back.',

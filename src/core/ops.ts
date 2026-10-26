@@ -54,7 +54,7 @@ export function heroOf(s: RunState, id: HeroClass): HeroState {
 export function maxHP(h: HeroState): number {
 	const base =
 		h.baseMax + (h.relic === 'eq_bone_reliquary' ? EQUIPMENT_NUMBERS.reliquaryMaxHP : 0);
-	return h.injured ? Math.floor(base * RULES.injuryMaxHPMul) : base;
+	return h.injured ? Math.floor(base * (h.injuryMul ?? RULES.injuryMaxHPMul)) : base;
 }
 
 export const heroRef = (id: HeroClass): UnitRef => ({ side: 'hero', id });

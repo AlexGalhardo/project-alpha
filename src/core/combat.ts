@@ -7,6 +7,7 @@ import {
 	EQUIPMENT_DROP,
 	EQUIPMENT_NUMBERS,
 	GOLD,
+	RITES,
 	RULES,
 } from '../data/index.ts';
 import { cardDef, costOf, paramsOf, playableReason, resolveCard, targetMatches } from './cards.ts';
@@ -32,6 +33,7 @@ import {
 	swapHeroes,
 } from './ops.ts';
 import { addToStash, makeCardOffer, ownedItems, rollEquipment } from './rewards.ts';
+import { riteOn } from './rites.ts';
 import { randInt, shuffle } from './rng.ts';
 import type {
 	CombatState,
@@ -59,7 +61,22 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 		// Act scaling (GDD 4.3) applies to non-boss enemies only; boss HP is final.
 		const actHp = kind === 'boss' ? 1 : 1 + ACT_RULES.hpPerAct * ((s.act ?? 1) - 1);
 		const actDmg = kind === 'boss' ? 1 : 1 + ACT_RULES.dmgPerAct * ((s.act ?? 1) - 1);
-		const maxHP = Math.max(1, Math.round(def.hp * elite * actHp * s.options.enemyHpMul));
+		// Rites (GDD 13.3): elite units and bosses gain HP, the other units deal more damage.
+		const riteHp =
+			slot.elite && riteOn(s, 'eliteHp')
+				? RITES.eliteHpMul
+				: kind === 'boss' && riteOn(s, 'bossHp')
+					? RITES.bossHpMul
+					: 1;
+		const riteDmg =
+			!slot.elite && kind !== 'boss' && riteOn(s, 'commonDamage') ? RITES.commonDamageMul : 1;
+		const maxHP = Math.max(
+			1,
+			Math.round(def.hp * elite * actHp * riteHp * s.options.enemyHpMul),
+		);
+		const fx = emptyStatuses();
+		if (riteOn(s, 'enemyMight')) fx.might = RITES.enemyMight;
+		const extraIntent = riteOn(s, 'bossIntent') ? RITES.bossExtraIntent[def.key] : undefined;
 		const list = def.intents;
 		enemies.push({
 			uid: uid++,
@@ -68,12 +85,13 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 			maxHP,
 			speed: def.speed,
 			size: def.size,
-			fx: emptyStatuses(),
+			fx,
 			intentIdx: def.fixedStart ? 0 : randInt(s, 'combat', 0, list.length - 1),
 			phase: 1,
-			dmgMul: (slot.elite ? ELITE.damageMul : 1) * actDmg * s.options.enemyDmgMul,
+			dmgMul: (slot.elite ? ELITE.damageMul : 1) * actDmg * riteDmg * s.options.enemyDmgMul,
 			trait: slot.elite ?? null,
 			keg: 0,
+			...(extraIntent ? { extraIntent } : {}),
 		});
 	}
 	const heroFx: Record<string, HeroFx> = {};
@@ -117,7 +135,12 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 export function intentOf(e: Enemy): IntentDef {
 	const def = ENEMIES[e.key];
 	if (!def) throw new Error(`unknown enemy ${e.key}`);
-	const list = e.phase === 2 && def.phase2Intents ? def.phase2Intents : def.intents;
+	let list = e.phase === 2 && def.phase2Intents ? def.phase2Intents : def.intents;
+	const extra =
+		e.phase === 2 && e.extraIntent
+			? def.intents.find((i) => i.id === e.extraIntent)
+			: undefined;
+	if (extra) list = [...list, extra];
 	return list[e.intentIdx % list.length] as IntentDef;
 }
 
@@ -459,6 +482,7 @@ function finishCombat(c: Ctx): void {
 		const h = heroOf(s, id);
 		h.hp = RULES.fallenReturnHP;
 		h.injured = true;
+		if (riteOn(s, 'injury')) h.injuryMul = RITES.injuryMaxHPMul;
 	}
 	for (const h of s.party) {
 		if (!k.anyFell) h.stress = Math.max(0, h.stress - RULES.winStressRelief);

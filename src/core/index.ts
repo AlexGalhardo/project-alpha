@@ -12,9 +12,11 @@ export {
 	nextNodeCost,
 	type Profile,
 	parseProfile,
+	recordWin,
 	unlockedCards,
 } from './meta.ts';
 export { maxHP } from './ops.ts';
+export { applyRite, riteLevel } from './rites.ts';
 export { apply, createRun, deserialize, embers, preview, serialize } from './run.ts';
 export type {
 	ApplyResult,

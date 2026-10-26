@@ -1,9 +1,11 @@
 import Phaser from 'phaser';
-import { applyMeta, canVeteran, type HeroClass } from '../core';
+import { applyMeta, applyRite, canVeteran, type HeroClass } from '../core';
 import { HEROES } from '../data/heroes';
+import { RITES } from '../data/rites';
 import { BASE_WIDTH } from '../platform/zoom';
 import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
+import { P } from '../view/palette';
 import { loadProfile } from '../view/profile';
 import { session } from '../view/session';
 import { Button, backdrop, label, panel } from '../view/ui';
@@ -14,6 +16,8 @@ const ROSTER: HeroClass[] = ['shieldbearer', 'marksman', 'arcanist', 'confessor'
 export class PartyScene extends Phaser.Scene {
 	private picked: HeroClass[] = [];
 	private veteran = true;
+	/** Chosen Rite (docs/gdd.md §13.3); starts at the highest unlocked one. */
+	private rite = 0;
 
 	constructor() {
 		super('Party');
@@ -22,6 +26,7 @@ export class PartyScene extends Phaser.Scene {
 	create(): void {
 		playMusic(this, 'music.menu');
 		this.picked = ['shieldbearer', 'confessor', 'marksman'];
+		this.rite = loadProfile().unlockedRite;
 		this.render();
 	}
 
@@ -58,14 +63,15 @@ export class PartyScene extends Phaser.Scene {
 		label(
 			this,
 			BASE_WIDTH / 2,
-			236,
+			230,
 			t('party.selected', { count: this.picked.length }),
 			'ui',
 		).setOrigin(0.5, 0);
-		label(this, BASE_WIDTH / 2, 256, t('party.defaultHint'), 'tiny', 'ash5').setOrigin(0.5, 0);
+		label(this, BASE_WIDTH / 2, 244, t('party.defaultHint'), 'tiny', 'ash5').setOrigin(0.5, 0);
+		this.drawRiteRow();
 		// Allowed but weak (balance report: three back-liners win about 2%), so warn instead of block.
 		if (this.picked.length === 3 && !this.picked.some((id) => HEROES[id].frontOrder <= 1))
-			label(this, BASE_WIDTH / 2, 272, `▲ ${t('party.noFrontWarning')}`, 'tiny', 'ember3')
+			label(this, BASE_WIDTH / 2, 256, `▲ ${t('party.noFrontWarning')}`, 'tiny', 'ember3')
 				.setOrigin(0.5, 0)
 				.setWordWrapWidth(600)
 				.setName('party-no-front');
@@ -93,6 +99,84 @@ export class PartyScene extends Phaser.Scene {
 		});
 	}
 
+	/** ◀ Rite n ▶ (only up to the unlocked Rite) and a button that lists the active rules. */
+	private drawRiteRow(): void {
+		const unlocked = loadProfile().unlockedRite;
+		const y = 270;
+		new Button(this, 232, y, '◀', () => this.setRite(this.rite - 1), {
+			w: 28,
+			h: 20,
+			font: 'tiny',
+			testId: 'party-rite-down',
+		}).setEnabled(this.rite > 0);
+		label(
+			this,
+			BASE_WIDTH / 2,
+			y + 5,
+			this.rite > 0 ? t('party.rite', { n: this.rite }) : t('party.riteNone'),
+			'ui',
+			this.rite > 0 ? 'ember3' : 'ash5',
+		)
+			.setOrigin(0.5, 0)
+			.setName('party-rite');
+		new Button(this, 380, y, '▶', () => this.setRite(this.rite + 1), {
+			w: 28,
+			h: 20,
+			font: 'tiny',
+			testId: 'party-rite-up',
+		}).setEnabled(this.rite < unlocked);
+		if (this.rite > 0)
+			new Button(this, 412, y, '?', () => this.showRules(unlocked), {
+				w: 20,
+				h: 20,
+				font: 'tiny',
+				testId: 'party-rite-rules',
+			});
+	}
+
+	private setRite(rite: number): void {
+		this.rite = Math.max(0, Math.min(loadProfile().unlockedRite, rite));
+		this.render();
+	}
+
+	/** Overlay listing every rule active at the chosen Rite (rules are cumulative). */
+	private showRules(unlocked: number): void {
+		const root = this.add.container(0, 0).setDepth(100);
+		const shade = this.add
+			.rectangle(0, 0, 640, 360, P.ash0, 0.85)
+			.setOrigin(0)
+			.setInteractive();
+		root.add(shade);
+		root.add(panel(this, 120, 40, 400, 280));
+		root.add(
+			label(this, 320, 50, t('party.rite', { n: this.rite }), 'h2', 'ember3').setOrigin(
+				0.5,
+				0,
+			),
+		);
+		for (let i = 1; i <= this.rite; i++) {
+			root.add(label(this, 136, 64 + i * 18, `${i}. ${t(`rite.${i}`)}`, 'tiny', 'bone2'));
+		}
+		if (unlocked < RITES.max && this.rite === unlocked)
+			root.add(
+				label(
+					this,
+					320,
+					268,
+					t('party.riteLocked', { n: unlocked }),
+					'tiny',
+					'ash5',
+				).setOrigin(0.5, 0),
+			);
+		const close = new Button(this, 270, 284, t('settings.back'), () => root.destroy(), {
+			w: 100,
+			h: 28,
+			sfx: 'sfx.ui.cancel',
+			testId: 'party-rite-close',
+		});
+		root.add(close);
+	}
+
 	private toggleVeteran(): void {
 		this.veteran = !this.veteran;
 		this.render();
@@ -112,7 +196,7 @@ export class PartyScene extends Phaser.Scene {
 		const profile = loadProfile();
 		const veteran = this.veteran ? this.picked.filter((h) => canVeteran(profile, h)) : [];
 		if (session.state) {
-			session.state = applyMeta(session.state, profile, veteran);
+			session.state = applyRite(applyMeta(session.state, profile, veteran), this.rite);
 			session.save();
 		}
 		this.scene.start(session.sceneForScreen());

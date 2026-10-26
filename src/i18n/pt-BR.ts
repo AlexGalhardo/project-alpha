@@ -52,6 +52,9 @@ export const ptBR: Strings = {
 		noFrontWarning:
 			'Ninguém segura a linha de frente: os inimigos golpeiam primeiro o herói na posição 1.',
 		veteran: 'Início veterano',
+		rite: 'Rito {n}',
+		riteNone: 'Sem Rito',
+		riteLocked: 'Vença o Rito {n} para desbloquear',
 	},
 	hud: {
 		chooseTarget: 'Toque em um alvo destacado.',
@@ -146,6 +149,7 @@ export const ptBR: Strings = {
 		bosses: 'Chefes vencidos: {count}',
 		embers: 'Brasas ganhas: {count}',
 		mainMenu: 'Menu principal',
+		riteWon: 'Rito {n} conquistado. Rito {next} desbloqueado.',
 	},
 	stress: {
 		label: 'Estresse',
@@ -479,6 +483,18 @@ export const ptBR: Strings = {
 	},
 	act: {
 		transition: 'A descida continua. Ato {act}.',
+	},
+	rite: {
+		'1': 'Elites têm 20% mais HP.',
+		'2': 'Inimigos comuns causam 15% mais dano.',
+		'3': 'Comece a corrida com 30 de ouro.',
+		'4': 'O chefe tem 20% mais HP.',
+		'5': 'Recuperar no descanso cura 20%, não 30%.',
+		'6': 'Heróis começam a corrida com 2 de estresse.',
+		'7': 'Preços da loja e do acampamento sobem 15%.',
+		'8': 'Todo inimigo começa o combate com 1 de Força.',
+		'9': 'Ferimento custa 35% do HP máximo.',
+		'10': 'A fase 2 do chefe ganha uma quarta intenção.',
 	},
 	intent: {
 		ambush: 'Ataca uma emboscada contra um herói da retaguarda.',

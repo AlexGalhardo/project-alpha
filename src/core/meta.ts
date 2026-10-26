@@ -1,4 +1,4 @@
-import { HEROES } from '../data';
+import { HEROES, RITES } from '../data';
 import { TREE } from '../data/meta';
 import type { HeroClass, RunState } from './types';
 
@@ -10,6 +10,8 @@ export interface Profile {
 	nodes: Record<HeroClass, number>;
 	/** Run seeds already banked, so a run's Embers are added once. */
 	banked: number[];
+	/** Highest Rite the player may pick (docs/gdd.md §13.3): highest Rite won + 1, at most 10. */
+	unlockedRite: number;
 }
 
 const HERO_KEYS = Object.keys(TREE.cards) as HeroClass[];
@@ -17,7 +19,7 @@ const MAX_BANKED = 50;
 
 export function emptyProfile(): Profile {
 	const nodes = Object.fromEntries(HERO_KEYS.map((h) => [h, 0])) as Record<HeroClass, number>;
-	return { version: 1, embers: 0, nodes, banked: [] };
+	return { version: 1, embers: 0, nodes, banked: [], unlockedRite: 0 };
 }
 
 /** Accepts unknown JSON; anything invalid falls back to an empty profile field by field. */
@@ -38,13 +40,23 @@ export function parseProfile(data: unknown): Profile {
 	const banked = Array.isArray(d.banked)
 		? d.banked.filter((x): x is number => typeof x === 'number')
 		: [];
-	return { ...base, embers, banked: banked.slice(-MAX_BANKED) };
+	const rite =
+		typeof d.unlockedRite === 'number' && Number.isFinite(d.unlockedRite)
+			? Math.max(0, Math.min(RITES.max, Math.floor(d.unlockedRite)))
+			: 0;
+	return { ...base, embers, banked: banked.slice(-MAX_BANKED), unlockedRite: rite };
 }
 
 /** Adds a finished run's Embers once per seed. */
 export function bankRun(p: Profile, seed: number, amount: number): Profile {
 	if (p.banked.includes(seed) || amount <= 0) return p;
 	return { ...p, embers: p.embers + amount, banked: [...p.banked, seed].slice(-MAX_BANKED) };
+}
+
+/** A victory at `rite` unlocks the next Rite (never lowers what is already unlocked). */
+export function recordWin(p: Profile, rite: number): Profile {
+	const next = Math.min(RITES.max, Math.floor(rite) + 1);
+	return next > p.unlockedRite ? { ...p, unlockedRite: next } : p;
 }
 
 export function nextNodeCost(p: Profile, hero: HeroClass): number | null {

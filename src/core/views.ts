@@ -5,6 +5,7 @@ import { intentView, turnQueue } from './combat.ts';
 import { availableNodes } from './map.ts';
 import { enemyRank, maxHP } from './ops.ts';
 import { removalPrice } from './rewards.ts';
+import { ritePrice } from './rites.ts';
 import { embers } from './run.ts';
 import type {
 	CampView,
@@ -174,7 +175,7 @@ export function campView(s: RunState): CampView | null {
 		equipment: c.equipment,
 		service: c.service,
 		swapCandidates: HERO_CLASSES.filter((id) => !s.party.some((h) => h.id === id)),
-		swapPrice: CAMP.swapPrice,
+		swapPrice: ritePrice(s, CAMP.swapPrice),
 		swapped: c.swapped,
 		stash: s.stash,
 	};

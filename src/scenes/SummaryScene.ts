@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { bankRun, summaryView } from '../core';
+import { bankRun, recordWin, riteLevel, summaryView } from '../core';
 import { BASE_WIDTH } from '../platform/zoom';
 import { stopMusic } from '../view/audio';
 import { t } from '../view/i18n';
@@ -22,7 +22,13 @@ export class SummaryScene extends Phaser.Scene {
 			return;
 		}
 		// Bank this run's Embers once (the profile remembers the seed).
-		if (session.state) saveProfile(bankRun(loadProfile(), session.state.seed, view.embers));
+		const before = loadProfile();
+		const rite = session.state ? riteLevel(session.state) : 0;
+		let profile = session.state ? bankRun(before, session.state.seed, view.embers) : before;
+		// A victory unlocks the next Rite (docs/gdd.md §13.3).
+		if (view.victory) profile = recordWin(profile, rite);
+		saveProfile(profile);
+		const unlockedNow = profile.unlockedRite > before.unlockedRite;
 		panel(this, 160, 40, 320, 280);
 		const title = view.victory ? t('hud.victory') : t('hud.defeat');
 		label(this, BASE_WIDTH / 2, 56, title, 'h1', view.victory ? 'gold2' : 'blood2').setOrigin(
@@ -47,6 +53,17 @@ export class SummaryScene extends Phaser.Scene {
 		rows.forEach((r, i) => {
 			label(this, 200, 166 + i * 18, r, 'ui');
 		});
+		if (unlockedNow)
+			label(
+				this,
+				BASE_WIDTH / 2,
+				256,
+				t('summary.riteWon', { n: rite, next: profile.unlockedRite }),
+				'tiny',
+				'ember3',
+			)
+				.setOrigin(0.5, 0)
+				.setName('summary-rite-won');
 		new Button(this, BASE_WIDTH / 2 - 70, 272, t('summary.mainMenu'), () => this.toMenu(), {
 			w: 140,
 			h: 32,

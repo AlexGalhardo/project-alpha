@@ -15,6 +15,7 @@ export const ptBR: Strings = {
 		newRun: 'Nova run',
 		settings: 'Configurações',
 		credits: 'Créditos',
+		creditsFonts: 'Fonte: Roboto (SIL OFL 1.1) · Motor: Phaser 4',
 		tapToBegin: 'Toque para começar',
 		version: 'Versão {version}',
 		legacy: 'Legado',
@@ -462,6 +463,55 @@ export const ptBR: Strings = {
 			text: 'Um peregrino senta junto a um fogo de brasas que nunca se apagam.\nCaminhou muito e quer descansar.\nTroca o fogo por ouro ou divide-o de graça.',
 			choice1: 'Trocar: pague {gold} de ouro; aprimore duas cartas (você escolhe).',
 			choice2: 'Dividir o fogo: cada herói cura {heal} de vida.',
+			choice3: 'Sair.',
+		},
+		ev_drowned_reliquary: {
+			title: 'O Relicário Afogado',
+			text: 'Um relicário jaz no fundo de uma cripta alagada. O vidro mostra uma mão, pressionada por dentro.\nA água é negra e muito fria. Uma corrente desce do teto da cúpula até ele.\nAlgo na ponta da corrente puxa, devagar, como se quisesse companhia.',
+			choice1:
+				'Mergulhar: o primeiro herói perde {cost} de vida e ganha um equipamento comum.',
+			choice2:
+				'Puxar a corrente: o herói com menos vida perde {cost} de vida; ganhe {gold} de ouro.',
+			choice3: 'Sair.',
+		},
+		ev_bone_cartographer: {
+			title: 'O Cartógrafo de Ossos',
+			text: 'Um homem senta numa tenda costurada de pele pálida, desenhando mapas sobre osso.\nOs mapas mostram a Fenda como era, e as estradas como serão.\nEle não pede que você compre. Apenas oferece.',
+			choice1: 'Comprar um mapa: pague {gold} de ouro; escolha 1 de 3 cartas incomuns.',
+			choice2: 'Vender uma página: remova 1 carta (você escolhe) e ganhe {gold} de ouro.',
+			choice3: 'Sair.',
+		},
+		ev_ashen_vigil: {
+			title: 'Vigília de Cinza',
+			text: 'Uma fila de carpideiras senta em volta de um fogo de cinza, vigiando ninguém.\nO fogo não aquece. Apenas mostra o que cada um carrega.\nDuas delas se levantam e oferecem um lugar junto às brasas.',
+			choice1:
+				'Vigiar: o primeiro herói ganha {stress} de estresse; cada herói cura {heal}% da vida máxima.',
+			choice2:
+				'Dormir junto às cinzas: cada herói cura {heal} de vida e ganha {stress} de estresse.',
+			choice3: 'Sair.',
+		},
+		ev_flagellant_procession: {
+			title: 'Procissão dos Flagelantes',
+			text: 'Penitentes andam pela nave com as costas nuas, cantando uma nota só.\nNão olham para você. Pedem que caminhe com eles, sem prometer nada.\nNão se sabe se saem da capela ou trazem algo para dentro.',
+			choice1:
+				'Caminhar com eles: cada herói ganha {stress} de estresse; aprimore 2 cartas (você escolhe).',
+			choice2: 'Dar esmolas: pague {gold} de ouro; cada herói perde {relief} de estresse.',
+			choice3: 'Sair.',
+		},
+		ev_gravewright: {
+			title: 'O Gravador de Túmulos',
+			text: 'Um artesão talha nomes em lajes que não têm túmulo debaixo.\nSua bancada tem uma bandeja de pequenas relíquias, ainda mornas.\nPergunta o que você quer enterrar e o que prefere guardar.',
+			choice1:
+				'Enterrar uma lembrança: o herói com menos vida perde {cost} de vida; remova 1 carta (você escolhe).',
+			choice2: 'Comprar uma relíquia: pague {gold} de ouro e ganhe a relíquia comum.',
+			choice3: 'Sair.',
+		},
+		ev_sealed_grille: {
+			title: 'Grade Selada',
+			text: 'Uma grade selada com cera e barras de ferro fecha um nicho na parede.\nAtrás dela, algo respira devagar e diz o nome do primeiro herói.\nOferece uma confissão ou uma escuta, e não pede mais nada.',
+			choice1: 'Confessar: o primeiro herói perde {relief} de estresse e {cost} de vida.',
+			choice2:
+				'Escutar na grade: aprimore 2 cartas aleatórias (visíveis); cada herói ganha {stress} de estresse.',
 			choice3: 'Sair.',
 		},
 	},

@@ -17,6 +17,7 @@ export const en = {
 		newRun: 'New run',
 		settings: 'Settings',
 		credits: 'Credits',
+		creditsFonts: 'Font: Roboto (SIL OFL 1.1) · Engine: Phaser 4',
 		tapToBegin: 'Tap to begin',
 		version: 'Version {version}',
 		legacy: 'Legacy',
@@ -460,6 +461,52 @@ export const en = {
 			text: 'A pilgrim sits by a fire of coals that never burn down.\nHe has walked a long way and wants to rest.\nHe will trade his fire for gold, or share it for free.',
 			choice1: 'Trade: pay {gold} gold; upgrade two cards (you choose).',
 			choice2: 'Share the fire: each hero heals {heal} HP.',
+			choice3: 'Leave.',
+		},
+		ev_drowned_reliquary: {
+			title: 'The Drowned Reliquary',
+			text: 'A reliquary lies at the bottom of a flooded crypt. Its glass shows a hand, pressed from inside.\nThe water is black and very cold. A chain runs down into it from the vault roof.\nSomething at the end of the chain pulls, slowly, as if it wanted company.',
+			choice1: 'Dive: the first hero loses {cost} HP and gains a common equipment.',
+			choice2: 'Pull the chain: the lowest-HP hero loses {cost} HP; gain {gold} gold.',
+			choice3: 'Leave.',
+		},
+		ev_bone_cartographer: {
+			title: 'The Bone Cartographer',
+			text: 'A man sits in a tent stitched from pale skin, drawing maps on bone.\nThe maps show the Rift as it was, and the roads as they will be.\nHe does not ask you to buy. He only offers.',
+			choice1: 'Buy a map: pay {gold} gold, choose 1 of 3 uncommon cards.',
+			choice2: 'Sell him a page: remove 1 card (you choose), gain {gold} gold.',
+			choice3: 'Leave.',
+		},
+		ev_ashen_vigil: {
+			title: 'Ashen Vigil',
+			text: 'A row of mourners sits around a fire of ash, keeping watch over no one.\nThe fire does not warm. It only shows what each of you carries.\nTwo of them stand and offer you a place by the coals.',
+			choice1:
+				'Keep watch: the first hero gains {stress} stress; each hero heals {heal}% of max HP.',
+			choice2: 'Sleep by the ashes: each hero heals {heal} HP and gains {stress} stress.',
+			choice3: 'Leave.',
+		},
+		ev_flagellant_procession: {
+			title: 'Flagellant Procession',
+			text: 'They walk the nave with their backs bare, singing a single note.\nThey do not look at you. They ask you to walk with them, and promise nothing.\nIt is not clear whether they are leaving the chapel or bringing something in.',
+			choice1:
+				'Walk with them: each hero gains {stress} stress; upgrade 2 cards (you choose).',
+			choice2: 'Give alms: pay {gold} gold; each hero loses {relief} stress.',
+			choice3: 'Leave.',
+		},
+		ev_gravewright: {
+			title: 'The Gravewright',
+			text: 'A craftsman carves names into stone slabs that have no graves beneath them.\nHis bench holds a tray of small relics, each still warm.\nHe asks what you want buried, and what you would rather keep.',
+			choice1:
+				'Bury a memory: the lowest-HP hero loses {cost} HP; remove 1 card (you choose).',
+			choice2: 'Buy a relic: pay {gold} gold and gain the common relic.',
+			choice3: 'Leave.',
+		},
+		ev_sealed_grille: {
+			title: 'Sealed Grille',
+			text: 'A grille sealed with wax and iron bars blocks a niche in the wall.\nBehind it, something breathes slowly and says the name of the first hero.\nIt offers a confession or a listen, and asks nothing more.',
+			choice1: 'Confess: the first hero loses {relief} stress and {cost} HP.',
+			choice2:
+				'Listen at the grille: upgrade 2 random cards (shown); each hero gains {stress} stress.',
 			choice3: 'Leave.',
 		},
 	},

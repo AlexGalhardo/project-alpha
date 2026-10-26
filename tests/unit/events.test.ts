@@ -166,6 +166,94 @@ describe('event outcomes apply exactly as listed (GDD 22.4)', () => {
 	});
 });
 
+describe('Alpha events 7-12 (GDD 22.4)', () => {
+	test('twelve events exist', () => {
+		expect(EVENT_IDS).toHaveLength(12);
+	});
+
+	test('Drowned Reliquary: dive costs H1 8 HP for a common item; the chain costs the weakest 5 HP for 35 gold', () => {
+		const s = eventRun('ev_drowned_reliquary');
+		const dive = run(s, choose(0)).s;
+		expect(dive.party[0]?.hp).toBe((s.party[0]?.hp as number) - 8);
+		expect(EQUIPMENT[s.event?.item as string]?.rarity).toBe('common');
+		expect(dive.stash).toContain(s.event?.item as string);
+		(s.party[1] as { hp: number }).hp = 20;
+		const chain = run(s, choose(1)).s;
+		expect(chain.gold).toBe(s.gold + 35);
+		expect(chain.party[1]?.hp).toBe(15);
+	});
+
+	test('Bone Cartographer: 35 gold for 1 of 3 uncommons; or sell a chosen card for 25 gold', () => {
+		const s = eventRun('ev_bone_cartographer');
+		s.gold = 50;
+		const buy = run(s, choose(0)).s;
+		expect(buy.gold).toBe(15);
+		expect(buy.phase).toBe('reward');
+		expect(buy.reward?.cards).toHaveLength(3);
+		const uid = s.deck[0]?.uid as number;
+		const sell = run(s, choose(1, [uid])).s;
+		expect(sell.gold).toBe(75);
+		expect(sell.deck.some((c) => c.uid === uid)).toBe(false);
+	});
+
+	test('Ashen Vigil: H1 +3 stress and all heal 15%; or all heal 10 and +1 stress', () => {
+		const s = eventRun('ev_ashen_vigil');
+		for (const h of s.party) h.hp = 10;
+		const watch = run(s, choose(0)).s;
+		expect(watch.party[0]?.stress).toBe(3);
+		expect(watch.party[1]?.stress).toBe(0);
+		for (const h of watch.party) expect(h.hp).toBe(10 + Math.floor((maxHP(h) * 15) / 100));
+		const sleep = run(s, choose(1)).s;
+		for (const h of sleep.party) {
+			expect(h.hp).toBe(20);
+			expect(h.stress).toBe(1);
+		}
+	});
+
+	test('Flagellant Procession: +3 stress each to upgrade 2 chosen cards; or 20 gold for -2 stress each', () => {
+		const s = eventRun('ev_flagellant_procession');
+		for (const h of s.party) h.stress = 4;
+		const [a, b] = [s.deck[2]?.uid as number, s.deck[3]?.uid as number];
+		const join = run(s, choose(0, [a, b])).s;
+		for (const h of join.party) expect(h.stress).toBe(7);
+		expect(join.deck.filter((c) => c.upgraded).map((c) => c.uid)).toEqual([a, b]);
+		const alms = run(s, choose(1)).s;
+		expect(alms.gold).toBe(s.gold - 20);
+		for (const h of alms.party) expect(h.stress).toBe(2);
+	});
+
+	test('Gravewright: the weakest loses 6 HP to remove a chosen card; or 45 gold buys the common relic', () => {
+		const s = eventRun('ev_gravewright');
+		s.gold = 60;
+		const uid = s.deck[5]?.uid as number;
+		(s.party[2] as { hp: number }).hp = 9;
+		const bury = run(s, choose(0, [uid])).s;
+		expect(bury.party[2]?.hp).toBe(3);
+		expect(bury.deck.some((c) => c.uid === uid)).toBe(false);
+		const buy = run(s, choose(1)).s;
+		expect(buy.gold).toBe(15);
+		expect(buy.stash).toContain('eq_bone_reliquary');
+	});
+
+	test('Sealed Grille: H1 -5 stress and loses 6 HP; or 2 random upgrades and +1 stress each', () => {
+		const s = eventRun('ev_sealed_grille');
+		for (const h of s.party) h.stress = 6;
+		const confess = run(s, choose(0)).s;
+		expect(confess.party[0]?.stress).toBe(1);
+		expect(confess.party[1]?.stress).toBe(6);
+		expect(confess.party[0]?.hp).toBe((s.party[0]?.hp as number) - 6);
+		expect(s.event?.upgradeUids).toHaveLength(2);
+		const listen = run(s, choose(1)).s;
+		expect(
+			listen.deck
+				.filter((c) => c.upgraded)
+				.map((c) => c.uid)
+				.sort(),
+		).toEqual([...(s.event?.upgradeUids ?? [])].sort());
+		for (const h of listen.party) expect(h.stress).toBe(7);
+	});
+});
+
 describe('treasure (GDD 22.4)', () => {
 	test('claim gives 25 gold and the rolled uncommon or rare item, then the camp opens', () => {
 		const s = createRun(4, PARTY);

@@ -126,6 +126,100 @@ export const EVENTS: Record<string, EventDef> = {
 			LEAVE,
 		],
 	},
+	// Alpha events 7-12 (PLAN A3.2): same effect types, every outcome shown before the choice.
+	ev_drowned_reliquary: {
+		id: 'ev_drowned_reliquary',
+		choices: [
+			{
+				effects: [
+					{ kind: 'damageH1', amount: 8 },
+					{ kind: 'equipment', rarity: 'common' },
+				],
+			},
+			{
+				effects: [
+					{ kind: 'damageLowest', amount: 5 },
+					{ kind: 'gold', amount: 35 },
+				],
+			},
+			LEAVE,
+		],
+	},
+	ev_bone_cartographer: {
+		id: 'ev_bone_cartographer',
+		choices: [
+			{ cost: 35, effects: [{ kind: 'cardOffer', rarity: 'uncommon', count: 3 }] },
+			{
+				effects: [
+					{ kind: 'removeChoose', count: 1 },
+					{ kind: 'gold', amount: 25 },
+				],
+			},
+			LEAVE,
+		],
+	},
+	ev_ashen_vigil: {
+		id: 'ev_ashen_vigil',
+		choices: [
+			{
+				effects: [
+					{ kind: 'stressH1', amount: 3 },
+					{ kind: 'healPctEach', pct: 15 },
+				],
+			},
+			{
+				effects: [
+					{ kind: 'healEach', amount: 10 },
+					{ kind: 'stressEach', amount: 1 },
+				],
+			},
+			LEAVE,
+		],
+	},
+	ev_flagellant_procession: {
+		id: 'ev_flagellant_procession',
+		choices: [
+			{
+				effects: [
+					{ kind: 'stressEach', amount: 3 },
+					{ kind: 'upgradeChoose', count: 2 },
+				],
+			},
+			{ cost: 20, effects: [{ kind: 'stressEach', amount: -2 }] },
+			LEAVE,
+		],
+	},
+	ev_gravewright: {
+		id: 'ev_gravewright',
+		choices: [
+			{
+				effects: [
+					{ kind: 'damageLowest', amount: 6 },
+					{ kind: 'removeChoose', count: 1 },
+				],
+			},
+			{ cost: 45, effects: [{ kind: 'relic', rarity: 'common' }] },
+			LEAVE,
+		],
+	},
+	ev_sealed_grille: {
+		id: 'ev_sealed_grille',
+		choices: [
+			{
+				effects: [
+					{ kind: 'stressH1', amount: -5 },
+					{ kind: 'damageH1', amount: 6 },
+				],
+			},
+			{
+				effects: [
+					{ kind: 'upgradeRandom', count: 2 },
+					{ kind: 'stressEach', amount: 1 },
+				],
+			},
+			LEAVE,
+		],
+	},
 };
 
 export const EVENT_IDS = Object.keys(EVENTS);

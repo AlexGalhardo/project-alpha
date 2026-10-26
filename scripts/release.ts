@@ -35,7 +35,7 @@ const arg = process.argv[2] ?? 'patch';
 if (arg !== 'patch' && arg !== 'minor' && arg !== 'major') throw new Error(`invalid bump: ${arg}`);
 
 if (run(['git', 'branch', '--show-current']) !== 'main') throw new Error('release only from main');
-if (run(['git', 'status', '--porcelain']) !== '') throw new Error('working tree is not clean');
+if (run(['git', 'status', '--porcelain', '--untracked-files=no']) !== '') throw new Error('working tree is not clean');
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8')) as { version: string };
 const head = run(['git', 'log', '-1', '--format=%s']);

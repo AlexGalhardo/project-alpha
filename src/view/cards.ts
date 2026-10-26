@@ -92,16 +92,25 @@ export function drawCard(
 	// Value chips: shape + colour + number (art bible §5 tokens), so the card reads without its text.
 	const v = cardValues(cardId, upgraded);
 	const hits = (upgraded ? def.upgrade.hits : undefined) ?? def.params.hits ?? 1;
-	const chips: [string, number][] = [];
-	if (v.damage !== undefined) chips.push(['damage', v.damage]);
-	if (v.block !== undefined) chips.push(['block', v.block]);
-	if (v.heal !== undefined) chips.push(['heal', v.heal]);
-	if (v.stacks !== undefined) chips.push(['stacks', v.stacks]);
-	if (v.draw !== undefined) chips.push(['draw', v.draw]);
+	const p = upgraded ? { ...def.params, ...def.upgrade } : def.params;
+	// [kind, text]: numbers for plain values; glyph text for effects with no single number
+	// (Shield Slam "=", Absolve stress relief, Rekindle revive %, Channel energy next turn).
+	const chips: [string, string][] = [];
+	if (v.damage !== undefined)
+		chips.push(['damage', hits > 1 ? `${v.damage}x${hits}` : `${v.damage}`]);
+	else if (p.cap !== undefined) chips.push(['damage', '=']);
+	if (v.block !== undefined) chips.push(['block', `${v.block}`]);
+	else if (p.cap !== undefined) chips.push(['block', p.preBlock ? `+${p.preBlock}` : '']);
+	if (v.heal !== undefined) chips.push(['heal', `${v.heal}`]);
+	if (p.pct !== undefined) chips.push(['heal', `${p.pct}%`]);
+	if (v.stacks !== undefined) chips.push(['stacks', `${v.stacks}`]);
+	if (v.stress !== undefined) chips.push(['stacks', `-${v.stress}`]);
+	if (v.draw !== undefined) chips.push(['draw', `${v.draw}`]);
+	if (p.energyNext !== undefined) chips.push(['energy', `+${p.energyNext}`]);
 	const chipY = name.height > 12 ? 62 : 54;
 	const cg = scene.add.graphics();
 	let x = 4;
-	for (const [kind, n] of chips.slice(0, 3)) {
+	for (const [kind, text] of chips.slice(0, 3)) {
 		const color =
 			kind === 'damage'
 				? P.blood2
@@ -111,7 +120,9 @@ export function drawCard(
 						? P.rot2
 						: kind === 'stacks'
 							? P.rift2
-							: P.bone1;
+							: kind === 'energy'
+								? P.ember3
+								: P.bone1;
 		cg.fillStyle(color);
 		if (kind === 'damage') cg.fillTriangle(x, chipY + 7, x + 6, chipY + 7, x + 3, chipY + 1);
 		else if (kind === 'block') cg.fillRect(x, chipY + 1, 6, 6);
@@ -125,8 +136,8 @@ export function drawCard(
 				x + 3,
 				chipY + 8,
 			);
+		else if (kind === 'energy') cg.fillCircle(x + 3, chipY + 4, 3);
 		else cg.fillRect(x + 1, chipY, 4, 7);
-		const text = kind === 'damage' && hits > 1 ? `${n}x${hits}` : `${n}`;
 		const t2 = label(scene, x + 8, chipY - 1, text, 'tiny', 'bone2');
 		c.add(t2);
 		x += 10 + t2.width + 2;

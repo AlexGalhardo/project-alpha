@@ -1,8 +1,8 @@
 import type Phaser from 'phaser';
 import { app } from './app';
 
-// shortcut: synthesized placeholder SFX keyed like docs/gdd.md §17.1 until the ElevenLabs set
-// passes the cost gate; swap `play` to Phaser's sound manager with the same keys then.
+// Generated ElevenLabs files play through Phaser's sound manager; the synthesized tones below are
+// the fallback when a file is missing or failed to load, so the game never goes silent by error.
 type Wave = OscillatorType | 'noise';
 
 interface Tone {
@@ -53,11 +53,99 @@ function contextOf(scene: Phaser.Scene): AudioContext | null {
 let noise: AudioBuffer | null = null;
 
 /** Plays a placeholder SFX; silently does nothing when audio is locked, missing or muted. */
-export function play(scene: Phaser.Scene, key: string): void {
-	const tones = TONES[key];
-	const ctx = contextOf(scene);
+/** Generated sound set (ElevenLabs, public/assets/audio); see art-src/audio/generation-log.json. */
+export const AUDIO_KEYS = [
+	'music.menu',
+	'music.map',
+	'music.combat',
+	'music.boss',
+	...[
+		'block.absorb',
+		'block.break',
+		'block.gain',
+		'card.draw',
+		'card.exhaust',
+		'card.invalid',
+		'card.play',
+		'card.upgrade',
+		'flow.defeat',
+		'flow.reward',
+		'flow.victory',
+		'hit.blunt',
+		'hit.fire',
+		'hit.multi',
+		'hit.pierce',
+		'hit.slash',
+		'status.bleed',
+		'status.burn',
+		'status.marked',
+		'status.stun',
+		'status.ward',
+		'status.weakened',
+		'stress.collapse',
+		'stress.gain',
+		'stress.relief',
+		'ui.cancel',
+		'ui.close',
+		'ui.coin',
+		'ui.confirm',
+		'ui.end_turn',
+		'ui.open',
+		'ui.tap',
+		'unit.boss_phase',
+		'unit.enemy_death',
+		'unit.hero_fall',
+	].map((k) => `sfx.${k}`),
+] as const;
+
+/** Queue the generated files; missing files only log a load error and fall back to synthesis. */
+export function preloadAudio(scene: Phaser.Scene): void {
+	for (const key of AUDIO_KEYS) {
+		scene.load.audio(key, [`assets/audio/${key}.ogg`, `assets/audio/${key}.mp3`]);
+	}
+}
+
+// Older code keys mapped to the generated set.
+const ALIAS: Record<string, string> = {
+	'sfx.unit.fall': 'sfx.unit.hero_fall',
+	'sfx.unit.heal': 'sfx.stress.relief',
+};
+
+let currentMusic: Phaser.Sound.BaseSound | null = null;
+let currentMusicKey = '';
+
+/** Loops one music track for the whole game; switching keys crossfades by stopping the old one. */
+export function playMusic(scene: Phaser.Scene, key: string): void {
+	if (currentMusicKey === key && currentMusic?.isPlaying) return;
+	currentMusic?.stop();
+	currentMusic = null;
+	currentMusicKey = key;
+	if (!scene.cache.audio.exists(key)) return;
+	const volume = app.settings.musicVolume / 100;
+	currentMusic = scene.sound.add(key, { loop: true, volume });
+	// Locked audio (no gesture yet) starts automatically on unlock; otherwise play now.
+	if (scene.sound.locked) scene.sound.once('unlocked', () => currentMusic?.play());
+	else currentMusic.play();
+}
+
+export function setMusicVolume(volume: number): void {
+	const sound = currentMusic as
+		| (Phaser.Sound.BaseSound & { setVolume?: (v: number) => void })
+		| null;
+	sound?.setVolume?.(volume / 100);
+}
+
+export function play(scene: Phaser.Scene, rawKey: string): void {
+	const key = ALIAS[rawKey] ?? rawKey;
 	const volume = app.settings.sfxVolume / 100;
-	if (!tones || !ctx || volume <= 0) return;
+	if (volume <= 0) return;
+	if (scene.cache.audio.exists(key) && !scene.sound.locked) {
+		scene.sound.play(key, { volume });
+		return;
+	}
+	const tones = TONES[rawKey] ?? TONES[key];
+	const ctx = contextOf(scene);
+	if (!tones || !ctx) return;
 	const now = ctx.currentTime;
 	for (const tone of tones) {
 		const gain = ctx.createGain();

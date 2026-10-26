@@ -470,7 +470,11 @@ export function spriteCanvas(key: string): HTMLCanvasElement | null {
 	canvas.height = spec.h;
 	const ctx = canvas.getContext('2d');
 	if (!ctx) return null;
-	ctx.putImageData(new ImageData(pix.toRGBA(), spec.w, spec.h), 0, 0);
+	ctx.putImageData(
+		new ImageData(pix.toRGBA() as Uint8ClampedArray<ArrayBuffer>, spec.w, spec.h),
+		0,
+		0,
+	);
 	return canvas;
 }
 
@@ -537,6 +541,6 @@ export function backgroundCanvas(key: string, w = 640, h = 360): HTMLCanvasEleme
 	canvas.height = h;
 	const ctx = canvas.getContext('2d');
 	if (!ctx) return null;
-	ctx.putImageData(new ImageData(make(w, h), w, h), 0, 0);
+	ctx.putImageData(new ImageData(make(w, h) as Uint8ClampedArray<ArrayBuffer>, w, h), 0, 0);
 	return canvas;
 }

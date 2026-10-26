@@ -1,12 +1,29 @@
 import Phaser from 'phaser';
 import { play } from './audio';
+import { type FontToken, fontKey, fontSize } from './fonts';
 import { css, P, type PaletteKey } from './palette';
 
-// shortcut: Phaser Text (browser-rasterised) until the BitmapText atlases of docs/art-bible.md §8
-// are generated; swap these helpers to BitmapText when `font.*` atlases land (PLAN P2.3).
-export type FontToken = 'tiny' | 'ui' | 'h2' | 'h1' | 'display';
+export type { FontToken } from './fonts';
 
-const FONT_PX: Record<FontToken, number> = { tiny: 8, ui: 11, h2: 16, h1: 22, display: 28 };
+/**
+ * 1-bit BitmapText (fonts built at boot, src/view/fonts.ts) with the few Text-style helpers the
+ * scenes use, so callers stay the same. Colour is a tint on white glyphs.
+ */
+export class PixelText extends Phaser.GameObjects.BitmapText {
+	setWordWrapWidth(width: number): this {
+		return this.setMaxWidth(width);
+	}
+
+	setAlign(align: 'left' | 'center' | 'right'): this {
+		if (align === 'center') return this.setCenterAlign();
+		if (align === 'right') return this.setRightAlign();
+		return this.setLeftAlign();
+	}
+
+	setColor(color: string): this {
+		return this.setTint(Number.parseInt(color.replace('#', ''), 16));
+	}
+}
 
 export function label(
 	scene: Phaser.Scene,
@@ -15,15 +32,10 @@ export function label(
 	text: string,
 	font: FontToken = 'ui',
 	color: PaletteKey = 'bone2',
-): Phaser.GameObjects.Text {
-	return scene.add
-		.text(x, y, text, {
-			fontFamily: 'monospace',
-			fontSize: `${FONT_PX[font]}px`,
-			color: css(color),
-			resolution: 1,
-		})
-		.setOrigin(0, 0);
+): PixelText {
+	const t = new PixelText(scene, x, y, fontKey(font), text, fontSize(scene, font));
+	scene.add.existing(t);
+	return t.setOrigin(0, 0).setTint(P[color]);
 }
 
 export function panel(
@@ -54,7 +66,7 @@ export interface ButtonOptions {
 /** Hover-free button: pressed state on pointerdown, action on pointerup inside (docs/art-bible.md §9.2). */
 export class Button extends Phaser.GameObjects.Container {
 	private readonly bg: Phaser.GameObjects.Graphics;
-	private readonly text: Phaser.GameObjects.Text;
+	private readonly text: PixelText;
 	private enabled = true;
 	private selected = false;
 	readonly w: number;
@@ -74,7 +86,13 @@ export class Button extends Phaser.GameObjects.Container {
 		this.h = opts.h ?? 28;
 		this.danger = opts.danger ?? false;
 		this.bg = scene.add.graphics();
-		this.text = label(scene, this.w / 2, this.h / 2, caption, opts.font ?? 'ui').setOrigin(0.5);
+		let text = label(scene, this.w / 2, this.h / 2, caption, opts.font ?? 'ui').setOrigin(0.5);
+		// Long captions (PT-BR) drop to the tiny font instead of overflowing the button.
+		if (text.width > this.w - 6 && (opts.font ?? 'ui') === 'ui') {
+			text.destroy();
+			text = label(scene, this.w / 2, this.h / 2, caption, 'tiny').setOrigin(0.5);
+		}
+		this.text = text;
 		this.add([this.bg, this.text]);
 		this.setSize(this.w, this.h);
 		this.setInteractive(
@@ -123,4 +141,11 @@ export class Button extends Phaser.GameObjects.Container {
 		this.text.setColor(this.enabled ? css('bone2') : css('ash5'));
 		this.text.setY(this.h / 2 + (pressed ? 1 : 0));
 	}
+}
+
+/** Full-screen background (src/view/pixelgen.ts keys) behind everything, with an optional dim layer. */
+export function backdrop(scene: Phaser.Scene, key: string, dim = 0): void {
+	if (!scene.textures.exists(key)) return;
+	scene.add.image(0, 0, key).setOrigin(0).setDepth(-2);
+	if (dim > 0) scene.add.rectangle(0, 0, 640, 360, P.ash0, dim).setOrigin(0).setDepth(-1);
 }

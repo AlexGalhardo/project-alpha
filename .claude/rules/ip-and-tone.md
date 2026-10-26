@@ -1,34 +1,34 @@
-# Regras de propriedade intelectual e tom
+# Intellectual property and tone rules
 
-O jogo se inspira no **tom** de Warhammer 40k, DOOM: The Dark Ages, Alien e Predator, e na **estrutura** de Darkest Dungeon e Slay the Spire. Nunca em nomes, símbolos, heráldica, silhuetas, personagens ou cosmologias reconhecíveis dessas obras.
+The game draws on the **tone** of Warhammer 40k, DOOM: The Dark Ages, Alien and Predator, and on the **structure** of Darkest Dungeon and Slay the Spire. Never on names, symbols, heraldry, silhouettes, characters or cosmologies recognizable from those works.
 
-Esta lista vale para o conteúdo do jogo (texto, nomes, chaves, prompts, assets). Regras, pesquisa e ADRs podem citar as obras apenas para defini-las ou proibi-las.
+This list applies to game content (text, names, keys, prompts, assets). Rules, research and ADRs may cite the works only to define or prohibit them.
 
-## Proibido em qualquer texto, nome de arquivo, chave, prompt de geração ou asset
+## Forbidden in any text, file name, key, generation prompt or asset
 
-- Games Workshop: Warhammer, Space Marine, Adeptus (qualquer), Astartes, Astra Militarum, Imperium of Man, Ork, Eldar, Aeldari, Necron, Tyranid, Tau, Primarch, Bolter, Inquisition como organização, Ecclesiarchy, Mechanicus, Chaos Gods e seus nomes; "o Imperador" como deus-cadáver em trono, "a Dobra" como dimensão demoníaca, águia bicéfala.
-- Alien: Xenomorph, Facehugger, Chestburster, Weyland-Yutani, Nostromo, Engineers como raça criadora; silhueta de cabeça alongada lisa com segunda mandíbula.
-- Predator: Yautja, máscara biomecânica com mandíbulas de quatro presas, mira laser de três pontos como assinatura.
-- DOOM: Doom Slayer, Argent, Sentinel, UAC, Maykr, nomes de demônios e armas da franquia.
-- Darkest Dungeon e Slay the Spire: nomes de classes, personagens, inimigos, cartas, relíquias, lugares (Hamlet, Ancestor, Spire, Neow etc.) e o narrador como personagem.
-- Em prompts de geração de arte ou áudio: nunca "no estilo de" seguido de obra, estúdio ou artista.
+- Games Workshop: Warhammer, Space Marine, Adeptus (any), Astartes, Astra Militarum, Imperium of Man, Ork, Eldar, Aeldari, Necron, Tyranid, Tau, Primarch, Bolter, Inquisition as an organization, Ecclesiarchy, Mechanicus, Chaos Gods and their names; "the Emperor" as a corpse-god on a throne, "the Warp" as a demonic dimension, the two-headed eagle.
+- Alien: Xenomorph, Facehugger, Chestburster, Weyland-Yutani, Nostromo, Engineers as a creator race; smooth elongated head silhouette with a second jaw.
+- Predator: Yautja, biomechanical mask with four-fanged mandibles, three-point laser sight as a signature.
+- DOOM: Doom Slayer, Argent, Sentinel, UAC, Maykr, demon and weapon names from the franchise.
+- Darkest Dungeon and Slay the Spire: names of classes, characters, enemies, cards, relics, places (Hamlet, Ancestor, Spire, Neow, etc.) and the narrator as a character.
+- In art or audio generation prompts: never "in the style of" followed by a work, studio or artist.
 
-## Permitido
+## Allowed
 
-- Tropos genéricos: império em decadência, fé militarizada, tecnologia como relíquia, horror biomecânico, caçador alienígena, arquitetura gótica, armadura pesada.
-- Nomes genéricos de classe e arma: templário, atirador, arcanista, curandeiro, bombardeiro, espada, besta.
-- Mecânicas de gênero: energia, compra/descarte, intenção inimiga, posição em fileira, estresse, mapa de nós, relíquias.
+- Generic tropes: a decaying empire, militarized faith, technology as relic, biomechanical horror, alien hunter, gothic architecture, heavy armor.
+- Generic class and weapon names: templar, marksman, arcanist, healer, bombardier, sword, crossbow.
+- Genre mechanics: energy, draw/discard, enemy intent, row position, stress, node map, relics.
 
-## Nome novo
+## New names
 
-Facção, lugar, inimigo, carta ou item novo: conferir contra esta lista e buscar na web se já é nome de obra conhecida. O vocabulário próprio do jogo vive no GDD.
+A new faction, place, enemy, card or item: check it against this list and search the web to see whether it is already the name of a known work. The game's own vocabulary lives in the GDD.
 
-## Tom
+## Tone
 
-- Sombrio e seco, sem humor de paródia. Violência sugerida, não gráfica gratuita.
-- Sem conteúdo sexual, sem apologia de ideologia real, sem símbolos de ódio.
-- Textos curtos: evento em 2 a 4 parágrafos, descrição de carta/item em 1 a 2 linhas.
+- Dark and dry, with no parody humor. Suggested violence, not gratuitous gore.
+- No sexual content, no endorsement of real ideology, no hate symbols.
+- Short texts: an event in 2 to 4 paragraphs; a card or item description in 1 to 2 lines.
 
-## Material de referência
+## Reference material
 
-`references/` e PDFs são material de terceiros para estudo. Nunca copiar trechos, recortar imagens ou embarcar no jogo.
+`references/` and the PDFs in the root are third-party study material. Never copy excerpts, crop images or ship them in the game.

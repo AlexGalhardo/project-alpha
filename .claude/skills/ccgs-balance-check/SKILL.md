@@ -7,12 +7,12 @@ allowed-tools: Read, Glob, Grep, Write, AskUserQuestion
 model: sonnet
 ---
 
-> **project-alpha:** skill de terceiros (`Donchitos/Claude-Code-Game-Studios`, MIT). Em conflito valem `AGENTS.md`, `.claude/rules/` e `docs/gdd.md`: Phaser 4, Bun, roguelite deckbuilder dark fantasy com combate por turnos em fileira lateral; lógica pura em `src/core`, números em `src/data`, textos em `src/i18n`. Ela assume as pastas `design/` e `production/` do Claude-Code-Game-Studios. **Mapeie:** `design/gdd/*` → `docs/gdd.md` e `docs/sdd/balancing.md`; `design/art/*` → `docs/art-bible.md`; `production/*` → `docs/reports/<skill>-<data>.md`; sprints/milestones → `PLAN.md`. Não invoque agentes que não existem aqui.
+> **project-alpha:** third-party skill (`Donchitos/Claude-Code-Game-Studios`, MIT). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4, Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`. It assumes the `design/` and `production/` folders of Claude-Code-Game-Studios. **Map:** `design/gdd/*` → `docs/gdd.md` e `docs/sdd/balancing.md`; `design/art/*` → `docs/art-bible.md`; `production/*` → `docs/reports/<skill>-<data>.md`; sprints/milestones → `PLAN.md`. Do not invoke agents that do not exist here.
 >
-> **Escopo aqui:** os dados de balanceamento vêm do simulador headless (`bun run sim`, ver `docs/sdd/balancing.md`), não de planilhas ou estimativas; os números vivem em `src/data`.
+> **Scope here:** balancing data comes from the headless simulator (`bun run sim`, see `docs/sdd/balancing.md`), not from spreadsheets or estimates; the numbers live in `src/data`.
 
 
-> (Config automática do CCGS removida: este projeto não tem `production/` nem os hooks do CCGS; use os padrões da skill.)
+> (CCGS automatic config removed: this project has no `production/` and no CCGS hooks; use the skill's defaults.)
 
 
 

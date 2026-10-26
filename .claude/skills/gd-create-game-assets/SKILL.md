@@ -3,9 +3,9 @@ name: gd-create-game-assets
 description: Plan, generate, source, normalize, and validate cohesive visual game assets. Use for art direction, style bibles, sprites, tilesets, backgrounds, UI art, icons, textures, concept art, or 3D asset briefs.
 ---
 
-> **project-alpha:** skill de terceiros (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). Em conflito valem `AGENTS.md`, `.claude/rules/` e `docs/gdd.md`: Phaser 4, Bun, roguelite deckbuilder dark fantasy com combate por turnos em fileira lateral; lógica pura em `src/core`, números em `src/data`, textos em `src/i18n`.
+> **project-alpha:** third-party skill (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4, Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`.
 >
-> **Escopo aqui:** o pipeline de arte deste jogo está em `docs/art-bible.md` (a definir) e nas skills `pixel-logic` (regras de pixel art) e `alpha-art-assets` (geração, specs e chaves); elas prevalecem sobre esta skill. Os scripts Python citados abaixo (`asset_report.py`, `build_preview_sheet.py`) não estão instalados e não são usados (Bun only): os validadores equivalentes ficam em `bun scripts/assets/...`, a criar (PLAN, fase PROTÓTIPO).
+> **Scope here:** the art pipeline of this game is in `docs/art-bible.md` (to be defined) and in the `pixel-logic` (pixel-art rules) and `alpha-art-assets` (generation, specs and keys) skills; they prevail over this skill. The Python scripts cited below (`asset_report.py`, `build_preview_sheet.py`) are not installed and are not used (Bun only): the equivalent validators live in `bun scripts/assets/...`, to be created (PLAN, PROTOTYPE phase).
 
 
 # Create Game Assets

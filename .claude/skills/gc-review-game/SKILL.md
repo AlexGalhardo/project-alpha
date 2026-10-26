@@ -9,7 +9,7 @@ metadata:
   tags: [game, review, architecture, best-practices, code-quality]
 ---
 
-> **project-alpha:** skill de terceiros (`PlayableIntelligence/game-creator`, MIT). Use como checklist/guia; **não** gere scaffold, templates ou deploy próprios da skill (a estrutura do projeto está em `docs/sdd/architecture.md`). Em conflito valem `AGENTS.md`, `.claude/rules/` e `docs/gdd.md`: Phaser 4 (não 3), Bun, roguelite deckbuilder dark fantasy com combate por turnos em fileira lateral; lógica pura em `src/core`, números em `src/data`, textos em `src/i18n`; arte via PixelLab, áudio via ElevenLabs.
+> **project-alpha:** third-party skill (`PlayableIntelligence/game-creator`, MIT). Use it as a checklist/guide; **do not** generate the skill's own scaffold, templates or deploy (the project structure is in `docs/sdd/architecture.md`). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4 (not 3), Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`; art via PixelLab, audio via ElevenLabs.
 
 
 ## Performance Notes

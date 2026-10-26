@@ -1,297 +1,299 @@
-# Digest das referências do desenvolvedor
+# Digest of the developer's references
 
-Fontes lidas: `references/chatgpt/conversation.md` (3074 linhas, inteiro), `references/concept-arts/*.png` (24), `references/wireframes/*.png` (13), e o repositório `AlexGalhardo/zeta-c` via `gh`.
+Sources read: `references/chatgpt/conversation.md` (3,074 lines, in full), `references/concept-arts/*.png` (24), `references/wireframes/*.png` (13), and the repository `AlexGalhardo/zeta-c` via `gh`.
 
-## Resumo
+Quoted in-game strings are kept in Portuguese (PT-BR) where they are the actual text shown in the concepts; the English gloss is given in parentheses.
 
-1. O material de referência se chama **DARKEON** (ChatGPT, concepts, wireframes). Nome do projeto novo ainda não confirmado (ver Contradições).
-2. Combate por turnos em fileira: 3 heróis à esquerda, 3 a 5 inimigos à direita, HUD superior, mão de cartas embaixo, botão Fim do Turno.
-3. Roster de referência (concepts 23 a 27): Guerreiro, Mago, Curandeiro, Artilharia, Arqueiro. A equipe de combate tem 3 heróis.
-4. Cartas com custo em energia (3 por turno no padrão), recarga de habilidades em turnos, status (Sangria, Veneno, Fraqueza, Corrupção, Marcado, Queimadura).
-5. Mapa de progressão: trilha de nós com caveiras e chefe final (batle-2, batle-6, batle-7).
-6. Metaprogressão: árvores de maestria por herói, árvore de pactos de equipe ("Eclipse dos Três") e árvore radial permanente ("Legado do Abismo", com fragmentos).
-7. Economia: Ouro (moeda de loja), Vida como custo de pacto, Fragmentos (metaprogressão), Relíquias.
-8. Lojas: Mercador (grade 3x3), Arsenal (equipamento, comparação), Relicário (pactos de risco).
-9. A UI é consistente entre telas: mesmas faixas, painéis de pedra escura, botões retangulares com borda dourada no foco.
-10. Os wireframes técnicos (1920x1080, coordenadas em px) são a fonte numérica; os concepts são referência visual. A ideia de "geometria numérica vence arte" está no ChatGPT e é boa.
+## Summary
 
-## Ideias do ChatGPT
+1. The reference material is called **DARKEON** (ChatGPT, concepts, wireframes). The new project's name is not confirmed yet (see Contradictions).
+2. Turn-based combat in ranks: 3 heroes on the left, 3 to 5 enemies on the right, top HUD, card hand at the bottom, End Turn button.
+3. Reference roster (concepts 23 to 27): Warrior, Mage, Healer, Artillery, Archer. The combat party has 3 heroes.
+4. Cards with energy cost (3 per turn by default), ability cooldowns in turns, statuses (Bleed, Poison, Weakness, Corruption, Marked, Burn).
+5. Progression map: a node trail with skulls and a final boss (batle-2, batle-6, batle-7).
+6. Meta-progression: mastery trees per hero, a team-pact tree ("Eclipse of the Three") and a permanent radial tree ("Legacy of the Abyss", with fragments).
+7. Economy: Gold (shop currency), Health as a pact cost, Fragments (meta-progression), Relics.
+8. Shops: Merchant (3x3 grid), Arsenal (equipment, comparison), Reliquary (risky pacts).
+9. The UI is consistent across screens: same bands, dark-stone panels, rectangular buttons with a gold border on focus.
+10. The technical wireframes (1920x1080, pixel coordinates) are the numeric source; the concepts are visual references. The ChatGPT's idea that "numeric geometry beats art" is good.
 
-Organizado por tema. Itens com "(ChatGPT)" são propostas literais; itens com "(contradição)" estão em outra seção.
+## Ideas from ChatGPT
 
-### Conceito e tom
+Organized by theme. Items marked "(ChatGPT)" are literal proposals; items marked "(contradiction)" are in another section.
 
-- Roguelite + deckbuilding + RPG, dark fantasy, pixel art 2D lateral, universo original.
-- Inspirações citadas: Darkest Dungeon (silhueta, atmosfera), Slay the Spire 2 (mão, legibilidade), DOOM The Dark Ages (metal, escala), Warhammer 40k e Space Marine 2 (arquitetura, corrupção), Alien/Predator (horror biomecânico). Ver Contradições: nomes de obras de terceiros aparecem no texto.
-- Tom: gótico opressivo, medieval-industrial, horror alienígena antigo, maquinaria oculta.
+### Concept and tone
 
-### Heróis e classes
+- Roguelite + deckbuilding + RPG, dark fantasy, 2D side-view pixel art, original universe.
+- Cited inspirations: Darkest Dungeon (silhouette, atmosphere), Slay the Spire 2 (hand, legibility), DOOM The Dark Ages (metal, scale), Warhammer 40k and Space Marine 2 (architecture, corruption), Alien/Predator (biomechanical horror). See Contradictions: third-party work names appear in the text.
+- Tone: oppressive gothic, medieval-industrial, ancient alien horror, occult machinery.
 
-- Três heróis fixos na equipe: **Dreadguard** (tanque, escudo retangular, espada serrilhada), **Blood Huntress** (DPS/assassina, duas lâminas, máscara óssea), **Void Inquisitor** (mago/suporte, cajado espinhoso, máscara sem rosto).
-- Ordem visual: Inquisidor, Caçadora, Dreadguard (Dreadguard mais perto dos inimigos).
-- Cinco classes para detalhes (concepts 23 a 27), nível 25 de exemplo:
-  - Guerreiro: vida 420, ataque 62, defesa 115; bloqueio e provocação.
-  - Mago: vida 180, ataque mágico 125, defesa 28; dano em área e controle.
-  - Curandeiro: vida 240, cura 135, defesa 42; cura, purificação, ressurreição, escudo.
-  - Artilharia: vida 310, ataque 110, defesa 70; dano em área, canhão medieval-industrial, queimadura.
-  - Arqueiro: vida 230, ataque 105, defesa 32; crítico, marcação, veneno.
-- Cada herói tem seis habilidades (I a VI) com custo de energia e recarga em turnos.
-- Atributos listados: vida, mana, ataque, defesa, força/destreza/inteligência/fé (conforme classe), crítico, velocidade, bloqueio, resistências (físico, fogo, gelo, veneno, vazio). Pontos disponíveis: 3.
-- Slots de equipamento: capacete, armadura, arma, escudo/canhão/arco/cajado, amuleto, anel.
+### Heroes and classes
 
-### Combate
+- Three fixed heroes in the party: **Dreadguard** (tank, rectangular shield, serrated sword), **Blood Huntress** (DPS/assassin, two blades, bone mask), **Void Inquisitor** (mage/support, spiked staff, faceless mask).
+- Visual order: Inquisitor, Huntress, Dreadguard (Dreadguard nearest the enemies).
+- Five classes for the detail screens (concepts 23 to 27), example at level 25:
+  - Warrior: health 420, attack 62, defense 115; block and taunt.
+  - Mage: health 180, magic attack 125, defense 28; area damage and control.
+  - Healer: health 240, healing 135, defense 42; healing, purification, revival, shield.
+  - Artillery: health 310, attack 110, defense 70; area damage, medieval-industrial cannon, burn.
+  - Archer: health 230, attack 105, defense 32; crit, mark, poison.
+- Each hero has six abilities (I to VI) with energy cost and cooldown in turns.
+- Attributes listed: health, mana, attack, defense, strength/dexterity/intelligence/faith (per class), crit, speed, block, resistances (physical, fire, ice, poison, void). Points available: 3.
+- Equipment slots: helmet, armor, weapon, shield/cannon/bow/staff, amulet, ring.
 
-- Mão de seis cartas visíveis como referência; energia 3/3 no início; energia usada para jogar cartas.
-- Posições: heróis à esquerda com barras individuais; inimigos em slots fixos (5 centros: 1098, 1250, 1402, 1554, 1706 em wireframe).
-- Intenção do inimigo mostrada (ataque, defesa, maldição, invocação). Telegrafia de área (veneno, ovo de invocação).
-- Efeitos e status: Sangria, Veneno, Fraqueza, Corrupção, Marcado, Queimadura, Fortalecimento, Escudo/Bloqueio.
-- Ataque em cadeia: "LÂMINA GIRATÓRIA" atinge 3 inimigos (linha de alvo).
-- Elite: 20% de chance de encontro elite, como regra de encontro (não fixo por fase). Elite com barra própria e rótulo.
-- Corrupção de carta: carta da mão corrompida; PURIFICAR cancela.
-- Combo de relíquia: carta dispara relíquia (COMBO x3) com conexão visual dourada.
-- Chefe em fases (3 fases, pontos de fase); barra de HP de chefe com 10.000 de vida.
-- Recursos de combate: Ruptura, Marcado (+ dano), Fraqueza (carta de Fraqueza).
-- Cartas de exemplo (nome, custo, efeito): Golpe Devoto (1, causa 8), Sangria (1, causa 4 e aplica 3 Sangria), Bomba Ácida (1, causa 6 e Veneno 2), Selo Maldito (aplica 3 Fraqueza, compra 1), Guarda de Aço (concede 8 Bloqueio, compra 1); Cataclismo do Vazio (3, causa 60 em um alvo, +30 se marcado; versão de área 24 em concept 27).
-- Última carta de emergência: ÚLTIMO SACRAMENTO (2, restaura 40 de vida, adiciona Maldição ao baralho).
-- Pila de descarte e baralho visíveis com contagem; "Terminar Turno" em destaque.
+### Combat
 
-### Mapa e progressão de run
+- Hand of six visible cards as the reference; energy 3/3 at the start; energy spent to play cards.
+- Positions: heroes on the left with individual bars; enemies in fixed slots (5 centers: 1098, 1250, 1402, 1554, 1706 in the wireframe).
+- Enemy intent shown (attack, defense, curse, summon). Area telegraphs (poison, summoning egg).
+- Effects and statuses: Bleed, Poison, Weakness, Corruption, Marked, Burn, Fortify, Shield/Block.
+- Chain attack: "LÂMINA GIRATÓRIA" (WHIRLING BLADE) hits 3 enemies (target line).
+- Elite: 20% chance of an elite encounter, as an encounter rule (not fixed per stage). Elite with its own bar and label.
+- Card corruption: a card in hand is corrupted; PURIFICAR (PURIFY) cancels it.
+- Relic combo: a card triggers a relic (COMBO x3) with a gold visual link.
+- Boss in phases (3 phases, phase markers); boss HP bar with 10,000 HP.
+- Combat resources: Rupture, Marked (+ damage), Weakness (a Weakness card).
+- Example cards (name, cost, effect): Devoted Strike (1, deals 8), Bleed (1, deals 4 and applies 3 Bleed), Acid Bomb (1, deals 6 and Poison 2), Cursed Seal (applies 3 Weakness, draws 1), Iron Guard (grants 8 Block, draws 1); Void Cataclysm (3, deals 60 to one target, +30 if marked; area version 24 in concept 27).
+- Last-resort card: ÚLTIMO SACRAMENTO (LAST SACRAMENT) (2, restores 40 health, adds a Curse to the deck).
+- Discard pile and draw pile visible with counts; "Terminar Turno" (End Turn) highlighted.
 
-- Batalhas com "ROUND XX/10". Atos (ATO I) e nomes de locais: Catedral Abandonada, Pântano Biomecânico, Necrópole de Ferro, Campo de Guerra, Floresta do Sangue, Cidadela do Desespero, Forja Obsidiana, Catedral do Vazio (chefe).
-- Trilha de nós com ícones de caveira e coroa no fim (progresso da run).
-- Pré-chefe: "Cidadela do Desespero / Aproximação da Sala do Trono".
+### Map and run progression
 
-### Cartas e baralho
+- Battles labeled "ROUND XX/10". Acts (ATO I) and location names: Abandoned Cathedral, Biomechanical Swamp, Iron Necropolis, Field of War, Blood Forest, Citadel of Despair, Obsidian Forge, Void Cathedral (boss).
+- Node trail with skull icons and a crown at the end (run progress).
+- Pre-boss: "Cidadela do Desespero / Aproximação da Sala do Trono" (Citadel of Despair / Approach to the Throne Room).
 
-- Tipos de carta: Ataque, Defesa, Habilidade (com cor de faixa). Raridades: Comum, Incomum, Rara, Épica, Lendária.
-- Filtros no deckbuilder: por classe, raridade, tipo (TODAS, ATAQUE, DEFESA, HABILIDADE, SUPORTE, UTILIDADE conforme tela), busca.
-- Limite de baralho: 30 cartas (24/30 no exemplo). Cópias: x1, x2, x3 por carta.
-- Métricas do baralho: custo médio (1,5), energia base, curva média.
-- Sinergia de classe: cartas de Magia do Vazio.
-- AUTO-ORGANIZAR no grimório.
+### Cards and deck
 
-### Economia e loja
+- Card types: Attack, Defense, Skill (with a colored band). Rarities: Common, Uncommon, Rare, Epic, Legendary.
+- Deckbuilder filters: by class, rarity, type (ALL, ATTACK, DEFENSE, SKILL, SUPPORT, UTILITY depending on the screen), search.
+- Deck limit: 30 cards (24/30 in the example). Copies: x1, x2, x3 per card.
+- Deck metrics: average cost (1.5), base energy, average curve.
+- Class synergy: Void Magic cards.
+- AUTO-ORGANIZE in the grimoire.
 
-- Ouro: moeda de loja (exemplos: 150, 180, 350, 420, 850).
-- Lojas: Mercador (compra e venda, grade 3x3, painel de detalhe, COMPRAR), Arsenal (equipamento, comparação atual x selecionado, EQUIPAR/COMPRAR), Relicário (ofertas de relíquia com custo em ouro ou vida).
-- Pacto de Sangue: custa 20 de Vida e dá +2 energia no primeiro turno e +1 Corrupção.
-- Regra de moeda do ChatGPT: "Toda moeda e todo item alimenta uma decisão do jogador" (alinhado ao GDD).
+### Economy and shops
 
-### Metaprogressão e árvores
+- Gold: shop currency (examples: 150, 180, 350, 420, 850).
+- Shops: Merchant (buy and sell, 3x3 grid, detail panel, BUY), Arsenal (equipment, current vs. selected comparison, EQUIP/BUY), Reliquary (relic offers costing gold or health).
+- Blood Pact: costs 20 Health and gives +2 energy on the first turn and +1 Corruption.
+- ChatGPT's currency rule: "Every coin and every item feeds a player decision" (aligned with the GDD).
 
-- Árvore de maestria (individual): três ramos por herói, nós 1/5 a 5/5, pontos de habilidade, APRENDER.
-  - Guardião: Bastião (defesa), Executor (dano), Juramento (proteção/sacrifício).
-  - Caçadora e Inquisidor: ramos próprios (concept 17 mostra as três abas).
-- Árvore de equipe ("Pactos de Guerra"): triângulo com um vértice por herói; nós híbridos entre vértices; ultimate "Eclipse dos Três" (todos os heróis atacam o mesmo alvo; requer 3 vínculos; custo 3 pontos).
-- Árvore permanente ("Legado do Abismo"): radial, núcleo "Núcleo Eterno", quatro ramos (Sobrevivência, Arsenal, Conhecimento, Profanação), custo em Fragmentos (1.250 disponíveis), nível do legado.
-- Fragmentos e Nível do Legado: moedas entre runs.
-- Morte de unidade: não aparece no ChatGPT; ver Lacunas.
+### Meta-progression and trees
 
-### Menu e navegação
+- Mastery tree (individual): three branches per hero, nodes 1/5 to 5/5, skill points, LEARN.
+  - Guardian: Bastion (defense), Executor (damage), Oath (protection/sacrifice).
+  - Huntress and Inquisitor: their own branches (concept 17 shows the three tabs).
+- Team tree ("Pactos de Guerra", War Pacts): a triangle with one vertex per hero; hybrid nodes between vertices; ultimate "Eclipse dos Três" (all heroes attack the same target; requires 3 links; costs 3 points).
+- Permanent tree ("Legado do Abismo", Legacy of the Abyss): radial, core "Núcleo Eterno" (Eternal Core), four branches (Survival, Arsenal, Knowledge, Profanation), cost in Fragments (1,250 available), legacy level.
+- Fragments and Legacy Level: currencies between runs.
+- Unit death: not mentioned by ChatGPT; see Gaps.
 
-- Menu principal: CONTINUAR, NOVA JORNADA, PERSONAGENS/HERÓIS/COLEÇÃO, OPÇÕES, SAIR. Versão 0.1.0 no canto.
-- Três direções de menu (Fortaleza, Sala do Trono, Portal Alienígena). A recomendação do ChatGPT é a Fortaleza (Main Menu 01).
-- Menu de pausa: PAUSA, CONTINUAR, CONFIGURAÇÕES, REINICIAR RUN, MENU PRINCIPAL; aviso "O PROGRESSO DA RUN PODE SER PERDIDO"; ESC retoma.
-- Configurações: categorias GERAL, VÍDEO, ÁUDIO, JOGABILIDADE, INTERFACE, ACESSIBILIDADE; resolução, modo de tela, VSync, limite de FPS, escala de interface, escala de pixel (inteira), efeitos, partículas, tremor de tela.
-- Gestão de equipe: formação de 3 posições, ALTERAR FORMAÇÃO, CONFIRMAR EQUIPE; arrastar herói para posição.
+### Menu and navigation
 
-### Arte e direção
+- Main menu: CONTINUAR (CONTINUE), NOVA JORNADA (NEW JOURNEY), PERSONAGENS/HERÓIS/COLEÇÃO (CHARACTERS/HEROES/COLLECTION), OPÇÕES (OPTIONS), SAIR (QUIT). Version 0.1.0 in a corner.
+- Three menu directions (Fortress, Throne Room, Alien Portal). ChatGPT's recommendation is the Fortress (Main Menu 01).
+- Pause menu: PAUSA (PAUSE), CONTINUAR, CONFIGURAÇÕES (SETTINGS), REINICIAR RUN (RESTART RUN), MENU PRINCIPAL (MAIN MENU); warning "O PROGRESSO DA RUN PODE SER PERDIDO" (RUN PROGRESS MAY BE LOST); ESC resumes.
+- Settings: categories GERAL (GENERAL), VÍDEO (VIDEO), ÁUDIO (AUDIO), JOGABILIDADE (GAMEPLAY), INTERFACE, ACESSIBILIDADE (ACCESSIBILITY); resolution, screen mode, VSync, FPS limit, interface scale, pixel scale (integer), effects, particles, screen shake.
+- Team management: 3-position formation, ALTERAR FORMAÇÃO (CHANGE FORMATION), CONFIRMAR EQUIPE (CONFIRM TEAM); drag a hero into a position.
 
-- Estilo: ortográfico lateral, pixels quadrados sem anti-aliasing, sem 3D, sem pintura, sem gradiente sobre pixel; dithering leve no fundo.
-- Paleta de produção (ChatGPT): #111018 (carvão), #252331 (sombra/painel), #464256 (pedra/subpainel), #DDD3C0 (osso/texto), #A92F39 (carmim), #E05B38 (laranja infernal), #A9CD4B (verde ácido), #7B58AB (violeta espectral), #D1A052 (dourado relíquia).
-- Tipografia: gótica só em títulos; texto funcional em fonte pixel legível.
-- Cores por função: vermelho ataque, azul-aço defesa, violeta magia, verde veneno, dourado destaque.
-- Proposta de estrutura de assets: characters/heroes, enemies, bosses, npcs; backgrounds/combat, menu, shops; ui/cards, panels, buttons, icons, status-effects; items; vfx.
+### Art and direction
 
-### Escopo e processo (do ChatGPT)
+- Style: side-view orthographic, square pixels with no antialiasing, no 3D, no painting, no gradients over pixels; light dithering in the background.
+- Production palette (ChatGPT): #111018 (charcoal), #252331 (shadow/panel), #464256 (stone/subpanel), #DDD3C0 (bone/text), #A92F39 (crimson), #E05B38 (infernal orange), #A9CD4B (acid green), #7B58AB (spectral violet), #D1A052 (relic gold).
+- Typography: gothic only for titles; functional text in a readable pixel font.
+- Colors by function: red for attack, steel blue for defense, violet for magic, green for poison, gold for emphasis.
+- Proposed asset structure: characters/heroes, enemies, bosses, npcs; backgrounds/combat, menu, shops; ui/cards, panels, buttons, icons, status-effects; items; vfx.
 
-- Gerar primeiro o Gameplay 01 como imagem-mestra, depois as outras batalhas com o mesmo elenco.
-- Prioridade: P0 combate 01, 03, 10; P1 loja 01 e árvore 01; P2 menu 01 e árvore 03; P3 o resto.
-- Vertical slice antes de todas as cartas: 3 heróis, 3 inimigos, 6 cartas, turnos completos, status.
-- Dois sistemas concorrentes a decidir: habilidades do herói como ação, carta ou passiva (o próprio ChatGPT marca isso como decisão pendente).
-- Concept arts são referência; cenário, sprites, cartas, botões, VFX e HUD devem ser camadas separadas no Phaser 4.
-- Geometria: canvas 1920x1080 de referência, produção nativa 960x540 com escala 2x (ver Contradições: conflita com o projeto).
-- Espaçamento base 8 px; espaçamentos 4, 8, 12, 16, 24, 32, 48; margem externa 32; área clicável mínima 48x48; títulos 36 px, subtítulo 24, texto 20, compacto 16, secundário 14.
-- Painéis com borda 2 ou 4 px; divisórias 2 px; raio 0 a 8 px.
-- Layout padrão de batalha: ~65% da altura para cenário e personagens, ~35% para cartas e controles.
+### Scope and process (from ChatGPT)
+
+- Generate Gameplay 01 first as the master image, then the other battles with the same cast.
+- Priority: P0 combat 01, 03, 10; P1 shop 01 and tree 01; P2 menu 01 and tree 03; P3 the rest.
+- Vertical slice before all cards: 3 heroes, 3 enemies, 6 cards, full turns, statuses.
+- Two competing systems to decide: hero abilities as an action, a card, or a passive (ChatGPT itself marks this as a pending decision).
+- Concept arts are references; scenery, sprites, cards, buttons, VFX and HUD must be separate layers in Phaser 4.
+- Geometry: 1920x1080 reference canvas, native production at 960x540 with 2x scale (see Contradictions: it conflicts with the project).
+- Base spacing 8 px; spacing 4, 8, 12, 16, 24, 32, 48; outer margin 32; minimum tap area 48x48; titles 36 px, subtitle 24, text 20, compact 16, secondary 14.
+- Panel borders 2 or 4 px; dividers 2 px; radius 0 to 8 px.
+- Default battle layout: ~65% of the height for scenery and characters, ~35% for cards and controls.
 
 ## Concept arts
 
-Todas as imagens são 1672x941 (exceto menu-settings 1672x940). Cores: amostragem automática quantizada em 3 bits por canal deu resultado dominado por preto e azul-escuro; não é confiável para hex. Por isso as cores abaixo são impressão visual, marcadas como "estimado".
+All images are 1672x941 (except menu-settings, 1672x940). Colors: an automatic 3-bit-per-channel quantized sample came out dominated by black and dark blue; it is not reliable for hex values. So the colors below are visual estimates, marked "estimated".
 
-Paleta geral observada (estimado): fundo quase preto arroxeado (#14121a aprox.), painel carvão (#26232f aprox.), pedra cinza-violeta (#4a4658 aprox.), texto osso (#ddd3c0), dourado (#d1a052), carmim (#a92f39), vermelho vivo nas luzes (#c83a3a aprox.), laranja de brasa (#e05b38 aprox.), violeta (#7b58ab aprox.), verde ácido (#a9cd4b aprox.).
+Overall palette observed (estimated): near-black purplish background (~#14121a), charcoal panel (~#26232f), grey-violet stone (~#4a4658), bone text (#ddd3c0), gold (#d1a052), crimson (#a92f39), bright red in the lights (~#c83a3a), ember orange (~#e05b38), violet (~#7b58ab), acid green (~#a9cd4b).
 
-| Arquivo | Tela | Layout / HUD | Heróis / inimigos | Paleta (estimado) | Câmera / texto |
+| File | Screen | Layout / HUD | Heroes / enemies | Palette (estimated) | Camera / text |
 |---|---|---|---|---|---|
-| batle-1.png | Combate, Rodada 7, Ouro 128, Baralho 19, Energia 3/3 | Topo: logo DARKEON, relíquias, Rodada, Ouro, Baralho, Energia, "Turno do Jogador". Esquerda: 3 retratos empilhados com HP e status. Embaixo: 5 cartas, "Mão 5/5", Descarte 0, Fim do Turno, poções na direita | Heróis: Valgrin, Morzeth, Kaelis. Inimigos: 5 (mound de carne 96/120, sacerdote 38/38, aranha 26/26, criatura alta 24/24, escudeiro 39/45 à esquerda do inimigo) | Vermelho, laranja, verde ácido, violeta, osso | Lateral, fileira. Título serifado; corpo pixel |
-| batle-2.png | Necrópole de Ferro, Round 03/10, Ouro 320 | Trilha de 6 nós no topo com coroa no fim; Round no topo direito; mão em arco com carta ampliada (LÂMINA GIRATÓRIA) com linhas de alvo; energia 3/3 em disco dourado à esquerda; baralho 12, descarte 0; TERMINAR TURNO | 3 heróis, 5 inimigos (caveiras com escudo, cavaleiro, drone-esfera). Ícones de intenção: espadas vermelhas (ataque), símbolo violeta (maldição) | Dourado e laranja forte, carvão, carmim | Lateral, fileira; HUD com molduras de metal |
-| batle-3.png | Catedral do Vazio, Rodada 10/10, CHEFÃO | Nome do chefe no topo central; barra de HP do chefe 6.400/10.000 com "FASE 2/3" e três marcadores; hand de 6 cartas com carta selecionada elevada; energia 3/3 em anel violeta; ENCERRAR TURNO | 3 heróis; chefe enorme à direita (Abyss Sovereign); 2 servos com 320/320 e 280/280 | Violeta dominante, lua vermelha, osso | Lateral, chefe ocupa metade direita |
-| batle-4.png | Ato I, Round 01/10, Ouro 150 | Topo: logo, Ato, Round, Ouro, Relíquias, "Turno do Jogador", pausa. Esquerda: 3 retratos com HP. Embaixo: 6 cartas, Energia 3/3, Mão 6/6, Descartar 0, TERMINAR TURNO, poções | Heróis: Inquisidor do Vazio, Caçadora de Sangue, Dreadguard. Inimigos: 4 visíveis (cavaleiro-esqueleto, carne, sacerdote com coroa, caveira) | Carmim e vermelho dominantes, violeta, dourado | Lateral; vitrais atrás |
-| batle-5.png | Floresta do Sangue, Rodada 07/10, Combate | Topo esquerdo: nome da região; topo direito: Rodada; barras de HP com Mana (azul) sob heróis; elite com rótulo ELITE e 25% ESQUIVA; mão de 6; energia 2/3 em anel violeta; ENCERRAR TURNO | 3 heróis; 3 inimigos (elite 420/420, besta 280/280, atirador 240/240) | Vermelho-sangue, lua vermelha, violeta | Lateral; linha de mira vermelha do arqueiro ao elite |
-| batle-6.png | Cidadela do Desespero, Round 09/10 | Trilha de nós no topo; Ouro 180; mão de 6 com ÚLTIMO SACRAMENTO elevada; energia 2/3 em disco dourado; Baralho 6; Descarte 0; caveira 3; TERMINAR TURNO | Heróis com HP baixo (18/100, 34/85, 62/90). Inimigos 5 (cavaleiro 120/120, sacerdote 90/90, esfera 70/70, cavaleiro 110/110, besta 200/200) | Carvão, dourado, carmim | Lateral; escadaria do trono ao fundo |
-| batle-7.png | A Forja Obsidiana, Ato I, Round 08/10 | Topo: logo, Ato, Round, Ouro 420; relíquias no centro do topo com linhas até as cartas (Coração da Forja, Medalhão de Cinzas, Núcleo Profano); COMBO x3; energia 1/3 em disco azul-chama; Baralho 14; Descarte 6; TERMINAR TURNO | 3 heróis; 5 inimigos (robôs de ferro 75/75, golem 180/180, etc.) | Laranja e fogo dominantes, carvão, azul-chama na energia | Lateral; forja |
-| deckbuilding-menu.png | Grimório de Guerra (deckbuilder) | Cabeçalho com Baralho 24/30, Energia base 3, Curva média 1,5; coluna esquerda MEU BARALHO (24) com 3 filtros de herói e lista com x2/x1, filtros de tipo, AUTO-ORGANIZAR, VOLTAR, SALVAR BARALHO; centro COLEÇÃO DE CARTAS (grade 4x3 com filtros e busca); direita DETALHES DA CARTA com carta grande, custo, causa, ADICIONAR/REMOVER | Não aplicável | Carvão, dourado, bordas coloridas por classe | Frontal de interface |
-| hero-menu.png | Companhia dos Condenados (equipe) | Logo no topo esquerdo; lista de heróis à esquerda com HP; cena central com 3 heróis e marcadores POSIÇÃO 1/2/3; painel direito com atributos, equipamentos, pontos; botões ALTERAR FORMAÇÃO, VOLTAR, CONFIRMAR EQUIPE | Dreadguard (nível 12), Blood Huntress (11), Void Inquisitor (10) | Vermelho lua, carvão, dourado | Lateral; cena com profundidade |
-| hero-warrior-menu.png | Herói Guerreiro (Dreadguard, O Bastião de Ferro) | Esquerda: sprite, nível 25, XP, equipamentos (capacete, armadura, arma, escudo, amuleto, anel). Centro: ATRIBUTOS e RESISTÊNCIAS. Direita: 6 habilidades (grade 3x2) e detalhe da selecionada com APRIMORAR. Rodapé: VOLTAR, EQUIPAMENTOS, ÁRVORE DE HABILIDADES | Dreadguard | Carvão, dourado, carmim | Frontal; texto pixel |
-| hero-mage-menu.png | Herói Mago (Void Arcanist) | Mesmo layout de três colunas; nível 25 com barra de XP violeta; slots em duas colunas ao redor do sprite; 6 habilidades (1 a 3 de custo) com detalhe e APRIMORAR | Void Arcanist | Violeta dominante, dourado | Frontal |
-| hero-healer-menu.png | Herói Curandeiro (Ashen Saint) | Mesmo layout; seletor de herói no topo direito (3 miniaturas); slots com bônus (+5, +6, +7); 6 habilidades; APRIMORAR em dourado cheio | Ashen Saint | Osso, verde-claro, dourado | Frontal |
-| hero-archer-menu.png | Herói Arqueiro (Bone Warden) | Mesmo layout; barra de XP vermelha; slots CAPUZ, ALJAVA, ARCO, ARMADURA, AMULETO, ANEL; 6 habilidades | Bone Warden | Vermelho, verde ácido (veneno), dourado | Frontal |
-| hero-bombardier-menu.png | Herói Artilharia (Iron Bombardier) | Mesmo layout; equipamento CANHÃO e MUNIÇÃO; 6 habilidades | Iron Bombardier | Carvão, vermelho, laranja | Frontal |
-| menu-1.png | Menu principal, Fortaleza (Main Menu 01) | Logo no alto central; menu vertical à esquerda: CONTINUAR (selecionado em dourado), NOVA JORNADA, PERSONAGENS, OPÇÕES, SAIR; VERSÃO 0.1.0 no canto inferior direito | 3 heróis de costas num penhasco | Roxo-cinza, vermelho lua, dourado no logo | Panorâmica; logo serifado com ornamentos |
-| menu-2.png | Menu principal, Sala do Trono (Main Menu 02) | Logo no topo; menu à esquerda inferior: NOVA JORNADA (selecionado), CONTINUAR, HERÓIS, OPÇÕES, SAIR com ícones; subtítulo "O ABISMO AGUARDA" | 3 heróis à esquerda, trono vazio à direita | Vermelho e carvão, velas | Panorâmica |
-| menu-3.png | Menu principal, Portal (Main Menu 03) | Logo no topo; menu vertical à direita: CONTINUAR (selecionado em violeta), NOVA JORNADA, COLEÇÃO, OPÇÕES, SAIR; VERSÃO 0.1.0 | 3 heróis pequenos na base do portal | Violeta dominante, osso, carvão | Panorâmica |
-| menu-settings.png | Configurações, aba VÍDEO | Título CONFIGURAÇÕES no topo central; coluna esquerda com 6 categorias (VÍDEO selecionado em dourado); painel com linhas: resolução, modo de tela, VSync, FPS, escala da interface (slider), escala de pixel (INTEIRA), efeitos, partículas, tremor; rodapé RESTAURAR PADRÃO, CANCELAR, APLICAR | Não aplicável | Carvão, carmim, dourado | Frontal; texto serifado |
-| shop-menu-1.png | Mercador (Cursed Merchant) | Topo: abas MERCADOR (ativa) e INVENTÁRIO; OURO 350; SAIR. Esquerda: NPC grande. Direita: grade 3x3 de itens com cor por raridade, preço em ouro. Abaixo: painel de detalhe com ESPADA DO VAZIO (Épico, 180) e COMPRAR | NPC: Cursed Merchant (encapuzado com máscara de bico) | Carvão, violeta, dourado, verde/azul/vermelho nas bordas por raridade | Frontal |
-| shop-menu-2.png | Arsenal Infernal | Topo: ATO I, ARSENAL INFERNAL, OURO 850. Esquerda: DREADGUARD com slots (capacete, armadura, arma, escudo, amuleto, anel). Centro: abas TODOS, ARMAS, ARMADURAS, ACESSÓRIOS e grade 4x2. Direita: COMPARAÇÃO com ATUAL x SELECIONADO e EQUIPAR/COMPRAR | Dreadguard; ferreiro grande ao fundo | Carvão, laranja de forja, dourado | Frontal; forja em destaque |
-| shop-menu-3.png | Relicário Proibido (Veiled Oracle) | Topo esquerdo: título; topo direito: OURO 420, VIDA 85/100. Centro: 3 cartas de relíquia (CORAÇÃO ABISSAL 150 ouro, PACTO DE SANGUE 20 vida, OLHO DO ESQUECIMENTO 250 ouro); direita: detalhe do pacto e palavras-chave; base: ACEITAR PACTO e VOLTAR | Oracle sentada num trono | Violeta, carmim, carvão | Frontal |
-| skill-tree-1.png | Maestria dos Heróis (Guardião) | Abas GUARDIÃO, CAÇADORA, INQUISIDOR no topo. Esquerda: Dreadguard, nível 12, vida, defesa, força, pontos. Centro: três colunas (BASTIÃO azul, EXECUTOR vermelho, JURAMENTO dourado) com nós em árvore e cadeados. Direita: nó selecionado e APRENDER | Dreadguard | Azul-aço, vermelho, dourado | Frontal; nós com ícone pixel |
-| skill-tree-2.png | Pactos de Guerra (Eclipse dos Três) | Topo: abas Jornada, Coleção, Pactos de Guerra, Relíquias, Diário; Pontos de pacto 4; três retratos (Dreadguard, Blood Huntress, Void Inquisitor). Centro: triângulo com nós (azul, vermelho, violeta) e ultimate central. Direita: detalhe e DESBLOQUEAR | Três heróis nos vértices | Azul, vermelho, violeta, dourado | Frontal; grafo triangular |
-| skill-tree-3.png | Legado do Abismo (permanente) | Esquerda: título, FRAGMENTOS 1.250, Nível do legado 12 (450/1000). Centro: árvore radial com NÚCLEO ETERNO e quatro ramos (SOBREVIVÊNCIA, ARSENAL, CONHECIMENTO, PROFANAÇÃO). Direita: SANGUE RESISTENTE (nível 2/5), custo 200 fragmentos, MELHORAR, VOLTAR | Silhueta de guardião à esquerda | Verde, vermelho, violeta, azul, dourado | Frontal; grafo radial |
+| batle-1.png | Combat, Round 7, Gold 128, Deck 19, Energy 3/3 | Top: DARKEON logo, relics, Round, Gold, Deck, Energy, "Turno do Jogador" (Player's Turn). Left: 3 stacked portraits with HP and statuses. Bottom: 5 cards, "Mão 5/5" (Hand 5/5), Discard 0, End Turn, potions on the right | Heroes: Valgrin, Morzeth, Kaelis. Enemies: 5 (flesh mound 96/120, priest 38/38, spider 26/26, tall creature 24/24, shield-bearer 39/45 left of the enemy line) | Red, orange, acid green, violet, bone | Side view, in rows. Serif title; pixel body |
+| batle-2.png | Iron Necropolis, Round 03/10, Gold 320 | Trail of 6 nodes at the top with a crown at the end; Round at the top right; hand in an arc with an enlarged card (LÂMINA GIRATÓRIA) with target lines; energy 3/3 in a gold disc on the left; draw pile 12, discard 0; TERMINAR TURNO | 3 heroes, 5 enemies (shielded skulls, knight, sphere drone). Intent icons: red swords (attack), violet symbol (curse) | Strong gold and orange, charcoal, crimson | Side view, in rows; HUD with metal frames |
+| batle-3.png | Void Cathedral, Round 10/10, BOSS | Boss name at the top center; boss HP bar 6,400/10,000 with "FASE 2/3" and three markers; hand of 6 cards with the selected card raised; energy 3/3 in a violet ring; ENCERRAR TURNO | 3 heroes; huge boss on the right (Abyss Sovereign); 2 minions with 320/320 and 280/280 | Dominant violet, red moon, bone | Side view, boss fills the right half |
+| batle-4.png | Act I, Round 01/10, Gold 150 | Top: logo, Act, Round, Gold, Relics, "Turno do Jogador", pause. Left: 3 portraits with HP. Bottom: 6 cards, Energy 3/3, Hand 6/6, Discard 0, TERMINAR TURNO, potions | Heroes: Void Inquisitor, Blood Huntress, Dreadguard. 4 visible enemies (skeleton knight, flesh, crowned priest, skull) | Dominant crimson and red, violet, gold | Side view; stained glass behind |
+| batle-5.png | Blood Forest, Round 07/10, Combat | Top left: region name; top right: Round; HP bars with Mana (blue) under heroes; elite with an ELITE label and 25% DODGE; hand of 6; energy 2/3 in a violet ring; ENCERRAR TURNO | 3 heroes; 3 enemies (elite 420/420, beast 280/280, archer 240/240) | Blood red, red moon, violet | Side view; red aiming line from the archer to the elite |
+| batle-6.png | Citadel of Despair, Round 09/10 | Trail of nodes at the top; Gold 180; hand of 6 with ÚLTIMO SACRAMENTO raised; energy 2/3 in a gold disc; Deck 6; Discard 0; skull 3; TERMINAR TURNO | Heroes with low HP (18/100, 34/85, 62/90). 5 enemies (knight 120/120, priest 90/90, sphere 70/70, knight 110/110, beast 200/200) | Charcoal, gold, crimson | Side view; throne staircase in the background |
+| batle-7.png | The Obsidian Forge, Act I, Round 08/10 | Top: logo, Act, Round, Gold 420; relics at the top center with lines to the cards (Forge Heart, Ash Medallion, Profane Core); COMBO x3; energy 1/3 in a blue-flame disc; Deck 14; Discard 6; TERMINAR TURNO | 3 heroes; 5 enemies (iron robots 75/75, golem 180/180, etc.) | Dominant orange and fire, charcoal, blue flame for energy | Side view; forge |
+| deckbuilding-menu.png | Grimoire of War (deckbuilder) | Header with Deck 24/30, base energy 3, average curve 1.5; left column MY DECK (24) with 3 hero filters and a list with x2/x1, type filters, AUTO-ORGANIZAR, VOLTAR, SALVAR BARALHO; center COLLECTION (4x3 grid with filters and search); right CARD DETAILS with a large card, cost, effect, ADICIONAR/REMOVER | Not applicable | Charcoal, gold, class-colored borders | Interface, front-on |
+| hero-menu.png | Company of the Damned (team) | Logo at the top left; hero list on the left with HP; central scene with 3 heroes and POSIÇÃO 1/2/3 markers; right panel with attributes, equipment, points; buttons ALTERAR FORMAÇÃO, VOLTAR, CONFIRMAR EQUIPE | Dreadguard (level 12), Blood Huntress (11), Void Inquisitor (10) | Red moon, charcoal, gold | Side view; scene with depth |
+| hero-warrior-menu.png | Warrior hero (Dreadguard, The Iron Bastion) | Left: sprite, level 25, XP, equipment (helmet, armor, weapon, shield, amulet, ring). Center: ATRIBUTOS and RESISTÊNCIAS. Right: 6 abilities (3x2 grid) and the selected one's detail with APRIMORAR. Footer: VOLTAR, EQUIPAMENTOS, ÁRVORE DE HABILIDADES | Dreadguard | Charcoal, gold, crimson | Front-on; pixel text |
+| hero-mage-menu.png | Mage hero (Void Arcanist) | Same three-column layout; level 25 with a violet XP bar; slots in two columns around the sprite; 6 abilities (cost 1 to 3) with detail and APRIMORAR | Void Arcanist | Dominant violet, gold | Front-on |
+| hero-healer-menu.png | Healer hero (Ashen Saint) | Same layout; hero selector at the top right (3 thumbnails); slots with bonuses (+5, +6, +7); 6 abilities; APRIMORAR in solid gold | Ashen Saint | Bone, light green, gold | Front-on |
+| hero-archer-menu.png | Archer hero (Bone Warden) | Same layout; red XP bar; slots CAPUZ (HOOD), ALJAVA (QUIVER), ARCO (BOW), ARMADURA (ARMOR), AMULETO, ANEL (RING); 6 abilities | Bone Warden | Red, acid green (poison), gold | Front-on |
+| hero-bombardier-menu.png | Artillery hero (Iron Bombardier) | Same layout; equipment CANHÃO (CANNON) and MUNIÇÃO (AMMO); 6 abilities | Iron Bombardier | Charcoal, red, orange | Front-on |
+| menu-1.png | Main menu, Fortress (Main Menu 01) | Logo at the top center; vertical menu on the left: CONTINUAR (selected in gold), NOVA JORNADA, PERSONAGENS, OPÇÕES, SAIR; VERSÃO 0.1.0 in the bottom-right corner | 3 heroes seen from behind on a cliff | Grey-violet, red moon, gold logo | Panoramic; serif logo with ornaments |
+| menu-2.png | Main menu, Throne Room (Main Menu 02) | Logo at the top; menu at the bottom left: NOVA JORNADA (selected), CONTINUAR, HERÓIS, OPÇÕES, SAIR with icons; subtitle "O ABISMO AGUARDA" (THE ABYSS AWAITS) | 3 heroes on the left, empty throne on the right | Red and charcoal, candles | Panoramic |
+| menu-3.png | Main menu, Portal (Main Menu 03) | Logo at the top; vertical menu on the right: CONTINUAR (selected in violet), NOVA JORNADA, COLEÇÃO, OPÇÕES, SAIR; VERSÃO 0.1.0 | 3 small heroes at the base of the portal | Dominant violet, bone, charcoal | Panoramic |
+| menu-settings.png | Settings, VIDEO tab | CONFIGURAÇÕES title at the top center; left column with 6 categories (VÍDEO selected in gold); panel with rows: resolution, screen mode, VSync, FPS, interface scale (slider), pixel scale (INTEIRA = integer), effects, particles, shake; footer RESTAURAR PADRÃO, CANCELAR, APLICAR | Not applicable | Charcoal, crimson, gold | Front-on; serif text |
+| shop-menu-1.png | Merchant (Cursed Merchant) | Top: MERCADOR (active) and INVENTÁRIO tabs; OURO 350; SAIR. Left: large NPC. Right: 3x3 grid of items with rarity color and gold price. Below: detail panel with ESPADA DO VAZIO (Epic, 180) and COMPRAR | NPC: Cursed Merchant (hooded, beaked mask) | Charcoal, violet, gold, green/blue/red borders by rarity | Front-on |
+| shop-menu-2.png | Infernal Arsenal | Top: ATO I, ARSENAL INFERNAL, OURO 850. Left: DREADGUARD with slots (helmet, armor, weapon, shield, amulet, ring). Center: tabs TODOS, ARMAS, ARMADURAS, ACESSÓRIOS and a 4x2 grid. Right: COMPARAÇÃO with ATUAL x SELECIONADO and EQUIPAR/COMPRAR | Dreadguard; large smith in the background | Charcoal, forge orange, gold | Front-on; forge highlighted |
+| shop-menu-3.png | Forbidden Reliquary (Veiled Oracle) | Top left: title; top right: OURO 420, VIDA 85/100. Center: 3 relic cards (CORAÇÃO ABISSAL 150 gold, PACTO DE SANGUE 20 health, OLHO DO ESQUECIMENTO 250 gold); right: pact detail and keywords; bottom: ACEITAR PACTO and VOLTAR | Oracle seated on a throne | Violet, crimson, charcoal | Front-on |
+| skill-tree-1.png | Hero Mastery (Guardian) | Tabs GUARDIÃO, CAÇADORA, INQUISIDOR at the top. Left: Dreadguard, level 12, health, defense, strength, points. Center: three columns (BASTIÃO blue, EXECUTOR red, JURAMENTO gold) with tree nodes and locks. Right: selected node and APRENDER | Dreadguard | Steel blue, red, gold | Front-on; pixel-icon nodes |
+| skill-tree-2.png | War Pacts (Eclipse of the Three) | Top: tabs Jornada, Coleção, Pactos de Guerra, Relíquias, Diário; Pact points 4; three portraits (Dreadguard, Blood Huntress, Void Inquisitor). Center: triangle with nodes (blue, red, violet) and a central ultimate. Right: detail and DESBLOQUEAR | Three heroes at the vertices | Blue, red, violet, gold | Front-on; triangular graph |
+| skill-tree-3.png | Legacy of the Abyss (permanent) | Left: title, FRAGMENTOS 1,250, Legacy Level 12 (450/1,000). Center: radial tree with NÚCLEO ETERNO and four branches (SOBREVIVÊNCIA, ARSENAL, CONHECIMENTO, PROFANAÇÃO). Right: SANGUE RESISTENTE (level 2/5), cost 200 fragments, MELHORAR, VOLTAR | Guardian silhouette on the left | Green, red, violet, blue, gold | Front-on; radial graph |
 
-Notas sobre concepts:
+Notes on the concepts:
 
-- Não há fila de turnos visível em nenhum concept (ver Contradições).
-- Nomes de heróis divergem entre telas (ver Contradições).
-- Fonte do corpo: as telas de herói e de loja usam serifa estilo gótico no corpo de texto, não pixel. O ChatGPT pede pixel no texto funcional. Divergência observada.
+- No turn-order queue is visible in any concept (see Contradictions).
+- Hero names differ across screens (see Contradictions).
+- Body font: the hero and shop screens use a gothic serif for body text, not pixel font. ChatGPT asks for pixel font in functional text. Observed divergence.
 
 ## Wireframes
 
-Ordem e identificação conferidas pelo checksum: wireframe-10 e wireframe-12 são bytes idênticos (mesmo md5). Os demais são distintos.
+Order and identification checked by checksum: wireframe-10 and wireframe-12 are byte-identical (same md5). The others are distinct.
 
-| Arquivo | Tela | Layout / coordenadas | Observações |
+| File | Screen | Layout / coordinates | Notes |
 |---|---|---|---|
-| wireframe-2.png | Sistema de coordenadas | 1920x1080 de referência; HEADER, LEFT, MAIN CONTENT, RIGHT, FOOTER; 960x540 como alternativa 50%; 8 px de unidade | Diagrama de conceito, sem medidas de componente |
-| wireframe-3.png | Batalha, diagrama simplificado | Topo: RUN/ROUND, RECURSOS e RELÍQUIAS, PAUSA. Meio: 3 HERÓIS e 3 A 5 INIMIGOS. Base: ENERGIA, DECK/DESCARTE, TURNO e 6 cartas #1 a #6 | Fluxo de leitura, sem números |
-| wireframe-4.png | Batalha, HUD técnico (WF01) | Cabeçalho 0,0,1920x104 com run-info (32,20,300x64), recursos (380,20,760x64), status (1192,20,360x64), pausa (1776,20,112x64). Área de batalha 0,104,1920x626: heróis em 80,220,810x456, inimigos em 1030,220,810x456 com 5 centros (1098, 1250, 1402, 1554, 1706). Ação: energia 32,816,224x228; baralho/descarte 280,816,208x228; mão 530,762,860x292 com cartas 132x204; painel direito 1432,816,456x228; FIM DO TURNO 1616,942,264x88 | Rótulos com IDs (carta-2 e carta-3 repetidos, inimigo-N, inimigo-5sprtus: erros de rotulagem). Atalhos: Pausar [P], Ver inimigos [TAB], Fim do turno [ESPAÇO]. Mão 860x292 aqui; o ChatGPT corrige para 864x292 em outro trecho |
-| wireframe-5.png | Menu principal (WF02) | Logo 680x180 em 620,96; botões 512x72 em x=704, y=364, 452, 540, 628, 716 (gap 16); rodapé info 32,1020,480x28 e versão 1632,1020,256x28. Estados: default, hover (violeta), pressed (fill violeta), disabled (texto #6B6458), focused (borda dourada 4px) | Rodapé diz "© 2025" e "Build 2025.08.24", data anterior ao corrente |
-| wireframe-6.png | Mercador (WF03) | Cabeçalho 0,0,1920x104 (título 32,32; moeda 1392,20,304x64; fechar 1776,20,112x64). Painel NPC 32,128,440x872; inventário 496,128,888x872 com 4 abas (192x56, gap 16) e grade 3x3 de itens 264x208 (x 520/800/1080; y 240/464/688); detalhe 1408,128,480x872; paginação 760,920,360x48; rodapé 32,1024,1856x40 | Estados de item: normal, hover, selecionado, comprado, indisponível (sem moeda) |
-| wireframe-7.png | Árvore de habilidades (WF04) | Sidebar 32,128,336x872 (avatar 240x240, tabs 288x56); viewport do grafo 392,128,1000x872 com grade de nós (colunas 496 a 1296 de 160 px; linhas 256, 400, 544, 688, 832 de 144 px); nós 64x64 com área de toque 80x80; conectores 4 px (ativo #D1A052, inativo #464256); inspector 1416,128,472x872 | Três modos de grafo (ramo, triângulo, radial); controles de pan e zoom 100% |
-| wireframe-8.png | Configurações (WF05) | Categorias 320x72 (gap 12), ativa em dourado; painel principal 408,128,1088x872 com linhas 1040x72 (rótulo x=456, controle x=1008); help 1520,128,368x872; botões RESTAURAR 432,920,240x64, CANCELAR 952,920,240x64, APLICAR 1208,920,264x64 | Escala de pixel 2x e FPS ilimitado aqui; concept menu-settings mostra escala INTEIRA e FPS 60. Divergência |
-| wireframe-9.png | Deckbuilder (WF06), variante "Defesa Sólida" | Sidebar 32,128,376x872 com seleção de herói (88x88), lista de 8 entradas 328x56; grade 4x3 de cartas 204x208 (x 456/700/944/1188; y 264/496/728); inspetor 1464,128,424x872 com carta grande 240x336 e botões ADICIONAR 1488,816 e REMOVER 1688,816 (176x64) e SALVAR 1488,904 (376x64) | Carta com faixa de raridade, tipo e custo |
-| wireframe-10.png | Equipe (WF07), "Companhia dos Condenados" | Roster 32,128,320x872 (linhas 288x128); showcase 376,128,952x872 com 3 slots 256x464, sprite 224x400 e linha de base y=744; formação 208x88; inspector 1352,128,536x872; equipamento em grade 3x2 de 64x64 e slot vazio 208x128 | Nomes: Branwen (Guerreiro), Nyssa (Maga), Cael (Curandeiro). Ver Contradições |
-| wireframe-11.png | Deckbuilder (WF06), variante "Tiro Preciso" | Sidebar com filtros ARQUEIRO, MAGO, CURANDEIRO (88x88); grade 4x3 de 204x208 (gap 40 horizontal, 24 vertical); carta grande 240x336 com custo; ADICIONAR (A) e REMOVER (R) | Mostra 8 entradas de baralho com x1/x2/x3/x4 |
-| wireframe-12.png | Igual a wireframe-10 | Byte a byte idêntico | Duplicata |
-| wireframe-13.png | Detalhes do herói (WF08), ARDEN (Guerreiro) | Cabeçalho com nome, nível 12, moeda e diamante; painel do personagem 32,128,624x872 (sprite 416x416); atributos 680,128,560x872 com 7 linhas de 48 px; habilidades 1264,128,624x872 (grade 2x3 de 264x112); detalhe com APRIMORAR 1288,888,576x72; rodapé 0,1024,1920x56 | Mostra valores (força 24, agilidade 16, inteligência 12, vitalidade 28) |
-| wireframe-hero-menu.png | Detalhes do herói, esboço genérico | Três colunas: painel de personagem (esquerda), atributos (centro, 9 valores), habilidades I a VI (direita); rodapé VOLTAR, EQUIPAMENTOS, ÁRVORE DE HABILIDADES | Placeholder da concept 23 (vida 245, mana 80, ataque 42, defesa 64, crítico 12%, velocidade 18) |
+| wireframe-2.png | Coordinate system | 1920x1080 reference; HEADER, LEFT, MAIN CONTENT, RIGHT, FOOTER; 960x540 as a 50% alternative; 8 px unit | Concept diagram, no component measurements |
+| wireframe-3.png | Battle, simplified diagram | Top: RUN/ROUND, RESOURCES and RELICS, PAUSE. Middle: 3 HEROES and 3 TO 5 ENEMIES. Bottom: ENERGY, DECK/DISCARD, TURN and 6 cards #1 to #6 | Reading flow, no numbers |
+| wireframe-4.png | Battle, technical HUD (WF01) | Header 0,0,1920x104 with run-info (32,20,300x64), resources (380,20,760x64), status (1192,20,360x64), pause (1776,20,112x64). Battle area 0,104,1920x626: heroes at 80,220,810x456, enemies at 1030,220,810x456 with 5 centers (1098, 1250, 1402, 1554, 1706). Action: energy 32,816,224x228; deck/discard 280,816,208x228; hand 530,762,860x292 with 132x204 cards; right panel 1432,816,456x228; END TURN 1616,942,264x88 | Labels with IDs (carta-2 and carta-3 repeated, inimigo-N, inimigo-5sprtus: labeling errors). Shortcuts: Pause [P], View enemies [TAB], End turn [SPACE]. Hand 860x292 here; ChatGPT corrects it to 864x292 elsewhere |
+| wireframe-5.png | Main menu (WF02) | Logo 680x180 at 620,96; buttons 512x72 at x=704, y=364, 452, 540, 628, 716 (gap 16); info footer 32,1020,480x28 and version 1632,1020,256x28. States: default, hover (violet), pressed (violet fill), disabled (text #6B6458), focused (4px gold border) | Footer says "© 2025" and "Build 2025.08.24", a date before the current one |
+| wireframe-6.png | Merchant (WF03) | Header 0,0,1920x104 (title 32,32; currency 1392,20,304x64; close 1776,20,112x64). NPC panel 32,128,440x872; inventory 496,128,888x872 with 4 tabs (192x56, gap 16) and a 3x3 grid of 264x208 items (x 520/800/1080; y 240/464/688); detail 1408,128,480x872; pagination 760,920,360x48; footer 32,1024,1856x40 | Item states: normal, hover, selected, purchased, unavailable (no currency) |
+| wireframe-7.png | Skill tree (WF04) | Sidebar 32,128,336x872 (avatar 240x240, tabs 288x56); graph viewport 392,128,1000x872 with a node grid (columns 496 to 1296 at 160 px; rows 256, 400, 544, 688, 832 at 144 px); nodes 64x64 with an 80x80 tap area; connectors 4 px (active #D1A052, inactive #464256); inspector 1416,128,472x872 | Three graph modes (branch, triangle, radial); pan and zoom controls at 100% |
+| wireframe-8.png | Settings (WF05) | Categories 320x72 (gap 12), active in gold; main panel 408,128,1088x872 with 1040x72 rows (label x=456, control x=1008); help 1520,128,368x872; buttons RESTAURAR 432,920,240x64, CANCELAR 952,920,240x64, APLICAR 1208,920,264x64 | Pixel scale 2x and unlimited FPS here; the menu-settings concept shows INTEGER scale and FPS 60. Divergence |
+| wireframe-9.png | Deckbuilder (WF06), "Defesa Sólida" variant | Sidebar 32,128,376x872 with hero selection (88x88), list of 8 entries 328x56; 4x3 card grid of 204x208 (x 456/700/944/1188; y 264/496/728); inspector 1464,128,424x872 with a large card 240x336 and buttons ADICIONAR 1488,816 and REMOVER 1688,816 (176x64) and SALVAR 1488,904 (376x64) | Card with rarity band, type and cost |
+| wireframe-10.png | Team (WF07), "Companhia dos Condenados" | Roster 32,128,320x872 (rows 288x128); showcase 376,128,952x872 with 3 slots 256x464, sprite 224x400 and baseline y=744; formation 208x88; inspector 1352,128,536x872; equipment grid 3x2 of 64x64 and an empty slot 208x128 | Names: Branwen (Warrior), Nyssa (Mage), Cael (Healer). See Contradictions |
+| wireframe-11.png | Deckbuilder (WF06), "Tiro Preciso" variant | Sidebar with filters ARQUEIRO, MAGO, CURANDEIRO (88x88); 4x3 grid of 204x208 (40 px horizontal gap, 24 px vertical); large card 240x336 with cost; ADICIONAR (A) and REMOVER (R) | Shows 8 deck entries with x1/x2/x3/x4 |
+| wireframe-12.png | Same as wireframe-10 | Byte-for-byte identical | Duplicate |
+| wireframe-13.png | Hero details (WF08), ARDEN (Warrior) | Header with name, level 12, currency and gem; character panel 32,128,624x872 (sprite 416x416); attributes 680,128,560x872 with 7 rows of 48 px; abilities 1264,128,624x872 (2x3 grid of 264x112); detail with APRIMORAR 1288,888,576x72; footer 0,1024,1920x56 | Shows values (strength 24, agility 16, intelligence 12, vitality 28) |
+| wireframe-hero-menu.png | Hero details, generic sketch | Three columns: character panel (left), attributes (center, 9 values), abilities I to VI (right); footer VOLTAR, EQUIPAMENTOS, ÁRVORE DE HABILIDADES | Placeholder for concept 23 (health 245, mana 80, attack 42, defense 64, crit 12%, speed 18) |
 
-Padrões de wireframe: todos seguem canvas 1920x1080, origem no canto superior esquerdo, cabeçalho de 104 px, margem 32, painéis com padding 24, rodapé de 40 a 56 px, cartas 132x204 (batalha) e 204x208 (coleção).
+Wireframe patterns: all follow a 1920x1080 canvas, origin at the top left, 104 px header, 32 margin, panels with 24 padding, footers of 40 to 56 px, cards 132x204 (battle) and 204x208 (collection).
 
-## Padrões inferidos de UI/HUD e paleta
+## Inferred UI/HUD patterns and palette
 
-Repetidos em concepts e wireframes:
+Repeated across concepts and wireframes:
 
-- Cabeçalho de 104 px com logo ou título à esquerda, recursos no centro, pausa ou fechar à direita.
-- Combate: heróis à esquerda com HP e status (ícones pequenos sob a barra), inimigos à direita com HP e intenção (ícone sobre o inimigo), mão embaixo, energia num disco circular à esquerda, baralho e descarte com contagem, TERMINAR TURNO à direita.
-- Cartas: faixa de custo (círculo azul ou dourado) no canto superior esquerdo, nome em faixa, tipo (ATAQUE, HABILIDADE, DEFESA), ilustração, texto de efeito, raridade por cor de moldura. A carta selecionada sobe e ganha moldura em brilho.
-- Telas de herói e de loja: três colunas (34/32/34 %) ou (624/560/624 px). Esquerda: retrato grande, equipamento em grade. Centro: atributos e resistências. Direita: habilidades e detalhe.
-- Botões: retângulos de metal escuro com borda, destaque em dourado para ação principal; vermelho para ação destrutiva ou fechar; violeta para estado pressionado.
-- Painéis: carvão com bordas de metal ornamentadas (dourado ou pedra).
-- Coordenadas do menu principal: botões alinhados à esquerda ou à direita.
-- Ícones de atributo: coração (vida), espada (ataque), escudo (defesa), gota azul (mana), estrela (crítico), bota (velocidade).
-- Ícones de status: caveira (veneno ou sangramento), chama (queimadura), floco (gelo), olho (marcação ou corrupção).
+- A 104 px header with logo or title on the left, resources in the center, pause or close on the right.
+- Combat: heroes on the left with HP and statuses (small icons under the bar), enemies on the right with HP and intent (icon above the enemy), hand at the bottom, energy in a circular disc on the left, deck and discard with counts, END TURN on the right.
+- Cards: a cost badge (blue or gold circle) at the top left, name in a band, type (ATTACK, SKILL, DEFENSE), illustration, effect text, rarity by frame color. The selected card rises and gets a glowing frame.
+- Hero and shop screens: three columns (34/32/34 %) or (624/560/624 px). Left: large portrait, equipment in a grid. Center: attributes and resistances. Right: abilities and detail.
+- Buttons: dark metal rectangles with a border; gold highlight for the main action; red for destructive actions or close; violet for the pressed state.
+- Panels: charcoal with ornamented metal borders (gold or stone).
+- Main menu coordinates: buttons aligned to the left or right.
+- Attribute icons: heart (health), sword (attack), shield (defense), blue drop (mana), star (crit), boot (speed).
+- Status icons: skull (poison or bleeding), flame (burn), snowflake (ice), eye (mark or corruption).
 
-Cores de função (consistentes):
+Functional colors (consistent):
 
-- Vermelho/carmim: ataque, sangue, perigo.
-- Azul-aço: defesa, bloqueio.
-- Violeta: magia do vazio, corrupção, ultimate.
-- Verde ácido: veneno, cura (em alguns casos).
-- Dourado: destaque, selecionado, moeda.
+- Red/crimson: attack, blood, danger.
+- Steel blue: defense, block.
+- Violet: void magic, corruption, ultimate.
+- Acid green: poison, healing (in some cases).
+- Gold: emphasis, selected, currency.
 
-Divergências de paleta: a energia muda de cor entre telas (dourado, violeta, azul-chama, verde). Não há cor fixa para energia.
+Palette divergences: energy changes color across screens (gold, violet, blue flame, green). There is no fixed color for energy.
 
-Acessibilidade de cor: os wireframes e concepts usam forma e ícone junto da cor em status e raridade; isso atende à regra do projeto (informação não só por cor). Não verificado se todas as cartas de raridade têm forma além da cor.
+Color accessibility: the wireframes and concepts pair shape and icon with color for status and rarity; this meets the project rule (information not conveyed by color alone). Not verified whether every rarity card has a shape beyond color.
 
-## Estrutura do zeta-c a replicar
+## zeta-c structure to replicate
 
-Fonte: subagente que leu o repo via `gh` (somente leitura, nada gravado). Não verificado: tsconfig.json, biome.json, bunfig.toml, vite.config.ts, .editorconfig, .markdownlint-cli2.jsonc, conteúdo completo de docs/agent-workflow.md e docs/git-and-versioning.md.
+Source: a subagent that read the repository via `gh` (read-only, nothing written). Not verified: tsconfig.json, biome.json, bunfig.toml, vite.config.ts, .editorconfig, .markdownlint-cli2.jsonc, full content of docs/agent-workflow.md and docs/git-and-versioning.md.
 
-Árvore resumida:
+Summary tree:
 
 ```text
-AGENTS.md          (regras; CLAUDE.md contém apenas "@AGENTS.md")
-PLAN.md            (fonte da verdade: fases, grupos, tarefas com checkbox, "Pronto quando")
-CHANGELOG.md       (Keep a Changelog, seção [Unreleased] no topo)
+AGENTS.md          (rules; CLAUDE.md contains only "@AGENTS.md")
+PLAN.md            (source of truth: phases, groups, checkbox tasks, "Ready when")
+CHANGELOG.md       (Keep a Changelog, [Unreleased] section at the top)
 BUGS.md
-package.json       (version única; scripts: check, typecheck, test, lint, lint:md, build, balance, release)
+package.json       (single version; scripts: check, typecheck, test, lint, lint:md, build, balance, release)
 biome.json, bunfig.toml, tsconfig.json, vite.config.ts, .editorconfig
 .claude/
   rules/           (karpathy, code-architecture, content-and-assets, git-release-docs, caveman, platform)
-  skills/          (≈70: núcleo do projeto + skills genéricas de game dev)
+  skills/          (≈70: project core + generic game-dev skills)
 .githooks/         (pre-commit: biome + typecheck + markdownlint; commit-msg: Conventional Commits)
 .github/workflows/ (ci.yml, deploy.yml, release.yml, dependabot.yml)
-docs/              (agent-workflow, architecture, balancing, decisions, git-and-versioning, quality-assurance, release-checklist, visual, audio, ...; README.md é índice)
+docs/              (agent-workflow, architecture, balancing, decisions, git-and-versioning, quality-assurance, release-checklist, visual, audio, ...; README.md is the index)
 scripts/           (balance.ts, sim.ts, smoke.ts, qa*.ts, release.ts, build-*.ts, lib/)
 src/
-  logic/           (núcleo puro: rng, save, run, score, ai/, ... ; legalActions(state, seat) e apply(state, action, rng))
-  data/            (todos os números de balanceamento)
+  logic/           (pure core: rng, save, run, score, ai/, ... ; legalActions(state, seat) and apply(state, action, rng))
+  data/            (all balancing numbers)
   i18n/            (en, pt-BR)
   config/          (palette.ts, constants, ui)
-  scenes/          (uma cena por tela)
-  ui/              (componentes)
-  core/            (camada de plataforma)
-  view/            (apresentação)
-tests/             (um arquivo por área: <área>.test.ts; describe('<feature> (<ID do PLAN>)'))
+  scenes/          (one scene per screen)
+  ui/              (components)
+  core/            (platform layer)
+  view/            (presentation)
+tests/             (one file per area: <area>.test.ts; describe('<feature> (<PLAN ID>)'))
 ```
 
-Convenções que valem replicar:
+Conventions worth replicating:
 
-- PLAN.md: seção de visão, decisões com IDs (D-xx), arquitetura, especificação de regras, style bible, testes e gates, git e release, depois fases. Formato `## FASE N — Nome (versão)`, grupos `### PA1 — Nome · versão`, tarefas `- [x] ID` com subitens e linha `**Pronto quando:**` como critério de aceite. Marcação `[x]` ao concluir.
-- Núcleo puro sem Phaser, por comandos: `legalActions(state, seat)` e `apply(state, action, rng)`. RNG com seed injetado.
-- Números em `data/`, textos em `i18n/` (EN e PT-BR juntos), cores em `config/palette.ts`.
-- Biome e formato com TAB (o zeta-c usa TAB 4). Neste repo, `biome.json` usa `indentStyle: tab` e `indentWidth: 4` (YAML com 2 espaços).
-- Gates: `check`, `typecheck`, `test` a cada commit; `build` antes de push. `balance` (bot com faixa-alvo de vitória, seeds fixas) e `sim` (headless) são úteis ao roguelite. O zeta-c não tem script `ci` no package.json; o gate é encadeado. Não verificado se existe `ci` fora do package.json.
-- Hooks: `pre-commit` roda biome, typecheck e markdownlint nos arquivos staged; `commit-msg` rejeita mensagem fora de Conventional Commits (tipos feat, fix, docs, test, refactor, perf, chore, build, ci, style, revert; escopo opcional; `!` aceito). Ativado pelo `prepare` do package.json (`core.hooksPath .githooks`).
-- CHANGELOG: entradas em negrito por escopo, cada commit atualiza [Unreleased].
-- Versão: campo único no package.json; tag e release só por pedido.
-- Versões exatas: o zeta-c não segue a própria regra (phaser, typescript, vite e @types/bun usam ^). Replicar a regra do project-alpha (sem ^), não o package.json do zeta-c.
-- Testes: `tests/<área>.test.ts`, `bun test`, fixtures em `tests/fixtures/`.
+- PLAN.md: a vision section, decisions with IDs (D-xx), architecture, rules specification, style bible, tests and gates, git and release, then phases. Format `## FASE N — Name (version)`, groups `### PA1 — Name · version`, tasks `- [x] ID` with sub-items and a `**Pronto quando:**` (Ready when) line as the acceptance criterion. Mark `[x]` when done.
+- A pure core without Phaser, driven by commands: `legalActions(state, seat)` and `apply(state, action, rng)`. RNG with an injected seed.
+- Numbers in `data/`, text in `i18n/` (EN and PT-BR together), colors in `config/palette.ts`.
+- Biome and TAB formatting (zeta-c uses TAB 4). In this repo, `biome.json` uses `indentStyle: tab` and `indentWidth: 4` (YAML with 2 spaces).
+- Gates: `check`, `typecheck`, `test` on every commit; `build` before a push. `balance` (a bot with a target win band, fixed seeds) and `sim` (headless) are useful for the roguelite. zeta-c has no `ci` script in package.json; the gate is chained. Not verified whether a `ci` exists outside package.json.
+- Hooks: `pre-commit` runs biome, typecheck and markdownlint on the staged files; `commit-msg` rejects messages outside Conventional Commits (types feat, fix, docs, test, refactor, perf, chore, build, ci, style, revert; optional scope; `!` accepted). Enabled by the `prepare` script in package.json (`core.hooksPath .githooks`).
+- CHANGELOG: entries in bold by scope; every commit updates [Unreleased].
+- Version: a single field in package.json; tag and release only on request.
+- Exact versions: zeta-c does not follow its own rule (phaser, typescript, vite and @types/bun use ^). Replicate project-alpha's rule (no ^), not zeta-c's package.json.
+- Tests: `tests/<area>.test.ts`, `bun test`, fixtures in `tests/fixtures/`.
 
-Não replicar (específico do jogo do zeta-c): regras de truco, manilha, vira, Manhas, companheiros, Campeonatos, nomes de NPC, scripts de balance e sim específicos do truco, qa-web, store-shots, site Next.js, trailer (Remotion), integrações Steam, Poki, Google Play, itch.io, ElevenLabs e PixelLab específicos, estilo visual híbrido (flat.ts, retratos pixel, Rubik), escopos de commit do truco.
+Do not replicate (specific to zeta-c's game): Truco rules, manilha, vira, Manhas, companions, Championships, NPC names, Truco-specific balance and sim scripts, qa-web, store-shots, the Next.js site, the trailer (Remotion), Steam, Poki, Google Play, itch.io integrations, ElevenLabs and PixelLab specifics, the hybrid visual style (flat.ts, pixel portraits, Rubik), Truco commit scopes.
 
-Diferenças de regra a manter com cuidado: o project-alpha tem regras próprias de camadas, IP e assets (ver `.claude/rules/` do project-alpha). Não copiar as regras do zeta-c sem conferir.
+Rule differences to keep in mind: project-alpha has its own rules for layers, IP and assets (see project-alpha's `.claude/rules/`). Do not copy zeta-c's rules without checking them.
 
-## Contradições e lacunas
+## Contradictions and gaps
 
-### Contradições entre referências e regras do projeto
+### Contradictions between the references and the project rules
 
-1. **Nome do jogo**: ChatGPT e todos os concepts usam DARKEON. O repositório herdou vocabulário de um projeto anterior ("Ashen Vanguard"), já removido das regras e skills. Nome final decidido na tarefa 2.
-2. **Resolução e escala**: ChatGPT propõe 1920x1080 com produção 960x540 e escala 2x. As regras herdadas fixavam base 480x270; hoje `assets.md` delega resolução e tamanhos à Art Bible. Decisão na tarefa 2.
-3. **Tamanho da mão**: ChatGPT fala em seis cartas; batle-1 mostra 5 cartas (Mão 5/5), batle-2 mostra 5 na mão em leque. Outras telas mostram 6.
-4. **Nomes de heróis**: ChatGPT e hero-menu usam Dreadguard, Blood Huntress, Void Inquisitor. batle-1 usa Valgrin, Morzeth, Kaelis. wireframe-10 usa Branwen, Nyssa, Cael. wireframe-13 usa Arden (Guerreiro). batle-4 usa nomes em PT (Inquisidor do Vazio, Caçadora de Sangue).
-5. **Nomes de classe**: ChatGPT usa Guerreiro, Mago, Curandeiro, Artilharia, Arqueiro. Grimório e árvore de maestria usam Guardião, Caçadora, Inquisidor. Wireframe-11 usa Arqueiro, Mago, Curandeiro. Não há roster único.
-6. **Duração de batalha**: concepts mostram "ROUND XX/10" em batalha comum. A regra herdada de 5 a 8 rodadas foi removida; a duração-alvo será definida no GDD.
-7. **Chance de acerto**: regra do projeto diz "acerto é garantido; não existe porcentagem de acerto". Concepts mostram "25% ESQUIVA" (batle-5 e hero-archer) e "Tem 20% de chance de aplicar a condição" (wireframe-11, Tiro Preciso). Esquiva é uma porcentagem de evitar acerto. Conflito a decidir.
-8. **Turn order**: regra do projeto exige fila de turnos sempre visível. Nenhum concept mostra fila explícita; batle-2 tem trilha de nós no topo, que é de mapa, não de turno. Ausente.
-9. **Mana vs energia**: ChatGPT pede decisão sobre mana (RPG) x energia (cartas). Os heróis mostram barra de mana junto com HP (batle-3, batle-5), e as habilidades têm custo em energia e recarga em turnos. Sistemas sobrepostos, que o próprio ChatGPT marca como risco.
-10. **Cor da energia**: dourado, violeta, azul-chama e verde mudam de tela para tela.
-11. **Elite**: ChatGPT diz 20% de chance de encontro elite, como regra de sistema. Os exemplos de concept usam rodadas 5 e 7 e um elite mostrado em tela. Coerente, mas os rótulos nas telas não são uniformes.
-12. **Escala de pixel e FPS**: menu-settings mostra escala INTEIRA e FPS 60. wireframe-8 mostra escala 2x e FPS ilimitado.
-13. **Duplicatas**: wireframe-10 e wireframe-12 são idênticos. A pasta tem 13 arquivos com 12 telas distintas.
-14. **Contagem de concepts**: ChatGPT fala em 19 prompts e depois em 27 (23 a 27 são heróis; 20, 21 e 22 são settings, deckbuilding e team, mas os prompts 20 a 22 não aparecem no texto, só como referências na tabela de wireframes). Existem 24 PNG de concept e não 27.
-15. **Wireframes de herói**: ChatGPT lista 5 classes com 6 habilidades, mas wireframe-hero-menu usa números e rótulos I a VI genéricos.
-16. **Ano no rodapé**: wireframe-5 diz "© 2025". Data de hoje: 2026.
+1. **Game name**: ChatGPT and all the concepts use DARKEON. The repository inherited vocabulary from a previous project ("Ashen Vanguard"), already removed from the rules and skills. The final name is decided in task 2.
+2. **Resolution and scale**: ChatGPT proposes 1920x1080 with 960x540 production and 2x scale. The inherited rules fixed a 480x270 base; today `assets.md` delegates resolution and sizes to the Art Bible. Decision in task 2.
+3. **Hand size**: ChatGPT talks about six cards; batle-1 shows 5 cards (Mão 5/5), batle-2 shows 5 in a fan. Other screens show 6.
+4. **Hero names**: ChatGPT and hero-menu use Dreadguard, Blood Huntress, Void Inquisitor. batle-1 uses Valgrin, Morzeth, Kaelis. wireframe-10 uses Branwen, Nyssa, Cael. wireframe-13 uses Arden (Warrior). batle-4 uses PT names (Inquisidor do Vazio, Caçadora de Sangue).
+5. **Class names**: ChatGPT uses Guerreiro, Mago, Curandeiro, Artilharia, Arqueiro. The grimoire and the mastery tree use Guardião, Caçadora, Inquisidor. Wireframe-11 uses Arqueiro, Mago, Curandeiro. There is no single roster.
+6. **Battle duration**: the concepts show "ROUND XX/10" in a normal battle. The inherited 5-to-8-round rule was removed; the target duration will be defined in the GDD.
+7. **Hit chance**: the project rule says "hits are guaranteed; there is no hit percentage". The concepts show "25% ESQUIVA" (DODGE) (batle-5 and hero-archer) and "Tem 20% de chance de aplicar a condição" (has a 20% chance to apply the condition) (wireframe-11, Tiro Preciso). Dodge is a percentage chance to avoid a hit. Conflict to decide.
+8. **Turn order**: the project rule requires an always-visible turn-order queue. No concept shows an explicit queue; batle-2 has a node trail at the top, which is a map, not a turn order. Absent.
+9. **Mana vs. energy**: ChatGPT asks for a decision on mana (RPG) vs. energy (cards). Heroes show a mana bar next to HP (batle-3, batle-5), and abilities have an energy cost and a cooldown in turns. Overlapping systems, which ChatGPT itself flags as a risk.
+10. **Energy color**: gold, violet, blue flame and green change from screen to screen.
+11. **Elite**: ChatGPT says a 20% elite encounter chance, as a system rule. The concept examples use rounds 5 and 7 and an elite shown on screen. Consistent, but the labels on the screens are not uniform.
+12. **Pixel scale and FPS**: menu-settings shows INTEGER scale and FPS 60. wireframe-8 shows 2x scale and unlimited FPS.
+13. **Duplicates**: wireframe-10 and wireframe-12 are identical. The folder has 13 files with 12 distinct screens.
+14. **Concept count**: ChatGPT talks about 19 prompts and later about 27 (23 to 27 are heroes; 20, 21 and 22 are settings, deckbuilding and team, but prompts 20 to 22 do not appear in the text, only as references in the wireframes table). There are 24 concept PNGs, not 27.
+15. **Hero wireframes**: ChatGPT lists 5 classes with 6 abilities, but wireframe-hero-menu uses generic numbers and I-to-VI labels.
+16. **Year in the footer**: wireframe-5 says "© 2025". Today's date is 2026.
 
-### Riscos de IP (regra de ip-and-tone do projeto)
+### IP risks (the project's ip-and-tone rule)
 
-- O texto do ChatGPT cita como inspiração Warhammer 40,000, Space Marine 2, Darkest Dungeon, Slay the Spire 2, DOOM The Dark Ages, Alien/Predator, Blasphemous, Dungeon Rushers e "Jake Thayne / Primal Hunter" (no link de referência do arqueiro). Não pode ir a nenhum texto, nome de arquivo, prompt ou asset do projeto. Usar apenas como referência interna, sem copiar termos.
-- Subtítulo de chefe "IMPERADOR DO VAZIO" (batle-3) e "demon-emperor" no prompt do chefe: combina com a regra de não usar o Imperador como deus-cadáver em trono. Revisar.
-- Classe "Inquisidor" (Void Inquisitor, skill-tree-1 e 2): a regra proíbe "Inquisition" como organização. Como nome de classe, provavelmente permitido, mas precisa de revisão.
-- Trono de caveiras, lua vermelha, sala do trono e altar de catedral: tropos genéricos, permitidos.
-- Prompts do ChatGPT pedem "No recognizable copyrighted iconography" e "Original universe": bom, mas não garante.
+- The ChatGPT text cites Warhammer 40,000, Space Marine 2, Darkest Dungeon, Slay the Spire 2, DOOM The Dark Ages, Alien/Predator, Blasphemous, Dungeon Rushers and "Jake Thayne / Primal Hunter" (in the archer's reference link) as inspirations. None of these may go into any project text, file name, prompt or asset. Use them only as internal references, without copying terms.
+- The boss subtitle "IMPERADOR DO VAZIO" (EMPEROR OF THE VOID) (batle-3) and "demon-emperor" in the boss prompt: this matches the rule against an emperor as a corpse-god on a throne. Review.
+- The "Inquisidor" class (Void Inquisitor, skill-tree-1 and 2): the rule prohibits "Inquisition" as an organization. As a class name it is probably allowed, but it needs review.
+- A throne of skulls, a red moon, a throne room and a cathedral altar: generic tropes, allowed.
+- ChatGPT's prompts ask for "No recognizable copyrighted iconography" and "Original universe": good, but not a guarantee.
 
-### Lacunas (não verificado ou ausente)
+### Gaps (not verified or absent)
 
-- Morte de unidade: a regra do projeto diz que nunca atravessa runs e sempre deixa algo. Nada no ChatGPT ou nos concepts trata disso.
-- Teto de poder permanente (GDD seção 8): não lido aqui (fora do escopo). Árvore radial e fragmentos precisam ser checados contra o teto.
-- Estrutura do mapa (nós, tipos de nó, ramos): só aparece como trilha linear com caveiras (batle-2, 6, 7). Não há mapa ramificado.
-- Lojas e eventos: nada sobre preço por rodada, reroll ou quantidade por loja além das telas.
-- Cartas: não há tabela de custos e efeitos completa; só exemplos.
-- Balanceamento: os números de HP e dano nos concepts são exemplos, o próprio ChatGPT avisa.
-- Inimigos: não há lista completa com intenções, nem família de criaturas definida em texto (só descrições por concept).
-- Save e continuidade de run: não tratado.
-- Não há concept nem wireframe de tela de morte/derrota, vitória de ato ou recompensa de batalha.
-- Não há tela de seleção de classe antes da run, nem de mapa.
-- Áudio, input por toque e acessibilidade: só aparece nas configurações (categoria ACESSIBILIDADE sem conteúdo).
-- Fontes: nenhuma fonte específica é definida; o texto diz "pixel legível" e "gótica só em títulos", mas as telas mostram serifas no corpo.
-- Paleta: os hex do ChatGPT e os "estimados" de concept não são medidos (amostragem automática deu resultado grosseiro, dominado por preto).
+- Unit death: the project rule says it never crosses runs and always leaves something behind. Nothing in ChatGPT or the concepts addresses it.
+- Permanent power ceiling (GDD section 8): not read here (out of scope). The radial tree and fragments must be checked against the ceiling.
+- Map structure (nodes, node types, branches): it appears only as a linear trail of skulls (batle-2, 6, 7). There is no branching map.
+- Shops and events: nothing about price per round, reroll or stock quantities beyond the screens.
+- Cards: there is no complete table of costs and effects; only examples.
+- Balancing: the HP and damage numbers in the concepts are examples; ChatGPT itself warns about this.
+- Enemies: there is no complete list with intents, nor a creature family defined in text (only per-concept descriptions).
+- Save and run continuity: not addressed.
+- There is no concept or wireframe for a death/defeat screen, act victory, or battle reward.
+- There is no class-selection screen before the run, nor a map screen.
+- Audio, touch input and accessibility: they appear only in settings (the ACCESSIBILITY category has no content).
+- Fonts: no specific font is defined; the text says "readable pixel" and "gothic only for titles", but the screens show serifs in the body text.
+- Palette: the ChatGPT hex values and the concept "estimates" are not measured (the automatic sampling gave a rough result dominated by black).

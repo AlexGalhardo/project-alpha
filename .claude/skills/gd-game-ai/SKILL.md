@@ -9,9 +9,9 @@ description: >
   patrol/chase.
 ---
 
-> **project-alpha:** skill de terceiros (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). Em conflito valem `AGENTS.md`, `.claude/rules/` e `docs/gdd.md`: Phaser 4, Bun, roguelite deckbuilder dark fantasy com combate por turnos em fileira lateral; lógica pura em `src/core`, números em `src/data`, textos em `src/i18n`.
+> **project-alpha:** third-party skill (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4, Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`.
 >
-> **Escopo aqui:** as seções de steering e movimento em tempo real estão fora de escopo (jogo por turnos). O que vale: pontuação por utilidade (utility scoring) para escolher ações e pathfinding em grid com altura.
+> **Scope here:** as seções de steering e movimento em tempo real estão fora de escopo (jogo por turnos). O que vale: pontuação por utilidade (utility scoring) para escolher ações e pathfinding em grid com altura.
 
 
 # Game AI: decisions, steering, and pathfinding

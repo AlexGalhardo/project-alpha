@@ -7,7 +7,7 @@ description: Use when creating, regenerating or replacing any sound of project-a
 
 Read first: `docs/gdd.md` (seção de áudio: lista de faixas e efeitos) and
 `.claude/rules/assets.md`. Estilo sonoro, alvos de loudness e lista final de faixas: a definir
-na GDD ou em `docs/sdd/audio.md` (ainda não criado). Se esta skill e a GDD divergirem, a GDD vence.
+na GDD ou em `docs/sdd/audio.md` (not created yet). If this skill and the GDD diverge, the GDD wins.
 For playback in the engine use the Phaser `audio-and-sound` skill.
 
 ## Scope

@@ -1,37 +1,37 @@
-# ADR 0001: Ferramentas de qualidade (Bun, Biome, markdownlint, commitlint)
+# ADR 0001: Quality tooling (Bun, Biome, markdownlint, commitlint)
 
-- Status: aceito
-- Data: 2026-10-26
+- Status: accepted
+- Date: 2026-10-26
 
-## Contexto
+## Context
 
-O desenvolvedor pediu Bun 1.4.4 como ferramenta principal, Biome v2 para TypeScript, markdownlint para Markdown, Conventional Commits e verificação de "typos e erros" com as ferramentas que existirem de fato na última release de Bun e Biome.
+The developer asked for Bun 1.4.4 as the main tool, Biome v2 for TypeScript, markdownlint for Markdown, Conventional Commits, and a check for "typos and errors" using only tools that actually exist in the latest Bun and Biome releases.
 
-## Verificação feita
+## Verification
 
-| Ferramenta | Versão | Comando verificado | O que faz |
+| Tool | Version | Verified command | What it does |
 |---|---|---|---|
-| Bun | 1.4.4 (`bun --version`) | `bun check` (listado em `bun --help`: "Type check a TypeScript project") | Type check do projeto via `tsconfig.json` |
-| Bun | 1.4.4 | `bun audit` | Vulnerabilidades em dependências |
-| Biome | 2.6.3 (npm, última estável em 2026-10-26) | `biome ci` | Formatação + lint + organize imports, sem escrever, para CI |
-| Biome | 2.6.3 | `biome check --write` | Corrige formatação e lint localmente |
-| markdownlint-cli2 | 0.24.0 | `markdownlint-cli2 "**/*.md"` | Lint de Markdown |
+| Bun | 1.4.4 (`bun --version`) | `bun check` (listed in `bun --help`: "Type check a TypeScript project") | Type-checks the project via `tsconfig.json` |
+| Bun | 1.4.4 | `bun audit` | Vulnerabilities in dependencies |
+| Biome | 2.6.3 (npm, latest stable on 2026-10-26) | `biome ci` | Formatting + lint + import organization, read-only, for CI |
+| Biome | 2.6.3 | `biome check --write` | Fixes formatting and lint locally |
+| markdownlint-cli2 | 0.24.0 | `markdownlint-cli2 "**/*.md"` | Markdown lint |
 
-Nem Bun nem Biome têm verificador ortográfico (typos) nativo: nenhum subcomando em `bun --help` ou `biome --help` faz isso. Erros de tipo são cobertos por `bun check` e erros de código por `biome ci`.
+Neither Bun nor Biome has a native spell checker (typos): no subcommand in `bun --help` or `biome --help` does this. Type errors are covered by `bun check`, code errors by `biome ci`.
 
-## Decisão
+## Decision
 
 - `bun run typecheck` → `bun check`; `bun run lint` → `biome ci .`; `bun run format` → `biome check --write .`; `bun run lint:md` → markdownlint-cli2.
-- `bun run ci` (`scripts/ci.ts`) encadeia tudo; etapas sem entrada ainda (sem `tsconfig.json`, `tests/`, `index.html`) são puladas com aviso até a fase ESTRUTURA.
-- commitlint + husky (`.husky/commit-msg`) validam Conventional Commits localmente.
-- Todas as versões exatas no `package.json`, sem `^`/`~`.
+- `bun run ci` (`scripts/ci.ts`) chains everything; steps without input yet (no `tsconfig.json`, `tests/`, `index.html`) are skipped with a warning until the STRUCTURE phase.
+- commitlint + husky (`.husky/commit-msg`) validate Conventional Commits locally.
+- All versions exact in `package.json`, without `^`/`~`.
 
-## Alternativas
+## Alternatives
 
-- `typos-cli` (crate-ci) ou `cspell` para ortografia: úteis, mas são dependência nova e o texto é bilíngue (PT-BR/EN). Fica como proposta para a fase ESTRUTURA, sujeita à aprovação.
-- `tsc --noEmit` direto: `bun check` faz o mesmo sem chamar o compilador separadamente; `typescript` 7.0.2 continua instalado para o editor e ferramentas.
+- `typos-cli` (crate-ci) or `cspell` for spelling: useful, but they are new dependencies and the in-game text is bilingual (EN/PT-BR). Proposed for the STRUCTURE phase, subject to approval.
+- Direct `tsc --noEmit`: `bun check` does the same without calling the compiler separately; `typescript` 7.0.2 stays installed for the editor and tools.
 
-## Consequências
+## Consequences
 
-- Typos em texto não são pegos automaticamente até a decisão sobre `typos-cli`/`cspell`.
-- O CI do GitHub e o local rodam o mesmo script.
+- Typos in text are not caught automatically until the `typos-cli`/`cspell` decision.
+- The GitHub and local CI run the same script.

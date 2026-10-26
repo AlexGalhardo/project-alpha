@@ -1,31 +1,31 @@
-# ADR 0003: CI/CD com GitHub Actions e deploy na Vercel
+# ADR 0003: CI/CD with GitHub Actions and Vercel deployment
 
-- Status: aceito (deploy pendente de configuração do desenvolvedor)
-- Data: 2026-10-26
+- Status: accepted (deployment pending the developer's configuration)
+- Date: 2026-10-26
 
-## Contexto
+## Context
 
-Deploy web na Vercel em `alpha.lekzera.xyz` durante a fase protótipo, disparado pelo GitHub Actions.
+Web deployment on Vercel at `alpha.lekzera.xyz` during the prototype phase, triggered by GitHub Actions.
 
-## Decisão
+## Decision
 
-- `.github/workflows/ci.yml`: push em `main` e PR → `bun install --frozen-lockfile` → `bun run ci`. Bun fixado em `1.4.4`, actions fixadas por SHA de commit (`actions/checkout` v7.0.1, `oven-sh/setup-bun` v2.2.0), `permissions: contents: read`, segredos só nos passos que os usam.
-- `.github/workflows/deploy.yml`: push em `main` → CI → `vercel pull/build/deploy --prebuilt --prod` com `vercel@65.3.1` fixado. O job só roda quando `index.html` existe (o jogo nasce na fase ESTRUTURA).
-- Segredos do repositório exigidos: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
-- Domínio `alpha.lekzera.xyz` adicionado ao projeto Vercel e CNAME `alpha` → `cname.vercel-dns.com` no DNS de `lekzera.xyz`.
+- `.github/workflows/ci.yml`: push to `main` and PR → `bun install --frozen-lockfile` → `bun run ci`. Bun pinned to `1.4.4`, actions pinned by commit SHA (`actions/checkout` v7.0.1, `oven-sh/setup-bun` v2.2.0), `permissions: contents: read`, secrets only in the steps that use them.
+- `.github/workflows/deploy.yml`: push to `main` → CI → `vercel pull/build/deploy --prebuilt --prod` with `vercel@65.3.1` pinned. The job only runs when `index.html` exists (the game is created in the STRUCTURE phase).
+- Required repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
+- Domain `alpha.lekzera.xyz` added to the Vercel project, and CNAME `alpha` → `cname.vercel-dns.com` in the DNS of `lekzera.xyz`.
 
-## Pendências do desenvolvedor
+## Developer to-dos
 
-1. Criar o projeto na Vercel (framework: Vite; build: `bun run build`; output: `dist`).
-2. Cadastrar os 3 segredos no GitHub (`gh secret set VERCEL_TOKEN` etc.).
-3. Configurar o domínio e o DNS.
+1. Create the Vercel project (framework: Vite; build: `bun run build`; output: `dist`).
+2. Add the 3 secrets to GitHub (`gh secret set VERCEL_TOKEN`, etc.).
+3. Configure the domain and DNS.
 
-## Alternativas
+## Alternatives
 
-- Integração Git nativa da Vercel: mais simples, mas faz deploy sem passar pelo `bun run ci`.
-- GitHub Pages: sem domínio por projeto tão simples e sem previews.
+- Vercel's native Git integration: simpler, but it deploys without going through `bun run ci`.
+- GitHub Pages: no per-project domain as simple, and no previews.
 
-## Consequências
+## Consequences
 
-- Deploy só sai com o CI verde.
-- Custo: plano Hobby da Vercel cobre o protótipo (não verificado para uso comercial; o Hobby é para uso não comercial pelos termos da Vercel, então reavaliar antes de monetizar).
+- A deploy only goes out with green CI.
+- Cost: the Vercel Hobby plan covers the prototype (commercial use not verified; Hobby is for non-commercial use under Vercel's terms, so re-evaluate before monetizing).

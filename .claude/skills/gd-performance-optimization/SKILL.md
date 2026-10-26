@@ -9,7 +9,7 @@ description: >
   batching, garbage collection/GC spikes, object pooling, or "the game runs slow".
 ---
 
-> **project-alpha:** skill de terceiros (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). Em conflito valem `AGENTS.md`, `.claude/rules/` e `docs/gdd.md`: Phaser 4, Bun, roguelite deckbuilder dark fantasy com combate por turnos em fileira lateral; lógica pura em `src/core`, números em `src/data`, textos em `src/i18n`.
+> **project-alpha:** third-party skill (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4, Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`.
 
 
 # Performance optimization

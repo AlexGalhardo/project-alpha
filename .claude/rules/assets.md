@@ -1,28 +1,28 @@
-# Regras de assets
+# Asset rules
 
 ## Visual
 
-- Pixel art segue a skill `pixel-logic`, `docs/books/pixel-logic.md` e `docs/art-bible.md` (resolução base, escala, paleta, contorno, animação).
-- Escala sempre inteira (`pixelArt: true`, `roundPixels: true`). Sem escala fracionária, sem mixels, sem antialias na borda externa.
-- Placeholder (SVG ou retângulo) usa as **mesmas dimensões e chaves** da arte final. Trocar placeholder por sprite nunca toca em lógica.
-- Paleta-mestra compartilhada definida na Art Bible; sem preto puro.
-- A silhueta identifica herói e inimigo. Aliado e inimigo nunca se distinguem só por cor.
-- Saída de gerador (PixelLab ou outro) é rascunho: limpeza manual e revisão em 1× sobre o fundo real antes de entrar no jogo.
+- Pixel art follows the `pixel-logic` skill, `docs/books/pixel-logic.md` and `docs/art-bible.md` (base resolution, scale, palette, outline, animation).
+- Scale is always integer (`pixelArt: true`, `roundPixels: true`). No fractional scale, no mixels, no antialiasing on the outer edge.
+- A placeholder (SVG or rectangle) uses the **same dimensions and keys** as the final art. Swapping a placeholder for a sprite never touches logic.
+- Shared master palette defined in the Art Bible; no pure black.
+- The silhouette identifies heroes and enemies. Allies and enemies are never told apart by color alone.
+- Output from a generator (PixelLab or other) is a draft: manual cleanup and a 1x review on the real background before it enters the game.
 
-## Áudio
+## Audio
 
-- Só efeitos e música, via ElevenLabs. Sem dublagem.
-- Loops sem emenda audível; volume normalizado; `ogg` principal, `mp3` de fallback.
-- O jogo funciona com áudio bloqueado ou ausente (política de autoplay do navegador).
+- Only sound effects and music, via ElevenLabs. No voice acting.
+- Seamless loops; normalized volume; `ogg` primary, `mp3` fallback.
+- The game works with audio blocked or missing (browser autoplay policy).
 
-## Geração
+## Generation
 
-- **Portão de custo**: antes de qualquer geração em lote (PixelLab ou ElevenLabs), apresentar lista e estimativa ao desenvolvedor e aguardar aprovação.
-- Toda geração é registrada (prompt, parâmetros, data, custo) em `art-src/`.
-- Scripts de geração são idempotentes: não regeram o que já existe.
+- **Cost gate:** before any batch generation (PixelLab or ElevenLabs), present the list and the estimate to the developer and wait for approval.
+- Every generation is logged (prompt, parameters, date, cost) in `art-src/`.
+- Generation scripts are idempotent: they do not regenerate what already exists.
 
-## Organização
+## Organization
 
-- Chaves: `hero.<class>.<pose>`, `enemy.<id>.<pose>`, `card.<id>`, `icon.<kind>.<id>`, `ui.<id>`, `bg.<act>.<id>`, `vfx.<id>`, `music.<id>`, `sfx.<category>.<id>`.
-- Arquivos do jogo em `public/assets/`; fontes e logs em `art-src/`.
-- `references/` é material de terceiros, só local: nunca copiar, recortar, rastrear (trace) ou embarcar.
+- Keys: `hero.<class>.<pose>`, `enemy.<id>.<pose>`, `card.<id>`, `icon.<kind>.<id>`, `ui.<id>`, `bg.<act>.<id>`, `vfx.<id>`, `music.<id>`, `sfx.<category>.<id>`.
+- Game files live in `public/assets/`; sources and logs in `art-src/`.
+- `references/` is third-party material, local only: never copy, crop, trace or ship it.

@@ -1,482 +1,482 @@
-# Pesquisa web: roguelite + deckbuilding + RPG grimdark em pixel art (Phaser 4, web)
+# Web research: roguelite + deckbuilding + grimdark RPG in pixel art (Phaser 4, web)
 
-> Pesquisa consolidada. Data da coleta: 2026-10-26. Toda afirmação relevante traz URL inline.
-> "não verificado" = não consegui confirmar em fonte primária nesta coleta. Nada aqui foi inventado.
-> Valores de StS referem-se a Slay the Spire 1 salvo indicação "StS2".
-
----
-
-## 1. Resumo executivo
-
-- Slay the Spire 1 (StS) define o núcleo de turno: **3 energia, compra de 5 cartas por turno**, descarte da mão no fim do turno, pilha de exaustão ([StS2 Mechanics](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics), [Exhaust](https://slaythespire.wiki.gg/wiki/Exhaust)).
-- Darkest Dungeon (DD1) define a camada de RPG sombrio: side-view com **ranks** (posição limita habilidades), estresse 0–200 com teste de resolução em 100 e ataque cardíaco em 200 ([Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon), [Stress](https://darkestdungeon.wiki.gg/wiki/Stress)).
-- Darkest Dungeon II (DD2) **removeu a precisão: acertos são garantidos** (salvo efeitos específicos), estresse virou escala 0–10, e adicionou relações entre heróis e a carruagem/estrada ([DD2 wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II), [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II))). Isso valida nosso invariante "acerto é garantido".
-- Economia de StS é bem documentada: combate normal 10–20 ouro, elite 25–35, chefe 95–105; remoção de carta 75 + 25 por uso ([Gold](https://slaythespire.wiki.gg/wiki/Gold), [Merchant](https://slaythespire.wiki.gg/wiki/Merchant)).
-- Balanceamento da MegaCrit foi guiado por métricas desde cedo (palestra GDC 2019) ([GDC Vault](https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics), [Game Developer](https://www.gamedeveloper.com/design/learn-i-slay-the-spire-i-s-metrics-driven-approach-to-game-balancing-at-gdc-2019)).
-- StS2 está em **Early Access desde 5 mar 2026** (Steam), motor Godot, atualizações em beta semanal/quinzenal até ago–set 2026 ([Steam appdetails](https://store.steampowered.com/app/2868840/Slay_the_Spire_2/), [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire)).
-- Phaser 4 é estável: **v4.0.0 em 2026-04-10**, última estável **v4.2.1 em 2026-07-09** ([GitHub releases API](https://api.github.com/repos/phaserjs/phaser/releases)).
-- Para pixel art no Phaser: `pixelArt: true` = `antialias: false` + `roundPixels: true` ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)); escala inteira é responsabilidade nossa (calcular `zoom`).
-- ElevenLabs: SFX até 30 s por geração, loop sem emenda, 40 créditos/s quando a duração é fixada; Music API com limite de 5 min ([SFX docs](https://elevenlabs.io/docs/overview/capabilities/sound-effects), [API pricing](https://elevenlabs.io/pricing/api)).
-- Risco de IP: GW aplica política de IP restritiva (proíbe fan films/animações sem licença desde 2021, segundo cobertura secundária); evitar qualquer termo/símbolo listado nas regras do projeto.
+> Consolidated research. Collection date: 2026-10-26. Every relevant claim carries an inline URL.
+> "not verified" = I could not confirm it in a primary source during this collection. Nothing here was invented.
+> StS values refer to Slay the Spire 1 unless marked "StS2".
 
 ---
 
-## 2. Câmera e enquadramento
+## 1. Executive summary
 
-| Jogo | Enquadramento | Fatos | Fonte |
+- Slay the Spire 1 (StS) defines the turn core: **3 energy, draw 5 cards per turn**, the hand is discarded at the end of the turn, and an exhaust pile ([StS2 Mechanics](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics), [Exhaust](https://slaythespire.wiki.gg/wiki/Exhaust)).
+- Darkest Dungeon (DD1) defines the dark RPG layer: side view with **ranks** (position limits abilities), stress 0–200 with a resolve check at 100 and a heart attack at 200 ([Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon), [Stress](https://darkestdungeon.wiki.gg/wiki/Stress)).
+- Darkest Dungeon II (DD2) **removed accuracy: hits are guaranteed** (except specific effects), stress became a 0–10 scale, and it added relationships between heroes and the stagecoach/road ([DD2 wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II), [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II))). This validates our "hits are guaranteed" invariant.
+- StS economy is well documented: normal combat 10–20 gold, elite 25–35, boss 95–105; card removal 75 + 25 per use ([Gold](https://slaythespire.wiki.gg/wiki/Gold), [Merchant](https://slaythespire.wiki.gg/wiki/Merchant)).
+- MegaCrit's balancing was driven by metrics from early on (GDC 2019 talk) ([GDC Vault](https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics), [Game Developer](https://www.gamedeveloper.com/design/learn-i-slay-the-spire-i-s-metrics-driven-approach-to-game-balancing-at-gdc-2019)).
+- StS2 has been in **Early Access since 5 Mar 2026** (Steam), Godot engine, weekly/fortnightly beta updates until Aug–Sep 2026 ([Steam appdetails](https://store.steampowered.com/app/2868840/Slay_the_Spire_2/), [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire)).
+- Phaser 4 is stable: **v4.0.0 on 2026-04-10**, latest stable **v4.2.1 on 2026-07-09** ([GitHub releases API](https://api.github.com/repos/phaserjs/phaser/releases)).
+- For pixel art in Phaser: `pixelArt: true` = `antialias: false` + `roundPixels: true` ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)); integer scaling is our responsibility (compute `zoom`).
+- ElevenLabs: SFX up to 30 s per generation, seamless loops, 40 credits/s when the duration is fixed; Music API limited to 5 min ([SFX docs](https://elevenlabs.io/docs/overview/capabilities/sound-effects), [API pricing](https://elevenlabs.io/pricing/api)).
+- IP risk: GW applies a restrictive IP policy (prohibits fan films/animations without a license since 2021, per secondary coverage); avoid any term or symbol listed in the project rules.
+
+---
+
+## 2. Camera and framing
+
+| Game | Framing | Facts | Source |
 |---|---|---|---|
-| DD1 | Side-view 2D, mesmo plano para exploração e combate | Side-view escolhido para reduzir assets; a mesma vista foi reaproveitada na exploração | [Wikipedia DD – Development](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
-| DD1 | Ranks (fileiras) aliados à esquerda, inimigos à direita | Ranks inspirados em *The Bard's Tale*; frente = melee forte e mais dano recebido; trás = protegido e ataques mais fracos; inimigos podem puxar/empurrar heróis de posição | [Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
-| DD1 | Número de ranks | 4 por lado (ranks 1–4): a Arbalest "só é efetiva do 3º e 4º ranks"; a Hag ocupa os ranks 3 e 4 e o caldeirão os ranks 1 e 2. Party de 4 heróis no DD1 é inferida (1 herói por rank); explícita só no DD2 | [Heroes (DD)](https://darkestdungeon.wiki.gg/wiki/Heroes_(Darkest_Dungeon)), [Hag](https://darkestdungeon.wiki.gg/wiki/Hag) |
-| DD2 | Side-view com modelos 3D estilizados | Party nunca passa de 4 heróis | [DD2 wiki – Combat](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II) |
-| StS | Side-view: jogador à esquerda, inimigos à direita, mão de cartas na parte de baixo | Layout descrito pela própria wiki (pilhas, ícone de exaustão "no lado direito da tela") | [StS2 Mechanics – Piles](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
+| DD1 | 2D side view, same plane for exploration and combat | Side view chosen to reduce assets; the same view was reused for exploration | [Wikipedia DD – Development](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
+| DD1 | Ranks (rows): allies on the left, enemies on the right | Ranks inspired by *The Bard's Tale*; front = strong melee and more damage taken; back = protected and weaker attacks; enemies can pull/push heroes between positions | [Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
+| DD1 | Number of ranks | 4 per side (ranks 1–4): the Arbalest "is only effective from the 3rd and 4th ranks"; the Hag occupies ranks 3 and 4 and the cauldron ranks 1 and 2. A 4-hero party in DD1 is inferred (1 hero per rank); explicit only in DD2 | [Heroes (DD)](https://darkestdungeon.wiki.gg/wiki/Heroes_(Darkest_Dungeon)), [Hag](https://darkestdungeon.wiki.gg/wiki/Hag) |
+| DD2 | Side view with stylized 3D models | A party never exceeds 4 heroes | [DD2 wiki – Combat](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II) |
+| StS | Side view: player on the left, enemies on the right, hand of cards at the bottom | Layout described by the wiki itself (piles, exhaust icon "on the right side of the screen") | [StS2 Mechanics – Piles](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
 
-Implicações:
+Implications:
 
-- Side-view 2D é o enquadramento mais barato para pixel art: um sprite por unidade voltado para um lado (espelhamento para o lado inimigo é opcional).
-- Ranks transformam posição em decisão sem precisar de grid — compatível com toque (alvos grandes, poucos).
-- Mão de cartas embaixo + unidades em cima exige reservar ~35–40% da altura para a mão em 480×270 (estimativa de layout nossa, não de fonte).
-- Inimigos à direita com intenção acima da cabeça (StS) é convenção do gênero; manter.
-
----
-
-## 3. Visual e direção de arte
-
-### 3.1 Referências
-
-| Jogo | Direção | Fonte |
-|---|---|---|
-| DD1 | Arte de Chris Bourassa; visual de **xilogravura (woodcut) e manuscrito iluminado**, influência de Albrecht Dürer, Mike Mignola, Guy Davis, Chris Bachalo; motor caseiro | [Wikipedia DD – Influences](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
-| DD2 | Migração para **3D (Unity)** mantendo o estilo; meta declarada: "emular a arte de marketing que desenhei para DD1" (Bourassa) | [NME](https://www.nme.com/features/darkest-dungeon-2-how-redhook-studios-are-reinventing-their-roguelike-classic-3085987), [Epic interview](https://store.epicgames.com/en-US/news/darkest-dungeon-2-early-access-interview), [TheGamer](https://www.thegamer.com/darkest-dungeon-2-3d-combat/) (link quebrado em 2026-10-26) |
-| DD2 | Motivo do 3D: público "dessensibilizado" à arte 2D já consumida; usar 3D só onde reforça o estilo | [Gamebanshee (reprint PC Gamer)](https://www.gamebanshee.com/3hqup) |
-| StS1 | Arte desenhada à mão, motor libGDX (Java) | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| StS2 | Motor Godot (migração de Unity após a polêmica de runtime fee) | [Wikipedia StS – Sequel](https://en.wikipedia.org/wiki/Slay_the_Spire), [Game Developer](https://gamedeveloper.com/business/slay-the-spire-devs-followed-through-on-abandoning-unity) |
-
-### 3.2 Considerações de pixel art (base 480×270 como hipótese; decisão na tarefa 2)
-
-- 480×270 × 4 = 1920×1080; × 3 = 1440×810; × 2 = 960×540 — todos inteiros (aritmética).
-- Phaser `pixelArt: true` liga nearest-neighbor e arredonda posições ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)).
-- Phaser 4 (rc.3) adicionou `vertexRoundMode` por objeto (`off`, `safe`, `safeAuto` padrão, `full`, `fullAuto`) — `full` pode fazer sprites "tremerem" em rotação ([releases](https://github.com/phaserjs/phaser/releases)).
-- Phaser 4 adicionou filtro `Blocky` (pixeliza preservando paleta) — útil para transições/efeitos, não para a arte base ([releases](https://github.com/phaserjs/phaser/releases)).
-- `smoothPixelArt` (WebGL) mantém pixels blocados mas suaviza bordas entre pixels quando escalado — **não usar** se a regra do projeto é "sem antialias" ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)).
-- Legibilidade: silhueta por classe; DD1 resolve leitura de posição pelos ranks e pela pose (Wikipedia DD). Para nós: contorno seletivo + 1 luz, conforme regras de assets do projeto.
-- Rotação/escala fracionária quebra pixel art; evitar tweens de `scale` não inteiros em sprites de unidade (prática geral; consequência direta de `roundPixels`/nearest).
+- 2D side view is the cheapest framing for pixel art: one sprite per unit facing one side (mirroring for the enemy side is optional).
+- Ranks turn position into a decision without a grid — compatible with touch (few, large targets).
+- A card hand at the bottom plus units above requires reserving ~35–40% of the height for the hand at 480×270 (our own layout estimate, not from a source).
+- Enemies on the right with intent above the head (StS) is a genre convention; keep it.
 
 ---
 
-## 4. Áudio
+## 3. Visuals and art direction
 
-| Ponto | Fato | Fonte |
+### 3.1 References
+
+| Game | Direction | Source |
 |---|---|---|
-| Narrador DD1 | Wayne June, narrador sardônico; Bourassa o conheceu pelas leituras de Lovecraft; a voz foi considerada "elemento necessário" após o trailer | [Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
-| Narrador DD2 | Wayne June também narra DD2 (The Academic); faleceu em 2025, homenagem da Red Hook em 30 jan | [DD wiki – Wayne June](https://darkestdungeon.wiki.gg/wiki/Wayne_June) |
-| Música do hub | A música do Hamlet chama-se "The Hamlet" | [DD wiki – Hamlet](https://darkestdungeon.wiki.gg/wiki/Hamlet) |
-| Música dinâmica DD/StS | Camadas por intensidade — **não verificado** nesta coleta | — |
-| Bark/estresse DD2 | Banter negativo aumenta com estresse (0–3 sem banter negativo, 4–6 algum) e gera mais estresse | [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II)) |
+| DD1 | Art by Chris Bourassa; **woodcut and illuminated manuscript** look, influenced by Albrecht Dürer, Mike Mignola, Guy Davis, Chris Bachalo; in-house engine | [Wikipedia DD – Influences](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
+| DD2 | Move to **3D (Unity)** keeping the style; declared goal: "emulate the marketing art I drew for DD1" (Bourassa) | [NME](https://www.nme.com/features/darkest-dungeon-2-how-redhook-studios-are-reinventing-their-roguelike-classic-3085987), [Epic interview](https://store.epicgames.com/en-US/news/darkest-dungeon-2-early-access-interview), [TheGamer](https://www.thegamer.com/darkest-dungeon-2-3d-combat/) (broken link as of 2026-10-26) |
+| DD2 | Reason for 3D: an audience "desensitized" to the 2D art already consumed; use 3D only where it reinforces the style | [Gamebanshee (PC Gamer reprint)](https://www.gamebanshee.com/3hqup) |
+| StS1 | Hand-drawn art, libGDX engine (Java) | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| StS2 | Godot engine (migration from Unity after the runtime-fee controversy) | [Wikipedia StS – Sequel](https://en.wikipedia.org/wiki/Slay_the_Spire), [Game Developer](https://gamedeveloper.com/business/slay-the-spire-devs-followed-through-on-abandoning-unity) |
 
-Implicações (regra do projeto: sem dublagem):
+### 3.2 Pixel art considerations (base 480×270 as a hypothesis; decision in task 2)
 
-- Substituir o narrador por **texto curto + stinger sonoro** (sino, corda grave) em eventos críticos (meltdown, morte, crítico).
-- SFX como canal de feedback primário: impacto, bloqueio, carta jogada, carta exaurida, ganho de estresse.
-- Música: loop de exploração, loop de combate, variação de chefe; ElevenLabs Music gera até 5 min por faixa ([API pricing](https://elevenlabs.io/pricing/api)).
-- Web: áudio só depois de gesto do usuário (ver seção 12).
+- 480×270 × 4 = 1920×1080; × 3 = 1440×810; × 2 = 960×540 — all integers (arithmetic).
+- Phaser `pixelArt: true` enables nearest-neighbor and rounds positions ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)).
+- Phaser 4 (rc.3) added a per-object `vertexRoundMode` (`off`, `safe`, `safeAuto` default, `full`, `fullAuto`) — `full` can make sprites "shake" when rotated ([releases](https://github.com/phaserjs/phaser/releases)).
+- Phaser 4 added a `Blocky` filter (pixelates while preserving the palette) — useful for transitions/effects, not for base art ([releases](https://github.com/phaserjs/phaser/releases)).
+- `smoothPixelArt` (WebGL) keeps pixels blocky but smooths edges between pixels when scaled — **do not use** if the project rule is "no antialiasing" ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)).
+- Legibility: silhouette per class; DD1 solves position reading through ranks and pose (Wikipedia DD). For nodes: selective outline + 1 light, per the project's asset rules.
+- Rotation/fractional scale breaks pixel art; avoid non-integer `scale` tweens on unit sprites (general practice; direct consequence of `roundPixels`/nearest).
 
 ---
 
-## 5. UI/HUD e UX
+## 4. Audio
 
-### 5.1 Intenções e previsibilidade (StS)
+| Point | Fact | Source |
+|---|---|---|
+| DD1 narrator | Wayne June, sardonic narrator; Bourassa knew him through his Lovecraft readings; the voice was considered a "necessary element" after the trailer | [Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
+| DD2 narrator | Wayne June also narrates DD2 (The Academic); died in 2025, Red Hook tribute on 30 Jan | [DD wiki – Wayne June](https://darkestdungeon.wiki.gg/wiki/Wayne_June) |
+| Hub music | The Hamlet's music is called "The Hamlet" | [DD wiki – Hamlet](https://darkestdungeon.wiki.gg/wiki/Hamlet) |
+| Dynamic music DD/StS | Layers by intensity — **not verified** in this collection | — |
+| DD2 bark/stress | Negative banter increases with stress (0–3 no negative banter, 4–6 some) and generates more stress | [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II)) |
 
-- Inimigos mostram **intenção** por ícone: ataque (ícone de arma muda conforme o dano), defesa (Block), buff, ataque+buff, ataque+defesa, debuff, desconhecido etc. ([Intent](https://slaythespire.wiki.gg/wiki/Intent)).
-- Alguns inimigos usam o ícone de buff para **cura** (Mystic, Time Eater, Darklings) — ambiguidade documentada ([Intent](https://slaythespire.wiki.gg/wiki/Intent)). Lição: um ícone por efeito, sem reaproveitar.
-- Pilha de compra pode ser vista, mas **ordenada por raridade, não pela ordem real** ([StS2 Mechanics – Piles](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics)). Lição: transparência sem matar a incerteza do embaralhamento.
-- Pilha de exaustão tem ícone com contador; clicar mostra as cartas ([StS2 Mechanics](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics)).
+Implications (project rule: no voice acting):
 
-### 5.2 Ordem de turno e posição (DD)
-
-- DD2 mantém **ordem de turno, velocidade, HP e status** como dimensões táticas ([DD2 wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II)).
-- Ranks exigem destacar quais posições cada habilidade alcança (convenção de DD; layout exato **não verificado**).
-
-### 5.3 Cartas e palavras-chave
-
-- Palavras-chave com tooltip: *Exhaust* ("Removida até o fim do combate"), *Ethereal*, *Unplayable* — wiki mostra a mesma estrutura nome + frase curta ([Exhaust](https://slaythespire.wiki.gg/wiki/Exhaust), [Ascension – Ascender's Bane](https://slaythespire.wiki.gg/wiki/Ascension)).
-- Molduras de raridade: o jogo só tem cor de moldura para comum, incomum, raro e chefe; relíquias de loja/evento usam a moldura de raro ([Relics – Notes](https://slaythespire.wiki.gg/wiki/Relics)). Lição: poucas cores de raridade, reforçadas por forma.
-
-### 5.4 Toque
-
-- Requisitos do projeto (sem hover, resposta ≤ 0,1 s) não são cobertos por fontes externas; StS2 tem requisitos mínimos de PC (Windows 10 64-bit, dual-core 2 GHz, 4 GB RAM) e não é mobile na Steam ([Steam appdetails](https://store.steampowered.com/app/2868840/Slay_the_Spire_2/)).
-- Padrão sugerido (nosso): toque 1 = selecionar e mostrar prévia; toque 2 no alvo = confirmar; long-press = tooltip. Substitui hover.
+- Replace the narrator with **short text + a sound sting** (bell, low string) on critical events (meltdown, death, critical hit).
+- SFX as the primary feedback channel: impact, block, card played, card exhausted, stress gained.
+- Music: exploration loop, combat loop, boss variation; ElevenLabs Music generates up to 5 min per track ([API pricing](https://elevenlabs.io/pricing/api)).
+- Web: audio only after a user gesture (see section 12).
 
 ---
 
-## 6. Categoria/gênero e mercado
+## 5. UI/HUD and UX
 
-| Item | Dado | Fonte |
-|---|---|---|
-| StS1 lançamento | 23 jan 2019 (1.0), Mega Crit | [Steam appdetails 646570](https://store.steampowered.com/app/646570/) |
-| StS1 EA | EA em nov 2017 vendeu ~2000 cópias nas primeiras semanas; virou após streamer chinês; 2º mais vendido da Steam na semana até 21 jan 2018 | [Wikipedia StS – Reception](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| StS1 vendas | >1 milhão até jun 2018; 1,5 milhão até mar 2019 | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| StS1 papel no gênero | "Considerado o jogo que popularizou" roguelike deckbuilders — Wikipedia marca *citation needed* → **não verificado** | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| StS2 | EA desde **5 mar 2026**, Mega Crit, gêneros Indie/Strategy/Early Access, 22,99 € (preço regional visto) | [Steam 2868840](https://store.steampowered.com/app/2868840/Slay_the_Spire_2/) |
-| StS2 conteúdo | Ironclad, Silent, Defect + Necrobinder e Regent; co-op até 4 jogadores; Godot | [Wikipedia StS – Sequel](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| StS2 status | Beta patch v0.111.0 em 14 ago 2026; Neowsletter set/2026: equipe volta de pausa, trabalha em Ato 2 alternativo, novo personagem, modos | [Steam news API](https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=2868840), [PCGamesN](https://www.pcgamesn.com/slay-the-spire-2/neowsletter-september-2026) |
-| StS2 e Godot | Mega Crit patrocinadora Platinum do Godot (~36 k€/ano) desde abr 2026 | [GamingOnLinux](https://gamingonlinux.com/2026/04/godot-gets-a-funding-boost-from-slay-the-spire-2-devs-mega-crit) |
-| DD1 | Lançado 19 jan 2016, Red Hook; "gothic roguelike turn-based RPG about the psychological stresses of adventuring"; Kickstarter fev 2014: meta US$ 75 mil batida em 2 dias, >US$ 313 mil de ~10 mil apoiadores | [Steam DD](https://store.steampowered.com/app/262060/Darkest_Dungeon/), [Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
-| DD2 | 1.0 em 8 mai 2023 (Steam + Epic), US$ 39,99; "roguelike road trip of the damned"; modo Kingdoms com 3 módulos | [Steam DD2](https://store.steampowered.com/app/1940340/Darkest_Dungeon_II/), [Game Developer PR](https://www.gamedeveloper.com/press-release/darkest-dungeon-ii-exits-early-access-launches-into-10-on-steam-epic-game-store-today) |
-| Outros do gênero (Monster Train, Balatro, Inscryption etc.) | Números de mercado **não verificados** nesta coleta | — |
+### 5.1 Intent and predictability (StS)
 
-Leitura: o nicho "deckbuilder + party com posição + estresse" (cruzamento DD×StS) não tem líder evidente nas fontes coletadas — **não verificado** como lacuna de mercado; tratar como hipótese.
+- Enemies show **intent** through an icon: attack (the weapon icon changes with the damage), defense (Block), buff, attack+buff, attack+defense, debuff, unknown, etc. ([Intent](https://slaythespire.wiki.gg/wiki/Intent)).
+- Some enemies use the buff icon for **healing** (Mystic, Time Eater, Darklings) — a documented ambiguity ([Intent](https://slaythespire.wiki.gg/wiki/Intent)). Lesson: one icon per effect, never reused.
+- The draw pile can be viewed, but **sorted by rarity, not by the real order** ([StS2 Mechanics – Piles](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics)). Lesson: transparency without removing the uncertainty of shuffling.
+- The exhaust pile has an icon with a counter; clicking shows the cards ([StS2 Mechanics](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics)).
 
----
+### 5.2 Turn order and position (DD)
 
-## 7. Jogabilidade e loop de combate
+- DD2 keeps **turn order, speed, HP and status** as tactical dimensions ([DD2 wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II)).
+- Ranks require highlighting which positions each ability reaches (DD convention; exact layout **not verified**).
 
-### 7.1 Núcleo de cartas (StS)
+### 5.3 Cards and keywords
 
-| Regra | Valor | Fonte |
-|---|---|---|
-| Energia por turno | 3 | [StS2 Mechanics – Turns](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics), [Energy](https://slaythespire.wiki.gg/wiki/Energy) |
-| Compra por turno | 5 | idem |
-| Pilhas | Compra, Mão, Descarte, Exaustão | [StS2 Mechanics – Piles](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
-| Fim de turno | Cartas sem *Retain* vão ao descarte | idem |
-| Exhaust | Carta vai à pilha de exaustão até o fim do combate | [Exhaust](https://slaythespire.wiki.gg/wiki/Exhaust) |
-| Ethereal | Exaurida se estiver na mão no fim do turno | [Ascension](https://slaythespire.wiki.gg/wiki/Ascension) |
-| Turnos | Jogador, depois grupo inimigo; turno termina manualmente | [StS2 Mechanics](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
-| Limite de mão | 10; compra excedente fica na pilha de compra e carta criada excedente vai ao descarte | [Mechanics – Hand Size Limit](https://slaythespire.wiki.gg/wiki/Mechanics) |
-| Deck inicial Ironclad | 5 Strike, 4 Defend, 1 Bash (10 cartas) | [Cards](https://slaythespire.wiki.gg/wiki/Cards) |
-| Deck inicial Silent | 5 Strike, 5 Defend, Neutralize, Survivor (12) — último item truncado na coleta | [Cards](https://slaythespire.wiki.gg/wiki/Cards) |
-| HP máx. inicial | Ironclad 80 (75 em A14), Silent 70 (66), Defect 75 (71), Watcher 72 (68) | [Ironclad](https://slaythespire.wiki.gg/wiki/Ironclad), [Silent](https://slaythespire.wiki.gg/wiki/Silent), [Defect](https://slaythespire.wiki.gg/wiki/Defect), [Watcher](https://slaythespire.wiki.gg/wiki/Watcher) |
-| Cap de HP (StS2) | 999.999.999 | [StS2 Mechanics – Health](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
+- Keywords with tooltips: *Exhaust* ("Removed until the end of combat"), *Ethereal*, *Unplayable* — the wiki shows the same structure: name + short phrase ([Exhaust](https://slaythespire.wiki.gg/wiki/Exhaust), [Ascension – Ascender's Bane](https://slaythespire.wiki.gg/wiki/Ascension)).
+- Frame rarity: the game only has frame colors for common, uncommon, rare and boss; shop/event relics use the rare frame ([Relics – Notes](https://slaythespire.wiki.gg/wiki/Relics)). Lesson: few rarity colors, reinforced by shape.
 
-### 7.2 Estrutura de run (StS)
+### 5.4 Touch
 
-| Item | Valor | Fonte |
-|---|---|---|
-| Atos | 3 + Ato 4 opcional (3 chaves) com o chefe final | [Wikipedia StS – Gameplay](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| Tipos de nó | 7: Monstro, Elite, Descanso, Desconhecido, Tesouro, Mercador, Chefe | [Map Locations](https://slaythespire.wiki.gg/wiki/Map_Locations) |
-| Antes do chefe | Último nó antes do chefe nos Atos 1–3 é sempre descanso | [Rest Sites](https://slaythespire.wiki.gg/wiki/Rest_Site) |
-| Descanso | Curar 30% do HP máx. **ou** melhorar 1 carta (Smith) | [Rest Sites](https://slaythespire.wiki.gg/wiki/Rest_Site) |
-| Andares por ato | 17; até 6 nós por andar; cada sala tem 1–3 caminhos de entrada e de saída. Andar 1 = combates fáceis; andar 9 = tesouro; andar 15 = descanso; andar 16 = chefe (página marcada "em construção" pela wiki) | [Map Generation](https://slaythespire.wiki.gg/wiki/Map_Generation) |
-| Chefe dos Atos 1–2 | 95–105 ouro, escolha de 3 cartas raras; o andar seguinte tem baú com escolha de 3 relíquias de chefe | [Map Locations](https://slaythespire.wiki.gg/wiki/Map_Locations) |
-
-### 7.3 DD1: posição, estresse, aflição
-
-| Regra | Valor | Fonte |
-|---|---|---|
-| Barra de estresse | 0–200; em 100 testa resolução | [Stress](https://darkestdungeon.wiki.gg/wiki/Stress) |
-| Virtude vs aflição | Chance base de virtude 25%, decidida antes do histórico | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
-| Virtude | Reseta estresse para 40–45 | [Stress](https://darkestdungeon.wiki.gg/wiki/Stress) |
-| 200 de estresse | Ataque cardíaco → Death's Door, ou morte se já estiver nele | [Stress](https://darkestdungeon.wiki.gg/wiki/Stress) |
-| Aflição | −15% em várias resistências, −10% HP máx.; ações forçadas ("act-outs"), ex.: Fearful 31,5% (10,5% estresse ao grupo / recuar / passar turno) | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
-| Barks de aflição | 6 de estresse ao grupo ou a um aliado | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
-| Histórico | Cada aflição tem peso 4; +2 cada vez obtida (personalidade emerge) | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
-| Ranks | Habilidades exigem rank; deslocamento é estratégia | [Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
-
-### 7.4 DD2: estresse 0–10, relações, estrada
-
-| Regra | Valor | Fonte |
-|---|---|---|
-| Estresse | 0–10; 0–3 sem banter negativo; 4–6 algum | [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II)) |
-| Em 10 | 80% Meltdown (HP vai a 10%, perde afinidade) / 20% Resolute (cura 50%, buffs) | [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II)) via [busca](https://darkestdungeon.wiki.gg/wiki/Meltdown) |
-| Precisão | **Sem precisão**; acerto garantido salvo efeitos específicos | [DD2 wiki – Combat](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II) |
-| Habilidades | Dependem de skills (Mastery Trainer em cada Inn), não de arma/armadura | idem |
-| Party | Escolhida na Crossroads; máximo 4 | idem |
-| Relações | Mesma decisão em nós dá +1 afinidade; itens de Inn alteram afinidade (ex.: 67% positiva / 33% negativa) | [Relationships](https://darkestdungeon.wiki.gg/wiki/Relationships) |
-| Carruagem | Rodas e Armadura perdem nível em certas estradas; reparo 8 Baubles cada; sem elas, emboscada | [Stagecoach DD2](https://darkestdungeon.wiki.gg/wiki/Stagecoach) |
-| Kingdoms | Regiões de 40 léguas / 3 nós | [Kingdoms](https://darkestdungeon.wiki.gg/wiki/Kingdoms) |
+- The project's requirements (no hover, response ≤ 0.1 s) are not covered by external sources; StS2 has minimum PC requirements (Windows 10 64-bit, dual-core 2 GHz, 4 GB RAM) and is not mobile on Steam ([Steam appdetails](https://store.steampowered.com/app/2868840/Slay_the_Spire_2/)).
+- Suggested pattern (ours): tap 1 = select and show a preview; tap 2 on the target = confirm; long-press = tooltip. Replaces hover.
 
 ---
 
-## 8. Progressão
+## 6. Category/genre and market
 
-### 8.1 Dentro da run vs meta
+| Item | Data | Source |
+|---|---|---|
+| StS1 release | 23 Jan 2019 (1.0), Mega Crit | [Steam appdetails 646570](https://store.steampowered.com/app/646570/) |
+| StS1 EA | EA in Nov 2017 sold ~2,000 copies in the first weeks; took off after a Chinese streamer; 2nd best-seller on Steam in the week to 21 Jan 2018 | [Wikipedia StS – Reception](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| StS1 sales | >1 million by Jun 2018; 1.5 million by Mar 2019 | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| StS1 role in the genre | "Considered the game that popularized" roguelike deckbuilders — Wikipedia marks it *citation needed* → **not verified** | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| StS2 | EA since **5 Mar 2026**, Mega Crit, genres Indie/Strategy/Early Access, €22.99 (regional price seen) | [Steam 2868840](https://store.steampowered.com/app/2868840/Slay_the_Spire_2/) |
+| StS2 content | Ironclad, Silent, Defect + Necrobinder and Regent; co-op up to 4 players; Godot | [Wikipedia StS – Sequel](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| StS2 status | Beta patch v0.111.0 on 14 Aug 2026; Neowsletter Sep/2026: team returns from a pause, works on an alternative Act 2, a new character, modes | [Steam news API](https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=2868840), [PCGamesN](https://www.pcgamesn.com/slay-the-spire-2/neowsletter-september-2026) |
+| StS2 and Godot | Mega Crit is a Platinum sponsor of Godot (~€36k/year) since Apr 2026 | [GamingOnLinux](https://gamingonlinux.com/2026/04/godot-gets-a-funding-boost-from-slay-the-spire-2-devs-mega-crit) |
+| DD1 | Released 19 Jan 2016, Red Hook; "gothic roguelike turn-based RPG about the psychological stresses of adventuring"; Kickstarter Feb 2014: target US$ 75k met in 2 days, >US$ 313k from ~10k backers | [Steam DD](https://store.steampowered.com/app/262060/Darkest_Dungeon/), [Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
+| DD2 | 1.0 on 8 May 2023 (Steam + Epic), US$ 39.99; "roguelike road trip of the damned"; Kingdoms mode with 3 modules | [Steam DD2](https://store.steampowered.com/app/1940340/Darkest_Dungeon_II/), [Game Developer PR](https://www.gamedeveloper.com/press-release/darkest-dungeon-ii-exits-early-access-launches-into-10-on-steam-epic-game-store-today) |
+| Others in the genre (Monster Train, Balatro, Inscryption, etc.) | Market figures **not verified** in this collection | — |
 
-| Jogo | Dentro da run | Meta | Fonte |
+Reading: the "deckbuilder + party with position + stress" niche (the DD×StS crossover) has no evident leader in the collected sources — **not verified** as a market gap; treat as a hypothesis.
+
+---
+
+## 7. Gameplay and combat loop
+
+### 7.1 Card core (StS)
+
+| Rule | Value | Source |
+|---|---|---|
+| Energy per turn | 3 | [StS2 Mechanics – Turns](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics), [Energy](https://slaythespire.wiki.gg/wiki/Energy) |
+| Draw per turn | 5 | same |
+| Piles | Draw, Hand, Discard, Exhaust | [StS2 Mechanics – Piles](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
+| End of turn | Cards without *Retain* go to the discard | same |
+| Exhaust | The card goes to the exhaust pile until the end of combat | [Exhaust](https://slaythespire.wiki.gg/wiki/Exhaust) |
+| Ethereal | Exhausted if still in hand at the end of the turn | [Ascension](https://slaythespire.wiki.gg/wiki/Ascension) |
+| Turns | Player, then enemy group; the turn ends manually | [StS2 Mechanics](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
+| Hand limit | 10; excess draws stay in the draw pile and excess created cards go to the discard | [Mechanics – Hand Size Limit](https://slaythespire.wiki.gg/wiki/Mechanics) |
+| Ironclad starting deck | 5 Strike, 4 Defend, 1 Bash (10 cards) | [Cards](https://slaythespire.wiki.gg/wiki/Cards) |
+| Silent starting deck | 5 Strike, 5 Defend, Neutralize, Survivor (12) — last item truncated in the collection | [Cards](https://slaythespire.wiki.gg/wiki/Cards) |
+| Starting max HP | Ironclad 80 (75 at A14), Silent 70 (66), Defect 75 (71), Watcher 72 (68) | [Ironclad](https://slaythespire.wiki.gg/wiki/Ironclad), [Silent](https://slaythespire.wiki.gg/wiki/Silent), [Defect](https://slaythespire.wiki.gg/wiki/Defect), [Watcher](https://slaythespire.wiki.gg/wiki/Watcher) |
+| HP cap (StS2) | 999,999,999 | [StS2 Mechanics – Health](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
+
+### 7.2 Run structure (StS)
+
+| Item | Value | Source |
+|---|---|---|
+| Acts | 3 + optional Act 4 (3 keys) with the final boss | [Wikipedia StS – Gameplay](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| Node types | 7: Monster, Elite, Rest, Unknown, Treasure, Merchant, Boss | [Map Locations](https://slaythespire.wiki.gg/wiki/Map_Locations) |
+| Before the boss | The last node before the boss in Acts 1–3 is always a rest | [Rest Sites](https://slaythespire.wiki.gg/wiki/Rest_Site) |
+| Rest | Heal 30% of max HP **or** upgrade 1 card (Smith) | [Rest Sites](https://slaythespire.wiki.gg/wiki/Rest_Site) |
+| Floors per act | 17; up to 6 nodes per floor; each room has 1–3 entry and exit paths. Floor 1 = easy combats; floor 9 = treasure; floor 15 = rest; floor 16 = boss (page marked "under construction" by the wiki) | [Map Generation](https://slaythespire.wiki.gg/wiki/Map_Generation) |
+| Boss of Acts 1–2 | 95–105 gold, choice of 3 rare cards; the next floor has a chest with a choice of 3 boss relics | [Map Locations](https://slaythespire.wiki.gg/wiki/Map_Locations) |
+
+### 7.3 DD1: position, stress, affliction
+
+| Rule | Value | Source |
+|---|---|---|
+| Stress bar | 0–200; at 100 a resolve check happens | [Stress](https://darkestdungeon.wiki.gg/wiki/Stress) |
+| Virtue vs. affliction | Base virtue chance 25%, decided before the history | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
+| Virtue | Resets stress to 40–45 | [Stress](https://darkestdungeon.wiki.gg/wiki/Stress) |
+| 200 stress | Heart attack → Death's Door, or death if already there | [Stress](https://darkestdungeon.wiki.gg/wiki/Stress) |
+| Affliction | −15% on several resistances, −10% max HP; forced actions ("act-outs"), e.g. Fearful 31.5% (10.5% stress to the group / retreat / pass the turn) | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
+| Affliction barks | 6 stress to the group or to one ally | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
+| History | Each affliction has weight 4; +2 each time it is gained (personality emerges) | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
+| Ranks | Abilities require a rank; movement is strategy | [Wikipedia DD](https://en.wikipedia.org/wiki/Darkest_Dungeon) |
+
+### 7.4 DD2: stress 0–10, relationships, road
+
+| Rule | Value | Source |
+|---|---|---|
+| Stress | 0–10; 0–3 no negative banter; 4–6 some | [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II)) |
+| At 10 | 80% Meltdown (HP goes to 10%, loses affinity) / 20% Resolute (heals 50%, buffs) | [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II)) via [search](https://darkestdungeon.wiki.gg/wiki/Meltdown) |
+| Accuracy | **No accuracy**; hits are guaranteed except for specific effects | [DD2 wiki – Combat](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II) |
+| Abilities | Depend on skills (Mastery Trainer at each Inn), not on weapon/armor | same |
+| Party | Chosen at the Crossroads; maximum 4 | same |
+| Relationships | The same decision at nodes gives +1 affinity; Inn items change affinity (e.g. 67% positive / 33% negative) | [Relationships](https://darkestdungeon.wiki.gg/wiki/Relationships) |
+| Stagecoach | Wheels and Armor lose level on certain roads; repair 8 Baubles each; without them, an ambush | [Stagecoach DD2](https://darkestdungeon.wiki.gg/wiki/Stagecoach) |
+| Kingdoms | Regions of 40 leagues / 3 nodes | [Kingdoms](https://darkestdungeon.wiki.gg/wiki/Kingdoms) |
+
+---
+
+## 8. Progression
+
+### 8.1 Inside the run vs. meta
+
+| Game | Inside the run | Meta | Source |
 |---|---|---|---|
-| StS1 | Cartas, relíquias, poções, upgrades, ouro | Pontos por run desbloqueiam personagens, cartas e relíquias; 20 níveis de Ascensão | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| DD1 | Provisões, loot, luz, estresse | Hamlet com 8 prédios (Abbey, Blacksmith, Guild, Nomad Wagon, Sanitarium, Stage Coach, Survivalist, Tavern) melhorados com heranças | [Hamlet](https://darkestdungeon.wiki.gg/wiki/Hamlet) |
-| DD1 heranças | Heranças (meta) | Bust, Portrait, Deed, Crest; pilhas na masmorra: Crest 12, Bust/Deed 6, Portrait 3 | [Heirlooms](https://darkestdungeon.wiki.gg/wiki/Heirlooms) |
-| DD2 | Itens, relações, carruagem, skills por Inn | **Altar of Hope** pago com **Candles of Hope** (ganhas por expedição + Hero Goals + Region Goals); desbloqueia heróis, upgrades da carruagem | [Altar of Hope](https://darkestdungeon.wiki.gg/wiki/Altar_of_Hope), [DD2 wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II) |
+| StS1 | Cards, relics, potions, upgrades, gold | Points per run unlock characters, cards and relics; 20 Ascension levels | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| DD1 | Provisions, loot, light, stress | Hamlet with 8 buildings (Abbey, Blacksmith, Guild, Nomad Wagon, Sanitarium, Stage Coach, Survivalist, Tavern) upgraded with heirlooms | [Hamlet](https://darkestdungeon.wiki.gg/wiki/Hamlet) |
+| DD1 heirlooms | Heirlooms (meta) | Bust, Portrait, Deed, Crest; dungeon piles: Crest 12, Bust/Deed 6, Portrait 3 | [Heirlooms](https://darkestdungeon.wiki.gg/wiki/Heirlooms) |
+| DD2 | Items, relationships, stagecoach, skills per Inn | **Altar of Hope** paid with **Candles of Hope** (earned per expedition + Hero Goals + Region Goals); unlocks heroes and stagecoach upgrades | [Altar of Hope](https://darkestdungeon.wiki.gg/wiki/Altar_of_Hope), [DD2 wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_II) |
 
-### 8.2 Ascensão (StS1)
+### 8.2 Ascension (StS1)
 
-- Desbloqueio: vencer o chefe do Ato 3 com o personagem; cada vitória libera o nível seguinte ([Ascension](https://slaythespire.wiki.gg/wiki/Ascension)).
+- Unlock: beat the Act 3 boss with the character; each win unlocks the next level ([Ascension](https://slaythespire.wiki.gg/wiki/Ascension)).
 
-| Nível | Efeito | Fonte |
+| Level | Effect | Source |
 |---|---|---|
-| A1 | ~60% mais elites | [Ascension](https://slaythespire.wiki.gg/wiki/Ascension) |
-| A2/A3/A4 | Normais / elites / chefes causam mais dano | idem |
-| A5 | Cura pós-chefe 75% do HP perdido (antes 100%) | idem |
-| A6 | Começa a run com −10% de HP | idem |
-| A7/A8/A9 | Normais / elites / chefes com mais HP e às vezes mais Block | idem |
-| A10 | Começa com a maldição Ascender's Bane (impossível de remover) | idem |
-| A11 | Um espaço de poção a menos | idem |
-| A12 | Cartas melhoradas aparecem com metade da frequência nos Atos 2 e 3 | idem |
-| A13 | Chefes dão 25% menos ouro (71–79) | idem, [Gold](https://slaythespire.wiki.gg/wiki/Gold) |
-| A14 | HP máx. −5 (Ironclad) / −4 (demais) | idem |
-| A15 | Eventos com resultados piores | idem |
-| A16 | Loja 10% mais cara | idem, [Merchant](https://slaythespire.wiki.gg/wiki/Merchant) |
-| A17/A18/A19 | Normais / elites / chefes com movesets mais difíceis | idem |
-| A20 | Dois chefes no fim do Ato 3 | idem |
+| A1 | ~60% more elites | [Ascension](https://slaythespire.wiki.gg/wiki/Ascension) |
+| A2/A3/A4 | Normal / elite / boss enemies deal more damage | same |
+| A5 | Post-boss healing 75% of the HP lost (previously 100%) | same |
+| A6 | Start the run with −10% HP | same |
+| A7/A8/A9 | Normal / elite / boss enemies with more HP and sometimes more Block | same |
+| A10 | Start with the Ascender's Bane curse (cannot be removed) | same |
+| A11 | One fewer potion slot | same |
+| A12 | Upgraded cards appear with half the frequency in Acts 2 and 3 | same |
+| A13 | Bosses give 25% less gold (71–79) | same, [Gold](https://slaythespire.wiki.gg/wiki/Gold) |
+| A14 | Max HP −5 (Ironclad) / −4 (others) | same |
+| A15 | Events with worse results | same |
+| A16 | Shop 10% more expensive | same, [Merchant](https://slaythespire.wiki.gg/wiki/Merchant) |
+| A17/A18/A19 | Normal / elite / boss enemies with harder movesets | same |
+| A20 | Two bosses at the end of Act 3 | same |
 
-- Os modificadores são cumulativos e cada personagem tem a própria escada ([Ascension](https://slaythespire.wiki.gg/wiki/Ascension)). No StS2 a escada tem **10 níveis** ([StS2 Mechanics – Ascension](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics)).
+- The modifiers are cumulative and each character has its own ladder ([Ascension](https://slaythespire.wiki.gg/wiki/Ascension)). In StS2 the ladder has **10 levels** ([StS2 Mechanics – Ascension](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics)).
 
-### 8.3 Modo Dam (DD2)
+### 8.3 Dam mode (DD2)
 
-- Modificadores opcionais: botão de recuar (+2 Loathing, +2 estresse), venda ao Hoarder, montanha em toda Inn, mais modificadores de batalha, Atos 1/2 estendidos ([Altar of Hope – The Dam](https://darkestdungeon.wiki.gg/wiki/Altar_of_Hope)). Mostra "dificuldade à la carte" em vez de escada única.
+- Optional modifiers: a retreat button (+2 Loathing, +2 stress), selling to the Hoarder, a mountain at every Inn, more battle modifiers, Acts 1/2 extended ([Altar of Hope – The Dam](https://darkestdungeon.wiki.gg/wiki/Altar_of_Hope)). It offers "à la carte difficulty" instead of a single ladder.
 
 ---
 
-## 9. Economia
+## 9. Economy
 
-### 9.1 StS1 — ouro
+### 9.1 StS1 — gold
 
-| Fonte de ouro | Valor | Fonte |
+| Gold source | Value | Source |
 |---|---|---|
-| Combate normal | 10–20 | [Gold](https://slaythespire.wiki.gg/wiki/Gold) |
-| Elite | 25–35 | idem |
-| Chefe | 95–105 (71–79 em A13+) | idem |
-| Ouro inicial | 99 (StS1 e StS2) | [Gold](https://slaythespire.wiki.gg/wiki/Gold), [StS2 Mechanics – Gold](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
+| Normal combat | 10–20 | [Gold](https://slaythespire.wiki.gg/wiki/Gold) |
+| Elite | 25–35 | same |
+| Boss | 95–105 (71–79 at A13+) | same |
+| Starting gold | 99 (StS1 and StS2) | [Gold](https://slaythespire.wiki.gg/wiki/Gold), [StS2 Mechanics – Gold](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
 
-### 9.2 StS1 — loja (Merchant)
+### 9.2 StS1 — shop (Merchant)
 
-| Item | Preço (A16+) | Fonte |
+| Item | Price (A16+) | Source |
 |---|---|---|
-| 5 cartas coloridas (2 ataques, 2 skills, 1 power; 1 com −50%) | Comum 45–55 (50–61); Incomum 68–83 (75–91); Rara 135–165 (149–182) | [Merchant](https://slaythespire.wiki.gg/wiki/Merchant) |
-| 2 incolores (1 incomum, 1 rara; +20%) | 81–99 (89–109); 162–198 (178–218) | idem |
-| 3 relíquias (direita sempre relíquia de loja) | Loja/Comum 143–158 (157–173); pesos 50/33/17% comum/incomum/rara | idem |
-| Remoção de carta | 75, +25 a cada uso; 1 por loja; Smiling Mask fixa em 50 | [Merchant](https://slaythespire.wiki.gg/wiki/Merchant), [Gold](https://slaythespire.wiki.gg/wiki/Gold) |
+| 5 colored cards (2 attacks, 2 skills, 1 power; 1 at −50%) | Common 45–55 (50–61); Uncommon 68–83 (75–91); Rare 135–165 (149–182) | [Merchant](https://slaythespire.wiki.gg/wiki/Merchant) |
+| 2 colorless (1 uncommon, 1 rare; +20%) | 81–99 (89–109); 162–198 (178–218) | same |
+| 3 relics (the right slot is always a shop relic) | Shop/Common 143–158 (157–173); weights 50/33/17% common/uncommon/rare | same |
+| Card removal | 75, +25 per use; 1 per shop; Smiling Mask fixed at 50 | [Merchant](https://slaythespire.wiki.gg/wiki/Merchant), [Gold](https://slaythespire.wiki.gg/wiki/Gold) |
 
-### 9.3 StS1 — recompensas de carta e relíquia
+### 9.3 StS1 — card and relic rewards
 
-| Contexto | Rara / Incomum / Comum | Fonte |
+| Context | Rare / Uncommon / Common | Source |
 |---|---|---|
-| Combate normal (base, antes do offset) | 3% / 37% / 60% | [Cards – Card Distribution](https://slaythespire.wiki.gg/wiki/Cards) |
-| Loja (base) | 9% / 37% / 54% | idem |
-| Relíquias (maioria das fontes) | Comum 50% / Incomum 33% / Rara 17% | [Relics – Rarity](https://slaythespire.wiki.gg/wiki/Relics) |
-| Baú pequeno / médio / grande | C 75/35/0; I 25/50/75; R 0/15/25 | idem |
-| Cartas oferecidas por recompensa | 3 (normal e elite; elite com mais chance de rara/incomum); chefe dos Atos 1–2 oferece 3 raras | [Map Locations](https://slaythespire.wiki.gg/wiki/Map_Locations) |
-| Loja (composição) | 5 cartas do personagem, 2 incolores, 3 relíquias, 3 poções e 1 remoção por loja | idem |
+| Normal combat (base, before offset) | 3% / 37% / 60% | [Cards – Card Distribution](https://slaythespire.wiki.gg/wiki/Cards) |
+| Shop (base) | 9% / 37% / 54% | same |
+| Relics (most sources) | Common 50% / Uncommon 33% / Rare 17% | [Relics – Rarity](https://slaythespire.wiki.gg/wiki/Relics) |
+| Small / medium / large chest | C 75/35/0; U 25/50/75; R 0/15/25 | same |
+| Cards offered per reward | 3 (normal and elite; elites have a better chance of rare/uncommon); the boss of Acts 1–2 offers 3 rares | [Map Locations](https://slaythespire.wiki.gg/wiki/Map_Locations) |
+| Shop (composition) | 5 character cards, 2 colorless, 3 relics, 3 potions and 1 removal per shop | same |
 
-Nota: existe "offset" de raridade (pity) que só é afetado por recompensas de carta, não pela loja ([Cards](https://slaythespire.wiki.gg/wiki/Cards)).
+Note: there is a rarity "offset" (pity) that is only affected by card rewards, not by the shop ([Cards](https://slaythespire.wiki.gg/wiki/Cards)).
 
-### 9.4 DD1 — ouro e sumidouros
+### 9.4 DD1 — gold and sinks
 
-- Ouro vem de loot, gemas vendidas no fim e recompensa de expedição; venda de trinkets ([DD Gold](https://darkestdungeon.wiki.gg/wiki/Gold)).
-- Sumidouros: estresse (Abbey, Tavern), provisões, Blacksmith, Guild, Survivalist, Sanitarium, Nomad Wagon ([DD Gold](https://darkestdungeon.wiki.gg/wiki/Gold)).
-- Radiant: estresse ocioso na cidade 5 → 10; provisões devolvidas rendem um pouco mais ([Game Modes](https://darkestdungeon.wiki.gg/wiki/Game_Modes)).
+- Gold comes from loot, gems sold at the end, and expedition rewards; trinket sales ([DD Gold](https://darkestdungeon.wiki.gg/wiki/Gold)).
+- Sinks: stress (Abbey, Tavern), provisions, Blacksmith, Guild, Survivalist, Sanitarium, Nomad Wagon ([DD Gold](https://darkestdungeon.wiki.gg/wiki/Gold)).
+- Radiant: idle stress in town 5 → 10; returned provisions yield a bit more ([Game Modes](https://darkestdungeon.wiki.gg/wiki/Game_Modes)).
 
 ### 9.5 DD1 — trinkets
 
-- Tabela por raridade e DLC existe (ex.: Ancestral 9 base, Trophy 9 base + 3 CC, Crimson Court 34+2), mas a wiki avisa que não inclui *The Fire's Edge* ([Trinkets](https://darkestdungeon.wiki.gg/wiki/Trinkets)). Total consolidado **não verificado**.
+- A table by rarity and DLC exists (e.g. Ancestral 9 base, Trophy 9 base + 3 CC, Crimson Court 34+2), but the wiki warns it does not include *The Fire's Edge* ([Trinkets](https://darkestdungeon.wiki.gg/wiki/Trinkets)). Consolidated total **not verified**.
 
 ---
 
-## 10. Balanceamento
+## 10. Balancing
 
-| Ponto | Fato | Fonte |
+| Point | Fact | Source |
 |---|---|---|
-| Palestra | "'Slay the Spire': Metrics Driven Design and Balance", GDC 2019, Anthony Giovannetti | [GDC Vault](https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics), [GDC news](https://gdconf.com/news/learn-slay-spires-successful-metrics-driven-approach-game-balancing-gdc-2019) (link quebrado em 2026-10-26) |
-| Escopo | Foco em métricas desde cedo e durante todo o EA; uso do feedback da comunidade mantendo feel e dificuldade "ao longo de um ano de mudanças" | [Game Developer](https://www.gamedeveloper.com/design/learn-i-slay-the-spire-i-s-metrics-driven-approach-to-game-balancing-at-gdc-2019) |
-| Método | Muitos playtesters + métricas reportadas pelo cliente para decidir quais cartas tinham bom design e quais remover; testers vindos da comunidade de *Netrunner* | [Wikipedia StS – Development](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| Ferramenta | Ferramenta de analytics caseira registrando cada partida; "jogadores escolhem esta carta X% das vezes" (entrevista Edge) | [PressReader/Edge](https://www.pressreader.com/australia/edge/20190620/282351156287993) — conteúdo via resumo de busca, **não lido na íntegra** |
-| Canal Slack + servidor de métricas | Citado apenas em resumo gerado por IA de podcast → **não verificado** | [Podwise](https://podwise.ai/episodes/1459444) |
-| StS2 hoje | Patches beta experimentais, inclusive revertendo reworks (jul 2026) | [PCGamesN](https://www.pcgamesn.com/slay-the-spire-2/patch-notes-july-31-2026) |
-| Ascensão | Escada cumulativa de 20 níveis (seção 8.2) | [Ascension](https://slaythespire.wiki.gg/wiki/Ascension) |
-| DD1 modos | Darkest (normal); Radiant (menos grind, mesmos stats, permadeath); Stygian: +20% HP inimigo, +3% crítico, mais estresse, luz drena 7 por passo em vez de 6, derrota em **86 semanas ou 12 mortes** (save apagado); Bloodmoon: 100 semanas / 16 mortes | [Game Modes](https://darkestdungeon.wiki.gg/wiki/Game_Modes) (Stygian % via resumo de busca da mesma página) |
-| DD2 | Dam: dificuldade por modificadores; Kingdoms usa tiers de Escalation | [Altar of Hope](https://darkestdungeon.wiki.gg/wiki/Altar_of_Hope), [Kingdoms](https://darkestdungeon.wiki.gg/wiki/Kingdoms) |
+| Talk | "'Slay the Spire': Metrics Driven Design and Balance", GDC 2019, Anthony Giovannetti | [GDC Vault](https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics), [GDC news](https://gdconf.com/news/learn-slay-spires-successful-metrics-driven-approach-game-balancing-gdc-2019) (broken link as of 2026-10-26) |
+| Scope | Focus on metrics from early on and throughout EA; use of community feedback while keeping feel and difficulty "over a year of changes" | [Game Developer](https://www.gamedeveloper.com/design/learn-i-slay-the-spire-i-s-metrics-driven-approach-to-game-balancing-at-gdc-2019) |
+| Method | Many playtesters + metrics reported by the client to decide which cards had good design and which to remove; testers came from the *Netrunner* community | [Wikipedia StS – Development](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| Tool | Homemade analytics tool recording each run; "players pick this card X% of the time" (Edge interview) | [PressReader/Edge](https://www.pressreader.com/australia/edge/20190620/282351156287993) — content via search summary, **not read in full** |
+| Slack channel + metrics server | Mentioned only in an AI-generated podcast summary → **not verified** | [Podwise](https://podwise.ai/episodes/1459444) |
+| StS2 today | Experimental beta patches, including reverting reworks (Jul 2026) | [PCGamesN](https://www.pcgamesn.com/slay-the-spire-2/patch-notes-july-31-2026) |
+| Ascension | Cumulative 20-level ladder (section 8.2) | [Ascension](https://slaythespire.wiki.gg/wiki/Ascension) |
+| DD1 modes | Darkest (normal); Radiant (less grind, same stats, permadeath); Stygian: +20% enemy HP, +3% crit, more stress, the light drains 7 per step instead of 6, defeat at **86 weeks or 12 deaths** (save erased); Bloodmoon: 100 weeks / 16 deaths | [Game Modes](https://darkestdungeon.wiki.gg/wiki/Game_Modes) (Stygian % via search summary of the same page) |
+| DD2 | Dam: difficulty through modifiers; Kingdoms uses Escalation tiers | [Altar of Hope](https://darkestdungeon.wiki.gg/wiki/Altar_of_Hope), [Kingdoms](https://darkestdungeon.wiki.gg/wiki/Kingdoms) |
 
 ---
 
-## 11. Diversão e heurísticas
+## 11. Fun and heuristics
 
-| Heurística | Evidência nos jogos | Fonte |
+| Heuristic | Evidence in the games | Source |
 |---|---|---|
-| Tensão/alívio | Descanso obrigatório antes de cada chefe (Atos 1–3) | [Rest Sites](https://slaythespire.wiki.gg/wiki/Rest_Site) |
-| Escolha significativa | Descanso: curar 30% **ou** melhorar carta — troca direta | idem |
-| Risco/recompensa | Elite 25–35 ouro vs normal 10–20, mais relíquia; A1 aumenta elites em ~60% | [Gold](https://slaythespire.wiki.gg/wiki/Gold), [Ascension](https://slaythespire.wiki.gg/wiki/Ascension) |
-| Diluição de deck | Pegar carta nem sempre é bom; remover custa ouro | [Wikipedia StS – Gameplay](https://en.wikipedia.org/wiki/Slay_the_Spire) |
-| Visibilidade | Intenções inimigas visíveis | [Intent](https://slaythespire.wiki.gg/wiki/Intent) |
-| Incerteza controlada | Pilha de compra visível, ordem oculta | [StS2 Mechanics](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
-| Bola de neve emocional | Banter negativo gera estresse e reduz afinidade ("snowballing") | [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II)) |
-| Perda com legado | Aflições moldam personalidade via histórico de pesos | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
-| Duração de run | DD2 Kingdoms encurtou regiões para 3 nós; DD1 Radiant cortou grind — ambos sinalizam que o público pediu sessões mais curtas | [Kingdoms](https://darkestdungeon.wiki.gg/wiki/Kingdoms), [Game Modes](https://darkestdungeon.wiki.gg/wiki/Game_Modes) |
-| Duração típica de run StS em minutos | **não verificado** | — |
-| Mesma seed para todos | Daily challenge de StS com seed fixa | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| Tension and relief | A mandatory rest before each boss (Acts 1–3) | [Rest Sites](https://slaythespire.wiki.gg/wiki/Rest_Site) |
+| Meaningful choice | Rest: heal 30% **or** upgrade a card — a direct trade-off | same |
+| Risk and reward | Elite 25–35 gold vs. normal 10–20, plus a relic; A1 increases elites by ~60% | [Gold](https://slaythespire.wiki.gg/wiki/Gold), [Ascension](https://slaythespire.wiki.gg/wiki/Ascension) |
+| Deck dilution | Taking a card is not always good; removing one costs gold | [Wikipedia StS – Gameplay](https://en.wikipedia.org/wiki/Slay_the_Spire) |
+| Visibility | Enemy intents are visible | [Intent](https://slaythespire.wiki.gg/wiki/Intent) |
+| Controlled uncertainty | Draw pile visible, order hidden | [StS2 Mechanics](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics) |
+| Emotional snowball | Negative banter generates stress and reduces affinity ("snowballing") | [Stress DD2](https://darkestdungeon.wiki.gg/wiki/Stress_(Darkest_Dungeon_II)) |
+| Loss with legacy | Afflictions shape personality through the history of weights | [Affliction](https://darkestdungeon.wiki.gg/wiki/Affliction) |
+| Run length | DD2 Kingdoms shortened regions to 3 nodes; DD1 Radiant cut the grind — both signal that the audience asked for shorter sessions | [Kingdoms](https://darkestdungeon.wiki.gg/wiki/Kingdoms), [Game Modes](https://darkestdungeon.wiki.gg/wiki/Game_Modes) |
+| Typical StS run length in minutes | **not verified** | — |
+| Same seed for everyone | StS daily challenge with a fixed seed | [Wikipedia StS](https://en.wikipedia.org/wiki/Slay_the_Spire) |
 
 ---
 
-## 12. Técnico Phaser 4 web
+## 12. Technical: Phaser 4 web
 
-### 12.1 Status de versão
+### 12.1 Version status
 
-| Versão | Data | Pre-release | Fonte |
+| Version | Date | Pre-release | Source |
 |---|---|---|---|
-| v4.2.1 | 2026-07-09 | não | [GitHub API](https://api.github.com/repos/phaserjs/phaser/releases) |
-| v4.2.0 | 2026-06-19 | não | idem |
-| v4.1.0 | 2026-04-30 | não | idem |
-| v4.0.0 | 2026-04-10 | não — "reconstrução do renderer WebGL do zero, mantendo a API" | [v4.0.0](https://github.com/phaserjs/phaser/releases/tag/v4.0.0) |
-| v4.0.0-rc.7 | 2026-03-25 | sim | [GitHub API](https://api.github.com/repos/phaserjs/phaser/releases) |
+| v4.2.1 | 2026-07-09 | no | [GitHub API](https://api.github.com/repos/phaserjs/phaser/releases) |
+| v4.2.0 | 2026-06-19 | no | same |
+| v4.1.0 | 2026-04-30 | no | same |
+| v4.0.0 | 2026-04-10 | no — "rebuilt the WebGL renderer from scratch, keeping the API" | [v4.0.0](https://github.com/phaserjs/phaser/releases/tag/v4.0.0) |
+| v4.0.0-rc.7 | 2026-03-25 | yes | [GitHub API](https://api.github.com/repos/phaserjs/phaser/releases) |
 
-→ Fixar `"phaser": "4.2.1"` (sem `^`), conforme regra do projeto. Docs oficiais em docs.phaser.io estavam em "v4.1.0" na coleta ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)).
+→ Pin `"phaser": "4.2.1"` (no `^`), per the project rule. The official docs at docs.phaser.io showed "v4.1.0" at collection time ([RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig)).
 
-### 12.2 Config de pixel art
+### 12.2 Pixel art config
 
-| Opção | Padrão | Efeito | Fonte |
+| Option | Default | Effect | Source |
 |---|---|---|---|
-| `pixelArt` | false | Seta `antialias: false` e `roundPixels: true`; "melhor configuração para pixel art" | [RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig) |
-| `antialias` | true | false = nearest-neighbor; também desliga AA do canvas escalado | idem |
-| `roundPixels` | false | Desenha objetos de textura só em posições inteiras | idem |
-| `smoothPixelArt` | false | Pixels blocados com borda suavizada (WebGL) — evitar | idem |
-| `vertexRoundMode` | `safeAuto` | Arredondamento por objeto quando a câmera tem `roundPixels` | [releases](https://github.com/phaserjs/phaser/releases) |
+| `pixelArt` | false | Sets `antialias: false` and `roundPixels: true`; "best setting for pixel art" | [RenderConfig](https://docs.phaser.io/api-documentation/typedef/types-core#renderconfig) |
+| `antialias` | true | false = nearest-neighbor; also turns off canvas AA when scaled | same |
+| `roundPixels` | false | Draws texture objects only at integer positions | same |
+| `smoothPixelArt` | false | Blocky pixels with smoothed edges (WebGL) — avoid | same |
+| `vertexRoundMode` | `safeAuto` | Per-object rounding when the camera has `roundPixels` | [releases](https://github.com/phaserjs/phaser/releases) |
 
-### 12.3 Escala
+### 12.3 Scale
 
-- Modos: `NONE`, `FIT` (mantém proporção, pode sobrar borda), `ENVELOP` (cobre, pode cortar), `WIDTH_CONTROLS_HEIGHT` etc.; `zoom` = tamanho do canvas = game size × zoom; `autoCenter: CENTER_BOTH` ([Scale Manager](https://docs.phaser.io/phaser/concepts/scale-manager)).
-- `FIT` escala fracionário → quebra a regra "escala sempre inteira". Abordagem: `mode: NONE`, `width: 480, height: 270`, e recalcular `zoom = max(1, floor(min(innerWidth/480, innerHeight/270)))` no resize; centralizar via CSS. Modo de escala inteira: a skill local `scale-and-responsive` documenta `Phaser.Scale.MAX_ZOOM` (zoom automático: maior inteiro que cabe no pai), `setMaxZoom()` e `getMaxZoom()` (fonte: skill local `.claude/skills/scale-and-responsive/SKILL.md`, não é URL). Comportamento com `FIT` e DPR fracionário: em teste (ver §12.7).
-- Fix relevante: ScaleManager não redimensionava ao container pai (#7213), corrigido numa release v4 ([releases](https://github.com/phaserjs/phaser/releases)).
+- Modes: `NONE`, `FIT` (keeps the ratio, may leave borders), `ENVELOP` (covers, may crop), `WIDTH_CONTROLS_HEIGHT`, etc.; `zoom` = canvas size = game size × zoom; `autoCenter: CENTER_BOTH` ([Scale Manager](https://docs.phaser.io/phaser/concepts/scale-manager)).
+- `FIT` scales by fractions → breaks the rule "integer scale always". Approach: `mode: NONE`, `width: 480, height: 270`, and recompute `zoom = max(1, floor(min(innerWidth/480, innerHeight/270)))` on resize; center via CSS. Integer-scale mode in Phaser 4: the local skill `scale-and-responsive` documents `Phaser.Scale.MAX_ZOOM` (automatic zoom: the largest integer that fits the parent), `setMaxZoom()` and `getMaxZoom()` (source: local skill `.claude/skills/scale-and-responsive/SKILL.md`, not a URL). Behavior with `FIT` and fractional DPR: under test (see §12.7).
+- Relevant fix: ScaleManager did not resize to the parent container (#7213), fixed in a v4 release ([releases](https://github.com/phaserjs/phaser/releases)).
 
-### 12.4 Texturas e atlas
+### 12.4 Textures and atlases
 
-- `load.spritesheet()` = células uniformes; `load.atlas()` = frames livres; `load.multiatlas()` = várias imagens; aceita formato TexturePacker "Phaser 3" ([Textures](https://docs.phaser.io/phaser/concepts/textures)).
-- SVG é rasterizado pelo navegador ao criar a textura ([Textures](https://docs.phaser.io/phaser/concepts/textures)) → nossos placeholders SVG precisam ser carregados já no tamanho final (sem escala do navegador) para não ganharem antialias.
-- Fix v4: `DynamicTexture` ficava preta ao redimensionar de potência de 2 para não potência de 2 ([releases](https://github.com/phaserjs/phaser/releases)).
+- `load.spritesheet()` = uniform cells; `load.atlas()` = free frames; `load.multiatlas()` = several images; accepts the TexturePacker "Phaser 3" format ([Textures](https://docs.phaser.io/phaser/concepts/textures)).
+- SVG is rasterized by the browser when the texture is created ([Textures](https://docs.phaser.io/phaser/concepts/textures)) → our SVG placeholders must be loaded already at their final size (no browser scaling) so they do not gain antialiasing.
+- v4 fix: `DynamicTexture` turned black when resized from a power of 2 to a non-power of 2 ([releases](https://github.com/phaserjs/phaser/releases)).
 
-### 12.5 Áudio na web
+### 12.5 Web audio
 
-- A maioria dos navegadores não toca som até clique/toque; checar `this.sound.locked`; Phaser tenta retomar o AudioContext no primeiro gesto; `this.sound.unlock()` disponível ([Audio](https://docs.phaser.io/phaser/concepts/audio)).
-- Aviso do Chrome "The AudioContext was not allowed to start" é normal ([Audio](https://docs.phaser.io/phaser/concepts/audio)); referência MDN: [Autoplay guide](https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide).
-- Fix v4: áudio de data URI Base64 não carregava ([releases](https://github.com/phaserjs/phaser/releases)).
+- Most browsers do not play sound until a click/tap; check `this.sound.locked`; Phaser tries to resume the AudioContext on the first gesture; `this.sound.unlock()` is available ([Audio](https://docs.phaser.io/phaser/concepts/audio)).
+- The Chrome warning "The AudioContext was not allowed to start" is normal ([Audio](https://docs.phaser.io/phaser/concepts/audio)); MDN reference: [Autoplay guide](https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide).
+- v4 fix: audio from a Base64 data URI did not load ([releases](https://github.com/phaserjs/phaser/releases)).
 
 ### 12.6 Performance
 
-- `BatchHandler` em v4 cria buffers WebGL próprios: ~5 MB de RAM e VRAM num jogo básico ([releases](https://github.com/phaserjs/phaser/releases)).
-- `TimeStep#stepLimitFPS` corrigido para descartar menos frames; limite de FPS só é necessário para rodar abaixo da taxa do monitor ([releases](https://github.com/phaserjs/phaser/releases)).
-- Blend modes vazavam entre irmãos em `Container` — corrigido ([releases](https://github.com/phaserjs/phaser/releases)).
-- FPS de animação de DD/StS: **não verificado**. Para pixel art, 8–12 fps por animação de unidade é convenção do meio, não fonte.
+- `BatchHandler` in v4 creates its own WebGL buffers: ~5 MB of RAM and VRAM in a basic game ([releases](https://github.com/phaserjs/phaser/releases)).
+- `TimeStep#stepLimitFPS` fixed to drop fewer frames; an FPS limit is only needed to run below the monitor's refresh rate ([releases](https://github.com/phaserjs/phaser/releases)).
+- Blend modes leaked between siblings in `Container` — fixed ([releases](https://github.com/phaserjs/phaser/releases)).
+- Animation FPS of DD/StS: **not verified**. For pixel art, 8–12 fps per unit animation is a common convention, not a source.
 
 ---
 
-### 12.7 Spike local (2026-10-26)
+### 12.7 Local spike (2026-10-26)
 
-Fonte: experimento local, não URL. Stack: Phaser 4.2.1, Vite 8.3.5, Bun 1.4.4, playwright-core 1.64.1 com chrome-headless-shell. Resumo em `scratchpad/phaser-spike/FINDINGS.md` (22 casos, 8 capturas de tela). Limite: só Chromium headless com DPR emulado; sem iOS Safari, Firefox ou WebKit reais; o atlas de BitmapText era um substituto.
+Source: local experiment, not a URL. Stack: Phaser 4.2.1, Vite 8.3.5, Bun 1.4.4, playwright-core 1.64.1 with chrome-headless-shell. Summary in `scratchpad/phaser-spike/FINDINGS.md` (22 cases, 8 screenshots). Limits: only headless Chromium with emulated DPR; no real iOS Safari, Firefox or WebKit; the BitmapText atlas was a stand-in.
 
-Escala:
+Scale:
 
-- `pixelArt: true` com `scale.mode: Phaser.Scale.NONE` e zoom inteiro recalculado no `resize` (`game.scale.setZoom()`). Letterbox por CSS.
-- Nas 8 capturas (480×270 e 640×360, zoom 1 a 4), zero blocos NxN irregulares: pixel exato.
-- O invariante é número inteiro de pixels de dispositivo por pixel de jogo, e não inteiro em px CSS. Fórmula: `zoom = max(1, floor(fit × dpr)) / dpr`.
+- `pixelArt: true` with `scale.mode: Phaser.Scale.NONE` and an integer zoom recomputed on `resize` (`game.scale.setZoom()`). Letterboxing via CSS.
+- Across the 8 screenshots (480×270 and 640×360, zoom 1 to 4), zero irregular NxN blocks: pixel-exact.
+- The invariant is an integer number of device pixels per game pixel, not an integer number of CSS pixels. Formula: `zoom = max(1, floor(fit × dpr)) / dpr`.
 
 | Viewport | DPR | Base 480×270 | Base 640×360 |
 |---|---|---|---|
 | 1280×720 | 1 | zoom 2 → 960×540 | zoom 2 → 1280×720 |
 | 1920×1080 | 1 | zoom 4 → 1920×1080 | zoom 3 → 1920×1080 |
-| 390×844 (retrato) | 3 | 320×180 (2 px de dispositivo por px de jogo) | 213,33×120 (1 px de dispositivo) |
-| 844×390 (paisagem) | 3 | 640×360 | 640×360 |
+| 390×844 (portrait) | 3 | 320×180 (2 device px per game px) | 213.33×120 (1 device px) |
+| 844×390 (landscape) | 3 | 640×360 | 640×360 |
 
-Gotcha: com zoom 1, o Phaser não escreve `canvas.style`; ler `getBoundingClientRect()` em vez de assumir o tamanho.
+Gotcha: at zoom 1, Phaser does not write `canvas.style`; read `getBoundingClientRect()` instead of assuming the size.
 
-Texto:
+Text:
 
-- BitmapText de 1 bit: 2 cores únicas por linha de texto.
-- `Text` de 8 px: 143 cores únicas; de 10 px: 156. O antialias do navegador aparece mesmo com `pixelArt`.
-- Regra adotada: todo texto de UI em BitmapText, com charset EN e PT-BR acentuado. `Text` só em depuração.
+- 1-bit BitmapText: 2 unique colors per text row.
+- `Text` at 8 px: 143 unique colors; at 10 px: 156. Browser antialiasing appears even with `pixelArt`.
+- Adopted rule: all UI text in BitmapText, with the EN and accented PT-BR charset. `Text` only for debugging.
 
-Áudio:
+Audio:
 
-- Antes do gesto, `sound.locked === true` e o contexto fica suspenso. Depois do clique, `unlocked` dispara uma vez.
-- Iniciar a música em `sound.once('unlocked', ...)`.
+- Before the gesture, `sound.locked === true` and the context is suspended. After the click, `unlocked` fires once.
+- Start the music in `sound.once('unlocked', ...)`.
 
-Velocidade (fator global):
+Speed (global factor):
 
-- Aplicar `time.timeScale = f`, `tweens.timeScale = f` e `anims.globalTimeScale = f`.
-- Progresso de tween após cerca de 1,5 s: 0,25 (1x), 0,494 (2x), 0,742 (3x).
-- Ticks de timer: 3, 5 e 8 (ideal 3, 6 e 9). Ou seja, o timer não escala de forma linear.
-- Armadilhas: `scene.restart()` reseta só `tweens.timeScale` para 1 (reaplicar em todo `create()`); os fatores se multiplicam (relógio × evento de timer; tween × tween); `Timeline.timeScale` não afeta os tweens dela; `timeScale = 0` não congela de fato (usar `paused`). O núcleo nunca lê esse fator.
+- Apply `time.timeScale = f`, `tweens.timeScale = f` and `anims.globalTimeScale = f`.
+- Tween progress after about 1.5 s: 0.25 (1x), 0.494 (2x), 0.742 (3x).
+- Timer ticks: 3, 5 and 8 (ideal 3, 6 and 9). In other words, the timer does not scale linearly.
+- Gotchas: `scene.restart()` resets only `tweens.timeScale` to 1 (reapply in every `create()`); the factors multiply (clock × timer event; tween × tween); `Timeline.timeScale` does not affect its own tweens; `timeScale = 0` does not really freeze (use `paused`). The core never reads this factor.
 
-## 13. Skills, plugins, regras e prompts
+## 13. Skills, plugins, rules and prompts
 
-### 13.1 Skills disponíveis neste ambiente Claude Code (fonte: lista de skills da sessão local, sem URL)
+### 13.1 Skills available in this Claude Code environment (source: session skill list, no URL)
 
-| Área | Skills |
+| Area | Skills |
 |---|---|
 | Phaser 4 | `v4-new-features`, `game-setup-and-config`, `scale-and-responsive`, `loading-assets`, `sprites-and-images`, `animations`, `tweens`, `cameras`, `scenes`, `input-keyboard-mouse-touch`, `audio-and-sound`, `text-and-bitmaptext`, `filters-and-postfx`, `particles`, `render-textures` |
 | Design | `art-of-game-design`, `gd-roguelike`, `gd-rpg`, `gd-game-feel`, `gd-game-ui-ux`, `gd-procedural-gen`, `gd-save-systems` |
-| Balanceamento/QA | `ccgs-balance-check`, `ccgs-playtest-report`, `ccgs-qa-plan`, `ccgs-perf-profile`, `ccgs-localize` |
-| Arte | `pixel-logic`, `aseprite-pixel-assets`, `alpha-art-assets`, `asset-animation`, `game-assets`, `inkscape-vector-assets` |
-| Áudio | `alpha-audio-assets`, `gd-audio-design` |
-| MCP | PixelLab MCP: `create_character`, `animate_character`, `create_ui_asset`, `create_sidescroller_tileset`, `create_portrait_character`, `reduce_colors`, `pixelart_workbench`, `vfx_workbench` (lista de ferramentas da sessão) |
+| Balancing/QA | `ccgs-balance-check`, `ccgs-playtest-report`, `ccgs-qa-plan`, `ccgs-perf-profile`, `ccgs-localize` |
+| Art | `pixel-logic`, `aseprite-pixel-assets`, `alpha-art-assets`, `asset-animation`, `game-assets`, `inkscape-vector-assets` |
+| Audio | `alpha-audio-assets`, `gd-audio-design` |
+| MCP | PixelLab MCP: `create_character`, `animate_character`, `create_ui_asset`, `create_sidescroller_tileset`, `create_portrait_character`, `reduce_colors`, `pixelart_workbench`, `vfx_workbench` (session tool list) |
 
 ### 13.2 PixelLab
 
-- Produto: personagens com 4 ou 8 rotações, animações, tilesets, tiles isométricos, objetos de mapa, edição (inpaint, rotate, resize, style transfer); API REST assíncrona por job ([PixelLab API llms.txt](https://api.pixellab.ai/v2/llms.txt)).
-- Endpoints: `create-character-v3` (8 rotações), `create-character-pro`, `animate-character`, `create-character-state`, `create-character-with-4-directions` ([idem](https://api.pixellab.ai/v2/llms.txt)).
-- Site: geração de UI (botões, barras de vida, menus) com referência de estilo; inpainting "que entende a imagem original" ([pixellab.ai](https://www.pixellab.ai/)).
-- Modelo de cobrança: assinatura mensal; gerações e créditos restantes visíveis na conta; upgrade no meio do mês cobra só os dias restantes; uso comercial permitido, exceto treinar novos modelos com as imagens ([PixelLab FAQ](https://www.pixellab.ai/docs/faq)).
-- **Valores: não verificado** — `pixellab.ai/pricing` e `/plans` retornam 404 e a home não lista preços; terceiros divergem (Apprentice US$ 10 ou 12/mês; Architect US$ 50/mês) ([G2](https://ai.g2.com/marketplace/tools/pixellab), [Cinevva](https://app.cinevva.com/guides/ai-pixel-art-generators)). Usar `get_balance` do MCP antes de lotes.
-- Verificação de 2026-10-26: `https://www.pixellab.ai/pricing` (link quebrado em 2026-10-26), `https://pixellab.ai/pricing` (link quebrado em 2026-10-26) e `https://api.pixellab.ai/docs` (link quebrado em 2026-10-26) retornaram HTTP 404; a home carrega "Loading subscription plans..." sem preço.
+- Product: characters with 4 or 8 rotations, animations, tilesets, isometric tiles, map objects, editing (inpaint, rotate, resize, style transfer); asynchronous REST API per job ([PixelLab API llms.txt](https://api.pixellab.ai/v2/llms.txt)).
+- Endpoints: `create-character-v3` (8 rotations), `create-character-pro`, `animate-character`, `create-character-state`, `create-character-with-4-directions` ([same](https://api.pixellab.ai/v2/llms.txt)).
+- Site: UI generation (buttons, health bars, menus) with a style reference; inpainting "that understands the original image" ([pixellab.ai](https://www.pixellab.ai/)).
+- Billing model: monthly subscription; generations and remaining credits visible in the account; a mid-month upgrade charges only the remaining days; commercial use allowed, except training new models with the images ([PixelLab FAQ](https://www.pixellab.ai/docs/faq)).
+- **Prices: not verified** — `pixellab.ai/pricing` and `/plans` return 404 and the home page lists no prices; third parties disagree (Apprentice US$ 10 or 12/month; Architect US$ 50/month) ([G2](https://ai.g2.com/marketplace/tools/pixellab), [Cinevva](https://app.cinevva.com/guides/ai-pixel-art-generators)). Use the MCP `get_balance` before batches.
+- Check on 2026-10-26: `https://www.pixellab.ai/pricing` (broken link as of 2026-10-26), `https://pixellab.ai/pricing` (broken link as of 2026-10-26) and `https://api.pixellab.ai/docs` (broken link as of 2026-10-26) returned HTTP 404; the home page loads "Loading subscription plans..." with no prices.
 
-Planos e custos (só fontes de terceiros; oficial não verificado):
+Plans and costs (third-party sources only; official not verified):
 
-| Plano | Preço | Créditos / gerações | Uso comercial | Fonte (acesso 2026-10-26) |
+| Plan | Price | Credits / generations | Commercial use | Source (accessed 2026-10-26) |
 |---|---|---|---|---|
-| Free trial | US$ 0 | 40 rápidas, depois 5 lentas por dia | não verificado | [Knowara](https://knowara.com/ai-tools/image/pixellab-review/) |
-| Entrada ("Hobbyist"/"Apprentice") | cerca de US$ 10 a 12/mês | 1.000 a 2.000 imagens/mês (fontes divergem) | incluído nos planos pagos (página diz "cleared for commercial use in shipped games") | [Knowara](https://knowara.com/ai-tools/image/pixellab-review/), [G2](https://ai.g2.com/marketplace/tools/pixellab) |
-| Intermediário ("Pro") | cerca de US$ 29 a 35/mês | cerca de 3.000/mês | idem | [Knowara](https://knowara.com/ai-tools/image/pixellab-review/) |
-| Topo ("Architect"/"Team") | cerca de US$ 50/mês | 6.000/mês | idem | [G2](https://ai.g2.com/marketplace/tools/pixellab) |
-| API | cobrada à parte, por chamada | não verificado | não verificado | [Knowara](https://knowara.com/ai-tools/image/pixellab-review/) |
+| Free trial | US$ 0 | 40 fast, then 5 slow per day | not verified | [Knowara](https://knowara.com/ai-tools/image/pixellab-review/) |
+| Entry ("Hobbyist"/"Apprentice") | about US$ 10 to 12/month | 1,000 to 2,000 images/month (sources disagree) | included in paid plans (page says "cleared for commercial use in shipped games") | [Knowara](https://knowara.com/ai-tools/image/pixellab-review/), [G2](https://ai.g2.com/marketplace/tools/pixellab) |
+| Mid-tier ("Pro") | about US$ 29 to 35/month | about 3,000/month | same | [Knowara](https://knowara.com/ai-tools/image/pixellab-review/) |
+| Top ("Architect"/"Team") | about US$ 50/month | 6,000/month | same | [G2](https://ai.g2.com/marketplace/tools/pixellab) |
+| API | billed separately, per call | not verified | not verified | [Knowara](https://knowara.com/ai-tools/image/pixellab-review/) |
 
-Custo por tipo de asset (personagem, objeto, UI, imagem): **não verificado**. Proxy usado no orçamento de `scratchpad/asset-pricing.md`: US$ 0,010 a 0,012 por geração, derivado da cota de terceiros (hipótese, não preço oficial).
+Cost per asset type (character, object, UI, image): **not verified**. Proxy used in the budget in `scratchpad/asset-pricing.md`: US$ 0.010 to 0.012 per generation, derived from the third-party quota (hypothesis, not an official price).
 
-Dados verificados da conta (fonte: MCP PixelLab `get_balance`, 2026-10-26; informados pelo coordenador, não consultados nesta tarefa):
+Verified account data (source: PixelLab MCP `get_balance`, 2026-10-26; provided by the coordinator, not queried in this task):
 
-| Item | Valor |
+| Item | Value |
 |---|---|
-| Cota do plano do desenvolvedor | 5.000 gerações por período de cobrança |
-| Uso informado pelo desenvolvedor (2026-10-26) | 1.600 de 5.000 usadas; cerca de 3.400 restantes |
-| `get_balance` (MCP, 2026-10-26) | assinatura expirou em 2026-10-25; gerações congeladas até a renovação em `pixellab.ai/account` |
-| Saldo pay-as-you-go | US$ 0,05 |
+| Developer's plan quota | 5,000 generations per billing period |
+| Usage reported by the developer (2026-10-26) | 1,600 of 5,000 used; about 3,400 remaining |
+| `get_balance` (MCP, 2026-10-26) | subscription expired on 2026-10-25; generations frozen until renewal at `pixellab.ai/account` |
+| Pay-as-you-go balance | US$ 0.05 |
 
-Divergência a confirmar em `pixellab.ai/account`: o desenvolvedor relata cerca de 3.400 gerações restantes, mas o `get_balance` do mesmo dia indica assinatura expirada e gerações congeladas. Até a confirmação, não está claro se a geração está bloqueada.
+Divergence to confirm at `pixellab.ai/account`: the developer reports about 3,400 generations remaining, but `get_balance` on the same day indicates an expired subscription and frozen generations. Until this is confirmed, it is unclear whether generation is blocked.
 
-Implicação: a necessidade do protótipo (68 assets × 3 tentativas ≈ 204 gerações) cabe na cota restante informada pelo desenvolvedor, desde que a assinatura esteja ativa. Se a expiração for real, a geração fica bloqueada até a renovação.
+Implication: the prototype's need (68 assets × 3 tries ≈ 204 generations) fits within the remaining quota reported by the developer, as long as the subscription is active. If the expiration is real, generation stays blocked until renewal.
 
 ### 13.3 ElevenLabs
 
-| Recurso | Fato | Fonte |
+| Resource | Fact | Source |
 |---|---|---|
-| SFX duração | 0,1–30 s; padrão automático | [SFX docs](https://elevenlabs.io/docs/overview/capabilities/sound-effects) |
-| SFX custo | 40 créditos/s quando a duração é especificada | idem |
-| SFX loop | Loop sem início/fim perceptível | idem |
-| SFX formatos | MP3 sempre; WAV 48 kHz para não-loop | idem |
-| SFX prompt influence | Alto = literal; baixo = criativo | idem |
-| API pay-as-you-go | SFX US$ 0,12/min; Music US$ 0,15/min, limite 5 min, licença comercial a partir do Starter, 44,1 kHz 128–192 kbps | [API pricing](https://elevenlabs.io/pricing/api) |
-| Music | Instrumental ou com voz; edição por seção; "liberado para quase todos os usos comerciais, incluindo games" | [Music docs](https://elevenlabs.io/docs/overview/capabilities/music), [Music terms](https://elevenlabs.io/music-terms) |
-| Plano Creator | US$ 22/mês (US$ 11 no 1º mês) | [API pricing](https://elevenlabs.io/pricing/api) |
+| SFX duration | 0.1–30 s; automatic default | [SFX docs](https://elevenlabs.io/docs/overview/capabilities/sound-effects) |
+| SFX cost | 40 credits/s when the duration is specified | same |
+| SFX loop | Loop with no perceptible start/end | same |
+| SFX formats | MP3 always; WAV 48 kHz for non-loop | same |
+| SFX prompt influence | High = literal; low = creative | same |
+| API pay-as-you-go | SFX US$ 0.12/min; Music US$ 0.15/min, limit 5 min, commercial license from Starter, 44.1 kHz 128–192 kbps | [API pricing](https://elevenlabs.io/pricing/api) |
+| Music | Instrumental or with vocals; section-based editing; "cleared for almost all commercial uses, including games" | [Music docs](https://elevenlabs.io/docs/overview/capabilities/music), [Music terms](https://elevenlabs.io/music-terms) |
+| Creator plan | US$ 22/month (US$ 11 in the 1st month) | [API pricing](https://elevenlabs.io/pricing/api) |
 
-Planos (página de planos, acesso 2026-10-26, [pricing](https://elevenlabs.io/pricing)):
+Plans (plans page, accessed 2026-10-26, [pricing](https://elevenlabs.io/pricing)):
 
-| Plano | Preço mensal | Créditos/mês | Uso comercial | Fonte |
+| Plan | Monthly price | Credits/month | Commercial use | Source |
 |---|---|---|---|---|
-| Free | US$ 0 | 10.000 | não verificado | [pricing](https://elevenlabs.io/pricing) |
-| Starter | **conflito: US$ 1 (tabela) x US$ 6 (FAQ)** | 30.000 | sim: "Commercial License" e "Music commercial use" a partir do Starter | [pricing](https://elevenlabs.io/pricing) |
-| Creator | **conflito: US$ 11 (tabela) x US$ 22 (FAQ)** | 121.000 | herda do Starter | [pricing](https://elevenlabs.io/pricing) |
-| Pro | US$ 99 | 600.000 | herda do Creator | [pricing](https://elevenlabs.io/pricing) |
-| Scale | US$ 299 | 1.800.000 | herda do Pro (3 assentos) | [pricing](https://elevenlabs.io/pricing) |
-| Business | US$ 990 | 6.000.000 | herda do Scale (10 assentos) | [pricing](https://elevenlabs.io/pricing) |
+| Free | US$ 0 | 10,000 | not verified | [pricing](https://elevenlabs.io/pricing) |
+| Starter | **conflict: US$ 1 (table) vs US$ 6 (FAQ)** | 30,000 | yes: "Commercial License" and "Music commercial use" from Starter | [pricing](https://elevenlabs.io/pricing) |
+| Creator | **conflict: US$ 11 (table) vs US$ 22 (FAQ)** | 121,000 | inherits from Starter | [pricing](https://elevenlabs.io/pricing) |
+| Pro | US$ 99 | 600,000 | inherits from Creator | [pricing](https://elevenlabs.io/pricing) |
+| Scale | US$ 299 | 1,800,000 | inherits from Pro (3 seats) | [pricing](https://elevenlabs.io/pricing) |
+| Business | US$ 990 | 6,000,000 | inherits from Scale (10 seats) | [pricing](https://elevenlabs.io/pricing) |
 
-Conflito de Starter: a tabela e a FAQ da mesma página dão valores diferentes; o valor conservador (US$ 6) é o usado no orçamento. Não resolvido. Conflito de custo de SFX: a página de planos cita 200 créditos por geração; a página de capacidades cita 40 créditos/s com duração definida. Não resolvido; a regra de 13.4 usa 40 créditos/s.
+Starter conflict: the table and the FAQ on the same page give different values; the conservative value (US$ 6) is the one used in the budget. Unresolved. SFX cost conflict: the plans page cites 200 credits per generation; the capabilities page cites 40 credits/s with a fixed duration. Unresolved; the rule in 13.4 uses 40 credits/s.
 
-### 13.4 Regras úteis para `.claude/rules` (derivadas das fontes)
+### 13.4 Useful rules for `.claude/rules` (derived from the sources)
 
-- "Toda nova palavra-chave de carta tem nome + frase curta ≤ 12 palavras e ícone próprio" (seção 5.3).
-- "Um ícone de intenção por tipo de efeito; nunca reutilizar ícone de buff para cura" (Intent).
-- "Prompt de geração lista paleta, tamanho em px, direção de luz e contorno; nunca nome de obra/artista" (regra de IP do projeto).
-- "Lote de geração mostra custo estimado: SFX = segundos × 40 créditos; música = minutos × US$ 0,15" (13.3).
+- "Every new card keyword has a name + a short phrase of ≤ 12 words and its own icon" (section 5.3).
+- "One intent icon per effect type; never reuse the buff icon for healing" (Intent).
+- "A generation prompt lists palette, size in px, light direction and outline; never a work or artist name" (the project's IP rule).
+- "A generation batch shows the estimated cost: SFX = seconds × 40 credits; music = minutes × US$ 0.15" (13.3).
 
-### 13.5 Prompts de exemplo (sem "no estilo de")
+### 13.5 Example prompts (no "in the style of")
 
-Pixel art — unidade:
+Pixel art — unit:
 
 ```text
 Side-view pixel art sprite, 48x48 px canvas, character facing right.
@@ -486,7 +486,7 @@ Single light source from upper left, selective dark-brown outline, no anti-alias
 Transparent background. Readable silhouette at 1x.
 ```
 
-Pixel art — inimigo:
+Pixel art — enemy:
 
 ```text
 Side-view pixel art enemy, 64x64 px, facing left.
@@ -495,7 +495,7 @@ Palette: 14 colors, cold desaturated greens and wax yellow, deep violet shadows,
 Light from upper right, crisp 1px outline, transparent background, no anti-aliasing.
 ```
 
-Moldura de carta:
+Card frame:
 
 ```text
 Pixel art card frame, 64x88 px, portrait orientation.
@@ -526,7 +526,7 @@ Playing card slid across rough parchment then slapped on a stone table, 0.4 seco
 Low cracked church bell single toll with distant wind, ominous, 2.5 seconds, fade out.
 ```
 
-Música (loop):
+Music (loop):
 
 ```text
 Instrumental dark ambient loop for a turn-based battle, 90 BPM, D minor.
@@ -536,101 +536,101 @@ Tense but steady, no melody climax, 60 seconds, seamless loop start and end, no 
 
 ---
 
-## 14. Riscos de IP
+## 14. IP risks
 
-| Risco | Fato | Fonte |
+| Risk | Fact | Source |
 |---|---|---|
-| Política de IP da GW | Atualização de 2021 vetou fan films/animações não licenciadas; série *TTS* entrou em hiato | [Vice](https://vice.com/en/article/warhammer-40k-fans-in-revolt-over-zero-tolerance-fan-animation-policy), [Know Your Meme](https://knowyourmeme.com/news/warhammer-fan-series-tts-announces-indefinite-hiatus-in-protest-of-games-workshops-new-strict-copyright-policies) |
-| Página oficial | games-workshop.com/en-US/Intellectual-Property-Policy retornou HTTP 405 nesta coleta → texto atual **não verificado** | [GW IP Policy](https://www.games-workshop.com/en-US/Intellectual-Property-Policy) |
-| Marcas registradas | Lista de terceiros inclui "40,000", "40K", "Adeptus Custodes", "Adeptus Mechanicus", "Blood Bowl", "Black Library", "Citadel" | [MyMiniFactory](https://creator.myminifactory.com/registered-trademarks-from-games-workshop) |
-| Precedente | 2007: GW bloqueou o fan film *Damnatus* | [Slashdot](https://games.slashdot.org/story/07/07/11/1536240/games-workshop-forbids-warhammer-fan-films/interesting-comments) |
+| GW IP policy | A 2021 update banned unlicensed fan films/animations; the *TTS* series went on indefinite hiatus | [Vice](https://vice.com/en/article/warhammer-40k-fans-in-revolt-over-zero-tolerance-fan-animation-policy), [Know Your Meme](https://knowyourmeme.com/news/warhammer-fan-series-tts-announces-indefinite-hiatus-in-protest-of-games-workshops-new-strict-copyright-policies) |
+| Official page | games-workshop.com/en-US/Intellectual-Property-Policy returned HTTP 405 in this collection → current text **not verified** | [GW IP Policy](https://www.games-workshop.com/en-US/Intellectual-Property-Policy) |
+| Trademarks | Third-party list includes "40,000", "40K", "Adeptus Custodes", "Adeptus Mechanicus", "Blood Bowl", "Black Library", "Citadel" | [MyMiniFactory](https://creator.myminifactory.com/registered-trademarks-from-games-workshop) |
+| Precedent | 2007: GW blocked the fan film *Damnatus* | [Slashdot](https://games.slashdot.org/story/07/07/11/1536240/games-workshop-forbids-warhammer-fan-films/interesting-comments) |
 
-Como evocar o tom sem copiar (alinhado a `.claude/rules/ip-and-tone.md`):
+How to evoke the tone without copying (aligned with `.claude/rules/ip-and-tone.md`):
 
-- Usar tropos genéricos (fé militarizada, tecnologia como relíquia, império em decadência) e o vocabulário do GDD.
-- Heráldica própria: formas geométricas simples (anel partido, chama em coroa de espinhos) em vez de águias, caveiras aladas ou cruzes estilizadas reconhecíveis.
-- Silhuetas de armadura sem ombreiras gigantes arredondadas e sem capacete com grade frontal característica — evitar a "assinatura" visual de um universo.
-- DD é também referência protegida: não copiar classes com nomes deles (Plague Doctor, Highwayman, Crusader como pacote), nem o "Ancestor"/mansão como premissa. Ranks, estresse e meltdown são mecânicas de gênero, não expressão protegida (mecânica não é protegida por copyright em geral — análise jurídica **não verificada**).
-- Prompts de geração nunca citam obra, artista ou estúdio (regra do projeto).
-- Checar todo nome novo por busca web antes de fixar.
+- Use generic tropes (militarized faith, technology as relic, a decaying empire) and the GDD's vocabulary.
+- Our own heraldry: simple geometric shapes (a split ring, a flame in a crown of thorns) instead of eagles, winged skulls or recognizable stylized crosses.
+- Armor silhouettes without giant rounded shoulder pads and without a helmet with a characteristic front grille — avoid a universe's visual "signature".
+- DD is also a protected reference: do not copy classes under its names (Plague Doctor, Highwayman, Crusader as a package), nor the "Ancestor"/manor as a premise. Ranks, stress and meltdown are genre mechanics, not protected expression (mechanics are generally not protected by copyright — legal analysis **not verified**).
+- Generation prompts never cite a work, artist or studio (project rule).
+- Check every new name with a web search before fixing it.
 
 ---
 
-## 15. O que isso significa para o nosso jogo
+## 15. What this means for our game
 
-1. **Energia 3 / compra 5 como ponto de partida**, depois dobrar/dividir por simulação; é o par mais testado do gênero (§7.1).
-2. **Acerto garantido**: DD2 provou que tirar precisão funciona em RPG sombrio; manter o invariante e mover a incerteza para compra de cartas e intenções (§7.4).
-3. **Ranks 1–4 por lado** em side-view: habilidade/carta declara ranks de origem e alvo; deslocamento é efeito de carta (§2, §7.3).
-4. **Estresse em escala curta (0–10)** como DD2, não 0–200: cabe em pips legíveis em 480×270 e num toque (§7.4).
-5. Em 10 de estresse: resultado binário anunciado antes (ex.: meltdown vs resolve) com chance exibida na prévia — respeita "dano visível antes de decidir" (§7.3, §7.4).
-6. **Intenção inimiga com ícone por efeito + número**, sem reaproveitar ícones; forma distinta além de cor (§5.1).
-7. **Pilha de compra visível, ordem oculta**, contador de exaustão clicável (§5.1).
-8. **Palavras-chave com tooltip por long-press**; nome + frase curta (§5.3, §13.4).
-9. **Raridade por cor + forma de moldura**, máximo 4 níveis (§5.3, §13.5).
-10. **Mapa de nós com 7 tipos** (normal, elite, descanso, evento, tesouro, loja, chefe) e descanso garantido antes do chefe (§7.2, §11).
-11. **Descanso = escolha excludente** (curar ~30% ou melhorar carta/skill) (§7.2).
-12. **Ouro: normal < elite < chefe** na proporção aproximada 1 : 2 : 7 de StS (15 / 30 / 100) como âncora inicial (§9.1).
-13. **Remoção de carta com custo crescente** (75 +25 em StS) — sumidouro de ouro e decisão de diluição (§9.2).
-14. **Pity de raridade** nas recompensas (offset de StS) para evitar runs sem raras (§9.3).
-15. **Equipamento com raridade** usando pesos 50/33/17 como ponto de partida (§9.3).
-16. **Relações entre heróis (DD2) como camada opcional da Beta**: +1 afinidade em decisões compartilhadas; fora do Alpha (§7.4).
-17. **Meta-progressão dá opção, não poder bruto**: Altar de DD2 desbloqueia heróis e slots; seguir o teto do GDD §8 (§8.1).
-18. **Dificuldade em escada cumulativa** (Ascensão) + modificadores opcionais (Dam) para jogadores que querem ajustar (§8.2, §8.3).
-19. **Métricas desde o primeiro jogável**: log de escolha/pick rate por carta e taxa de vitória por nó; é o método documentado da MegaCrit e casa com `bun run sim` (§10).
-20. **Seed diária** compartilhada — trivial com RNG injetado já exigido pelo núcleo (§11).
-21. **Phaser fixado em 4.2.1**, `pixelArt: true`, `Scale.NONE` + zoom inteiro calculado no resize (§12.1–12.3).
-22. **Placeholders SVG rasterizados no tamanho final**, nunca escalados pelo navegador (§12.4).
-23. **Áudio desbloqueado no primeiro toque** ("Toque para começar"); jogo funciona com `sound.locked` (§12.5).
-24. **Sem narrador falado**: texto curto + stinger sonoro em eventos de estresse/morte (§4).
-25. **Orçamento de áudio** previsível: ~40 SFX × 2 s × 40 créditos ≈ 3.200 créditos; 6 faixas × 1 min × US$ 0,15 ≈ US$ 0,90 (cálculo a partir de §13.3; confirmar plano antes).
-26. **Preço PixelLab não verificado** → consultar `get_balance` e mostrar estimativa no portão de custo (§13.2).
-27. **Sessões curtas**: regiões de ~3 nós (Kingdoms) e runs de 3 atos — mirar runs que caibam numa sessão web (§11).
-28. **IP**: nenhum termo GW/DD/FFT; heráldica geométrica própria; busca web obrigatória para nome novo (§14).
-29. **Todo texto de UI em BitmapText; zoom inteiro por pixel de dispositivo** (§12.7).
+1. **Energy 3 / draw 5 as a starting point**, then double/halve through simulation; it is the most tested pairing in the genre (§7.1).
+2. **Guaranteed hits**: DD2 proved that removing accuracy works in a dark RPG; keep the invariant and move the uncertainty to card draws and intents (§7.4).
+3. **Ranks 1–4 per side** in side view: an ability/card declares origin and target ranks; movement is a card effect (§2, §7.3).
+4. **Stress on a short scale (0–10)** like DD2, not 0–200: it fits readable pips at 480×270 and on a tap (§7.4).
+5. At 10 stress: a binary result announced in advance (e.g. meltdown vs. resolve) with the chance shown in the preview — respects "visible damage before deciding" (§7.3, §7.4).
+6. **Enemy intent with an icon per effect + a number**, without reusing icons; a distinct shape beyond color (§5.1).
+7. **Draw pile visible, order hidden**, a clickable exhaust counter (§5.1).
+8. **Keywords with a tooltip on long-press**; name + short phrase (§5.3, §13.4).
+9. **Rarity by color + frame shape**, at most 4 levels (§5.3, §13.5).
+10. **A node map with 7 types** (normal, elite, rest, event, treasure, shop, boss) and a guaranteed rest before the boss (§7.2, §11).
+11. **Rest = exclusive choice** (heal ~30% or upgrade a card/skill) (§7.2).
+12. **Gold: normal < elite < boss** in the rough StS ratio of 1 : 2 : 7 (15 / 30 / 100) as an initial anchor (§9.1).
+13. **Card removal with rising cost** (75 +25 in StS) — a gold sink and a dilution decision (§9.2).
+14. **Rarity pity** in rewards (StS offset) to avoid runs with no rares (§9.3).
+15. **Equipment with rarity** using weights 50/33/17 as a starting point (§9.3).
+16. **Relationships between heroes (DD2) as an optional layer of the Beta**: +1 affinity on shared decisions; outside Alpha (§7.4).
+17. **Meta-progression grants options, not raw power**: DD2's Altar unlocks heroes and slots; follow the GDD §8 ceiling (§8.1).
+18. **Difficulty as a cumulative ladder** (Ascension) + optional modifiers (Dam) for players who want to tune (§8.2, §8.3).
+19. **Metrics from the first playable**: a log of choices/pick rate per card and win rate per node; this is MegaCrit's documented method and matches `bun run sim` (§10).
+20. **Shared daily seed** — trivial with the injected RNG the core already requires (§11).
+21. **Phaser pinned to 4.2.1**, `pixelArt: true`, `Scale.NONE` + an integer zoom computed on resize (§12.1–12.3).
+22. **SVG placeholders rasterized at the final size**, never scaled by the browser (§12.4).
+23. **Audio unlocked on the first tap** ("Tap to start"); the game works with `sound.locked` (§12.5).
+24. **No spoken narrator**: short text + a sound sting on stress/death events (§4).
+25. **Predictable audio budget**: ~40 SFX × 2 s × 40 credits ≈ 3,200 credits; 6 tracks × 1 min × US$ 0.15 ≈ US$ 0.90 (calculated from §13.3; confirm the plan first).
+26. **PixelLab price not verified** → check `get_balance` and show the estimate at the cost gate (§13.2).
+27. **Short sessions**: regions of ~3 nodes (Kingdoms) and 3-act runs — aim for runs that fit a web session (§11).
+28. **IP**: no GW/DD/FFT terms; our own geometric heraldry; web search mandatory for any new name (§14).
+29. **All UI text in BitmapText; integer zoom per device pixel** (§12.7).
 
 ---
 
-## 15b. Referências do desenvolvedor (resumo)
+## 15b. Developer references (summary)
 
-Digest completo, imagem por imagem: [`docs/research/developer-references.md`](research/developer-references.md). Fontes: `references/chatgpt/conversation.md`, 24 concept arts, 13 wireframes (12 telas distintas; `wireframe-10` = `wireframe-12`) e o repositório <https://github.com/AlexGalhardo/zeta-c>.
+Full digest, image by image: [`docs/research/developer-references.md`](research/developer-references.md). Sources: `references/chatgpt/conversation.md`, 24 concept arts, 13 wireframes (12 distinct screens; `wireframe-10` = `wireframe-12`) and the repository <https://github.com/AlexGalhardo/zeta-c>.
 
-- Conceito de referência chamado **DARKEON**: combate lateral por turnos, 3 heróis à esquerda contra 3 a 5 inimigos à direita, HUD superior, mão de cartas embaixo, botão "Terminar Turno".
-- Roster de referência com 5 classes (Guerreiro, Mago, Curandeiro, Artilharia, Arqueiro) e equipe de 3 em combate; 6 habilidades por herói com custo de energia e recarga.
-- Metaprogressão proposta: árvore de maestria por herói, árvore de pactos de equipe e árvore permanente com fragmentos.
-- Economia proposta: Ouro, Fragmentos, Relíquias e Vida como custo de pacto; 3 lojas (Mercador 3×3, Arsenal, Relicário).
-- UI consistente: painéis de pedra escura, borda dourada no foco; wireframes técnicos em 1920×1080 com coordenadas em px.
-- Estrutura do zeta-c a replicar: `PLAN.md` com fases → grupos → checkboxes e "Pronto quando", `.claude/rules` + `.claude/skills`, hooks Biome + markdownlint + Conventional Commits, scripts de simulação, smoke e balanceamento, `CHANGELOG.md` com `[Unreleased]`.
+- Reference concept called **DARKEON**: side-view turn-based combat, 3 heroes on the left against 3 to 5 enemies on the right, top HUD, card hand at the bottom, "End Turn" button.
+- Reference roster of 5 classes (Warrior, Mage, Healer, Artillery, Archer) and a 3-hero combat party; 6 abilities per hero with energy cost and cooldown.
+- Proposed meta-progression: a mastery tree per hero, a team-pact tree, and a permanent tree with fragments.
+- Proposed economy: Gold, Fragments, Relics and Health as a pact cost; 3 shops (3×3 Merchant, Arsenal, Reliquary).
+- Consistent UI: dark-stone panels, gold border on focus; technical wireframes at 1920×1080 with pixel coordinates.
+- zeta-c structure to replicate: `PLAN.md` with phases → groups → checkboxes and "Ready when", `.claude/rules` + `.claude/skills`, Biome + markdownlint + Conventional Commits hooks, simulation, smoke and balancing scripts, `CHANGELOG.md` with `[Unreleased]`.
 
-**Contradições a decidir no brainstorming (tarefa 2):**
+**Contradictions to decide in the brainstorming (task 2):**
 
-| # | Tema | Conflito |
+| # | Topic | Conflict |
 |---|---|---|
-| 1 | Nome | DARKEON (referências) × "project-alpha" × vocabulário herdado do projeto anterior |
-| 2 | Resolução | 1920×1080 com produção 960×540 (ChatGPT) × base 480×270 (regras herdadas) |
-| 3 | Mão | 5 × 6 cartas entre telas |
-| 4 | Duração do combate | "ROUND XX/10" × 5 a 8 rodadas |
-| 5 | Acerto | "25% ESQUIVA" e chance de condição × invariante de acerto garantido |
-| 6 | Fila de turnos | ausente nos concepts × exigida pelas regras |
-| 7 | Recursos | mana + energia + recarga sobrepostos (o próprio ChatGPT aponta o risco) |
-| 8 | Nomes de heróis e classes | 4 conjuntos diferentes entre telas |
-| 9 | IP | "Imperador do Vazio", "Inquisidor" e citações de obras de terceiros no texto do ChatGPT |
+| 1 | Name | DARKEON (references) × "project-alpha" × vocabulary inherited from the previous project |
+| 2 | Resolution | 1920×1080 with 960×540 production (ChatGPT) × 480×270 base (inherited rules) |
+| 3 | Hand | 5 × 6 cards across screens |
+| 4 | Combat duration | "ROUND XX/10" × 5 to 8 rounds |
+| 5 | Hit chance | "25% DODGE" and condition chance × guaranteed-hit invariant |
+| 6 | Turn order queue | absent from the concepts × required by the rules |
+| 7 | Resources | mana + energy + cooldown overlapping (ChatGPT itself points out the risk) |
+| 8 | Hero and class names | 4 different sets across screens |
+| 9 | IP | "Emperor of the Void", "Inquisitor" and third-party work citations in the ChatGPT text |
 
-## 15c. Imagens de referência dos 4 jogos
+## 15c. Reference images of the 4 games
 
-Pasta local, fora do git (`references/` está no `.gitignore`). Cada pasta tem `images/` e `images.md` com arquivo, URL de origem e descrição.
+Local folder, outside git (`references/` is in `.gitignore`). Each folder has `images/` and `images.md` with file, source URL and description.
 
-| Jogo | Pasta | Imagens | Origem |
+| Game | Folder | Images | Origin |
 |---|---|---|---|
-| Darkest Dungeon | `references/darkest-dungeon/` | 23 | Steam (screenshots oficiais): combate 9, hub 5, ficha de herói 2, evento 2, loot 2, acampamento 1, mapa 1, loja 1 |
-| Darkest Dungeon II | `references/darkest-dungeon-2/` | 20 | Steam: evento 6, combate 5, exploração 4, acampamento 2, mapa 1, bestiário 1, hub 1 |
-| Slay the Spire | `references/slay-the-spire/` | 55 | Steam (6) + frames do Launch Trailer oficial (24) + slaythespire.wiki.gg (25: notas de patch, menus, sprites, ícones). Capturas reais de jogo: 30. Categorias das capturas: combate 12, menu 11, sprite 5, evento 5, loot 4, chefe 4, deck 3, loja 3, mapa 3, ícone 3, bestiário 1, arte 1. Removidos 8 arquivos de ferramenta/template. Nenhuma captura de descanso (rest site) encontrada para StS1 ou StS2 |
-| Slay the Spire 2 | `references/slay-the-spire-2/` | 51 | Steam (6) + frames do Gameplay Trailer oficial (14) + Steam News (6) + slaythespire.wiki.gg (24 cartas, ícones e artes) + 1 marketing; 26 capturas in-game |
+| Darkest Dungeon | `references/darkest-dungeon/` | 23 | Steam (official screenshots): combat 9, hub 5, hero sheet 2, event 2, loot 2, camp 1, map 1, shop 1 |
+| Darkest Dungeon II | `references/darkest-dungeon-2/` | 20 | Steam: event 6, combat 5, exploration 4, camp 2, map 1, bestiary 1, hub 1 |
+| Slay the Spire | `references/slay-the-spire/` | 55 | Steam (6) + frames from the official Launch Trailer (24) + slaythespire.wiki.gg (25: patch notes, menus, sprites, icons). Real in-game captures: 30. Capture categories: combat 12, menu 11, sprite 5, event 5, loot 4, boss 4, deck 3, shop 3, map 3, icon 3, bestiary 1, art 1. 8 tool/template files removed. No rest-site screenshot found for StS1 or StS2 |
+| Slay the Spire 2 | `references/slay-the-spire-2/` | 51 | Steam (6) + frames from the official Gameplay Trailer (14) + Steam News (6) + slaythespire.wiki.gg (24 cards, icons and art) + 1 marketing; 26 in-game captures |
 
-Curadoria visual feita em 2026-10-26: cada `images.md` traz categoria, URL de origem, descrição e "Padrões observados". Nenhuma duplicata encontrada (MD5 + dHash).
+Visual curation done on 2026-10-26: each `images.md` gives category, source URL, description and "Observed patterns". No duplicates found (MD5 + dHash).
 
-## 16. Fontes
+## 16. Sources
 
-Slay the Spire (wiki oficial e dados)
+Slay the Spire (official wiki and data)
 
 - <https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mechanics>
 - <https://slaythespire.wiki.gg/wiki/Energy>
@@ -658,12 +658,12 @@ Slay the Spire (wiki oficial e dados)
 - <https://gamingonlinux.com/2026/04/godot-gets-a-funding-boost-from-slay-the-spire-2-devs-mega-crit>
 - <https://gamedeveloper.com/business/slay-the-spire-devs-followed-through-on-abandoning-unity>
 - <https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics>
-- <https://gdconf.com/news/learn-slay-spires-successful-metrics-driven-approach-game-balancing-gdc-2019> (link quebrado em 2026-10-26)
+- <https://gdconf.com/news/learn-slay-spires-successful-metrics-driven-approach-game-balancing-gdc-2019> (broken link as of 2026-10-26)
 - <https://www.gamedeveloper.com/design/learn-i-slay-the-spire-i-s-metrics-driven-approach-to-game-balancing-at-gdc-2019>
 - <https://www.pressreader.com/australia/edge/20190620/282351156287993>
 - <https://podwise.ai/episodes/1459444>
 
-Darkest Dungeon 1 e 2
+Darkest Dungeon 1 and 2
 
 - <https://darkestdungeon.wiki.gg/wiki/Stress>
 - <https://darkestdungeon.wiki.gg/wiki/Affliction>
@@ -688,7 +688,7 @@ Darkest Dungeon 1 e 2
 - <https://www.gamedeveloper.com/press-release/darkest-dungeon-ii-exits-early-access-launches-into-10-on-steam-epic-game-store-today>
 - <https://www.nme.com/features/darkest-dungeon-2-how-redhook-studios-are-reinventing-their-roguelike-classic-3085987>
 - <https://store.epicgames.com/en-US/news/darkest-dungeon-2-early-access-interview>
-- <https://www.thegamer.com/darkest-dungeon-2-3d-combat/> (link quebrado em 2026-10-26)
+- <https://www.thegamer.com/darkest-dungeon-2-3d-combat/> (broken link as of 2026-10-26)
 - <https://www.gamebanshee.com/3hqup>
 
 Phaser
@@ -702,18 +702,18 @@ Phaser
 - <https://docs.phaser.io/phaser/concepts/audio>
 - <https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide>
 
-Ferramentas de geração
+Generation tools
 
 - <https://api.pixellab.ai/v2/llms.txt>
 - <https://www.pixellab.ai/>
 - <https://www.pixellab.ai/docs/faq>
 - <https://ai.g2.com/marketplace/tools/pixellab>
 - <https://app.cinevva.com/guides/ai-pixel-art-generators>
-- <https://www.pixellab.ai/pricing> (HTTP 404, acesso 2026-10-26; link quebrado em 2026-10-26)
-- <https://pixellab.ai/pricing> (HTTP 404, acesso 2026-10-26; link quebrado em 2026-10-26)
-- <https://api.pixellab.ai/docs> (HTTP 404, acesso 2026-10-26; link quebrado em 2026-10-26)
-- <https://knowara.com/ai-tools/image/pixellab-review/> (acesso 2026-10-26; "verificado em setembro de 2026" segundo a página)
-- <https://elevenlabs.io/pricing> (acesso 2026-10-26)
+- <https://www.pixellab.ai/pricing> (HTTP 404, accessed 2026-10-26; broken link as of 2026-10-26)
+- <https://pixellab.ai/pricing> (HTTP 404, accessed 2026-10-26; broken link as of 2026-10-26)
+- <https://api.pixellab.ai/docs> (HTTP 404, accessed 2026-10-26; broken link as of 2026-10-26)
+- <https://knowara.com/ai-tools/image/pixellab-review/> (accessed 2026-10-26; "verified as of September 2026" according to the page)
+- <https://elevenlabs.io/pricing> (accessed 2026-10-26)
 - <https://elevenlabs.io/docs/overview/capabilities/sound-effects>
 - <https://elevenlabs.io/docs/overview/capabilities/music>
 - <https://elevenlabs.io/pricing/api>

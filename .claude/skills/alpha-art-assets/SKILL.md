@@ -7,8 +7,8 @@ description: "Use when creating, regenerating, animating, cleaning or replacing 
 
 Read first: `docs/gdd.md` (direção de arte) and `.claude/rules/assets.md`.
 Numbers (resolução base, tamanhos de célula, paleta, formatos): a definir na Art Bible
-(`docs/art-bible.md`, ainda não criada). Até lá, nenhum tamanho ou cor fixo vale por esta skill;
-se algum número aparecer aqui, ele é provisório e a Art Bible prevalece.
+(`docs/art-bible.md`, not created yet). Until then, no fixed size or color applies through this skill;
+if any number appears here, it is provisional and the Art Bible prevails.
 
 ## Route
 

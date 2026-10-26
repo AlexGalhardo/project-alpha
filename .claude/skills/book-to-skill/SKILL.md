@@ -3,7 +3,7 @@ name: book-to-skill
 description: "Converts books and documents (PDF, EPUB, DOCX, HTML, Markdown, plain text) into structured agent skills, extracting frameworks, mental models, principles, techniques, and anti-patterns. Use when the user wants to turn a book or document into a skill, study a document through Claude Code, apply an author's frameworks while working, or build a reusable knowledge base from a file."
 ---
 
-> **project-alpha:** skill de terceiros ([virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill), MIT, commit `e180fc4`), cópia curada em arquivo único. Ajustes locais: sem `scripts/extract.py` nem `tools/scan_generated_skill.py` (a extração usa `pdftotext`/leitura direta), destino fixo em `.claude/skills/` do projeto, e a skill gerada é **um único `SKILL.md`** (sem `chapters/`, `glossary.md`, `patterns.md`, `cheatsheet.md` — o conteúdo deles vira seções do mesmo arquivo). Removidos: suporte a outros hosts (Copilot, Amp, Hermes, OpenClaw, OpenCode), symlinks e publicação no GitHub.
+> **project-alpha:** third-party skill ([virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill), MIT, commit `e180fc4`), curated copy as a single file. Local adjustments: no `scripts/extract.py` or `tools/scan_generated_skill.py` (extraction uses `pdftotext` or direct reading), fixed output in the project's `.claude/skills/`, and the generated skill is **a single `SKILL.md`** (no `chapters/`, `glossary.md`, `patterns.md`, `cheatsheet.md`; their content becomes sections of the same file). Removed: support for other hosts (Copilot, Amp, Hermes, OpenClaw, OpenCode), symlinks and GitHub publishing.
 
 <!-- argument-hint: <path-to-document-folder-or-glob>... [skill-name-slug] -->
 

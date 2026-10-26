@@ -10,9 +10,9 @@ metadata:
   tags: [game, qa, testing, playwright]
 ---
 
-> **project-alpha:** skill de terceiros (`PlayableIntelligence/game-creator`, MIT). Use como checklist/guia; **não** gere scaffold, templates ou deploy próprios da skill (a estrutura do projeto está em `docs/sdd/architecture.md`; testes em `docs/sdd/testing.md`). Em conflito valem `AGENTS.md`, `.claude/rules/` e `docs/gdd.md`: Phaser 4 (não 3), Bun, roguelite deckbuilder dark fantasy com combate por turnos em fileira lateral; lógica pura em `src/core`, números em `src/data`, textos em `src/i18n`; arte via PixelLab, áudio via ElevenLabs.
+> **project-alpha:** third-party skill (`PlayableIntelligence/game-creator`, MIT). Use it as a checklist/guide; **do not** generate the skill's own scaffold, templates or deploy (the project structure is in `docs/sdd/architecture.md`; tests in `docs/sdd/testing.md`). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4 (not 3), Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`; art via PixelLab, audio via ElevenLabs.
 >
-> **Playwright aqui:** `@playwright/test` já é dependência; a config (`playwright.config.ts`, TypeScript) e os scripts `test*` serão recriados na fase ESTRUTURA. Smoke/e2e e QA visual rodam no fim de cada fase, não a cada commit. `@axe-core/playwright` é dependência nova: só com aprovação do desenvolvedor. Arquivos de teste em TypeScript (`.ts`), não `.js`.
+> **Playwright here:** `@playwright/test` is already a dependency; the config (`playwright.config.ts`, TypeScript) and the `test*` scripts will be recreated in the STRUCTURE phase. Smoke/e2e and visual QA run at the end of each phase, not on every commit. `@axe-core/playwright` is a new dependency: only with the developer's approval. Test files in TypeScript (`.ts`), not `.js`.
 
 
 # Game QA with Playwright

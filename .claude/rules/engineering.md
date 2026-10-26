@@ -1,43 +1,48 @@
-# Regras de engenharia
+# Engineering rules
 
-## Camadas
+## Language
 
-- `src/core/` é lógica pura e determinística. Proibido importar `phaser`, `src/scenes`, `src/view`, usar DOM, `Math.random`, `Date`, `performance.now` ou temporizadores.
-- `src/scenes/` e `src/view/` apresentam: consomem eventos do núcleo e animam. Nunca decidem regra de jogo.
-- Toda aleatoriedade vem do RNG com seed injetado. Mesma seed + mesmos comandos = mesmo estado.
-- Número de balanceamento vive em `src/data/`. Número mágico em lógica é defeito.
-- Texto exibido ao jogador vive em `src/i18n/`, em EN e PT-BR. String de jogador em código é defeito.
+- All repository content is English: docs, code, comments, keys, commit messages.
+- PT-BR appears only as in-game localization in `src/i18n/`. English is the default locale.
+
+## Layers
+
+- `src/core/` is pure, deterministic logic. Do not import `phaser`, `src/scenes`, `src/view`; do not use the DOM, `Math.random`, `Date`, `performance.now` or timers.
+- `src/scenes/` and `src/view/` present: they consume core events and animate. They never decide game rules.
+- All randomness comes from the RNG with an injected seed. Same seed + same commands = same state.
+- Balancing numbers live in `src/data/`. A magic number in logic is a defect.
+- Player-facing text lives in `src/i18n/`, in EN (default) and PT-BR. A player string in code is a defect.
 
 ## TypeScript
 
-- Sem `any`. Tipo desconhecido usa `unknown` com narrowing.
-- Tipo de retorno explícito em toda função exportada.
-- Sem `@ts-ignore` e sem `@ts-expect-error` para "passar".
-- Estado do núcleo é tratado como imutável: comando devolve novo estado.
+- No `any`. Unknown types use `unknown` with narrowing.
+- Explicit return type on every exported function.
+- No `@ts-ignore` and no `@ts-expect-error` to "make it pass".
+- Core state is immutable: a command returns a new state.
 
-## Testes
+## Tests
 
-- Lógica em `src/core/`: teste primeiro, implementação depois.
-- Bug corrigido ganha teste que o reproduz.
-- Teste instável nunca é reexecutado até passar: corrige-se a causa (quase sempre determinismo).
-- Nunca desativar, pular ou afrouxar um teste para o CI passar.
-- Antes de declarar pronto: rodar o comando do assert e `bun run ci`, e ler o resultado.
-- Testes rápidos (unit, integração) durante o desenvolvimento; simulação de balanceamento, e2e e QA humano só no fim de cada fase.
+- Logic in `src/core/`: test first, implementation after.
+- A fixed bug gets a test that reproduces it.
+- Never re-run an unstable test until it passes: fix the cause (almost always determinism).
+- Never disable, skip or weaken a test to make CI pass.
+- Before declaring done: run the assert's command and `bun run ci`, and read the result.
+- Fast tests (unit, integration) during development; balancing simulation, e2e and human QA only at the end of each phase.
 
-## Dependências e ferramentas
+## Dependencies and tooling
 
-- Bun para tudo (`bun`, `bunx`). Node/npm só quando uma ferramenta exigir, com registro em `docs/adrs/`.
-- Dependência nova exige aprovação do desenvolvedor.
-- Versão estável exata no `package.json`: sem `^`, `~`, `latest`, `next`, `rc`, `beta`, `alpha`.
-- Phaser 4: consultar a skill oficial do assunto antes de usar uma API. Não aplicar padrões do Phaser 3.
+- Bun for everything (`bun`, `bunx`). Node/npm only when a tool requires it, recorded in `docs/adrs/`.
+- A new dependency requires the developer's approval.
+- Exact stable versions in `package.json`: no `^`, `~`, `latest`, `next`, `rc`, `beta`, `alpha`.
+- Phaser 4: consult the official skill for the topic before using an API. Do not apply Phaser 3 patterns.
 
-## Código
+## Code
 
-- Comentário só para o porquê, caso de borda não óbvio ou workaround com motivo.
-- Corrigir a causa raiz. Nunca engolir exceção.
-- Formatação e lint pelo Biome; markdown pelo markdownlint. Não discutir estilo à mão.
+- Comment only for the why, a non-obvious edge case, or a workaround with a reason.
+- Fix the root cause. Never swallow an exception.
+- Formatting and linting with Biome; Markdown with markdownlint. Do not argue style by hand.
 
-## Segredos
+## Secrets
 
-- `.env` nunca é lido para exibição, impresso, registrado em log nem versionado.
-- Chave de API só em scripts de `scripts/`, nunca no bundle do jogo.
+- `.env` is never read for display, printed, logged or committed.
+- API keys only in scripts under `scripts/`, never in the game bundle.

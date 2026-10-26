@@ -9,9 +9,9 @@ description: >
   buffering, coyote time, or accessible controls.
 ---
 
-> **project-alpha:** skill de terceiros (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). Em conflito valem `AGENTS.md`, `.claude/rules/` e `docs/gdd.md`: Phaser 4, Bun, roguelite deckbuilder dark fantasy com combate por turnos em fileira lateral; lógica pura em `src/core`, números em `src/data`, textos em `src/i18n`.
+> **project-alpha:** third-party skill (`gamedev-skills/awesome-gamedev-agent-skills`, Apache-2.0). In case of conflict, `AGENTS.md`, `.claude/rules/` and `docs/gdd.md` prevail: Phaser 4, Bun, dark-fantasy roguelite deckbuilder with turn-based side-view combat in ranks; pure logic in `src/core`, numbers in `src/data`, text in `src/i18n`.
 >
-> **Escopo aqui:** input buffering e coyote time não se aplicam (jogo por turnos). A UI é touch-first; teclado e mouse são atalhos sobre o mesmo fluxo.
+> **Scope here:** input buffering and coyote time do not apply (turn-based game). The UI is touch-first; keyboard and mouse are shortcuts over the same flow.
 
 
 # Input systems

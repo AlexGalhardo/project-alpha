@@ -1,31 +1,31 @@
-# ADR 0004: Coordenação de agentes paralelos
+# ADR 0004: Coordination of parallel agents
 
-- Status: aceito
-- Data: 2026-10-26
+- Status: accepted
+- Date: 2026-10-26
 
-## Contexto
+## Context
 
-O desenvolvedor pediu 3 agentes paralelos permanentes, com modelos por função, coordenados pela sessão principal. O CLAUDE.md global dele exige "sim" explícito para agentes paralelos e worktrees. Em 2026-10-26 ele autorizou **3 agentes sem worktree**.
+The developer asked for 3 permanent parallel agents, with models assigned by role, coordinated by the main session. The developer's global CLAUDE.md requires explicit "yes" for parallel agents and worktrees. On 2026-10-26 the developer authorized **3 agents without worktrees**.
 
-## Decisão
+## Decision
 
-| Agente | Modelo | Função |
+| Agent | Model | Role |
 |---|---|---|
-| Revisor | Claude Opus 5.5 | Revisão e auditoria do que foi feito; pesquisa que exige julgamento |
-| Implementador | Claude Sonnet 5.5 | Código, scripts, integração técnica |
-| Redator | Claude Haiku 5.5 | i18n, documentação, textos, testes, balanceamentos e simulações pontuais |
+| Reviewer | Claude Opus 5.5 | Review and audit of what was done; research that requires judgment |
+| Implementer | Claude Sonnet 5.5 | Code, scripts, technical integration |
+| Writer | Claude Haiku 5.5 | i18n, documentation, text, tests, balancing and ad-hoc simulations |
 
-- A sessão principal (Opus 5.5) planeja, delega, integra e faz todos os commits.
-- Subagentes terminam cada tarefa e ficam em espera; recebem a próxima via `SendMessage` com o contexto preservado ("standby").
-- Cada agente toca um conjunto de arquivos distinto por vez; nenhum faz commit.
-- Sem `git worktree` salvo novo pedido explícito.
+- The main session (Opus 5.5) plans, delegates, integrates and makes all commits.
+- Subagents finish each task and stand by; they receive the next one via `SendMessage` with preserved context ("standby").
+- Each agent touches one distinct set of files at a time; none commits.
+- No `git worktree` unless explicitly requested again.
 
-## Alternativas
+## Alternatives
 
-- 3 worktrees: isolamento total, mas custo de rebase e merge a cada grupo e pouco ganho em fases de documentação.
-- Trabalho só sequencial: mais lento.
+- 3 worktrees: full isolation, but rebase and merge cost at every group, and little gain in documentation phases.
+- Sequential work only: slower.
 
-## Consequências
+## Consequences
 
-- Conflito de edição é evitado por divisão de arquivos, não por branches.
-- Toda saída de agente é revisada pelo coordenador antes do commit.
+- Edit conflicts are avoided by splitting files, not by branches.
+- Every agent output is reviewed by the coordinator before the commit.

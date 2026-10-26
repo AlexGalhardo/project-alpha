@@ -24,6 +24,7 @@ export class PauseScene extends Phaser.Scene {
 		const x = BASE_WIDTH / 2 - 70;
 		new Button(this, x, 110, t('pause.resume'), () => this.resume(), {
 			w: 140,
+			sfx: 'sfx.ui.cancel',
 			testId: 'pause-resume',
 		});
 		new Button(this, x, 148, t('pause.settings'), () => this.openSettings(), {

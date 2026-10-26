@@ -1,10 +1,11 @@
 import Phaser from 'phaser';
 import { type MapView, mapView, maxHP } from '../core';
 import { app } from '../view/app';
+import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { goNext, session } from '../view/session';
-import { Button, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel } from '../view/ui';
 
 /** Column centre for a round (docs/art-bible.md §11.4): x = 40 + (round − 1) × 62. */
 const COL_X = (round: number): number => 40 + (round - 1) * 62 + 12;
@@ -24,7 +25,9 @@ export class MapScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		backdrop(this, 'bg.map.act1');
 		this.focus = 0;
 		const state = session.state;
 		const view = state ? mapView(state) : null;
@@ -47,7 +50,7 @@ export class MapScene extends Phaser.Scene {
 			testId: 'map-pause',
 		});
 
-		panel(this, 16, 32, 608, 256, 'ash1');
+		panel(this, 16, 32, 608, 256, 'ash1').setAlpha(0.85);
 		label(this, 24, 36, t('map.choose'), 'tiny', 'ash5');
 
 		const pos = (row: number, index: number): { x: number; y: number } => {
@@ -159,6 +162,8 @@ export class MapScene extends Phaser.Scene {
 	}
 
 	private drawPartyStrip(): void {
+		// Dark band so the strip and legend stay readable over the background floor.
+		this.add.rectangle(0, 290, 640, 70, P.ash1, 0.9).setOrigin(0);
 		const party = session.state?.party ?? [];
 		party.forEach((h, i) => {
 			const x = 16 + i * 136;

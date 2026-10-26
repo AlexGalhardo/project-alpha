@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 import { type Command, type RewardView, rewardView } from '../core';
+import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { goNext, session } from '../view/session';
-import { Button, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel } from '../view/ui';
 
 /** Reward after a won fight (GDD §11, docs/art-bible.md §11.7): gold, pick 1 of 3 cards or skip. */
 export class RewardScene extends Phaser.Scene {
@@ -17,7 +18,10 @@ export class RewardScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		playMusic(this, 'music.map');
+		play(this, 'sfx.flow.reward');
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		backdrop(this, 'bg.menu', 0.6);
 		this.skipArmed = false;
 		this.selected = null;
 		this.layer = this.add.container(0, 0);
@@ -90,6 +94,7 @@ export class RewardScene extends Phaser.Scene {
 			new Button(this, 112, 264, t('reward.skip'), () => this.send({ type: 'skipReward' }), {
 				w: 96,
 				h: 44,
+				sfx: 'sfx.ui.cancel',
 				testId: 'reward-skip',
 			}),
 		);
@@ -99,6 +104,7 @@ export class RewardScene extends Phaser.Scene {
 		const take = new Button(this, 432, 264, t('reward.take'), () => this.take(), {
 			w: 96,
 			h: 44,
+			sfx: 'sfx.ui.confirm',
 			testId: 'reward-take',
 		});
 		take.setEnabled(this.selected !== null);

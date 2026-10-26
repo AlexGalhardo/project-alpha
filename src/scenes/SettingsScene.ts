@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { BASE_WIDTH } from '../platform/zoom';
 import { app } from '../view/app';
+import { setMusicVolume } from '../view/audio';
 import { t } from '../view/i18n';
 import type { Speed } from '../view/settings';
 import { Button, label, panel } from '../view/ui';
@@ -45,7 +46,11 @@ export class SettingsScene extends Phaser.Scene {
 			[
 				t('settings.musicVolume'),
 				`${s.musicVolume}`,
-				() => app.update({ musicVolume: (s.musicVolume + 20) % 120 }),
+				() => {
+					const musicVolume = (s.musicVolume + 20) % 120;
+					app.update({ musicVolume });
+					setMusicVolume(musicVolume);
+				},
 			],
 			[
 				t('settings.sfxVolume'),
@@ -102,6 +107,7 @@ export class SettingsScene extends Phaser.Scene {
 			).setData('row', true);
 		});
 		new Button(this, BASE_WIDTH / 2 - 60, 296, t('settings.back'), () => this.close(), {
+			sfx: 'sfx.ui.cancel',
 			testId: 'settings-back',
 		}).setData('row', true);
 	}

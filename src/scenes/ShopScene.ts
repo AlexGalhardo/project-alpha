@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 import { type Command, shopView } from '../core';
+import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { session } from '../view/session';
-import { Button, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel } from '../view/ui';
 import { openCardPicker } from './RestScene';
 
 /** Shop node (GDD §4.6, docs/art-bible.md §11.9): 5 cards, 2 equipment, one card removal per visit. */
@@ -17,7 +18,9 @@ export class ShopScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		backdrop(this, 'bg.menu', 0.6);
 		this.selected = null;
 		this.picker = null;
 		this.layer = this.add.container(0, 0);
@@ -140,6 +143,7 @@ export class ShopScene extends Phaser.Scene {
 			new Button(this, 504, 288, t('shop.leave'), () => this.send({ type: 'leaveShop' }), {
 				w: 96,
 				h: 44,
+				sfx: 'sfx.ui.confirm',
 				testId: 'shop-leave',
 			}),
 		);
@@ -180,7 +184,10 @@ export class ShopScene extends Phaser.Scene {
 
 	/** Re-renders in place while still in the shop; otherwise moves to the next screen. */
 	private send(cmd: Command): void {
-		session.send(cmd);
+		const result = session.send(cmd);
+		const bought = cmd.type === 'shopBuy' || cmd.type === 'shopRemoveCard';
+		if (bought && result && !result.events.some((e) => e.type === 'invalid'))
+			play(this, 'sfx.ui.coin');
 		const next = session.sceneForScreen();
 		if (next !== 'Shop') this.scene.start(next);
 		else this.scene.restart();

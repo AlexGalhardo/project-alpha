@@ -12,12 +12,12 @@ import {
 	type Target,
 } from '../core';
 import { app } from '../view/app';
-import { play } from '../view/audio';
+import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
-import { css, P } from '../view/palette';
+import { type css, P, type PaletteKey } from '../view/palette';
 import { session } from '../view/session';
-import { Button, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel } from '../view/ui';
 
 const HERO_X = (rank: number): number => 16 + (3 - rank) * 88;
 const ENEMY_X = (rank: number): number => 304 + (rank - 1) * 80;
@@ -25,7 +25,93 @@ const SLOT_W = 80;
 
 type UnitKey = string; // 'h:<class>' | 'e:<uid>'
 
+interface UnitDelta {
+	name: string;
+	hpFrom: number;
+	hpTo: number;
+	block: number;
+	stress: number;
+	statuses: [string, number][];
+}
+
+interface UnitSnapshot {
+	name: string;
+	hp: number;
+	block: number;
+	stress: number;
+	status: HeroView['status'];
+}
+
+const STATUS_KEYS = ['might', 'marked', 'weakened', 'bleed', 'burn', 'ward'] as const;
+
+function snapshots(view: CombatView | null): Map<UnitKey, UnitSnapshot> {
+	const out = new Map<UnitKey, UnitSnapshot>();
+	if (!view) return out;
+	for (const h of view.heroes)
+		out.set(`h:${h.id}`, {
+			name: t(`hero.${h.id}.name`),
+			hp: h.hp,
+			block: h.status.block,
+			stress: h.stress,
+			status: h.status,
+		});
+	for (const e of view.enemies)
+		out.set(`e:${e.uid}`, {
+			name: t(`enemy.${e.key}.name`),
+			hp: e.hp,
+			block: e.status.block,
+			stress: 0,
+			status: e.status,
+		});
+	return out;
+}
+
+/** Per-unit change between two combat views; units missing afterwards are dead (HP 0). */
+function diffViews(before: CombatView, after: CombatView | null): Map<UnitKey, UnitDelta> {
+	const a = snapshots(before);
+	const b = snapshots(after);
+	const out = new Map<UnitKey, UnitDelta>();
+	for (const [key, s] of a) {
+		const n = b.get(key);
+		const hpTo = n ? n.hp : key.startsWith('e:') ? 0 : s.hp;
+		const statuses: [string, number][] = [];
+		if (n) {
+			for (const k of STATUS_KEYS) {
+				const d = n.status[k] - s.status[k];
+				if (d > 0) statuses.push([k, d]);
+			}
+			if (n.status.stunned && !s.status.stunned) statuses.push(['stunned', 1]);
+		}
+		const d: UnitDelta = {
+			name: s.name,
+			hpFrom: s.hp,
+			hpTo,
+			block: n ? n.block - s.block : -s.block,
+			stress: n ? n.stress - s.stress : 0,
+			statuses,
+		};
+		if (d.hpFrom !== d.hpTo || d.block !== 0 || d.stress !== 0 || statuses.length > 0)
+			out.set(key, d);
+	}
+	return out;
+}
+
+function targetKey(target: Target): UnitKey | null {
+	if (!target) return null;
+	return target.type === 'enemy' ? `e:${target.uid}` : `h:${target.id}`;
+}
+
 /** Combat screen (GDD §5, docs/art-bible.md §11.5). Rules come from src/core; this only draws and animates. */
+// Core status names to generated sound keys; statuses without a sound stay silent.
+const STATUS_SFX: Record<string, string> = {
+	marked: 'sfx.status.marked',
+	weakened: 'sfx.status.weakened',
+	bleed: 'sfx.status.bleed',
+	burn: 'sfx.status.burn',
+	ward: 'sfx.status.ward',
+	stunned: 'sfx.status.stun',
+};
+
 export class CombatScene extends Phaser.Scene {
 	private view!: CombatView;
 	private layer!: Phaser.GameObjects.Container;
@@ -35,6 +121,10 @@ export class CombatScene extends Phaser.Scene {
 	private autoTimer: Phaser.Time.TimerEvent | null = null;
 	private speedBtn!: Button;
 	private autoBtn!: Button;
+	/** Result previews of the selected card, one per valid target (GDD invariant: preview before confirm). */
+	private previews: { target: Target; deltas: Map<UnitKey, UnitDelta> }[] = [];
+	private previewUid: number | null = null;
+	private focusIdx = 0;
 
 	constructor() {
 		super('Combat');
@@ -42,6 +132,7 @@ export class CombatScene extends Phaser.Scene {
 
 	create(): void {
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		backdrop(this, 'bg.combat.act1');
 		app.applySpeed(this);
 		this.layer = this.add.container(0, 0);
 		this.buildStatic();
@@ -125,13 +216,16 @@ export class CombatScene extends Phaser.Scene {
 			return;
 		}
 		this.view = view;
+		playMusic(this, view.kind === 'boss' ? 'music.boss' : 'music.combat');
 		if (this.selected && !view.hand.some((c) => c.uid === this.selected?.uid))
 			this.selected = null;
 		this.layer.removeAll(true);
 		this.unitPos.clear();
 		this.drawTopBar();
+		this.computePreviews();
 		for (const h of view.heroes) this.drawHero(h);
 		for (const e of view.enemies) this.drawEnemy(e);
+		this.drawPreviewChips();
 		this.drawActionBand();
 		if (this.selected) this.drawDetail(this.selected);
 		this.scheduleAuto();
@@ -216,7 +310,6 @@ export class CombatScene extends Phaser.Scene {
 		this.statusRow(x + 4, 210, h.status);
 		if (h.status.block > 0)
 			this.layer.add(label(this, x + 66, 182, `${h.status.block}`, 'tiny', 'ward1'));
-		const valid = this.validTargetFor({ type: 'hero', id: h.id });
 		const zone = this.add
 			.zone(x, 24, SLOT_W, 166)
 			.setOrigin(0)
@@ -224,13 +317,7 @@ export class CombatScene extends Phaser.Scene {
 			.setName(`hero-${h.id}`);
 		zone.on('pointerup', () => this.onUnitTap({ type: 'hero', id: h.id }));
 		this.layer.add(zone);
-		if (valid)
-			this.layer.add(
-				this.add
-					.rectangle(x + 2, 26, SLOT_W - 4, 162)
-					.setOrigin(0)
-					.setStrokeStyle(2, P.gold2),
-			);
+		this.targetMark({ type: 'hero', id: h.id }, x, SLOT_W);
 	}
 
 	private drawEnemy(e: EnemyView): void {
@@ -240,7 +327,7 @@ export class CombatScene extends Phaser.Scene {
 		const img = this.add
 			.image(x + w / 2, 190, `enemy.${e.key}`)
 			.setOrigin(0.5, 1)
-			.setFlipX(false);
+			.setOrigin(0.5, 1); // enemy sprites are drawn facing left (src/view/pixelgen.ts)
 		if (e.trait) img.setTint(P.ember3);
 		this.layer.add(img);
 		if (e.trait)
@@ -259,14 +346,98 @@ export class CombatScene extends Phaser.Scene {
 			.setName(`enemy-${e.uid}`);
 		zone.on('pointerup', () => this.onUnitTap({ type: 'enemy', uid: e.uid }));
 		this.layer.add(zone);
-		if (this.validTargetFor({ type: 'enemy', uid: e.uid })) {
-			this.layer.add(
-				this.add
-					.rectangle(x + 2, 26, w - 4, 162)
-					.setOrigin(0)
-					.setStrokeStyle(2, P.gold2),
-			);
+		this.targetMark({ type: 'enemy', uid: e.uid }, x, w);
+	}
+
+	/** Valid targets get a gold outline; the focused one pulses (shape + motion, not only colour). */
+	private targetMark(target: Target, x: number, w: number): void {
+		if (!this.validTargetFor(target)) return;
+		const focused = targetKey(this.focusedTarget()) === targetKey(target);
+		const r = this.add
+			.rectangle(x + 2, 26, w - 4, 162)
+			.setOrigin(0)
+			.setStrokeStyle(focused ? 3 : 1, focused ? P.ember3 : P.gold2);
+		this.layer.add(r);
+		if (focused)
+			this.tweens.add({ targets: r, alpha: 0.35, duration: 450, yoyo: true, repeat: -1 });
+	}
+
+	// ---------- result preview ----------
+	private focusedTarget(): Target {
+		return this.previews[this.focusIdx]?.target ?? null;
+	}
+
+	/** Runs `preview` once per valid target when the selection changes (not per frame). */
+	private computePreviews(): void {
+		const card = this.selected;
+		const state = session.state;
+		if (!card?.playable || !state) {
+			this.previews = [];
+			this.previewUid = null;
+			return;
 		}
+		if (this.previewUid === card.uid) return;
+		this.previewUid = card.uid;
+		this.focusIdx = 0;
+		const targets: Target[] = card.autoTarget ? [null] : card.validTargets;
+		this.previews = targets.map((target) => {
+			const result = preview(state, { type: 'playCard', cardUid: card.uid, target });
+			return { target, deltas: diffViews(this.view, combatView(result.state)) };
+		});
+	}
+
+	/** Chips above the HP bar (y 176) for every unit the focused play would change. */
+	private drawPreviewChips(): void {
+		const p = this.previews[this.focusIdx];
+		if (!p) return;
+		for (const [key, d] of p.deltas) {
+			const pos = this.unitPos.get(key);
+			if (!pos) continue;
+			const parts: [string, PaletteKey][] = [];
+			if (d.hpTo !== d.hpFrom)
+				parts.push([
+					`${d.hpFrom}→${Math.max(0, d.hpTo)}`,
+					d.hpTo < d.hpFrom ? 'blood2' : 'rot2',
+				]);
+			if (d.block !== 0) parts.push([`${d.block > 0 ? '+' : ''}${d.block}▪`, 'ward1']);
+			if (d.stress !== 0) parts.push([`${d.stress > 0 ? '+' : ''}${d.stress}◆`, 'rift2']);
+			for (const [k, n] of d.statuses)
+				parts.push([`+${n} ${t(`status.${k}.name`)}`, 'gold2']);
+			let y = 176;
+			for (const [text, color] of parts.reverse()) {
+				const chip = label(this, pos.x + pos.w / 2, y, text, 'tiny', color).setOrigin(
+					0.5,
+					1,
+				);
+				const bg = this.add
+					.rectangle(chip.x, y + 1, chip.width + 6, chip.height + 2, P.ash0, 0.85)
+					.setOrigin(0.5, 1);
+				this.layer.add([bg, chip]);
+				y -= chip.height + 3;
+			}
+		}
+	}
+
+	/** One line for the detail panel: what the focused play does to its main target. */
+	private previewLine(): string | null {
+		const p = this.previews[this.focusIdx];
+		if (!p) return null;
+		const key = targetKey(p.target) ?? p.deltas.keys().next().value;
+		const d = key ? p.deltas.get(key) : undefined;
+		if (!d) return null;
+		const dealt = d.hpFrom - d.hpTo - Math.min(0, d.block);
+		if (d.hpTo !== d.hpFrom || d.block < 0)
+			return `→ ${d.name}: ${d.hpFrom}→${Math.max(0, d.hpTo)} (−${dealt})`;
+		if (d.block > 0) return `→ ${d.name}: +${d.block}▪`;
+		if (d.stress !== 0) return `→ ${d.name}: ${d.stress > 0 ? '+' : ''}${d.stress}◆`;
+		return `→ ${d.name}`;
+	}
+
+	private cycleFocus(step: number): void {
+		const n = this.previews.length;
+		if (n < 2) return;
+		this.focusIdx = (this.focusIdx + step + n) % n;
+		this.refresh();
 	}
 
 	private drawIntent(e: EnemyView, x: number, w: number): void {
@@ -286,13 +457,20 @@ export class CombatScene extends Phaser.Scene {
 		const parts: string[] = [];
 		const first = it.damage[0];
 		if (first) parts.push(first.hits > 1 ? `${first.perHit}x${first.hits}` : `${first.perHit}`);
-		if (it.stress > 0) parts.push(`+${it.stress}s`);
+		if (kind === 'stress') parts.push(`+${it.stress}`);
 		if (it.block > 0) parts.push(`${it.block}`);
 		const cx = x + w / 2;
 		const icon = this.add.image(cx - 14, 32, `icon.intent.${kind}`);
 		const txt = label(this, cx - 6, 26, parts.join(' '), 'ui', 'bone2');
 		icon.setInteractive().on('pointerup', () => this.tooltip(t(`intent.${it.intentId}`)));
 		this.layer.add([icon, txt]);
+		// Stress on top of another intent gets its own stress icon + "+n" (shape, not a letter).
+		if (kind !== 'stress' && it.stress > 0) {
+			const sx = txt.x + txt.width + 8;
+			const sIcon = this.add.image(sx, 32, 'icon.intent.stress');
+			const sTxt = label(this, sx + 8, 26, `+${it.stress}`, 'ui', 'rift2');
+			this.layer.add([sIcon, sTxt]);
+		}
 		// Target markers on heroes: a small downward triangle above each targeted hero.
 		for (const target of it.targets) {
 			const pos = this.unitPos.get(`h:${target}`) ?? this.heroSlot(target);
@@ -346,9 +524,18 @@ export class CombatScene extends Phaser.Scene {
 	}
 
 	private drawDetail(card: HandCardView): void {
-		const x = 236;
-		const y = 70;
-		this.layer.add(panel(this, x, y, 168, 120, 'ash1', 'gold1'));
+		// Opposite side of the focused target so its preview chips stay visible: over the heroes
+		// when aiming at an enemy (or no target), over the enemies when aiming at a hero.
+		const focus = this.focusedTarget();
+		const deltas = this.previews[this.focusIdx]?.deltas;
+		const hitsEnemies = focus
+			? focus.type === 'enemy'
+			: [...(deltas?.keys() ?? [])].some((k) => k.startsWith('e:'));
+		// Enemy-targeting card: panel top-left over the heroes (ends at y 148, above their HP bars);
+		// hero/ally card: top-right over the enemies. 80% fill so the units stay visible.
+		const x = hitsEnemies || card.validTargets.length === 0 ? 8 : 464;
+		const y = 28;
+		this.layer.add(panel(this, x, y, 168, 120, 'ash1', 'gold1').setAlpha(0.8));
 		this.layer.add(
 			label(this, x + 6, y + 4, cardName(card.cardId, card.upgraded), 'ui', 'gold2'),
 		);
@@ -362,6 +549,8 @@ export class CombatScene extends Phaser.Scene {
 				'bone2',
 			).setWordWrapWidth(156),
 		);
+		const line = this.previewLine();
+		if (line) this.layer.add(label(this, x + 6, y + 90, line, 'tiny', 'gold2'));
 		const hint = !card.playable
 			? (card.reason ?? t('hud.unplayable'))
 			: card.autoTarget
@@ -416,8 +605,12 @@ export class CombatScene extends Phaser.Scene {
 		} else if (e.key === '0' && hand[9]) this.onCardTap(hand[9]);
 		else if (e.key === ' ') this.send({ type: 'endTurn' });
 		else if (e.key === 'Enter' && this.selected) {
-			const first = this.selected.validTargets[0];
-			if (this.selected.playable) this.play(this.selected, first ?? null);
+			if (this.selected.playable) this.play(this.selected, this.focusedTarget());
+		} else if (e.key === 'Tab' || e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+			e.preventDefault();
+			this.cycleFocus(1);
+		} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+			this.cycleFocus(-1);
 		} else if (e.key === 'Escape') {
 			if (this.selected) {
 				this.selected = null;
@@ -445,12 +638,21 @@ export class CombatScene extends Phaser.Scene {
 		this.busy = true;
 		const step = app.ms(110);
 		let delay = 0;
+		let lastHit: string | null = null;
 		for (const ev of events) {
 			const d = delay;
 			const pos = this.eventPos(ev);
+			// Consecutive hits from one source on one target are one multi-hit card or intent.
+			const hitKey = ev.type === 'hit' ? JSON.stringify([ev.source, ev.target]) : null;
+			const multi = hitKey !== null && hitKey === lastHit;
+			if (ev.type !== 'hit' || pos) lastHit = hitKey;
 			if (pos) {
-				this.time.delayedCall(d, () => this.popFor(ev, pos));
+				this.time.delayedCall(d, () => this.popFor(ev, pos, multi));
 				delay += step;
+			} else if (ev.type === 'turnStarted') {
+				this.time.delayedCall(d, () => play(this, 'sfx.card.draw'));
+			} else if (ev.type === 'cardExhausted') {
+				this.time.delayedCall(d, () => play(this, 'sfx.card.exhaust'));
 			}
 		}
 		this.time.delayedCall(delay + app.ms(150), () => {
@@ -473,6 +675,13 @@ export class CombatScene extends Phaser.Scene {
 		});
 	}
 
+	private hitSfx(ev: Extract<GameEvent, { type: 'hit' }>, multi: boolean): string {
+		// Block absorbed part of the hit and HP still dropped: the block is gone.
+		if (ev.absorbed > 0 && ev.hpLost > 0) return 'sfx.block.break';
+		if (ev.hpLost === 0) return 'sfx.block.absorb';
+		return multi ? 'sfx.hit.multi' : 'sfx.hit.blunt';
+	}
+
 	private eventPos(ev: GameEvent): { x: number; y: number } | null {
 		const ref = (u: { side: 'hero'; id: string } | { side: 'enemy'; uid: number }): string =>
 			u.side === 'hero' ? `h:${u.id}` : `e:${u.uid}`;
@@ -492,13 +701,14 @@ export class CombatScene extends Phaser.Scene {
 		return p ? { x: p.x + p.w / 2, y: 100 } : null;
 	}
 
-	private popFor(ev: GameEvent, pos: { x: number; y: number }): void {
+	private popFor(ev: GameEvent, pos: { x: number; y: number }, multi = false): void {
 		const sfx: Partial<Record<GameEvent['type'], string>> = {
-			hit: ev.type === 'hit' && ev.hpLost === 0 ? 'sfx.block.absorb' : 'sfx.hit.blunt',
-			dot: 'sfx.status.burn',
+			hit: ev.type === 'hit' ? this.hitSfx(ev, multi) : '',
+			dot: ev.type === 'dot' ? STATUS_SFX[ev.status] : '',
+			status: ev.type === 'status' ? (STATUS_SFX[ev.status] ?? '') : '',
 			block: 'sfx.block.gain',
 			heal: 'sfx.unit.heal',
-			stress: 'sfx.stress.gain',
+			stress: ev.type === 'stress' && ev.amount < 0 ? 'sfx.stress.relief' : 'sfx.stress.gain',
 			collapse: 'sfx.stress.collapse',
 			fall: 'sfx.unit.fall',
 			enemyDied: 'sfx.unit.enemy_death',
@@ -575,10 +785,16 @@ export class CombatScene extends Phaser.Scene {
 	private tooltip(text: string): void {
 		const tip = label(this, 320, 196, text, 'tiny', 'bone2')
 			.setOrigin(0.5)
-			.setBackgroundColor(css('ash1'))
-			.setPadding(4, 2, 4, 2)
 			.setWordWrapWidth(300);
-		this.time.delayedCall(2500, () => tip.destroy());
+		const bg = this.add
+			.rectangle(320, 196, tip.width + 8, tip.height + 4, P.ash1)
+			.setStrokeStyle(1, P.gold1);
+		tip.setDepth(51);
+		bg.setDepth(50);
+		this.time.delayedCall(2500, () => {
+			tip.destroy();
+			bg.destroy();
+		});
 	}
 
 	// ---------- auto battle ----------

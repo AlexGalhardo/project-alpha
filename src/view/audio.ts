@@ -128,6 +128,12 @@ export function playMusic(scene: Phaser.Scene, key: string): void {
 	else currentMusic.play();
 }
 
+export function stopMusic(): void {
+	currentMusic?.stop();
+	currentMusic = null;
+	currentMusicKey = '';
+}
+
 export function setMusicVolume(volume: number): void {
 	const sound = currentMusic as
 		| (Phaser.Sound.BaseSound & { setVolume?: (v: number) => void })

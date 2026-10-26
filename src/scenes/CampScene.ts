@@ -8,11 +8,12 @@ import {
 	maxHP,
 } from '../core';
 import { EQUIPMENT } from '../data/equipment';
+import { play, playMusic } from '../view/audio';
 import { cardName } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { session } from '../view/session';
-import { Button, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel } from '../view/ui';
 
 /**
  * Camp after every round except the boss (GDD §4.4, docs/art-bible.md §11.8): swap a hero, buy one
@@ -30,7 +31,9 @@ export class CampScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		backdrop(this, 'bg.menu', 0.6);
 		this.hero = null;
 		this.reorderFrom = null;
 		this.layer = this.add.container(0, 0);
@@ -74,6 +77,7 @@ export class CampScene extends Phaser.Scene {
 			new Button(this, 496, 284, t('camp.leave'), () => this.send({ type: 'campLeave' }), {
 				w: 96,
 				h: 44,
+				sfx: 'sfx.ui.confirm',
 				testId: 'camp-leave',
 			}),
 		);
@@ -274,7 +278,9 @@ export class CampScene extends Phaser.Scene {
 
 	/** Sends a command; leaves the scene when the screen changed, otherwise re-renders in place. */
 	private send(cmd: Command, leaving = true): void {
-		session.send(cmd);
+		const result = session.send(cmd);
+		if (cmd.type === 'campBuy' && result && !result.events.some((e) => e.type === 'invalid'))
+			play(this, 'sfx.ui.coin');
 		const next = session.sceneForScreen();
 		if (leaving || next !== 'Camp') this.scene.start(next);
 		else this.refresh();

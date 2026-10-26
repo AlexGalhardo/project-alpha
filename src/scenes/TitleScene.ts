@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
 import { BASE_HEIGHT, BASE_WIDTH } from '../platform/zoom';
 import { app } from '../view/app';
+import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
-import { label } from '../view/ui';
+import { backdrop, label } from '../view/ui';
 
 export class TitleScene extends Phaser.Scene {
 	private started = false;
@@ -12,8 +13,10 @@ export class TitleScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		playMusic(this, 'music.menu');
 		this.started = false;
 		this.cameras.main.setBackgroundColor('#0e0d12');
+		backdrop(this, 'bg.title');
 		label(this, BASE_WIDTH / 2, 110, t('game.title'), 'display', 'gold2').setOrigin(0.5);
 		const lines = [t('intro.line1'), t('intro.line2'), t('intro.line3')];
 		lines.forEach((line, i) => {

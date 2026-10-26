@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 import type { HeroClass } from '../core';
 import { BASE_WIDTH } from '../platform/zoom';
+import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { session } from '../view/session';
-import { Button, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel } from '../view/ui';
 
 const ROSTER: HeroClass[] = ['shieldbearer', 'marksman', 'arcanist', 'confessor', 'bombardier'];
 
@@ -16,6 +17,7 @@ export class PartyScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		playMusic(this, 'music.menu');
 		this.picked = ['shieldbearer', 'confessor', 'marksman'];
 		this.render();
 	}
@@ -23,6 +25,7 @@ export class PartyScene extends Phaser.Scene {
 	private render(): void {
 		this.children.removeAll(true);
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		backdrop(this, 'bg.menu', 0.6);
 		label(this, BASE_WIDTH / 2, 10, t('party.title'), 'h2', 'gold2').setOrigin(0.5, 0);
 		label(this, BASE_WIDTH / 2, 32, t('party.subtitle'), 'tiny', 'ash5').setOrigin(0.5, 0);
 		ROSTER.forEach((id, i) => {
@@ -60,11 +63,13 @@ export class PartyScene extends Phaser.Scene {
 		new Button(this, BASE_WIDTH / 2 - 70, 296, t('party.start'), () => this.startRun(), {
 			w: 140,
 			h: 32,
+			sfx: 'sfx.ui.confirm',
 			testId: 'party-start',
 		}).setEnabled(this.picked.length === 3);
 		new Button(this, 16, 320, t('settings.back'), () => this.scene.start('Menu'), {
 			w: 80,
 			h: 28,
+			sfx: 'sfx.ui.cancel',
 			testId: 'party-back',
 		});
 	}

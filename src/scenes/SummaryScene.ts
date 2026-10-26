@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 import { summaryView } from '../core';
 import { BASE_WIDTH } from '../platform/zoom';
+import { stopMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { session } from '../view/session';
-import { Button, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel } from '../view/ui';
 
 export class SummaryScene extends Phaser.Scene {
 	constructor() {
@@ -11,7 +12,9 @@ export class SummaryScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		stopMusic();
 		this.cameras.main.setBackgroundColor('#0e0d12');
+		backdrop(this, 'bg.menu', 0.6);
 		const view = session.state ? summaryView(session.state) : null;
 		if (!view) {
 			this.scene.start('Menu');

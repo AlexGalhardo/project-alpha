@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { chooseBotCommand, combatView } from './core';
+import { chooseBotCommand, combatView, type HeroClass } from './core';
 import { BASE_HEIGHT, BASE_WIDTH, pickZoom } from './platform/zoom';
 import { BootScene } from './scenes/BootScene';
 import { CampScene } from './scenes/CampScene';
@@ -56,9 +56,13 @@ const hooks = window as unknown as {
 	__game?: Phaser.Game;
 	__botStep?: () => string;
 	__combat?: () => ReturnType<typeof combatView>;
+	__startRun?: (seed: number, party: HeroClass[]) => void;
 };
 hooks.__game = game;
 hooks.__combat = () => (session.state ? combatView(session.state) : null);
+hooks.__startRun = (seed: number, party: HeroClass[]): void => {
+	session.start(party, seed);
+};
 hooks.__botStep = (): string => {
 	const state = session.state;
 	const cmd = state ? chooseBotCommand(state) : null;

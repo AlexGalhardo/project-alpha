@@ -61,6 +61,8 @@ export interface ButtonOptions {
 	font?: FontToken;
 	danger?: boolean;
 	testId?: string;
+	/** Sound on activation; primary buttons confirm, back buttons cancel. */
+	sfx?: string;
 }
 
 /** Hover-free button: pressed state on pointerdown, action on pointerup inside (docs/art-bible.md §9.2). */
@@ -105,7 +107,7 @@ export class Button extends Phaser.GameObjects.Container {
 		this.on('pointerup', () => {
 			this.draw(false);
 			if (this.enabled) {
-				play(scene, 'sfx.ui.tap');
+				play(scene, opts.sfx ?? 'sfx.ui.tap');
 				onClick();
 			}
 		});

@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
 import { BASE_HEIGHT, BASE_WIDTH } from '../platform/zoom';
+import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { session } from '../view/session';
-import { Button, label } from '../view/ui';
+import { Button, backdrop, label } from '../view/ui';
 
 export class MenuScene extends Phaser.Scene {
 	constructor() {
@@ -10,7 +11,9 @@ export class MenuScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		playMusic(this, 'music.menu');
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		backdrop(this, 'bg.menu');
 		label(this, BASE_WIDTH / 2, 48, t('game.title'), 'h1', 'gold2').setOrigin(0.5);
 		const x = BASE_WIDTH / 2 - 80;
 		let y = 120;

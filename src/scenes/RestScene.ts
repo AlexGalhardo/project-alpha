@@ -1,10 +1,11 @@
 import Phaser from 'phaser';
 import type { CardInst, Command } from '../core';
+import { playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { goNext, session } from '../view/session';
-import { Button, label, panel } from '../view/ui';
+import { Button, backdrop, label, panel } from '../view/ui';
 
 const GRID_X = 24;
 const GRID_Y = 40;
@@ -107,7 +108,7 @@ export function openCardPicker(
 			root.destroy();
 			opts.onBack();
 		},
-		{ w: 96, h: 44, testId: `${opts.testPrefix}-back` },
+		{ w: 96, h: 44, testId: `${opts.testPrefix}-back`, sfx: 'sfx.ui.cancel' },
 	);
 	root.add([prev, next, back]);
 
@@ -163,7 +164,9 @@ export class RestScene extends Phaser.Scene {
 	}
 
 	create(): void {
+		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
+		backdrop(this, 'bg.menu', 0.6);
 		const state = session.state;
 		if (state?.phase !== 'rest') {
 			this.scene.start(session.nextSceneFrom(this.scene.key));
@@ -215,6 +218,7 @@ export class RestScene extends Phaser.Scene {
 			const btn = new Button(this, x + 32, 208, o.title, () => this.choose(o.option), {
 				w: 96,
 				h: 40,
+				sfx: 'sfx.ui.confirm',
 				testId: `rest-${o.option}`,
 			});
 			if (o.option === 'temper' && upgradable.length === 0) btn.setEnabled(false);

@@ -119,7 +119,7 @@ function tierOf(r: Rarity): Tier {
 export function makeCamp(s: RunState): CampState {
 	const cardId = pickCard(s, rollTier(s, CARD_REWARD.combat), []);
 	const item = rollEquipment(s, EQUIPMENT_DROP.camp);
-	const vigil = rand(s, 'meta') < 0.5;
+	const vigil = rand(s, 'meta') < CAMP.vigilChance;
 	return {
 		card: cardId
 			? { cardId, price: CAMP.cardPrice[tierOf(cardDef(cardId).rarity)], sold: false }
@@ -127,10 +127,7 @@ export function makeCamp(s: RunState): CampState {
 		equipment: item
 			? {
 					item,
-					price:
-						tierOf(EQUIPMENT[item]?.rarity ?? 'common') === 'uncommon'
-							? CAMP.equipmentPrice.uncommon
-							: CAMP.equipmentPrice.common,
+					price: CAMP.equipmentPrice[tierOf(EQUIPMENT[item]?.rarity ?? 'common')],
 					sold: false,
 				}
 			: null,
@@ -148,7 +145,7 @@ export function makeShop(s: RunState): ShopState {
 			const id = pickCard(s, tier, taken);
 			if (!id) continue;
 			taken.push(id);
-			const [lo, hi] = SHOP.cardPrice[tier];
+			const [lo, hi] = SHOP.cardPrice[tierOf(cardDef(id).rarity)];
 			cards.push({ cardId: id, price: randInt(s, 'meta', lo, hi), sold: false });
 		}
 	}

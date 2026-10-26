@@ -45,10 +45,13 @@ export const EQUIPMENT_DROP = {
 export const CAMP = {
 	swapPrice: 30,
 	cardPrice: { common: 35, uncommon: 55, rare: 90 },
-	equipmentPrice: { common: 50, uncommon: 85 },
+	// Rare only appears when every common and uncommon item is owned (fallback); priced as in the shop.
+	equipmentPrice: { common: 50, uncommon: 85, rare: 140 },
 	servicePrice: 12,
 	bindHealPct: 15,
 	vigilStress: 3,
+	/** Chance that the seeded service is Vigil rather than Bind wounds. */
+	vigilChance: 0.5,
 } as const;
 
 export const REST = {
@@ -83,3 +86,6 @@ export const MAP_LAYOUT: { nodes: [number, number]; types: string[] }[] = [
 
 /** GDD 4.3. Weight of an encounter from the other tier when choosing by novelty (0 = tiers are strict). */
 export const ENCOUNTER_RULES = { offTierWeight: 0 };
+
+/** Edge generation (GDD 4.2): chance a node gets a second edge, and tries before the fallback layout. */
+export const MAP_RULES = { secondEdgeChance: 0.45, edgeAttempts: 300 } as const;

@@ -7,6 +7,7 @@ export {
 	EQUIPMENT_DROP,
 	GOLD,
 	MAP_LAYOUT,
+	MAP_RULES,
 	REST,
 	RULES,
 	SHOP,

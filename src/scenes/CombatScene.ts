@@ -695,7 +695,8 @@ export class CombatScene extends Phaser.Scene {
 			ev.type === 'fall'
 		)
 			key = `h:${ev.target}`;
-		else if (ev.type === 'bossPhase' || ev.type === 'enemyDied') key = `e:${ev.uid}`;
+		else if (ev.type === 'bossPhase' || ev.type === 'enemyDied' || ev.type === 'enemyHeal')
+			key = `e:${ev.uid}`;
 		if (!key) return null;
 		const p = this.unitPos.get(key);
 		return p ? { x: p.x + p.w / 2, y: 100 } : null;
@@ -708,6 +709,7 @@ export class CombatScene extends Phaser.Scene {
 			status: ev.type === 'status' ? (STATUS_SFX[ev.status] ?? '') : '',
 			block: 'sfx.block.gain',
 			heal: 'sfx.unit.heal',
+			enemyHeal: 'sfx.unit.heal',
 			stress: ev.type === 'stress' && ev.amount < 0 ? 'sfx.stress.relief' : 'sfx.stress.gain',
 			collapse: 'sfx.stress.collapse',
 			fall: 'sfx.unit.fall',
@@ -729,7 +731,7 @@ export class CombatScene extends Phaser.Scene {
 		} else if (ev.type === 'block') {
 			text = `+${ev.amount}`;
 			color = 'ward1';
-		} else if (ev.type === 'heal') {
+		} else if (ev.type === 'heal' || ev.type === 'enemyHeal') {
 			text = `+${ev.amount}`;
 			color = 'rot2';
 		} else if (ev.type === 'stress') {

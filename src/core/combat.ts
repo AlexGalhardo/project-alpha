@@ -27,7 +27,6 @@ import {
 	heroRef,
 	hitDamage,
 	hitHero,
-	killEnemy,
 	moveEnemy,
 	swapHeroes,
 } from './ops.ts';
@@ -249,9 +248,12 @@ function performEffect(
 				});
 			}
 			break;
-		case 'selfHeal':
-			e.hp = Math.min(e.maxHP, e.hp + ef.amount);
+		case 'selfHeal': {
+			const gain = Math.min(ef.amount, e.maxHP - e.hp);
+			e.hp += gain;
+			if (gain > 0) c.ev.push({ type: 'enemyHeal', uid: e.uid, amount: gain });
 			break;
+		}
 		case 'moveToBack':
 			moveEnemy(c, e, k.enemies.length);
 			break;
@@ -274,9 +276,12 @@ function enemyPhase(c: Ctx): void {
 		e.fx.block = 0;
 		if (e.fx.bleed > 0) {
 			const b = e.fx.bleed;
+			const phase = e.phase;
 			e.fx.bleed -= 1;
 			dotEnemy(c, e, b, 'bleed');
 			if (!k.enemies.includes(e)) continue;
+			// A boss that changes phase here shows its new intent first instead of acting unseen.
+			if (e.phase !== phase) continue;
 		}
 		if (e.fx.stunned) {
 			e.fx.stunned = false;
@@ -322,8 +327,8 @@ function beginPlayerTurn(c: Ctx): void {
 	for (const id of k.lineup) {
 		const fx = k.heroFx[id] as HeroFx;
 		fx.taunt = false;
-		if (fx.keepBlock) fx.keepBlock = false;
-		else fx.block = 0;
+		fx.block = Math.min(fx.block, fx.keptBlock);
+		fx.keptBlock = 0;
 	}
 	for (const id of [...k.lineup]) {
 		const fx = k.heroFx[id] as HeroFx;
@@ -469,5 +474,4 @@ function finishCombat(c: Ctx): void {
 	s.stats.combats.push({ kind: k.kind, turns: k.turn, won: true, id: k.encounterId });
 	s.combat = null;
 	s.phase = 'reward';
-	void killEnemy;
 }

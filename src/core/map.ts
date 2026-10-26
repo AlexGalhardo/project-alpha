@@ -1,5 +1,5 @@
 // Map generation (GDD 4.2) and encounter selection (GDD 4.3).
-import { ENCOUNTER_RULES, ENCOUNTERS, MAP_LAYOUT } from '../data/index.ts';
+import { ENCOUNTER_RULES, ENCOUNTERS, MAP_LAYOUT, MAP_RULES } from '../data/index.ts';
 import { pick, rand, randInt, shuffle } from './rng.ts';
 import type { MapNode, NodeType, RunState } from './types.ts';
 
@@ -26,11 +26,11 @@ function fallbackEdges(a: number, b: number): Edge[] {
 
 /** Non-crossing edges from `a` nodes to `b` nodes; node i reaches i-1, i, i+1; every node has in and out edges. */
 export function makeEdges(s: Pick<RunState, 'rng'>, a: number, b: number): Edge[] {
-	for (let attempt = 0; attempt < 300; attempt++) {
+	for (let attempt = 0; attempt < MAP_RULES.edgeAttempts; attempt++) {
 		const edges: Edge[] = [];
 		for (let i = 0; i < a; i++) {
 			const cand = [i - 1, i, i + 1].filter((j) => j >= 0 && j < b);
-			const n = cand.length > 1 && rand(s, 'map') < 0.45 ? 2 : 1;
+			const n = cand.length > 1 && rand(s, 'map') < MAP_RULES.secondEdgeChance ? 2 : 1;
 			const first = Math.floor(rand(s, 'map') * cand.length);
 			const chosen = new Set<number>([cand[first] as number]);
 			if (n === 2) {

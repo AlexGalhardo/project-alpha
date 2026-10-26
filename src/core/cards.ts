@@ -1,5 +1,5 @@
 // Card data access and card effect resolution (GDD 9).
-import { CARDS, EQUIPMENT_NUMBERS, RULES } from '../data/index.ts';
+import { CARDS, EQUIPMENT_NUMBERS } from '../data/index.ts';
 import {
 	addDebuff,
 	addStress,
@@ -71,7 +71,6 @@ export function validTargets(s: RunState, inst: CardInst): Target[] {
 	if (!k) return [];
 	const d = cardDef(inst.cardId);
 	const t = d.target;
-	const ctx = { s, ev: [] };
 	switch (t.kind) {
 		case 'enemy':
 			return k.enemies
@@ -90,7 +89,6 @@ export function validTargets(s: RunState, inst: CardInst): Target[] {
 		case 'fallen':
 			return k.fallen.map((id) => ({ type: 'hero', id }));
 		default:
-			void ctx;
 			return [];
 	}
 }
@@ -163,7 +161,7 @@ export function resolveCard(c: Ctx, inst: CardInst, target: Target): void {
 	const hits = p.hits ?? 1;
 	let damage = p.damage;
 	if (inst.cardId === 'shb_shield_slam')
-		damage = Math.min(fxOf(k, heroRef(owner)).block, p.cap ?? 24);
+		damage = Math.min(fxOf(k, heroRef(owner)).block, p.cap ?? Number.POSITIVE_INFINITY);
 	if (inst.cardId === 'mrk_killshot' && enemyTarget && enemyTarget.fx.marked > 0)
 		damage = (damage ?? 0) + (p.bonus ?? 0);
 	const idx = enemyTarget ? k.enemies.indexOf(enemyTarget) : -1;
@@ -289,7 +287,8 @@ export function resolveCard(c: Ctx, inst: CardInst, target: Target): void {
 
 	// ---- misc ----
 	if (p.taunt) (k.heroFx[owner] as { taunt: boolean }).taunt = true;
-	if (p.keepBlock) (k.heroFx[owner] as { keepBlock: boolean }).keepBlock = true;
+	if (p.keepBlock && p.block !== undefined)
+		(k.heroFx[owner] as { keptBlock: number }).keptBlock += blk(p.block);
 	if (p.energyNext) k.energyNext += p.energyNext;
 	if (inst.cardId === 'bmb_reload' && p.bonus) k.reloadBonus[owner] = p.bonus;
 	if (p.swapBehind) {
@@ -301,7 +300,7 @@ export function resolveCard(c: Ctx, inst: CardInst, target: Target): void {
 		k.lineup.push(heroTarget);
 		k.rekindled.push(heroTarget);
 		const h = heroOf(c.s, heroTarget);
-		h.hp = Math.max(1, Math.floor((maxHP(h) * (p.pct ?? 25)) / 100));
+		h.hp = Math.max(1, Math.floor((maxHP(h) * (p.pct ?? 0)) / 100));
 		const fx = k.heroFx[heroTarget];
 		if (fx)
 			Object.assign(fx, {
@@ -313,11 +312,10 @@ export function resolveCard(c: Ctx, inst: CardInst, target: Target): void {
 				burn: 0,
 				ward: 0,
 				taunt: false,
-				keepBlock: false,
+				keptBlock: 0,
 			});
 		c.ev.push({ type: 'rekindle', target: heroTarget });
 	}
 	if (p.draw) drawCards(c, p.draw);
 	if (p.dread) addStress(c, owner, p.dread);
-	void RULES;
 }

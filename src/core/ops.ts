@@ -37,7 +37,7 @@ export function emptyStatuses(): Statuses {
 }
 
 export function emptyHeroFx(): HeroFx {
-	return { ...emptyStatuses(), taunt: false, keepBlock: false };
+	return { ...emptyStatuses(), taunt: false, keptBlock: 0 };
 }
 
 export function cs(c: Ctx): CombatState {
@@ -232,14 +232,14 @@ export function killEnemy(c: Ctx, e: Enemy): void {
 	if (k.enemies.length === 0 && k.phase === 'player') k.phase = 'won';
 }
 
+/** Enters boss phase 2 when HP crosses the threshold (GDD 10.5). Stunned is kept. */
 function bossPhaseCheck(c: Ctx, e: Enemy): void {
 	const def = ENEMIES[e.key];
 	if (!def || def.phase2Hp === undefined || e.phase !== 1 || e.hp <= 0 || e.hp > def.phase2Hp)
 		return;
 	e.phase = 2;
 	clearDebuffs(e.fx);
-	e.fx.stunned = false;
-	e.fx.might += 2;
+	e.fx.might += def.phase2Might ?? 0;
 	e.intentIdx = 0;
 	c.ev.push({ type: 'bossPhase', uid: e.uid, phase: 2 });
 }
@@ -272,18 +272,14 @@ export function hitEnemy(c: Ctx, e: Enemy, base: number, opts: HitOpts = {}): nu
 		absorbed,
 		hpLost: lost,
 	});
-	if (e.hp <= 0) {
-		killEnemy(c, e);
-		return lost;
-	}
-	bossPhaseCheck(c, e);
-	if (e.keg > 0 && !opts.noKeg) {
-		const keg = e.keg;
-		e.keg = 0;
-		const idx = k.enemies.indexOf(e);
-		const group = [e, k.enemies[idx - 1], k.enemies[idx + 1]].filter((x): x is Enemy => !!x);
-		for (const t of group) hitEnemy(c, t, keg, { noKeg: true });
-	}
+	// Neighbours are taken before a kill collapses the line: the keg still explodes on them.
+	const keg = opts.noKeg ? 0 : e.keg;
+	const idx = k.enemies.indexOf(e);
+	const group = [e, k.enemies[idx - 1], k.enemies[idx + 1]].filter((x): x is Enemy => !!x);
+	if (keg > 0) e.keg = 0;
+	if (e.hp <= 0) killEnemy(c, e);
+	else bossPhaseCheck(c, e);
+	if (keg > 0) for (const t of group) hitEnemy(c, t, keg, { noKeg: true });
 	return lost;
 }
 

@@ -140,6 +140,8 @@ export interface EnemyDef {
 	/** Phase 2 intents (boss). */
 	phase2Intents?: IntentDef[];
 	phase2Hp?: number;
+	/** Might gained on entering phase 2. */
+	phase2Might?: number;
 	fixedStart?: boolean;
 }
 
@@ -160,7 +162,8 @@ export interface EquipmentDef {
 // ---- combat state ----
 export interface HeroFx extends Statuses {
 	taunt: boolean;
-	keepBlock: boolean;
+	/** Block that survives the next turn-start reset (Bulwark); only this much is kept. */
+	keptBlock: number;
 }
 
 export interface Enemy {
@@ -338,6 +341,7 @@ export type GameEvent =
 	| { type: 'dot'; target: UnitRef; status: 'bleed' | 'burn'; hpLost: number }
 	| { type: 'block'; target: UnitRef; amount: number }
 	| { type: 'heal'; target: HeroClass; amount: number }
+	| { type: 'enemyHeal'; uid: number; amount: number }
 	| { type: 'status'; target: UnitRef; status: string; amount: number }
 	| { type: 'negated'; target: UnitRef; status: string }
 	| { type: 'stress'; target: HeroClass; amount: number }

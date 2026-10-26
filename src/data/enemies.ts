@@ -99,7 +99,8 @@ export const ENEMIES: Record<string, EnemyDef> = {
 			{
 				id: 'lure',
 				target: 'back',
-				effects: [{ kind: 'status', status: 'marked', amount: 1 }],
+				// 2 so one stack survives the end-of-player-turn decay and still amplifies the next enemy phase.
+				effects: [{ kind: 'status', status: 'marked', amount: 2 }],
 			},
 			{
 				id: 'drain',
@@ -173,6 +174,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		size: 2,
 		fixedStart: true,
 		phase2Hp: 50,
+		phase2Might: 2,
 		intents: [
 			{
 				id: 'toll',

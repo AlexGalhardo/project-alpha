@@ -568,6 +568,8 @@ Unlocked one at a time by winning at the previous Rite; cumulative.
 | 9 | Injury is −35% max HP |
 | 10 | Boss phase 2 adds a fourth intent to its cycle |
 
+Rite 10 fourth intents (taken from phase 1, appended to the phase-2 cycle): Bell-Maw adds Clapper 14 (front); Gilded Penitent adds Gild (15 Block, +1 Might). Rite 9's injury applies to falls taken at that Rite. Unlock: a victory at Rite n unlocks Rite n + 1 (stored in the meta profile).
+
 Prototype: no Rites; dev-only multipliers (enemy HP, enemy damage, hero HP) exist for simulation (`bun run sim`).
 
 ## 14. Auto battle and game speed

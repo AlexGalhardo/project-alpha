@@ -235,7 +235,11 @@ test.describe('speed parity', () => {
 	async function playToSummary(page: Page, speed: number): Promise<string[]> {
 		await page.goto('/');
 		await page.evaluate(
-			([k, s]) => localStorage.setItem(k, JSON.stringify({ defaultSpeed: s })),
+			([k, s]) => {
+				localStorage.setItem(k, JSON.stringify({ defaultSpeed: s }));
+				// Same starting profile for both runs: a win unlocks a Rite and adds a line to the summary.
+				localStorage.removeItem('ossuary.profile.v1');
+			},
 			[SETTINGS_KEY, speed] as const,
 		);
 		await page.reload();

@@ -13,7 +13,7 @@ import { cardName } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { session } from '../view/session';
-import { Button, backdrop, label, panel, portrait } from '../view/ui';
+import { Button, backdrop, itemIcon, label, panel, portrait } from '../view/ui';
 
 /**
  * Camp after every round except the boss (GDD §4.4, docs/art-bible.md §11.8): swap a hero, buy one
@@ -119,7 +119,13 @@ export class CampScene extends Phaser.Scene {
 				y + 100 + i * 26,
 				item ? t(`item.${item}.name`) : t(`equip.${slot}`),
 				() => this.send({ type: 'equip', heroId: h.id, slot, item: null }, false),
-				{ w: 72, h: 24, font: 'tiny', testId: `camp-unequip-${h.id}-${slot}` },
+				{
+					w: 72,
+					h: 24,
+					font: 'tiny',
+					testId: `camp-unequip-${h.id}-${slot}`,
+					icon: item ? `icon.item.${item}` : undefined,
+				},
 			);
 			b.setEnabled(item !== null);
 			this.layer.add(b);
@@ -199,6 +205,7 @@ export class CampScene extends Phaser.Scene {
 			name: string;
 			price: number;
 			sold: boolean;
+			item?: string;
 		}[] = [];
 		if (view.card)
 			tiles.push({
@@ -213,6 +220,7 @@ export class CampScene extends Phaser.Scene {
 				key: 'equipment',
 				title: t('camp.equipmentForSale'),
 				name: t(`item.${view.equipment.item}.name`),
+				item: view.equipment.item,
 				price: view.equipment.price,
 				sold: view.equipment.sold,
 			});
@@ -229,8 +237,12 @@ export class CampScene extends Phaser.Scene {
 			const ty = y + Math.floor(i / 2) * 64;
 			this.layer.add(panel(this, x, ty, 144, 58, 'ash1'));
 			this.layer.add(label(this, x + 6, ty + 4, o.title, 'tiny', 'ash5'));
+			const ic = o.item ? itemIcon(this, x + 6, ty + 16, o.item) : null;
+			if (ic) this.layer.add(ic);
 			this.layer.add(
-				label(this, x + 6, ty + 16, o.name, 'tiny', 'bone2').setWordWrapWidth(80),
+				label(this, x + (ic ? 26 : 6), ty + 18, o.name, 'tiny', 'bone2').setWordWrapWidth(
+					ic ? 60 : 80,
+				),
 			);
 			const caption = o.sold ? t('shop.soldOut') : t('camp.price', { gold: o.price });
 			const b = new Button(this, x + 88, ty + 14, caption, () => this.buy(o.key), {
@@ -261,7 +273,13 @@ export class CampScene extends Phaser.Scene {
 					if (this.hero)
 						this.send({ type: 'equip', heroId: this.hero, slot, item }, false);
 				},
-				{ w: 72, h: 28, font: 'tiny', testId: `camp-equip-${i}` },
+				{
+					w: 72,
+					h: 28,
+					font: 'tiny',
+					testId: `camp-equip-${i}`,
+					icon: `icon.item.${item}`,
+				},
 			);
 			b.setEnabled(this.hero !== null);
 			this.layer.add(b);

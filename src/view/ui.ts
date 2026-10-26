@@ -63,6 +63,20 @@ export interface ButtonOptions {
 	testId?: string;
 	/** Sound on activation; primary buttons confirm, back buttons cancel. */
 	sfx?: string;
+	/** Texture key of a 16x16 icon drawn at the left; the caption is centred in the rest. */
+	icon?: string;
+}
+
+/** 16x16 equipment icon (`icon.item.<key>`) with its top-left at (x, y), or null when the texture is missing. */
+export function itemIcon(
+	scene: Phaser.Scene,
+	x: number,
+	y: number,
+	item: string,
+): Phaser.GameObjects.Image | null {
+	const key = `icon.item.${item}`;
+	if (!scene.textures.exists(key)) return null;
+	return scene.add.image(x, y, key).setOrigin(0, 0);
 }
 
 /** Hover-free button: pressed state on pointerdown, action on pointerup inside (docs/art-bible.md §9.2). */
@@ -88,14 +102,18 @@ export class Button extends Phaser.GameObjects.Container {
 		this.h = opts.h ?? 28;
 		this.danger = opts.danger ?? false;
 		this.bg = scene.add.graphics();
-		let text = label(scene, this.w / 2, this.h / 2, caption, opts.font ?? 'ui').setOrigin(0.5);
+		const iconKey = opts.icon && scene.textures.exists(opts.icon) ? opts.icon : null;
+		const pad = iconKey ? 20 : 0;
+		const cx = pad + (this.w - pad) / 2;
+		let text = label(scene, cx, this.h / 2, caption, opts.font ?? 'ui').setOrigin(0.5);
 		// Long captions (PT-BR) drop to the tiny font instead of overflowing the button.
-		if (text.width > this.w - 6 && (opts.font ?? 'ui') === 'ui') {
+		if (text.width > this.w - pad - 6 && (opts.font ?? 'ui') === 'ui') {
 			text.destroy();
-			text = label(scene, this.w / 2, this.h / 2, caption, 'tiny').setOrigin(0.5);
+			text = label(scene, cx, this.h / 2, caption, 'tiny').setOrigin(0.5);
 		}
 		this.text = text;
 		this.add([this.bg, this.text]);
+		if (iconKey) this.add(scene.add.image(12, Math.round(this.h / 2), iconKey));
 		this.setSize(this.w, this.h);
 		this.setInteractive(
 			new Phaser.Geom.Rectangle(this.w / 2, this.h / 2, this.w, this.h),

@@ -27,7 +27,7 @@ export class MapScene extends Phaser.Scene {
 	create(): void {
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
-		backdrop(this, 'bg.map.act1', 0.4);
+		backdrop(this, session.state?.act === 2 ? 'bg.map.act2' : 'bg.map.act1', 0.4);
 		this.focus = 0;
 		const state = session.state;
 		const view = state ? mapView(state) : null;
@@ -78,7 +78,7 @@ export class MapScene extends Phaser.Scene {
 				const { x, y } = pos(node.row, node.index);
 				const open = available.has(`${node.row}:${node.index}`);
 				const isCursor = view.cursor?.row === node.row && view.cursor.index === node.index;
-				const r = node.type === 'boss' ? 18 : 14;
+				const r = node.type === 'boss' ? 14 : 11;
 				if (open) this.add.circle(x, y, r + 2, P.ember3).setStrokeStyle(1, P.ash0);
 				else if (isCursor) this.add.circle(x, y, r + 2, P.bone2).setStrokeStyle(1, P.ash0);
 				const img = this.add.image(x, y, `icon.node.${node.type}`);
@@ -96,7 +96,7 @@ export class MapScene extends Phaser.Scene {
 		LEGEND.forEach((n, i) => {
 			const x = 432 + (i % 3) * 64;
 			const y = 294 + Math.floor(i / 3) * 20;
-			this.add.image(x + 8, y + 8, `icon.node.${n}`).setScale(0.5);
+			this.add.image(x + 8, y + 8, `icon.node.${n}`);
 			label(this, x + 20, y + 2, t(`node.${n}`), 'tiny', 'ash5');
 		});
 

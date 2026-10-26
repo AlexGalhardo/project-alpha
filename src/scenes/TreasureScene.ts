@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { goNext, session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, itemIcon, label, panel } from '../view/ui';
 
 /** Treasure node (docs/gdd.md §22.4): the gold and the rolled item are shown, one tap claims them. */
 export class TreasureScene extends Phaser.Scene {
@@ -32,7 +32,8 @@ export class TreasureScene extends Phaser.Scene {
 		).setWordWrapWidth(352);
 		label(this, 144, 160, `+${treasure.gold} ${t('hud.gold')}`, 'ui', 'gold2');
 		if (treasure.item) {
-			label(this, 144, 180, t(`item.${treasure.item}.name`), 'ui', 'ember3');
+			const ic = itemIcon(this, 144, 177, treasure.item);
+			label(this, ic ? 164 : 144, 180, t(`item.${treasure.item}.name`), 'ui', 'ember3');
 			label(
 				this,
 				144,

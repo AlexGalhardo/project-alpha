@@ -606,6 +606,18 @@ const icons: [string, number, string, string?][] = [
 		'API minimum is 32x32: kept as 32x32 master (24x24 by hand)',
 	],
 	[
+		'icon.node.event',
+		32,
+		'an open ancient book with a glowing page',
+		'32x32 master, reduced to 16x16 by icons16.ts',
+	],
+	[
+		'icon.node.treasure',
+		32,
+		'a closed iron-bound treasure chest with gold trim',
+		'32x32 master, reduced to 16x16 by icons16.ts',
+	],
+	[
 		'icon.item.eq_notched_blade',
 		32,
 		'a notched short sword',

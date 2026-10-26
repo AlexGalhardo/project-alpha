@@ -18,7 +18,7 @@ function charset(): string {
 	for (let c = 0x20; c <= 0x7e; c += 1) s += String.fromCharCode(c);
 	for (let c = 0xa0; c <= 0xff; c += 1) s += String.fromCharCode(c);
 	// Curly quotes, dashes, ellipsis, bullet + UI symbols: arrow, minus, block square, stress diamond, ×.
-	return `${s}‘’“”–—…•→−▪◆×▲▼`;
+	return `${s}‘’“”–—…•→−▪◆×▲▼◀▶`;
 }
 
 export const CHARSET = charset();

@@ -4,7 +4,7 @@ import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { session } from '../view/session';
-import { Button, backdrop, label, panel } from '../view/ui';
+import { Button, backdrop, itemIcon, label, panel } from '../view/ui';
 import { openCardPicker } from './RestScene';
 
 /** Shop node (GDD §4.6, docs/art-bible.md §11.9): 5 cards, 2 equipment, one card removal per visit. */
@@ -96,12 +96,16 @@ export class ShopScene extends Phaser.Scene {
 		view.equipment.forEach((offer, i) => {
 			const x = 40 + i * 200;
 			this.layer.add(panel(this, x, 192, 192, 72, 'ash1'));
-			this.layer.add(label(this, x + 6, 196, t(`item.${offer.item}.name`), 'tiny', 'bone2'));
+			const ic = itemIcon(this, x + 6, 196, offer.item);
+			if (ic) this.layer.add(ic);
+			this.layer.add(
+				label(this, x + (ic ? 26 : 6), 200, t(`item.${offer.item}.name`), 'tiny', 'bone2'),
+			);
 			this.layer.add(
 				label(
 					this,
 					x + 6,
-					208,
+					216,
 					t(`item.${offer.item}.effect`),
 					'tiny',
 					'ash5',

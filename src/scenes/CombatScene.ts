@@ -137,7 +137,7 @@ export class CombatScene extends Phaser.Scene {
 
 	create(): void {
 		this.cameras.main.setBackgroundColor('#1b1a22');
-		backdrop(this, 'bg.combat.act1', 0.55);
+		backdrop(this, session.state?.act === 2 ? 'bg.combat.act2' : 'bg.combat.act1', 0.55);
 		app.applySpeed(this);
 		this.layer = this.add.container(0, 0);
 		this.buildStatic();

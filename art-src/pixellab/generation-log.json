@@ -2898,5 +2898,603 @@
       "type": "generations",
       "generations": 1
     }
+  },
+  {
+    "key": "card.shb_rampart",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A low wall of tower shields lined up across a corridor. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A low wall of tower shields lined up across a corridor. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:05:19.752Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.vault_warden.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A heavy vault guard in blackened plate with a deep hood-helm, a tall tower shield with a keyhole emblem, a ring of iron keys at the belt. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A heavy vault guard in blackened plate with a deep hood-helm, a tall tower shield with a keyhole emblem, a ring of iron keys at the belt. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:05:19.742Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.shb_riposte",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A shield catching a blade with sparks, a counter-thrust below. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A shield catching a blade with sparks, a counter-thrust below. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:05:40.043Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.bone_lancer.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A tall skeletal spearman in rotten cloth with a long barbed bone lance, ribs showing through torn armour. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A tall skeletal spearman in rotten cloth with a long barbed bone lance, ribs showing through torn armour. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:05:40.833Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_ricochet",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A bolt bouncing off two stone walls with sparks. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A bolt bouncing off two stone walls with sparks. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:05:55.872Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.censer_wraith.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A floating hooded wraith trailing smoke from an ornate swinging censer, pale thin hands, a hollow face. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A floating hooded wraith trailing smoke from an ornate swinging censer, pale thin hands, a hollow face. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:05:59.641Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.mrk_deadeye",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Several glowing red marks over a group of shadowy figures seen through a lens. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "Several glowing red marks over a group of shadowy figures seen through a lens. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:06:09.775Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.flesh_organ.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A tall pulsing mass of flesh shaped like a church organ, rows of pipes grown from bone, veins and bellows, faint mouths along the pipes. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A tall pulsing mass of flesh shaped like a church organ, rows of pipes grown from bone, veins and bellows, faint mouths along the pipes. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 80,
+        "height": 112
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:06:17.265Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.arc_cinder_ward",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A ring of drifting embers around a raised hand over a shield of ash. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A ring of drifting embers around a raised hand over a shield of ash. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:06:22.614Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.arc_inferno",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A wide wall of fire sweeping across a hall, silhouettes engulfed. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A wide wall of fire sweeping across a hall, silhouettes engulfed. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:06:44.161Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.gutter_crawler.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A low flat many-legged sewer scavenger with a pale elongated body and a snapping jaw. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A low flat many-legged sewer scavenger with a pale elongated body and a snapping jaw. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:06:40.475Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.cnf_penance",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A kneeling figure striking a censer into its own palm, smoke rising. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A kneeling figure striking a censer into its own palm, smoke rising. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:06:58.696Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.relic_thief.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A lean hunched thief in a patched hood, a long curved knife, a sack of stolen relics on the back, a glint of gold in one hand. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A lean hunched thief in a patched hood, a long curved knife, a sack of stolen relics on the back, a glint of gold in one hand. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:07:02.885Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.cnf_last_rites",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Hands closing a wounded soldier eyes by candlelight. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "Hands closing a wounded soldier eyes by candlelight. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:07:18.311Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.mirror_saint.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A saint statue come alive, polished silver skin like a mirror, a cracked halo, hands open in blessing, long robes of metal. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A saint statue come alive, polished silver skin like a mirror, a cracked halo, hands open in blessing, long robes of metal. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:07:23.580Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.bmb_shrapnel",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A shell burst scattering metal shards across a battlefield. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A shell burst scattering metal shards across a battlefield. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:07:31.219Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "card.bmb_flashbang",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A white flash blinding a line of silhouettes, long shadows. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+    "params": {
+      "description": "A white flash blinding a line of silhouettes, long shadows. Pixel art illustration, one clear focal point, cold ash greys, dark iron, bone, ember orange and worn gold, light from the upper left, dark vignette edges, no dithering, no border, no stars, no pentagrams, no eight-pointed symbols, no animals unless named, no text.",
+      "image_size": {
+        "width": 60,
+        "height": 40
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:07:49.382Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.hollow_bishop.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A tall bishop in torn ceremonial vestments with a crooked staff and a tall broken mitre, a dark empty hole where the face should be. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A tall bishop in torn ceremonial vestments with a crooked staff and a tall broken mitre, a dark empty hole where the face should be. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 64,
+        "height": 80
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:07:46.548Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.chain_golem.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A huge golem made of bound chains and iron plates, a heavy chain whip in each hand, rust and bone. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A huge golem made of bound chains and iron plates, a heavy chain whip in each hand, rust and bone. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 80,
+        "height": 112
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:08:07.241Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.rot_cherub.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Side-view pixel art creature, full body, standing, facing left. A small rotten winged cherub with a swollen belly and torn wings, black fluid dripping from its mouth. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Side-view pixel art creature, full body, standing, facing left. A small rotten winged cherub with a swollen belly and torn wings, black fluid dripping from its mouth. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "medium detail",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "direction": "west",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:08:47.831Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "enemy.gilded_penitent.idle",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "Front view pixel art boss monster, fills the canvas. A giant reliquary statue of a kneeling saint in gold leaf over rot, hands clasped, cracks of rot leaking through the gold, a ruined golden halo. Palette: worn gold, bone, rot green, dark iron. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+    "params": {
+      "description": "Front view pixel art boss monster, fills the canvas. A giant reliquary statue of a kneeling saint in gold leaf over rot, hands clasped, cracks of rot leaking through the gold, a ruined golden halo. Palette: worn gold, bone, rot green, dark iron. Dark fantasy, grim and worn. Limited palette: cold ash greys, dark iron, bone and worn gold. No pure black, no pure white. Single light from the upper left. 1 px selective outline, no dithering. Readable silhouette.",
+      "image_size": {
+        "width": 160,
+        "height": 144
+      },
+      "no_background": true,
+      "outline": "selective outline",
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "text_guidance_scale": 8,
+      "view": "side",
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:09:20.208Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    }
+  },
+  {
+    "key": "bg.combat.act2",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A flooded crypt vault beneath a cathedral, rows of gilded sarcophagi, dripping stone arches, a sickly green glow on dark water, ash and rot. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+    "params": {
+      "description": "A flooded crypt vault beneath a cathedral, rows of gilded sarcophagi, dripping stone arches, a sickly green glow on dark water, ash and rot. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+      "image_size": {
+        "width": 320,
+        "height": 180
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:09:57.676Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "generated at 320x180 (API max 400x400) and upscaled 2x nearest to 640x360"
+  },
+  {
+    "key": "bg.map.act2",
+    "endpoint": "/create-image-pixflux",
+    "prompt": "A deep undercroft maze seen from above, gilded tomb corridors, flooded floors, a faint gold glow. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+    "params": {
+      "description": "A deep undercroft maze seen from above, gilded tomb corridors, flooded floors, a faint gold glow. Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.",
+      "image_size": {
+        "width": 320,
+        "height": 180
+      },
+      "no_background": false,
+      "outline": "lineless",
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "text_guidance_scale": 8,
+      "color_image": "master palette (33 colours)"
+    },
+    "date": "2026-10-26T23:10:35.548Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "note": "generated at 320x180 (API max 400x400) and upscaled 2x nearest to 640x360"
   }
 ]

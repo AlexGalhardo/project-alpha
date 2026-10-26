@@ -41,7 +41,8 @@ function isEntry(v: unknown): v is Entry {
 
 async function readLog(path: string): Promise<Entry[]> {
 	const raw: unknown = JSON.parse(await Bun.file(path).text());
-	if (!Array.isArray(raw) || !raw.every(isEntry)) throw new Error(`unexpected log shape: ${path}`);
+	if (!Array.isArray(raw) || !raw.every(isEntry))
+		throw new Error(`unexpected log shape: ${path}`);
 	return raw;
 }
 
@@ -90,9 +91,11 @@ function outputFiles(e: Entry): string {
 }
 
 function table(entries: Entry[]): string {
-	const head = '| Key | Tool / endpoint | Prompt | Params | Date | Status | Output files |\n| --- | --- | --- | --- | --- | --- | --- |';
+	const head =
+		'| Key | Tool / endpoint | Prompt | Params | Date | Status | Output files |\n| --- | --- | --- | --- | --- | --- | --- |';
 	const rows = entries.map((e) => {
-		const status = e.status === 'ok' ? `ok (HTTP ${e.httpStatus})` : `failed (HTTP ${e.httpStatus})`;
+		const status =
+			e.status === 'ok' ? `ok (HTTP ${e.httpStatus})` : `failed (HTTP ${e.httpStatus})`;
 		const note = e.note ? `; note: ${e.note}` : '';
 		return `| \`${e.key}\` | \`${e.endpoint}\` | ${cell(e.prompt)} | ${cell(formatParams(e.params))} | ${e.date} | ${cell(status + note)} | ${outputFiles(e)} |`;
 	});
@@ -105,7 +108,11 @@ function section(title: string, entries: Entry[]): string {
 		const c = category(e.key);
 		groups.set(c, [...(groups.get(c) ?? []), e]);
 	}
-	return [`## ${title}`, '', ...[...groups].flatMap(([c, es]) => [`### ${c} (${es.length})`, '', table(es), ''])].join('\n');
+	return [
+		`## ${title}`,
+		'',
+		...[...groups].flatMap(([c, es]) => [`### ${c} (${es.length})`, '', table(es), '']),
+	].join('\n');
 }
 
 const audio = (await readLog(AUDIO_LOG)).filter((e) => e.status !== 'failed');
@@ -120,7 +127,7 @@ const doc = [
 	`Regenerated from logs on ${now} by \`scripts/assets/prompts-doc.ts\`. Do not edit by hand; rerun the script.`,
 	'',
 	'Source of truth: `art-src/audio/generation-log.json` (ElevenLabs) and `art-src/pixellab/generation-log.json` (PixelLab).',
-	'PixelLab generation was still running (cards in progress) when this file was rendered; rerun after the batch finishes.',
+	'Rerun this script after every generation batch so the counts and the prompt list stay current.',
 	'',
 	'## Tools and common settings',
 	'',
@@ -142,7 +149,13 @@ const doc = [
 	'',
 	'### ElevenLabs',
 	'',
-	table(audioFailed.map((e) => ({ ...e, prompt: e.prompt, note: e.error ? `error: ${e.error}` : undefined }))),
+	table(
+		audioFailed.map((e) => ({
+			...e,
+			prompt: e.prompt,
+			note: e.error ? `error: ${e.error}` : undefined,
+		})),
+	),
 	'',
 	'### PixelLab',
 	'',
@@ -151,4 +164,6 @@ const doc = [
 ].join('\n');
 
 await Bun.write(OUT, doc);
-console.log(`wrote ${OUT}: audio ${audio.length}+${audioFailed.length} failed, pixellab ${pixel.length}+${pixelFailed.length} failed`);
+console.log(
+	`wrote ${OUT}: audio ${audio.length}+${audioFailed.length} failed, pixellab ${pixel.length}+${pixelFailed.length} failed`,
+);

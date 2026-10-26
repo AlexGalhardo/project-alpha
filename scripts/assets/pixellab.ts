@@ -371,6 +371,86 @@ const enemies: [string, [number, number], string][] = [
 	],
 ];
 
+const enemiesAct2: [string, [number, number], string][] = [
+	[
+		'vault_warden',
+		[64, 80],
+		'A heavy vault guard in blackened plate with a deep hood-helm, a tall tower shield with a keyhole emblem, a ring of iron keys at the belt.',
+	],
+	[
+		'bone_lancer',
+		[64, 80],
+		'A tall skeletal spearman in rotten cloth with a long barbed bone lance, ribs showing through torn armour.',
+	],
+	[
+		'censer_wraith',
+		[64, 80],
+		'A floating hooded wraith trailing smoke from an ornate swinging censer, pale thin hands, a hollow face.',
+	],
+	[
+		'flesh_organ',
+		[80, 112],
+		'A tall pulsing mass of flesh shaped like a church organ, rows of pipes grown from bone, veins and bellows, faint mouths along the pipes.',
+	],
+	[
+		'gutter_crawler',
+		[48, 48],
+		'A low flat many-legged sewer scavenger with a pale elongated body and a snapping jaw.',
+	],
+	[
+		'relic_thief',
+		[64, 80],
+		'A lean hunched thief in a patched hood, a long curved knife, a sack of stolen relics on the back, a glint of gold in one hand.',
+	],
+	[
+		'mirror_saint',
+		[64, 80],
+		'A saint statue come alive, polished silver skin like a mirror, a cracked halo, hands open in blessing, long robes of metal.',
+	],
+	[
+		'hollow_bishop',
+		[64, 80],
+		'A tall bishop in torn ceremonial vestments with a crooked staff and a tall broken mitre, a dark empty hole where the face should be.',
+	],
+	[
+		'chain_golem',
+		[80, 112],
+		'A huge golem made of bound chains and iron plates, a heavy chain whip in each hand, rust and bone.',
+	],
+	[
+		'rot_cherub',
+		[48, 48],
+		'A small rotten winged cherub with a swollen belly and torn wings, black fluid dripping from its mouth.',
+	],
+];
+
+const backgroundsAct2: [string, string][] = [
+	[
+		'bg.combat.act2',
+		'A flooded crypt vault beneath a cathedral, rows of gilded sarcophagi, dripping stone arches, a sickly green glow on dark water, ash and rot.',
+	],
+	[
+		'bg.map.act2',
+		'A deep undercroft maze seen from above, gilded tomb corridors, flooded floors, a faint gold glow.',
+	],
+];
+
+const cardsAct2: [string, string][] = [
+	['shb_rampart', 'A low wall of tower shields lined up across a corridor'],
+	['shb_riposte', 'A shield catching a blade with sparks, a counter-thrust below'],
+	['mrk_ricochet', 'A bolt bouncing off two stone walls with sparks'],
+	[
+		'mrk_deadeye',
+		'Several glowing red marks over a group of shadowy figures seen through a lens',
+	],
+	['arc_cinder_ward', 'A ring of drifting embers around a raised hand over a shield of ash'],
+	['arc_inferno', 'A wide wall of fire sweeping across a hall, silhouettes engulfed'],
+	['cnf_penance', 'A kneeling figure striking a censer into its own palm, smoke rising'],
+	['cnf_last_rites', 'Hands closing a wounded soldier eyes by candlelight'],
+	['bmb_shrapnel', 'A shell burst scattering metal shards across a battlefield'],
+	['bmb_flashbang', 'A white flash blinding a line of silhouettes, long shadows'],
+];
+
 const BG_COMMON =
 	'Pixel art background, side view, no characters, no text, dark desaturated palette, light from the upper left, no dithering.';
 const backgrounds: [string, string][] = [
@@ -412,11 +492,17 @@ const cards: [string, string][] = [
 	['mrk_pinning_shot', 'Arrow pinning a cloak to a wall'],
 	['mrk_volley', 'Many arrows arcing over a field'],
 	['mrk_hunters_focus', 'Narrowed eye through a lens'],
-	['mrk_killshot', 'A single heavy crossbow bolt piercing a cracked iron helm, ember sparks, dark nave'],
+	[
+		'mrk_killshot',
+		'A single heavy crossbow bolt piercing a cracked iron helm, ember sparks, dark nave',
+	],
 	['arc_ember_bolt', 'Small glowing ember flying from a staff'],
 	['arc_ash_veil', 'Ash cloud forming a veil around an ally'],
 	['arc_rift_spark', 'Spark jumping between cracks in the air'],
-	['arc_burn_hex', 'Jagged glowing ember cracks spreading across a stone floor, an irregular scorch mark with a curse-like tangle of lines, no star, no hexagram, no pentagram, no geometric symbol, no letters'],
+	[
+		'arc_burn_hex',
+		'Jagged glowing ember cracks spreading across a stone floor, an irregular scorch mark with a curse-like tangle of lines, no star, no hexagram, no pentagram, no geometric symbol, no letters',
+	],
 	['arc_channel', 'Hands gathering light over a staff'],
 	['arc_cinder_lance', 'Lance of ember driving forward'],
 	['arc_firestorm', 'Column of fire across a field'],
@@ -600,6 +686,21 @@ function buildJobs(): Job[] {
 			view: 'side',
 		});
 	}
+	for (const [id, size, desc] of enemiesAct2) {
+		jobs.push({
+			key: `enemy.${id}.idle`,
+			group: 'enemies',
+			prompt: `Side-view pixel art creature, full body, standing, facing left. ${desc} ${CHAR_COMMON}`,
+			gen: size,
+			final: size,
+			facing: 'west',
+			transparent: true,
+			outline: 'selective outline',
+			shading: 'medium shading',
+			detail: 'medium detail',
+			view: 'side',
+		});
+	}
 	jobs.push({
 		key: 'enemy.bell_maw.idle',
 		group: 'boss',
@@ -612,7 +713,19 @@ function buildJobs(): Job[] {
 		detail: 'highly detailed',
 		view: 'side',
 	});
-	for (const [key, desc] of backgrounds) {
+	jobs.push({
+		key: 'enemy.gilded_penitent.idle',
+		group: 'boss',
+		prompt: `Front view pixel art boss monster, fills the canvas. A giant reliquary statue of a kneeling saint in gold leaf over rot, hands clasped, cracks of rot leaking through the gold, a ruined golden halo. Palette: worn gold, bone, rot green, dark iron. ${CHAR_COMMON}`,
+		gen: [160, 144],
+		final: [160, 144],
+		transparent: true,
+		outline: 'selective outline',
+		shading: 'medium shading',
+		detail: 'highly detailed',
+		view: 'side',
+	});
+	for (const [key, desc] of [...backgrounds, ...backgroundsAct2]) {
 		jobs.push({
 			key,
 			group: 'backgrounds',
@@ -627,7 +740,7 @@ function buildJobs(): Job[] {
 			note: 'generated at 320x180 (API max 400x400) and upscaled 2x nearest to 640x360',
 		});
 	}
-	for (const [id, scene] of cards) {
+	for (const [id, scene] of [...cards, ...cardsAct2]) {
 		jobs.push({
 			key: `card.${id}`,
 			group: 'cards',

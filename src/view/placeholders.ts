@@ -159,7 +159,7 @@ function icon(
 	key: string,
 	size: number,
 	color: number,
-	shape: 'circle' | 'diamond' | 'square' | 'tri',
+	shape: 'circle' | 'diamond' | 'square' | 'tri' | 'cross' | 'chest',
 ): Spec {
 	return {
 		key,
@@ -168,9 +168,14 @@ function icon(
 		draw: (g, w, h) => {
 			g.fillStyle(P.ash0);
 			const c = w / 2;
+			const t = Math.round(w / 3);
+			const lid = Math.round(h / 3);
 			if (shape === 'circle') g.fillCircle(c, c, c);
-			else if (shape === 'square') g.fillRect(0, 0, w, h);
-			else if (shape === 'tri') g.fillTriangle(0, h, w, h, c, 0);
+			else if (shape === 'square' || shape === 'chest') g.fillRect(0, 0, w, h);
+			else if (shape === 'cross') {
+				g.fillRect(t, 0, w - 2 * t, h);
+				g.fillRect(0, t, w, h - 2 * t);
+			} else if (shape === 'tri') g.fillTriangle(0, h, w, h, c, 0);
 			else {
 				g.fillTriangle(c, 0, w, c, 0, c);
 				g.fillTriangle(0, c, w, c, c, h);
@@ -178,7 +183,15 @@ function icon(
 			g.fillStyle(color);
 			if (shape === 'circle') g.fillCircle(c, c, c - 1);
 			else if (shape === 'square') g.fillRect(1, 1, w - 2, h - 2);
-			else if (shape === 'tri') g.fillTriangle(2, h - 1, w - 2, h - 1, c, 2);
+			else if (shape === 'cross') {
+				g.fillRect(t + 1, 1, w - 2 * t - 2, h - 2);
+				g.fillRect(1, t + 1, w - 2, h - 2 * t - 2);
+			} else if (shape === 'chest') {
+				// Lid and body split by a dark band, with a lock: reads as a chest, not as the shop square.
+				g.fillRect(1, 1, w - 2, lid - 1);
+				g.fillRect(1, lid + 1, w - 2, h - lid - 2);
+				g.fillStyle(P.ash0).fillRect(c - 2, lid - 1, 4, 5);
+			} else if (shape === 'tri') g.fillTriangle(2, h - 1, w - 2, h - 1, c, 2);
 			else {
 				g.fillTriangle(c, 1, w - 1, c, 1, c);
 				g.fillTriangle(1, c, w - 1, c, c, h - 1);
@@ -187,15 +200,121 @@ function icon(
 	};
 }
 
+/**
+ * 9×9 status icons drawn pixel by pixel per docs/art-bible.md §7.3: shape + colour, and a
+ * chevron in the corner (▲ buff, ▼ debuff) so colour is never the only cue. `#` = colour,
+ * `o` = ash0 outline.
+ */
+function mask(key: string, color: number, rows: string[]): Spec {
+	return {
+		key,
+		w: 9,
+		h: 9,
+		draw: (g) => {
+			rows.forEach((row, y) => {
+				[...row].forEach((ch, x) => {
+					if (ch === '#') g.fillStyle(color).fillRect(x, y, 1, 1);
+					else if (ch === 'o') g.fillStyle(P.ash0).fillRect(x, y, 1, 1);
+					else if (ch === '^' || ch === 'v') g.fillStyle(P.bone2).fillRect(x, y, 1, 1);
+				});
+			});
+		},
+	};
+}
+
+const STATUS_ICONS: Spec[] = [
+	mask('icon.status.block', P.ward1, [
+		'ooooooo..',
+		'o#####o..',
+		'o#####o..',
+		'o#####o..',
+		'o#####o..',
+		'.o###o...',
+		'..o#o....',
+		'...o.....',
+		'.........',
+	]),
+	mask('icon.status.might', P.gold2, [
+		'.ooooo.^.',
+		'o#####o^^',
+		'o#o#o#o..',
+		'o#####o..',
+		'o#####o..',
+		'.o###o...',
+		'.o###o...',
+		'.ooooo...',
+		'.........',
+	]),
+	mask('icon.status.ward', P.bone2, [
+		'..ooo..^.',
+		'.o###o.^^',
+		'o#ooo#o..',
+		'o#o#o#o..',
+		'o#ooo#o..',
+		'.o###o...',
+		'..ooo....',
+		'.........',
+		'.........',
+	]),
+	mask('icon.status.marked', P.ember3, [
+		'...o.....',
+		'..o#o....',
+		'.oo#oo...',
+		'o##o##o..',
+		'.oo#oo...',
+		'..o#o....',
+		'...o...vv',
+		'.......v.',
+		'.........',
+	]),
+	mask('icon.status.weakened', P.ash5, [
+		'......o..',
+		'.....o#o.',
+		'....o#o..',
+		'...o#o...',
+		'..o.o....',
+		'.o#o.....',
+		'o#o....vv',
+		'.o.....v.',
+		'.........',
+	]),
+	mask('icon.status.bleed', P.blood2, [
+		'...o.....',
+		'..o#o....',
+		'..o#o....',
+		'.o###o...',
+		'o#####o..',
+		'o#####o..',
+		'.o###o.vv',
+		'..ooo..v.',
+		'.........',
+	]),
+	mask('icon.status.burn', P.ember2, [
+		'..o......',
+		'.o#o.o...',
+		'.o#oo#o..',
+		'o###o#o..',
+		'o#####o..',
+		'o#####o..',
+		'.o###o.vv',
+		'..ooo..v.',
+		'.........',
+	]),
+	mask('icon.status.stunned', P.gold1, [
+		'.ooooo...',
+		'o#####o..',
+		'o#ooo#o..',
+		'o#o#o#o..',
+		'o#o##o...',
+		'o#ooo....',
+		'.o#####vv',
+		'..ooooo v',
+		'.........',
+	]),
+];
+
 const ICONS: Spec[] = [
-	icon('icon.status.block', 9, P.ward1, 'square'),
-	icon('icon.status.might', 9, P.ember3, 'tri'),
-	icon('icon.status.marked', 9, P.gold2, 'diamond'),
-	icon('icon.status.weakened', 9, P.rift2, 'tri'),
-	icon('icon.status.bleed', 9, P.blood2, 'circle'),
-	icon('icon.status.burn', 9, P.ember2, 'tri'),
-	icon('icon.status.ward', 9, P.ward0, 'diamond'),
-	icon('icon.status.stunned', 9, P.ash5, 'circle'),
+	...STATUS_ICONS,
 	icon('icon.intent.attack', 12, P.blood2, 'tri'),
 	icon('icon.intent.block', 12, P.ward1, 'square'),
 	icon('icon.intent.buff', 12, P.ember3, 'diamond'),
@@ -207,6 +326,8 @@ const ICONS: Spec[] = [
 	icon('icon.node.rest', 24, P.ember2, 'circle'),
 	icon('icon.node.shop', 24, P.gold2, 'square'),
 	icon('icon.node.boss', 24, P.rift1, 'diamond'),
+	icon('icon.node.event', 24, P.bone2, 'cross'),
+	icon('icon.node.treasure', 24, P.ember3, 'chest'),
 ];
 
 export const PLACEHOLDER_SPECS: readonly Spec[] = [...HEROES, ...ENEMIES, ...ICONS];

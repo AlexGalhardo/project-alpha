@@ -13,6 +13,7 @@ import {
 	mkdirSync,
 	mkdtempSync,
 	openSync,
+	readdirSync,
 	readFileSync,
 	rmSync,
 	writeFileSync,
@@ -1000,6 +1001,13 @@ function writeManifest(): number {
 		if (!existsSync(f)) continue;
 		const img = decodePng(new Uint8Array(readFileSync(f)));
 		if (img.w === job.final[0] && img.h === job.final[1]) keys.push(job.key);
+	}
+	// Node and item icons reduced to 16x16 by scripts/assets/icons16.ts (other icons stay out of the game).
+	for (const f of readdirSync(OUT_DIR)) {
+		const m = /^(icon\.(?:node|item)\..+)\.png$/.exec(f);
+		if (!m) continue;
+		const img = decodePng(new Uint8Array(readFileSync(join(OUT_DIR, f))));
+		if (img.w === 16 && img.h === 16) keys.push(m[1] as string);
 	}
 	keys.sort();
 	mkdirSync(OUT_DIR, { recursive: true });

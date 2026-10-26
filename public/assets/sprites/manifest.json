@@ -86,5 +86,18 @@
   "hero.bombardier.idle",
   "hero.confessor.idle",
   "hero.marksman.idle",
-  "hero.shieldbearer.idle"
+  "hero.shieldbearer.idle",
+  "icon.item.eq_bell_clapper",
+  "icon.item.eq_bone_reliquary",
+  "icon.item.eq_ember_focus",
+  "icon.item.eq_heavy_pavise",
+  "icon.item.eq_hunters_lens",
+  "icon.item.eq_iron_rosary",
+  "icon.item.eq_notched_blade",
+  "icon.item.eq_votive_candle",
+  "icon.node.boss",
+  "icon.node.combat",
+  "icon.node.elite",
+  "icon.node.rest",
+  "icon.node.shop"
 ]

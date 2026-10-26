@@ -29,7 +29,7 @@ project is Phaser **4.2.1**. Tooling is Bun + Aseprite only (no Python, no Node)
 
 | Action | Frames | ms per frame | Poses | Notes |
 |---|---|---|---|---|
-| `idle` | 4 | 260, 200, 260, 200 | rest; chest and head down 1 px; same with cloth and gear caught up; chest back up, cloth still down | Loop. Uneven holds so it breathes instead of ticking. Whole-pixel bob only |
+| `idle` | 2–4 | 160, 120, 160, 120 (6–8 fps, Art Bible §12.3) | rest; chest and head down 1 px; same with cloth and gear caught up; chest back up, cloth still down | Loop. Uneven holds so it breathes instead of ticking. Whole-pixel bob only |
 | `attack` | 6 | 90, 120, 50, 140, 100, 100 | anticipation; anticipation hold; smear; contact hold; recovery; settle | Plays once, then idle. Damage fires at the start of frame 4 |
 | `cast` (optional) | 4-6 | from the timing table | raise; hold; release; settle | For skills and spells without a weapon swing |
 | hurt | code | flash 60-80, hit-stop 50-70 | white fill flash, 3-4 px knockback and back, 2 px shake | No frames |

@@ -23,6 +23,6 @@
 
 ## Organization
 
-- Keys: `hero.<class>.<pose>`, `enemy.<id>.<pose>`, `card.<id>`, `icon.<kind>.<id>`, `ui.<id>`, `bg.<act>.<id>`, `vfx.<id>`, `music.<id>`, `sfx.<category>.<id>`.
+- Keys: `hero.<class>.<pose>`, `enemy.<id>.<pose>`, `card.<id>`, `icon.<kind>.<id>` (including `icon.portrait.<hero>` 48×48 and `icon.queue.<id>` 20×20), `ui.<id>`, `bg.<screen>[.<act>]` (e.g. `bg.title`, `bg.combat.act1`), `vfx.<id>`, `music.<id>`, `sfx.<category>.<id>`, `font.<token>` (BitmapText atlases). Sizes per key: `docs/art-bible.md`.
 - Game files live in `public/assets/`; sources and logs in `art-src/`.
 - `references/` is third-party material, local only: never copy, crop, trace or ship it.

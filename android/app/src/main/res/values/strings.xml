@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Ossuary</string>
+    <string name="title_activity_main">Ossuary</string>
+    <string name="package_name">xyz.lekzera.ossuary</string>
+    <string name="custom_url_scheme">xyz.lekzera.ossuary</string>
+</resources>

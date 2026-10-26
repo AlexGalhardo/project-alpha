@@ -105,6 +105,9 @@ Ideas kept for later phases. "Smaller version" is what entered the prototype ins
 | Impact sparks and hit effects | DR (concepts) | Some combat VFX in the prototype (K10) |
 | Card play/discard animation; flash and shake on impact | gd-game-feel | Code-driven flash/shake allowed with static art |
 | Save that survives closing the tab; warning when the same run is open in two tabs; language switch mid-run | QA plan | — |
+| Turn-limit enrage: after turn 10 every enemy gains +1 Might per turn (visible status); combat turn cap 60 → 20 | QA playtest 1 (P2-9: 60-turn leech stalemate ended a run) | — |
+| Camp merged into the map screen as a side panel, shown only when something is affordable or a hero is stressed | QA playtest 1 (fun #5) | — |
+| One defensive starter line for back-rank heroes so parties without the Shieldbearer are viable | QA playtest 1 (P2-8, sim: 5.9% wins without him) | Simulate before changing data |
 
 ### Beta
 

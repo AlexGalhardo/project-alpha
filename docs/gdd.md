@@ -150,17 +150,17 @@ Resulting path: 7 combats + up to 2 elites + 1–2 shops + 1 rest + 1 boss. Elit
 
 ### 4.4 Camp (B10) ⚖
 
-Opens after every round except the boss. One screen, no travel:
+Opens after every round except the boss, including after rest and shop nodes. One screen, no travel:
 
 | Offer | Price (gold) | Notes |
 |---|---|---|
-| Swap a hero | 30 | Choose 1 of the 2 heroes not in the party; they join at full HP and 0 stress with their 4 starter cards; the leaving hero's cards leave the deck and their equipment goes to the stash. |
-| Card for sale (1) | common 35 / uncommon 55 / rare 90 | Drawn from the party heroes' pools. |
-| Equipment for sale (1) | common 50 / uncommon 85 | |
+| Swap a hero | 30 | One swap per camp visit. Choose 1 of the 2 heroes not in the party; they join at full HP and 0 stress with their 4 starter cards; the leaving hero's cards leave the deck and their equipment goes to the stash. |
+| Card for sale (1) | common 35 / uncommon 55 / rare 90 | Drawn from the party heroes' pools. Rarity odds 65 / 30 / 5 (common / uncommon / rare). |
+| Equipment for sale (1) | common 50 / uncommon 85 | Odds 60 / 40 (common / uncommon). A full stash (6) blocks buying. |
 | Service (1 of 2, seeded) | 12 | "Bind wounds": heal 15% max HP of every hero; or "Vigil": −3 stress on one hero. |
 | Reorder ranks | free | Drag heroes between ranks 1–3. |
 
-The player may buy any subset they can afford; "Leave camp" continues.
+The player may buy any subset they can afford; "Leave camp" continues. With a full stash (6), buying equipment and equipping or unequipping are blocked.
 
 ### 4.5 Rest (row 9, B15) ⚖
 
@@ -200,6 +200,8 @@ Exclusive choice of one:
 
 Turn queue: enemies sorted by **Speed** descending, ties → lower rank first. The queue is always visible (top bar).
 
+A combat that reaches the 60-turn cap counts as a loss.
+
 ### 5.3 Cards, energy and piles ⚖
 
 | Rule | Value |
@@ -236,7 +238,7 @@ heal      = min(amount, maxHP - HP)        // healing never exceeds max HP; fall
 | Event | Rule |
 |---|---|
 | Hero HP reaches 0 | Hero **falls**: removed from rank (ranks collapse), their cards become unplayable, each other hero +2 stress. |
-| End of combat | Fallen heroes return for the next round at **1 HP** with an **Injury**: max HP −25% (floor) until a Rest "Recover". |
+| End of combat | Fallen heroes return for the next round at **1 HP** with an **Injury**: max HP −25% (floor) until a Rest "Recover". They return to their original rank after combat; rank swaps made during combat do not persist. |
 | Second fall while injured | Same rule; injury does not stack (still −25%). |
 | All party heroes fallen | Run over (defeat). |
 | All enemies dead | Combat won → rewards (§11). |
@@ -260,7 +262,7 @@ heal      = min(amount, maxHP - HP)        // healing never exceeds max HP; fall
 | Bleed N | all | Loses N HP at the start of the owner's turn. | Then N −1. |
 | Burn N | all | Loses N HP at the end of the owner's turn. | Then N = floor(N / 2). |
 | Ward N | all | Negates the next N debuff applications (Marked, Weakened, Bleed, Burn, Stunned). | −1 per negation. |
-| Stunned | enemies only | Skips its next action; then gains Stun immunity for its next action. | After the skipped action. |
+| Stunned | enemies only | Its next intent is skipped and consumed; the cycle advances. Immune to Stun until its next performed action. | When the skipped intent is consumed. |
 
 Status icons pair a color with a distinct shape (Art Bible). Stacks show as a number in the icon corner.
 
@@ -337,7 +339,7 @@ Personal names and backstories: open question Q-HERO (owner coordinator, GDD v0.
 | Text | ≤ 12 words, keywords as icons + bold word |
 | Upgrade (`+`) | Formula below; shown as a green number in the detail panel |
 
-Upgrade formula ⚖: each damage/Block/heal value: +3 if base ≥ 6, else +2; each status stack +1; costs never change unless the table says so.
+Upgrade values: the `+` column of §9.3 is authoritative. The formula below is only a guideline for designing new cards: each damage/Block/heal value: +3 if base ≥ 6, else +2; each status stack +1; costs never change unless the table says so.
 
 Card value guideline ⚖ (for designing new cards): 1 energy ≈ 6 damage ≈ 5 Block ≈ 5 heal ≈ 2 stacks of Marked/Weakened ≈ 3 Burn. Area hit = single value × 0.6 per enemy. Each Dread point refunds ≈ +2 damage. Power cards: payback in ≤ 3 turns.
 
@@ -374,7 +376,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | mrk_quick_draw | Quick Draw | 0 | Attack | common | H2–3 | any | 3 damage; draw 1 | 5 |
 | mrk_pinning_shot | Pinning Shot | 1 | Attack | common | H2–3 | any | 4 damage; 2 Weakened | 6 |
 | mrk_volley | Volley | 2 | Attack | uncommon | H2–3 | all | 4 damage ×2 to each enemy | 5 ×2 |
-| mrk_hunters_focus | Hunter's Focus | 1 | Power | uncommon | any | self | First attack each turn against a Marked enemy +5 damage | +7 |
+| mrk_hunters_focus | Hunter's Focus | 1 | Power | uncommon | any | self | First attack each turn against a Marked enemy +5 damage (owner's own attacks only) | +7 |
 | mrk_killshot | Killshot | 2 | Attack | rare | H2–3 | any | 14 damage; +14 if Marked; Exhaust | 18 / +18 |
 
 **Arcanist** (`arc_`)
@@ -413,21 +415,21 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | bmb_sandbags | Sandbags | 1 | Skill | starter | any | self | 6 Block to self; 3 Block to the adjacent hero | 9 / 4 |
 | bmb_shell | Shell | 2 | Attack | starter | H3 | E2–4 | 11 damage; Splash 4 | 15 / 6 |
 | bmb_incendiary | Incendiary | 1 | Attack | common | H2–3 | any | 3 damage and 3 Burn to target and adjacent enemies | 4 / 4 |
-| bmb_reload | Reload | 0 | Skill | common | any | self | Draw 1; next Bombardier attack this turn +4 damage | +6 |
+| bmb_reload | Reload | 0 | Skill | common | any | self | Draw 1; next attack by this hero this turn +4 damage (owner's own attacks only) | +6 |
 | bmb_concussion_round | Concussion Round | 2 | Attack | common | H2–3 | any | 6 damage; Stun | 9 |
 | bmb_barrage | Barrage | 3 | Attack | uncommon | H3 | random | 6 damage ×3, each to a random enemy (seeded) | 8 ×3 |
-| bmb_powder_keg | Powder Keg | 1 | Skill | uncommon | H2–3 | any | Plant a Keg: next time that enemy is hit, it and adjacent enemies take 10 | 14 |
+| bmb_powder_keg | Powder Keg | 1 | Skill | uncommon | H2–3 | any | Plant a Keg: next time that enemy is hit, it and adjacent enemies take 10 (hit formula; does not chain) | 14 |
 | bmb_siege_mortar | Siege Mortar | 3 | Attack | rare | H3 | all | 18 damage to each enemy; Dread 2; Exhaust | 24 |
 
 ## 10. Enemies, elites and boss
 
 ### 10.1 Intent rules
 
-- Each enemy has a fixed **intent cycle**; the cycle start index is seeded per combat. The next intent is revealed at the end of the enemy phase (and at combat start).
+- Each enemy has a fixed **intent cycle**; the boss starts at its first intent; other enemies start at a seeded index. The next intent is revealed at the end of the enemy phase (and at combat start).
 - An intent shows: icon (shape + color), exact number(s) after modifiers, and target marker on the hero(es).
 - Default targeting: the front-most hero in reach. Variants: `back` (H3, else front-most), `highest-stress`, `lowest-HP`, `marked` (a Marked hero, else front-most), `all`.
 - If the target moves or falls before the enemy acts, the intent retargets by the same rule; the displayed intent updates immediately.
-- A Stunned enemy skips its action without advancing its intent cycle: after the stun it performs the intent it had shown (SDD-06).
+- A Stunned enemy's skipped intent is consumed and the cycle advances. Stun immunity lasts until its next performed action.
 
 ### 10.2 Act 1 enemies (10) ⚖
 
@@ -463,7 +465,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 
 ### 10.4 Elites (B12) ⚖
 
-Elite = base enemy with: HP × 1.75 (round), every damage number × 1.25 (round), a gold frame/aura (no new sprite) and one trait:
+Elite = base enemy with: HP × 1.75 (round), every damage number × 1.25 (round; damage only, not stress), a gold frame/aura (no new sprite) and one trait:
 
 | Elite | Trait |
 |---|---|
@@ -514,12 +516,14 @@ Pity: each offer without a rare raises the rare chance by +2 percentage points (
 | Boss | 1 legendary equipment |
 | Camp / shop | for sale (§4.4, §4.6) |
 
+After the boss reward is taken, the run ends in victory.
+
 ## 12. Equipment
 
 ### 12.1 Rules (B19)
 
 - 2 slots per hero: **weapon** (modifies that hero's card numbers) and **relic** (passive effect). Any hero can equip any item.
-- Equip/unequip freely at camp and after rewards; unequipped items wait in the stash (max 6).
+- Equip/unequip freely at camp and after rewards; unequipped items wait in the stash (max 6). Reward equipment that does not fit in a full stash is lost.
 
 ### 12.2 Prototype items (8) ⚖
 
@@ -530,7 +534,7 @@ Pity: each offer without a rare raises the rare chance by +2 percentage points (
 | eq_bone_reliquary | Bone Reliquary | relic | common | Owner +6 max HP |
 | eq_ember_focus | Ember Focus | weapon | uncommon | Owner's first attack each turn also applies 2 Burn |
 | eq_votive_candle | Votive Candle | relic | uncommon | Owner −1 stress at the end of each combat |
-| eq_iron_rosary | Iron Rosary | relic | uncommon | Owner starts each combat with 6 Block |
+| eq_iron_rosary | Iron Rosary | relic | uncommon | Owner gains 6 Block after the turn-1 Block reset (lasts through the first enemy phase) |
 | eq_hunters_lens | Hunter's Lens | weapon | rare | Owner's first attack each combat applies 2 Marked |
 | eq_bell_clapper | Bell Clapper | relic | legendary | Once per turn, if any hero has ≥ 7 stress at the start of the turn, gain 1 energy |
 
@@ -571,7 +575,7 @@ Prototype: no Rites; dev-only multipliers (enemy HP, enemy damage, hero HP) exis
 
 - Toggle on the combat HUD and in Pause/Settings. Takes effect between commands; the player can take over at any time.
 - It issues the **same commands** as the player through the core. It never changes rules or randomness: a seed played by auto battle gives the same result at any game speed.
-- Policy (greedy, one card at a time): score each playable (card, target) pair and play the best until no card scores above 0 or energy is 0.
+- Policy (greedy, one card at a time): score each playable (card, target) pair and play the best until no card scores above 0 or energy is 0. Playing a Power card adds a flat +6 to its score.
 
 ```text
 score = 100 × (kills an enemy) + damageDealt + 0.8 × min(blockGained, incomingDamageToThatHero)

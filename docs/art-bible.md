@@ -57,24 +57,26 @@ When this file and the GDD disagree on a visual or audio number, this file wins;
 
 ### 3.1 Base resolution and zoom
 
+Superseded 2026-10-26 by ADR 0015 (developer playtest: fill the viewport, Full HD first, readable text).
+
 | Item | Value |
 |---|---|
-| Logical resolution | **640×360** (16:9) |
-| Phaser config | `pixelArt: true`, `scale.mode: Phaser.Scale.NONE`, `width: 640`, `height: 360` |
-| Zoom | `zoom = max(1, floor(fit × dpr)) / dpr`, `fit = min(innerWidth / 640, innerHeight / 360)`, applied with `game.scale.setZoom()` on every resize |
-| Invariant | An integer number of **device** pixels per game pixel. `Phaser.Scale.MAX_ZOOM` snaps CSS pixels and ignores DPR, so it is not used (`docs/web-research.md` §12.3, §12.7) |
-| Letterbox colour | `ink` `#0e0d12` (CSS `body` background) |
+| Layout space | **640×360** (16:9): every coordinate in this file and in `src/scenes/` |
+| Render size | **1920×1080** (Full HD, the primary target) |
+| Phaser config | `pixelArt: false`, `scale: { mode: FIT, autoCenter: CENTER_BOTH }`, `width: 1920`, `height: 1080` |
+| Camera | Every scene calls `fitCamera(scene)`: `setZoom(3).centerOn(320, 180)`, so the 640×360 layout fills the render |
+| Viewport | The game fills the browser (`#game` 100vw × 100dvh); `FIT` letterboxes the 16:9 area inside it |
+| Texture sampling | Pixel-art textures (sprites, backgrounds, icons, placeholders, card art) use `NEAREST`; Roboto text renders smooth |
+| Letterbox colour | `ink` `#0e0d12` |
 
-Zoom at common screens:
+Asset resolution: art may arrive at 1×, 2× or 3× its logical size and is always shown at the logical size (`sized()`, `standing()`, `portrait()`, `backdrop()` in `src/view/ui.ts`). Full HD art is 3× (hero 192×240 shown at 64×80, card art 180×120 at 60×40, backgrounds 1920×1080 at 640×360), which is 1:1 on a 1080p screen. The boss at 320×288 shown at 160×144 is 2× rather than 3× (1.5 screen pixels per texel at 1080p), an accepted exception.
 
-| Screen (CSS px) | DPR | Zoom (CSS) | Device px per game px | Displayed |
-|---|---|---|---|---|
-| 1280×720 | 1 | 2 | 2 | 1280×720 |
-| 1920×1080 | 1 | 3 | 3 | 1920×1080 |
-| 2560×1440 | 1 | 4 | 4 | 2560×1440 |
-| 844×390 (phone landscape) | 3 | 1 | 3 | 640×360 |
-
-Integer arithmetic: 640 × 2 = 1280, × 3 = 1920, × 4 = 2560; 360 × 2 = 720, × 3 = 1080, × 4 = 1440.
+| Screen (CSS px) | Scale of the 1920×1080 render |
+|---|---|
+| 1920×1080 | 1 (1:1, primary) |
+| 1366×768 | 0.711 |
+| 1280×720 | 0.667 |
+| 844×390 (phone landscape) | 0.361 |
 
 ### 3.2 Layout grid and spacing
 
@@ -295,26 +297,23 @@ Elites have no new body art: the elite version is the base sprite + a palette ti
 
 ## 8. Typography
 
-All in-game text is `BitmapText` from 1-bit atlases generated at the font's native size; `Text` is debug only (spike: `Text` at 8 px produced 143 unique colours, BitmapText 2; `docs/web-research.md` §12.7). Never pass a `size` other than the atlas size to `bitmapText()`.
+Superseded 2026-10-26 by ADR 0015: the 1-bit bitmap fonts (ADR 0010) are replaced by **Roboto** (Google Fonts, SIL OFL 1.1, weights 400/500/700, `display=swap`) for readability. Text is Phaser `Text` rendered at `resolution: 3`, so it stays sharp under the ×3 camera at 1920×1080. The game waits for `document.fonts.load` (3 s timeout, then the system sans-serif) before the Title scene, so text measures with the real font.
 
-| Token | Font (licence) | Native em | Cap / x / descender | Line height | Use |
-|---|---|---|---|---|---|
-| `font.tiny` | Tiny5 (SIL OFL 1.1) | 8 px | 5 / 4 / 1 | 10 (5 + 1 + 3 accent headroom + 1) | Card keyword numbers when space is tight, status counts, detail-panel body, tooltips, footers |
-| `font.ui` | Jersey 10 (SIL OFL 1.1) | 18.667 px | 10 / 8 / 2 | 16 (10 + 2 + 4 accent headroom) | Buttons, labels, card names, top bar, HP and intent numbers, cost gem |
-| `font.h2` | Jersey 15 (SIL OFL 1.1) | 27 px | 15 / 11 / 4 | 23 | Screen titles, energy orb number, damage and heal pop-ups |
-| `font.h1` | Jersey 20 (SIL OFL 1.1) | 34 px | 20 / 15 / 5 | 30 | Banners (Victory, Defeat, boss phase) |
-| `font.display` | Jersey 25 (SIL OFL 1.1) | 41 px | 25 / 19 / 6 | 36 | Large numbers on the run summary |
-
-Font metrics from the local font test (`pixel-fonts` research, 2026-10-26). m5x7 was rejected: its `ã`/`õ` are identical to `ä`/`ö` at 1x.
+| Token | Size (640×360 space) | Weight | Use |
+|---|---|---|---|
+| `tiny` | 7 px | 400 | Detail-panel body, tooltips, footers, status counts, card owner line |
+| `ui` | 9 px | 500 | Buttons, labels, card names, top bar, HP and intent numbers |
+| `h2` | 14 px | 700 | Screen titles, energy orb number, damage and heal pop-ups, boss banner |
+| `h1` | 20 px | 700 | Victory and Defeat banners |
+| `display` | 26 px | 700 | Title wordmark, large numbers |
 
 Rules:
 
-- **Accent headroom:** accented capitals extend 3–5 px above cap height in every tested font; the line heights above include it. Single-line labels need the same headroom above the cap line (a Jersey 10 label needs 14 px: 4 above + 10).
-- **Card names in Title Case**, so accents sit on lowercase letters inside the cap height; banners and buttons may use capitals because they have the headroom.
-- **Charset per atlas:** U+0020–007E, U+00A0–00FF, curly quotes, en/em dash, ellipsis, bullet. A build check fails when a character used in `src/i18n/` (EN or PT-BR) is missing from an atlas (Phaser skips missing glyphs silently).
-- **Colour:** atlases are white; tint at runtime with `bone2` (primary), `ash5` (secondary), `ember3` (warning) or a semantic token. Text never sits on a background without a panel or a 1 px `ash0` shadow (offset +1, +1).
-- **Atlas generation:** canvas-threshold pipeline (Bun + `playwright-core`, already a devDependency through `@playwright/test`, no new dependency): render each glyph at native size in headless Chromium, threshold alpha at 192 to 1-bit, pack with 1 px padding, write BMFont XML. Output `public/assets/fonts/<token>.png` + `.xml`; ship each font's `OFL.txt` and a credits line.
-- **Wordmark:** "Ossuary" is custom pixel lettering, not a font (§7.2): carved stone capitals in `ash4`–`ash6` with `bone2` top highlights, an `ember3` crack through the second "S", 2 px `ash0` outline.
+- **API:** `label(scene, x, y, text, token, colour)` in `src/view/ui.ts` returns a `Text`; `setWordWrapWidth`, `setAlign` and `setColor` work as before. Sizes live in `src/view/fonts.ts`.
+- **Colour:** `bone2` (primary), `ash5` (secondary), `ember3` (warning) or a semantic token. Text never sits on a busy background without a panel or a dark band.
+- **Card names in Title Case.** PT-BR captions that overflow a button drop to `tiny` (Button auto-shrink).
+- **Credits:** "Font: Roboto (SIL OFL 1.1)" in the menu credits (`menu.creditsFonts`).
+- **Wordmark:** "Ossuary" is set in Roboto `display` until custom lettering exists (§7.2).
 
 ---
 

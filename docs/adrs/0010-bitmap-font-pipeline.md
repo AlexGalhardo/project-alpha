@@ -1,6 +1,6 @@
 # ADR 0010: Bitmap pixel fonts built with a canvas-threshold pipeline
 
-- Status: accepted
+- Status: superseded by ADR 0015 (2026-10-26)
 - Date: 2026-10-26
 
 ## Context

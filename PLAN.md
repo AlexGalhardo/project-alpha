@@ -9,6 +9,7 @@ The onboarding document for every session and agent. Read **Current status** fir
 | Phase | 2 PROTOTYPE — Act 1 playable end to end in the browser with placeholder art and synthesized SFX |
 | Current group | A3 Alpha content (Act 2, events, skill tree done; Rites in progress) |
 | Version | 0.0.5 (live at <https://alpha.lekzera.xyz>) |
+| Last change | Render overhaul (B40, 2026-10-26): FIT scaling, Roboto, 2× art. ADR 0015 pending (Opus). Scene footer credit in `MenuScene.ts` still names Jersey and Tiny5 (coordinator to fix). |
 | Next step | Balance pass to GDD §20 targets (`docs/reports/`), then asset generation once `docs/asset-request.md` is approved |
 | Blockers | Paid asset generation waits for developer approval (`docs/asset-request.md`, `questions-to-dev.md` local only); Vercel secrets missing (no deploy); 1.0 RC items (Acts 2–3, Electron, Android, Steam) are later phases |
 

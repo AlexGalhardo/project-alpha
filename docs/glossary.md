@@ -131,5 +131,5 @@ Prototype node types are decided (B14): combat, elite, rest, shop and boss. Even
 | Dica | tooltip | Explanatory text shown on a long touch, with no hover. | "Poison tooltip: deals damage at the start of the turn." |
 | Prévia | preview | Shows the result of an action before confirmation. Mandatory (game rule). | "Preview: deals 14 damage to 2 enemies." |
 | Confirmação | confirm | A second tap on the target that executes the action. | "Tap 1 shows the preview; tap 2 confirms." |
-| Resolução base | base_resolution | 640×360 logical canvas with integer zoom snapped to device pixels (B28); to confirm in the zoom spike (Q-ZOOM). | "Base 640×360 at 3x = 1920×1080." |
+| Resolução base | base_resolution | 640×360 logical layout, drawn through a ×3 camera on a 1920×1080 canvas and FIT-scaled to the viewport (B40; replaces the integer zoom of B28). | "Base 640×360 at ×3 = 1920×1080." |
 | Título do jogo | game_title | Working title: "Ossuary" (B39). Trademark and domain are not verified; checks open (Q-NAME-CHECK). | "Ossuary" |

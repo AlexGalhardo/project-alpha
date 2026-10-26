@@ -59,7 +59,7 @@ Tense, readable turns where the right answer exists but costs something; a run t
 
 ### 1.6 Fixed constraints (K01–K12)
 
-Web first (Phaser 4.2.1, Bun, TypeScript), pixel art at 640×360 (B28), English default with PT-BR localization, 5 heroes, 10 rounds per act with a boss at round 10, auto battle and game speed 1x/2x/3x from the prototype, static art in the prototype, Electron and Android only at the end of the Beta.
+Web first (Phaser 4.2.1, Bun, TypeScript), pixel art on a 640×360 logical layout, drawn through a ×3 camera on a 1920×1080 canvas and FIT-scaled to the viewport (B28, B40), Roboto UI text (B40), English default with PT-BR localization, 5 heroes, 10 rounds per act with a boss at round 10, auto battle and game speed 1x/2x/3x from the prototype, static art in the prototype, Electron and Android only at the end of the Beta.
 
 ## 2. Scope by phase
 
@@ -808,6 +808,12 @@ Events show every outcome before the choice (no hidden chance, P3):
 | ev_forgotten_armory | Forgotten Armory | Search: gain 1 common equipment, the lowest-HP hero loses 8 HP · Leave |
 | ev_whispering_choir | Whispering Choir | Listen: remove 1 card (choose), +2 stress each hero · Leave |
 | ev_ember_pilgrim | Ember Pilgrim | Trade: pay 25 gold, upgrade 2 cards (choose) · Share the fire: heal 10 HP each hero · Leave |
+| ev_drowned_reliquary | Drowned Reliquary | Dive: H1 hero loses 8 HP, gain 1 common equipment · Pull the chain: the lowest-HP hero loses 5 HP, +35 gold · Leave |
+| ev_bone_cartographer | Bone Cartographer | Buy a map: pay 35 gold, choose 1 of 3 uncommon cards · Sell him a page: remove 1 card (choose), +25 gold · Leave |
+| ev_ashen_vigil | Ashen Vigil | Keep watch: H1 hero +3 stress, heal 15% max HP each hero · Sleep by the ashes: heal 10 HP each hero, +1 stress each · Leave |
+| ev_flagellant_procession | Flagellant Procession | Walk with them: +3 stress each hero, upgrade 2 cards (choose) · Give alms: pay 20 gold, −2 stress each hero · Leave |
+| ev_gravewright | The Gravewright | Bury a memory: the lowest-HP hero loses 6 HP, remove 1 card (choose) · Buy a relic: pay 45 gold, gain the common relic · Leave |
+| ev_sealed_grille | Sealed Grille | Confess: H1 hero −5 stress and loses 6 HP · Listen at the grille: upgrade 2 random cards (shown), +1 stress each hero · Leave |
 
 ### 22.5 Skill tree v1 (Embers, B21)
 

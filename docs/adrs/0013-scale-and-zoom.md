@@ -1,6 +1,6 @@
 # ADR 0013: Scale.NONE with integer zoom snapped to device pixels, base 640×360
 
-- Status: accepted
+- Status: superseded by ADR 0015 (2026-10-26)
 - Date: 2026-10-26
 
 ## Context

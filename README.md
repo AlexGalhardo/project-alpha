@@ -95,7 +95,7 @@ Colour-vision audit: `bun scripts/a11y/colorblind.ts` writes `docs/reports/2026-
 | git-cliff | 2.14.2 |
 | @commitlint/cli, @commitlint/config-conventional | 21.2.4 |
 
-Pixel fonts: Jersey 10, 15, 20, 25 and Tiny5, SIL Open Font License 1.1. Verify terms from the font files before shipping (ADR 0010).
+UI font: Roboto (Google Fonts), SIL Open Font License 1.1, copyright 2011 The Roboto Project Authors. Checked against the font licence file in google/fonts (`ofl/roboto/OFL.txt`) on 2026-10-26. Jersey and Tiny5 are no longer used (B40).
 
 ## License
 

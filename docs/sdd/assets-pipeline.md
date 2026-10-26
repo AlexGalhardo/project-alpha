@@ -6,7 +6,7 @@
 | Owner | Coordinator (`scripts/assets/`, `src/view/placeholders.ts`) |
 | Phase | STRUCTURE (placeholders, fonts) / PROTOTYPE (art, audio) |
 | Depends on | SDD-12, SDD-13, SDD-14 |
-| References | Art Bible (all), `.claude/rules/assets.md`, skills `alpha-art-assets`, `aseprite-pixel-assets`, `asset-animation`, `alpha-audio-assets`; ADR 0010 (bitmap fonts), 0014 (procedural placeholders) |
+| References | Art Bible (all), `.claude/rules/assets.md`, skills `alpha-art-assets`, `aseprite-pixel-assets`, `asset-animation`, `alpha-audio-assets`; ADR 0015 (Full HD render and Roboto; supersedes 0010), 0014 (procedural placeholders) |
 
 ## 1. Goal
 
@@ -22,7 +22,7 @@ Produce, validate and publish every visual, font and audio asset under the Art B
 - R-1 Keys and sizes: every asset key and canvas size from the Art Bible §7, §14; files in `public/assets/` named by key.
 - R-2 Placeholders (ADR 0014): `src/view/placeholders.ts` draws every key procedurally with the same size and shape+colour token; a missing file falls back to its placeholder.
 - R-3 Palette: every shipped image uses only the 31 master colours + transparency; alpha 0/255; colour budget per asset type (Art Bible §4.1).
-- R-4 Fonts (ADR 0010): `scripts/assets/fonts.ts` (Bun + `playwright-core` headless Chromium, no new dependency) renders each glyph of Jersey 10/15/20/25 and Tiny5 at native size on a canvas, thresholds alpha at 192 to 1-bit, packs glyphs with 1 px padding, and writes `public/assets/fonts/<token>.png` + BMFont `.xml`; charset per Art Bible §8; OFL licence files shipped.
+- R-4 Fonts (ADR 0015): Roboto from Google Fonts (400/500/700, `display=swap`), loaded by `index.html` and awaited at boot; no font atlas is built. The former Jersey/Tiny5 BMFont pipeline (ADR 0010) is retired.
 - R-5 Art: PixelLab drafts (cost gate first) → palette snap and cleanup in Aseprite (Lua, batch) → validators → publish; prompts from Art Bible §15; every generation logged in `art-src/` (prompt, parameters, date, cost).
 - R-6 Audio: ElevenLabs (cost gate first) → normalise to Art Bible §13.3 targets → `ogg` + `mp3` → publish; log in `art-src/audio-log.jsonl`.
 - R-7 Generation scripts are idempotent: an existing key is skipped unless `--force`.
@@ -33,7 +33,6 @@ Produce, validate and publish every visual, font and audio asset under the Art B
 
 ```text
 scripts/assets/
-├── fonts.ts        canvas-192 BMFont generator (playwright-core)
 ├── validate.ts     size per key, palette, alpha, colour budget, manifest consistency
 ├── manifest.ts     builds manifest.json from public/assets/
 └── audio-check.ts  duration, format pair, loudness report (ffmpeg if available; otherwise "not assessed")
@@ -46,7 +45,7 @@ art-src/
 ## 5. Acceptance criteria
 
 - AC-1 Given the placeholder set, then every key in the manifest renders at its Art Bible size with no file present.
-- AC-2 Given `bun scripts/assets/fonts.ts`, then each atlas PNG has exactly 2 colours (white, transparent) and the XML lists every charset glyph.
+- AC-2 Given the built game, then all text renders in Roboto (or the system sans-serif when the font CDN is unreachable) and no font atlas is requested.
 - AC-3 Given a sprite with a colour outside the master palette or a partial alpha pixel, then `validate.ts` fails with the key and pixel coordinates.
 - AC-4 Given a key whose PNG size differs from the Art Bible, then `validate.ts` fails.
 - AC-5 Given a second run of a generation script, then no paid call is made for existing keys.
@@ -54,7 +53,6 @@ art-src/
 
 ## 6. Edge cases
 
-- Glyphs absent from a source font (Jersey lacks `¤¦¬±²³µ¹¼½¾`): reported; build fails only if a dictionary uses them (SDD-14 AC-3).
 - Placeholder and final asset both present: the final asset wins.
 - ffmpeg not installed: loudness check reports "NOT ASSESSED" instead of passing silently.
 
@@ -67,7 +65,6 @@ art-src/
 ## 8. Verification
 
 ```sh
-bun scripts/assets/fonts.ts
 bun scripts/assets/validate.ts
 bun scripts/assets/manifest.ts
 ```

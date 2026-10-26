@@ -3,7 +3,7 @@
 ## Visual
 
 - Pixel art follows the `pixel-logic` skill, `docs/books/pixel-logic.md` and `docs/art-bible.md` (base resolution, scale, palette, outline, animation).
-- Scale is always integer (`pixelArt: true`, `roundPixels: true`). No fractional scale, no mixels, no antialiasing on the outer edge.
+- The canvas is FIT-scaled to the viewport (B40). Pixel textures use nearest filtering. Art is generated at native 1080p size: 3× the logical size (a 64×80 logical slot is 192×240 art). Art is never upscaled. Backgrounds are native 1920×1080, composed from generated pieces by `scripts/assets/stitch-bg.ts`. Units use one shared prompt template: side view; heroes face east (right), enemies face west (left). No mixels, no antialiasing on the outer edge of a pixel sprite.
 - A placeholder (SVG or rectangle) uses the **same dimensions and keys** as the final art. Swapping a placeholder for a sprite never touches logic.
 - Shared master palette defined in the Art Bible; no pure black.
 - The silhouette identifies heroes and enemies. Allies and enemies are never told apart by color alone.

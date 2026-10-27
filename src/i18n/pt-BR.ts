@@ -147,6 +147,20 @@ export const ptBR: Strings = {
 		skip: 'Pular',
 		gold: '+{gold} de ouro',
 	},
+	sanctum: {
+		title: 'Santuário',
+		text: 'Os ferimentos foram curados. Escolha uma bênção.',
+		heal: 'Repouso',
+		healText: 'Todo herói volta à vida máxima.',
+		remove: 'Expurgo',
+		removeText: 'Remova {count} cartas à sua escolha do baralho.',
+		upgrade: 'Têmpera',
+		upgradeText: 'Aprimore {count} cartas à sua escolha.',
+		gold: 'Dízimo',
+		goldText: '+{gold} de ouro (você ficará com {total}).',
+		pickRemove: 'Expurgo: escolha a carta {n} de {count}',
+		pickUpgrade: 'Têmpera: escolha a carta {n} de {count}',
+	},
 	summary: {
 		collapses: 'Colapsos: {count}',
 		victory: 'A Fenda está fechada por enquanto.',
@@ -686,6 +700,12 @@ export const ptBR: Strings = {
 		devour: 'Devora o herói mais estressado.',
 		unmaking: 'Desfaz: todos os heróis sofrem dano e ganham estresse.',
 		heartbeat: 'Batimento: cura a si mesma e ganha bloqueio.',
+		devour_weakest: 'Devora o herói com menos vida.',
+		choir_dirge: 'Entoa um réquiem: todos os heróis ganham estresse.',
+		cur_rend: 'Rasga o herói com menos vida e deixa Sangramento.',
+		chain_lash: 'Açoita os dois primeiros heróis com suas correntes.',
+		wraith_fade: 'Recua para a última posição e ganha bloqueio.',
+		wax_drip: 'Pinga cera escaldante no herói com menos vida; a queimadura sangra.',
 	},
 	card: {
 		shb_hack: {

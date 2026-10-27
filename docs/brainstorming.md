@@ -107,7 +107,8 @@ Ideas kept for later phases. "Smaller version" is what entered the prototype ins
 | Save that survives closing the tab; warning when the same run is open in two tabs; language switch mid-run | QA plan | — |
 | Turn-limit enrage: after turn 10 every enemy gains +1 Might per turn (visible status); combat turn cap 60 → 20 | QA playtest 1 (P2-9: 60-turn leech stalemate ended a run) | — |
 | Camp merged into the map screen as a side panel, shown only when something is affordable or a hero is stressed | QA playtest 1 (fun #5) | — |
-| One defensive starter line for back-rank heroes so parties without the Shieldbearer are viable | QA playtest 1 (P2-8, sim: 5.9% wins without him) | Simulate before changing data |
+| ~~One defensive starter line for back-rank heroes~~ done as Block/HP numbers (P2-8, sim report) | QA playtest 1 | — |
+| Front-rank rule: a party with neither Shieldbearer nor Confessor has no one to hold rank 1 (Marksman + Arcanist + Bombardier win 0.2%), and the Confessor is now in 85% of winning parties. Idea: whoever stands in H1 gets a class "Hold" card or a rank-1 Block bonus, so the front rank is a role, not a hero | P2-8 follow-up (docs/reports/2026-10-26-sim-prototype.md) | Design item, not now |
 
 ### Beta
 

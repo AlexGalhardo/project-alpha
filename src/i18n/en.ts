@@ -148,6 +148,20 @@ export const en = {
 		skip: 'Skip',
 		gold: '+{gold} gold',
 	},
+	sanctum: {
+		title: 'Sanctum',
+		text: 'Injuries are healed. Choose one blessing.',
+		heal: 'Rest',
+		healText: 'Every hero to full HP.',
+		remove: 'Purge',
+		removeText: 'Remove {count} cards of your choice from the deck.',
+		upgrade: 'Temper',
+		upgradeText: 'Upgrade {count} cards of your choice.',
+		gold: 'Tithe',
+		goldText: '+{gold} gold (you will have {total}).',
+		pickRemove: 'Purge: choose card {n} of {count}',
+		pickUpgrade: 'Temper: choose card {n} of {count}',
+	},
 	summary: {
 		collapses: 'Collapses: {count}',
 		victory: 'The Rift is closed for now.',
@@ -681,6 +695,12 @@ export const en = {
 		devour: 'Devours the most stressed hero.',
 		unmaking: 'Unmaking: every hero takes damage and gains stress.',
 		heartbeat: 'Heartbeat: heals itself and gains Block.',
+		devour_weakest: 'Devours the weakest hero.',
+		choir_dirge: 'Sings a dirge: every hero gains stress.',
+		cur_rend: 'Tears into the weakest hero and leaves a Bleed.',
+		chain_lash: 'Lashes the first two heroes with its chains.',
+		wraith_fade: 'Fades to the back rank and gains Block.',
+		wax_drip: 'Drips scalding wax on the weakest hero; the burn bleeds.',
 	},
 	card: {
 		shb_hack: {

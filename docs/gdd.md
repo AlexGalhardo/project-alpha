@@ -922,7 +922,7 @@ Three short paragraphs on the victory summary: the Rift closes from the inside; 
 - Four option tiles in one row (x 40 + i × 144, y 96, 128 × 160 in 640×360 space), each with a shape + colour icon (Rest: cross, rot2; Purge: X, blood2; Temper: anvil bar, gold2; Tithe: coin circle, gold2), a name (`sanctum.heal|remove|upgrade|gold`, ui) and the exact outcome under it (`sanctum.<option>Text`, tiny, wrapped to 116): e.g. "Every hero to full HP (Shieldbearer 34 → 60 …)" — the preview shows the real numbers.
 - Tap a tile to select (gold frame), tap again or press its button to confirm; keys 1–4 select, Enter confirms. Purge and Temper open the existing card picker twice (second pick excludes the first; Temper lists only cards not upgraded); Back cancels without spending the choice.
 - After the command the scene goes to Camp (`goNext`). Test ids: `sanctum-heal`, `sanctum-remove`, `sanctum-upgrade`, `sanctum-gold`, picker prefix `sanctum-card`.
-- Turning on: set `ACT_RULES.sanctum = true` in the same change as the scene, and step Act 3 damage up as in §23.7.
+- Shipped on (2026-10-26): `ACT_RULES.sanctum = true` with `SanctumScene` (e2e `tests/e2e/sanctum.spec.ts`). Picker titles `sanctum.pickRemove|pickUpgrade` ("Temper: choose card 1 of 2"); Back in the picker cancels the whole choice. With the Act 3 damage at 0.55 and the P2-8 hero changes, a 3-act run won 27.4% (200 runs per party, seed 1); Act 3 tuning continues in §23.7.
 
 ### 23.7 Tuning with the Sanctum (sim, 2026-10-26)
 

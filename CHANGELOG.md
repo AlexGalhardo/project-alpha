@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.9] - 2026-10-27
+
+### Added
+
+- **balance:** Let a Vanguard hero play from any rank and scale enemy damage by 1.25 ([411c2ce](https://github.com/AlexGalhardo/project-alpha/commit/411c2cebfe24eb622efa10d4472e04e64399a409))
+- **art:** Add native 180x120 card art, 1080p title and menu backgrounds and boss art ([b25d0d8](https://github.com/AlexGalhardo/project-alpha/commit/b25d0d8108c5cc0b73eea08fb954fbbf351a813d))
+- **ui:** Add keyboard navigation, reset progress, 24px tap targets and unplayable card reasons ([31385e2](https://github.com/AlexGalhardo/project-alpha/commit/31385e2f111bfc7dd86cec9f6556b6ee294dbfde))
+
+### Documentation
+
+- Record the any-rank Vanguard rule, enemy damage scale and the gate simulation ([5ae087e](https://github.com/AlexGalhardo/project-alpha/commit/5ae087ef04c0a9863526c4d6b31545c4877763f0))
+- Add the game director review and improvement session prompts ([cbfd944](https://github.com/AlexGalhardo/project-alpha/commit/cbfd94480572aba371b737b84318cf674af418b8))
+- Add the session handoff and update plan status, agents guide, rules and art skill ([bc01d03](https://github.com/AlexGalhardo/project-alpha/commit/bc01d03302039cd1231b01b5c854a01138b77236))
+
 ## [0.0.8] - 2026-10-27
 
 ### Added
@@ -193,6 +207,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **books:** Apply Pixel Logic and The Art of Game Design to this genre ([f23593e](https://github.com/AlexGalhardo/project-alpha/commit/f23593e4a6fe9161b8ffef7d51a3aaae6b15eff1))
 - Keep the project kickoff prompt ([a45f73b](https://github.com/AlexGalhardo/project-alpha/commit/a45f73b2c5647b12cc2903c6a90d387d74d06e99))
 - **skills:** Retarget project skills from the previous tactics game to this deckbuilder ([f535621](https://github.com/AlexGalhardo/project-alpha/commit/f535621369a0d22543be6643489eff4cf8b0c8cf))
+[0.0.9]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.8...v0.0.9>
 [0.0.8]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.7...v0.0.8>
 [0.0.7]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.6...v0.0.7>
 [0.0.6]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.5...v0.0.6>

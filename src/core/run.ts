@@ -424,6 +424,8 @@ function equip(c: Ctx, cmd: Extract<Command, { type: 'equip' }>): void {
 		s.stash.push(current);
 		if (cmd.slot === 'weapon') h.weapon = null;
 		else h.relic = null;
+		// Removing a max-HP relic lowers the maximum; never leave HP above it.
+		h.hp = Math.min(h.hp, maxHP(h));
 		return;
 	}
 	const at = s.stash.indexOf(cmd.item);

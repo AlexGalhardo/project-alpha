@@ -26,6 +26,9 @@ interface PartyResult {
 	runs: number;
 	wins: number;
 	act1Clears: number;
+	/** Runs that entered act k+1 (index k) and runs that beat its boss; sized to ACT_RULES.acts. */
+	reached: number[];
+	cleared: number[];
 	rounds: number;
 	collapseRuns: number;
 	falls: number;
@@ -72,6 +75,8 @@ function runParty(job: Job): PartyResult {
 		runs: job.runs,
 		wins: 0,
 		act1Clears: 0,
+		reached: [0, 0, 0],
+		cleared: [0, 0, 0],
 		rounds: 0,
 		collapseRuns: 0,
 		falls: 0,
@@ -86,6 +91,11 @@ function runParty(job: Job): PartyResult {
 		if (s.stats.collapses > 0) res.collapseRuns++;
 		for (const c of s.stats.combats) res.turns[c.kind].push(c.turns);
 		if (s.bossesWon >= 1) res.act1Clears++;
+		const acts = data.ACT_RULES.acts;
+		for (let k = 0; k < acts; k++) {
+			if (s.bossesWon >= k) res.reached[k] = (res.reached[k] ?? 0) + 1;
+			if (s.bossesWon >= k + 1) res.cleared[k] = (res.cleared[k] ?? 0) + 1;
+		}
 		if (s.phase === 'victory') res.wins++;
 		else {
 			const row = `A${s.act ?? 1}R${s.currentNode?.row ?? 0}`;
@@ -157,6 +167,8 @@ async function main(): Promise<void> {
 	const collapseRuns = results.reduce((a, r) => a + r.collapseRuns, 0);
 	const falls = results.reduce((a, r) => a + r.falls, 0);
 	const embers = results.reduce((a, r) => a + r.embers, 0);
+	const actReached = [0, 1, 2].map((k) => results.reduce((a, r) => a + (r.reached[k] ?? 0), 0));
+	const actCleared = [0, 1, 2].map((k) => results.reduce((a, r) => a + (r.cleared[k] ?? 0), 0));
 	const turns = { common: [] as number[], elite: [] as number[], boss: [] as number[] };
 	const deathRow: Record<string, number> = {};
 	const heroWins: Record<string, number> = {};
@@ -185,6 +197,20 @@ async function main(): Promise<void> {
 					elite: mean(turns.elite),
 					boss: mean(turns.boss),
 				},
+				turnStats: Object.fromEntries(
+					(['common', 'elite', 'boss'] as const).map((k) => [
+						k,
+						{
+							mean: mean(turns[k]),
+							median: pct(turns[k], 0.5),
+							p90: pct(turns[k], 0.9),
+							n: turns[k].length,
+						},
+					]),
+				),
+				actReached,
+				actCleared,
+				deathRow,
 				heroShare: Object.fromEntries(
 					HERO_CLASSES.map((h) => [h, wins ? (heroWins[h] ?? 0) / wins : 0]),
 				),

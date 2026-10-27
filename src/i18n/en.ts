@@ -193,6 +193,11 @@ export const en = {
 			name: 'Block',
 			tooltip: "Absorbs damage from hits. Resets at the start of its owner's turn.",
 		},
+		vanguard: {
+			name: 'Vanguard',
+			tooltip:
+				'In rank 1, a hero who is not a front-liner braces: +{block} Block at the start of each turn.',
+		},
 		enraged: {
 			name: 'Enraged',
 			tooltip: 'From turn {turn}, every enemy gains +1 Might each turn.',

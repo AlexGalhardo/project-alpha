@@ -171,6 +171,30 @@ const ENEMIES: Spec[] = [
 		humanoid(P.bone0, P.blood1, () => undefined),
 	),
 	enemy('rift_spawn', 48, 48, blob(P.rift1, P.rot2, 4)),
+	// Act 2: their art is drawn at 3× (192×240 for 64×80), so the spec gives the logical size;
+	// without it a 3× texture would be shown at 3× (QA playtest 2).
+	enemy(
+		'vault_warden',
+		64,
+		80,
+		humanoid(P.iron0, P.gold1, () => undefined),
+	),
+	enemy('bone_lancer', 64, 80, tall(P.bone1, P.ash4)),
+	enemy('censer_wraith', 64, 80, tall(P.ash3, P.ember2)),
+	enemy('flesh_organ', 80, 112, tall(P.blood1, P.bone1)),
+	enemy('gutter_crawler', 48, 48, blob(P.rot1, P.ash4, 4)),
+	enemy(
+		'relic_thief',
+		64,
+		80,
+		humanoid(P.ash2, P.gold1, () => undefined),
+	),
+	enemy('mirror_saint', 64, 80, tall(P.bone2, P.gold2)),
+	enemy('hollow_bishop', 64, 80, tall(P.ash4, P.blood2)),
+	enemy('chain_golem', 80, 112, tall(P.iron0, P.iron2)),
+	enemy('rot_cherub', 48, 48, blob(P.rot2, P.bone1, 2)),
+	// Act 2 boss: 400×360 art shown in the same 160×144 box as the Bell-Maw.
+	enemy('gilded_penitent', 160, 144, tall(P.gold1, P.bone1)),
 	{
 		key: 'enemy.rift_mother',
 		w: 160,

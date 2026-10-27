@@ -192,6 +192,11 @@ export const ptBR: Strings = {
 			name: 'Bloqueio',
 			tooltip: 'Absorve dano dos golpes. Zera no início do turno do dono.',
 		},
+		vanguard: {
+			name: 'Vanguarda',
+			tooltip:
+				'Na posição 1, um herói que não é da linha de frente se prepara: +{block} de Bloqueio no início de cada turno.',
+		},
 		enraged: {
 			name: 'Enfurecido',
 			tooltip: 'A partir do turno {turn}, todo inimigo ganha +1 de Força a cada turno.',

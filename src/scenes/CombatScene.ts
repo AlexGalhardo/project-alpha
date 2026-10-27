@@ -11,7 +11,7 @@ import {
 	preview,
 	type Target,
 } from '../core';
-import { ACT_RULES, CARDS } from '../data';
+import { ACT_RULES, CARDS, HEROES, RULES } from '../data';
 import { app } from '../view/app';
 import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardKeywords, cardName, cardText, drawCard } from '../view/cards';
@@ -139,6 +139,7 @@ export class CombatScene extends Phaser.Scene {
 	/** Unit sprites of the current frame: pop-ups start at their top, lunges move them. */
 	private unitImg = new Map<UnitKey, Phaser.GameObjects.Image>();
 	private tipObjs: Phaser.GameObjects.GameObject[] = [];
+	private popStack = new Map<number, { t: number; n: number }>();
 	private autoTimer: Phaser.Time.TimerEvent | null = null;
 	private speedBtn!: Button;
 	private autoBtn!: Button;
@@ -326,7 +327,7 @@ export class CombatScene extends Phaser.Scene {
 		this.layer.add(label(this, 488, 6, `${t('hud.gold')} ${state?.gold ?? 0}`, 'ui', 'gold2'));
 	}
 
-	private statusRow(x: number, y: number, s: HeroView['status']): void {
+	private statusRow(x: number, y: number, s: HeroView['status'], vanguard = false): void {
 		const entries: [string, number][] = [
 			['block', s.block],
 			['might', s.might],
@@ -346,6 +347,16 @@ export class CombatScene extends Phaser.Scene {
 			icon.setInteractive().on('pointerup', () => this.tooltip(t(`status.${key}.tooltip`)));
 			this.layer.add([icon, num]);
 			i++;
+		}
+		// Vanguard (GDD 5.2): a non-front-liner in rank 1 braces every turn; say why it has Block.
+		if (vanguard) {
+			const tag = label(this, x + i * 18, y - 1, t('status.vanguard.name'), 'tiny', 'ward1');
+			tag.setInteractive()
+				.setName('vanguard')
+				.on('pointerup', () =>
+					this.tooltip(t('status.vanguard.tooltip', { block: RULES.vanguardBlock })),
+				);
+			this.layer.add(tag);
 		}
 	}
 
@@ -380,7 +391,8 @@ export class CombatScene extends Phaser.Scene {
 		}
 		this.layer.add(pips);
 		this.hpBar(x + 8, 193, h.hp, h.maxHP, h.status.block);
-		this.statusRow(x + 4, 210, h.status);
+		const vanguard = h.rank === 1 && RULES.vanguardBlock > 0 && HEROES[h.id].frontOrder > 1;
+		this.statusRow(x + 4, 210, h.status, vanguard);
 		// The zone starts below the intent strip (y 24–44) so intent icons keep their own taps.
 		const zone = this.add
 			.zone(x, 44, SLOT_W, FLOOR_Y - 44)
@@ -1113,11 +1125,17 @@ export class CombatScene extends Phaser.Scene {
 		}
 		if (!text) return;
 		// Art Bible §12.1 number pop: h2, rise 12 px in 600 ms, hold 200 ms, fade 200 ms.
-		const pop = label(this, pos.x, pos.y, text, 'h2', color)
+		// Pops on the same unit within 350 ms stack upwards instead of overlapping.
+		const slot = Math.round(pos.x);
+		const prev = this.popStack.get(slot);
+		const n = prev && this.time.now - prev.t < 350 ? prev.n + 1 : 0;
+		this.popStack.set(slot, { t: this.time.now, n });
+		const y = pos.y - n * 16;
+		const pop = label(this, pos.x, y, text, 'h2', color)
 			.setOrigin(0.5, 1)
 			.setStroke(css('ash0'), 4)
 			.setDepth(40);
-		this.tweens.add({ targets: pop, y: pos.y - 12, duration: 600, ease: 'Cubic.easeOut' });
+		this.tweens.add({ targets: pop, y: y - 12, duration: 600, ease: 'Cubic.easeOut' });
 		this.tweens.add({
 			targets: pop,
 			alpha: 0,

@@ -200,7 +200,7 @@ Exclusive choice of one:
 
 Turn queue: enemies sorted by **Speed** descending, ties → lower rank first. The queue is always visible (top bar).
 
-**Enrage and turn cap ⚖.** From combat turn 10, at the start of each player turn every enemy gains +1 Might (shown as the "Enraged" warning in the top bar, announced from turn 8). It is applied before the player acts, so the intents on screen already include it (P3). A combat that reaches turn 30 counts as a loss. Why: a stalemate (for example two Lantern Leeches draining against a healer) used to run to a 60-turn cap and end the run after about 30 minutes at 1x (QA playtest 1, P2-9); enrage turns the stall into visible, rising pressure.
+**Enrage and turn cap ⚖.** From combat turn 10, at the start of each player turn every enemy gains +1 Might (shown as the "Enraged" warning in the top bar, announced from turn 8). It is applied before the player acts, so the intents on screen already include it (P3). A combat that reaches turn 30 counts as a loss. Why: a safety net, not a measured fix. Drain/heal stalemates and long boss fights must end in visible, rising pressure instead of a silent 60-turn cap (QA playtest 1, P2-9 with its errata: the 60-turn fight seen there came mostly from a bug in the scripted player).
 
 ### 5.3 Cards, energy and piles ⚖
 

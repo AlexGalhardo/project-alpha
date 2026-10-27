@@ -56,7 +56,7 @@ Screen: camp (`r1-camp.png`). Observed: "Card for sale: Pinning Shot 35 gold" an
 **P2-8 Dominant hero: Shieldbearer.**
 Data (sim, 2000 runs, 2 acts): Shieldbearer is in 91.7% of winning parties; parties without him win 5.9% (target ≥ 25%); Marksman/Arcanist/Bombardier present in winning parties 39–44% with win rates 18–21%. Playtests agree: all 3 parties without Shieldbearer died by Act 1 round 7 (r2, r3, r5). Expected: rule game-design.md "estratégia dominante é defeito de prioridade alta". Proposal (double/halve rule, needs `bun run sim` before/after and a report): give one starter card of each back-rank hero a defensive line (e.g. Marksman Sidestep 5 → 10 Block; Bombardier gets "Smoke: 6 Block to H1"), or let the first rank-1 hero of any class take Taunt from a common card. Not changed here (balance is outside QA scope).
 
-**P2-9 60-turn stalemate ends the run.**
+**P2-9 60-turn stalemate ends the run.** *Correction (same day): the scripted player of r4/r5 scored hits on `target.type` instead of `target.side`, so it valued attacks at 0 and mostly blocked and healed. The 60-turn fight below is mostly that bug; the Lantern Leech drain is real but the stalemate is not proven. Enrage + a 30-turn cap shipped anyway as a safety net (GDD §5.2).*
 Run r5 (Bombardier/Marksman/Confessor, manual): encounter B2 (Graft Hound + 2 Lantern Leech) lasted 60 turns and counted as a loss; hero HP went 24/13/44 → 51/36 because the leeches' Drain heals them and the Confessor kept healing. At 1x a human would spend about 30 minutes in this fight. Expected: GDD §5.7 common 3–6 turns. Fix options: lower `turnCap` in `src/data/economy.ts` from 60 to 20 and add an "enrage" (+1 Might to every enemy each turn after turn 10, shown as a status), so the stall is visible and solvable; or cap Drain self-heal at 50% of damage dealt.
 
 **P2-10 Pixel font draws "m" as a solid box.** *(font)*
@@ -117,3 +117,9 @@ Ranked by impact / effort. All keep guaranteed hits, visible intents, previews a
 ## Not checked
 
 Audio by ear, Safari/Firefox, real phones, slow network, WebGL off, colour-blind modes, PT-BR text fit on every screen (the i18n tables have all 495 keys in both locales; only `Auto`, `Elite`, `Confessor`, `Inferno` and the title are identical, which is correct).
+
+## Errata (2026-10-26, later the same day)
+
+- **Scripted player bug.** The preview-scored manual player of r4 and r5 read hits with `target.type` instead of `target.side`, so it scored every attack at 0 and mostly blocked and healed. The long fights of r4 (11–12 turns) and the 60-turn fight of r5 (P2-9) are mostly that bug. The enrage rule and the 30-turn cap (GDD §5.2) shipped as a safety net, not as a measured fix. The driver is fixed; later runs use it.
+- **P3-3 Rite arrows.** The hit area was 28×20, not 5×10 (the earlier measure took the glyph bounds). Still under 24 px high; now 28×24.
+- **Auto battle stall** (interim message): driver error, not a game bug (`app.auto` persists between combats).

@@ -22,6 +22,25 @@ bun run build        # production build
 bun run ci           # lint, typecheck, unit tests, markdown lint, build
 ```
 
+## Install (players)
+
+Each release on GitHub has the builds attached. The assets for the latest release are listed on the Releases page of the repository.
+
+| Asset | Platform | How to run |
+| --- | --- | --- |
+| `Ossuary.<version>.exe` | Windows desktop (Electron, portable) | Download and run. Windows may show a warning because the build is not code-signed (not verified on every machine). |
+| `ossuary-web-v<version>.tar.gz` | Any browser | Extract, then serve the folder with any static file server. The live build is at [alpha.lekzera.xyz](https://alpha.lekzera.xyz). |
+| `ossuary-v<version>-debug.apk` | Android (Capacitor) | Attached only when a release is built with the Android SDK. v0.0.6 has no APK. Install on a device that allows unknown sources. |
+| `checksums.txt` | All | SHA-256 of each asset. Check the download with `sha256sum <file>` and compare. |
+
+Desktop and Android builds from source (developers):
+
+```bash
+bun run desktop:dev       # Electron window on the dev build
+bun run desktop:build     # Windows portable exe into release/ (Windows only)
+bun run android:build     # Android debug APK; needs the Android SDK (ANDROID_HOME)
+```
+
 ## Commands
 
 | Command | What it does |

@@ -743,7 +743,7 @@ Playtest questions: Did you understand why you took damage? Which hero did you m
 | Q-NAME-CHECK | Trademark/domain check for "Ossuary" and the proper nouns of §16.1 | Developer | 2026-11-02 |
 | Q-HERO | Personal names and 2-line backstories for the 5 heroes | Coordinator | 2026-11-02 |
 | Q-LEGACY-NAME | Final name of the legacy currency (provisional "Embers") | Coordinator | 2026-11-02 |
-| Q-ZOOM | Integer zoom on real phones with browser UI visible | Coordinator (prototype spike) | 2026-11-09 |
+| Q-ZOOM | Resolved by ADR 0015: 1920×1080 internal canvas, FIT scaling, camera zoom 3 | Coordinator | 2026-10-26 |
 | Q-BALANCE-1 | First simulation pass on every ⚖ value of §5–§12 | Coordinator | end of prototype group "combat core" |
 
 ## 22. Alpha content (specified 2026-10-26, coordinator)
@@ -847,7 +847,7 @@ Card A / card B per hero, in table order: Shieldbearer rampart/riposte, Marksman
 
 ## 23. Act 3 and the final boss (1.0 content, specified 2026-10-26)
 
-Everything here is ⚖. Numbers below are the shipped data after the sim pass of 2026-10-26 (Act 3 HP × 0.75 and damage × 0.5 of the first draft, final boss 160 HP): a 3-act run wins 21.9% (`bun run sim -- --runs 200 --seed 1`, target 18–35%).
+Everything here is ⚖. Numbers below are the shipped data after the act-balance pass of 2026-10-26 (Act 3 HP × 0.75 and damage × 0.65 of the first draft, final boss 160 HP, Sanctum on): a 3-act run wins 21.3%, and Act 3 is the hardest act (clear 48.5% vs Act 2 61.4% and Act 1 71.4%; `docs/reports/2026-10-26-sim-act-balance.md`).
 
 ### 23.1 Run flow with three acts
 
@@ -870,15 +870,15 @@ Everything here is ⚖. Numbers below are the shipped data after the sim pass of
 
 | Key | Name | Ranks | HP | Speed | Intent cycle |
 |---|---|---|---|---|---|
-| iron_mourner | Iron Mourner | E1 | 27 | 2 | Toll-Hammer 4 (front) → Brace: 10 Block → Toll-Hammer 4 + 1 stress (front) |
-| grave_cur | Grave Cur | E1–2 | 18 | 7 | Snap 2 ×2 (front) → Rend 2 + 3 Bleed (lowest-HP) → Snap 2 ×2 |
-| ash_cantor | Ash Cantor | E3–4 | 16 | 3 | Lament: +2 stress (highest-stress) → Kindle: +1 Might to all enemies → Ember 3 (back) |
-| bronze_scribe | Bronze Scribe | E2–3 | 20 | 4 | Mark the Name: 2 Marked (front) → Etch 4 (marked) → Seal: 1 Ward to every enemy |
+| iron_mourner | Iron Mourner | E1 | 27 | 2 | Toll-Hammer 6 (front) → Brace: 10 Block → Toll-Hammer 6 + 1 stress (front) |
+| grave_cur | Grave Cur | E1–2 | 18 | 7 | Snap 3 ×2 (front) → Rend 3 + 3 Bleed (lowest-HP) → Snap 3 ×2 |
+| ash_cantor | Ash Cantor | E3–4 | 16 | 3 | Lament: +2 stress (highest-stress) → Kindle: +1 Might to all enemies → Ember 4 (back) |
+| bronze_scribe | Bronze Scribe | E2–3 | 20 | 4 | Mark the Name: 2 Marked (front) → Etch 5 (marked) → Seal: 1 Ward to every enemy |
 | hollow_choir | Hollow Choir | E4 | 22 | 1 | Dirge: +1 stress to every hero → Hush: 1 Weakened to every hero → Dirge |
-| sepulchre_knight | Sepulchre Knight | E1 | 36 | 2 | Wind-up (telegraph) → Execution 9 (front) → Iron Wall: 14 Block |
-| wax_saint | Wax Saint | E2–4 | 15 | 5 | Drip 2 + 2 Bleed (lowest-HP) → Mend Wax: heals itself 8 → Drip |
-| chain_wraith | Chain Wraith | E2–3 | 16 | 6 | Drag 2, swaps H1 and H2 (front) → Lash 3 to H1 and H2 → Fade: 8 Block, moves to E4 |
-| marrow_butcher | Marrow Butcher | E1–2 | 24 | 4 | Cleave 4 to H1 and H2 → Frenzy: +2 Might → Cleave 4 to H1 and H2 |
+| sepulchre_knight | Sepulchre Knight | E1 | 36 | 2 | Wind-up (telegraph) → Execution 12 (front) → Iron Wall: 14 Block |
+| wax_saint | Wax Saint | E2–4 | 15 | 5 | Drip 3 + 2 Bleed (lowest-HP) → Mend Wax: heals itself 8 → Drip |
+| chain_wraith | Chain Wraith | E2–3 | 16 | 6 | Drag 3, swaps H1 and H2 (front) → Lash 4 to H1 and H2 → Fade: 8 Block, moves to E4 |
+| marrow_butcher | Marrow Butcher | E1–2 | 24 | 4 | Cleave 5 to H1 and H2 → Frenzy: +2 Might → Cleave 5 to H1 and H2 |
 | rift_spawn | Rift Spawn | E1–3 | 8 | 6 | Bite 2 ×2 (front) |
 
 ### 23.3 Act 3 encounters and elites
@@ -905,9 +905,9 @@ The Rift Mother (`rift_mother`, "A Mãe da Fenda"): the wound itself grown a bod
 
 | Phase | Trigger | Intent cycle |
 |---|---|---|
-| 1 | start | Embrace 7 (front) → Wail: +2 stress to every hero → Coil: 15 Block |
-| 2 | HP ≤ 110 | Rend the Veil 3 to every hero → Devour 9 (highest-stress) → Wail |
-| 3 | HP ≤ 55 | Unmaking: 4 to every hero and +1 stress each → Devour 10 (lowest-HP) → Heartbeat: heals 15, 10 Block |
+| 1 | start | Embrace 9 (front) → Wail: +2 stress to every hero → Coil: 15 Block |
+| 2 | HP ≤ 110 | Rend the Veil 4 to every hero → Devour 12 (highest-stress) → Wail |
+| 3 | HP ≤ 55 | Unmaking: 5 to every hero and +1 stress each → Devour 13 (lowest-HP) → Heartbeat: heals 15, 10 Block |
 
 Rite 10 (§13.3) adds Embrace to her phase-2 and phase-3 cycles.
 
@@ -926,15 +926,12 @@ Three short paragraphs on the victory summary: the Rift closes from the inside; 
 
 ### 23.7 Tuning with the Sanctum (sim, 2026-10-26)
 
-`bun run sim -- --runs 200 --seed 1 --set ACT_RULES.sanctum=1`, act clear rates are of the runs that entered the act:
+`bun run sim -- --runs 400 --seed 1` with the Sanctum on and the Act 1–2 changes committed the same day (turn-limit enrage, Rite 2 tweak, P2-8 buffs). Act clear rates are of the runs that entered the act:
 
-| Act 3 damage (× first draft) | Sanctum | Win | Act 1 | Act 2 | Act 3 |
-|---|---|---|---|---|---|
-| 0.50 (shipped v0.0.6) | off | 21.0% | 64.7% | 48.1% | 67.5% |
-| 0.50 | on | 23.9% | 64.7% | 51.9% | 71.1% |
-| 0.55 | on | 19.5% | 58.2% | 51.8% | 64.7% |
-| 0.60 | on | 16.7% | 58.2% | 51.8% | 55.4% |
-| 0.65 | on | 14.5% | 58.2% | 51.8% | 48.3% |
-| 0.75 | on | 10.9% | 64.7% | 51.9% | 32.4% |
+| Act 3 damage (× first draft) | Win | Act 1 | Act 2 | Act 3 |
+|---|---|---|---|---|
+| 0.55 | 27.8% | 71.4% | 61.4% | 63.5% |
+| **0.65 (shipped)** | **21.3%** | 71.4% | 61.4% | **48.5%** |
+| 0.75 | 15.4% | 71.4% | 61.4% | 35.3% |
 
-(100-run rows: 0.50 and 0.75; the others 200 runs.) The two goals conflict with the current Acts 1–2: the run win is Act 1 × Act 2 × Act 3 clear, so with Act 1 ≈ 58% and Act 2 ≈ 52% the run can only reach 18% if Act 3 clears ≥ 60%, i.e. easier than Act 2. Decision for the switch-on: Act 3 damage 0.55 (Toll-Hammer 5, Execution 10, Drip 3, Drag 3, Embrace 8, Devour 10 / 11; the rest unchanged), win 19.5%. To make Act 3 the hardest act as well, raise the Act 2 clear rate toward 60% first (Act 2 data, Sonnet).
+Act 2 already clears about 60%, so no Act 2 change was needed. At 0.65 every goal holds: the run wins 18–35% and Act 3 is the hardest act. Shared intent ids were split so each id has one meaning: Act 3 uses `choir_dirge`, `cur_rend`, `chain_lash`, `wraith_fade`, `wax_drip`, and the Rift Mother's phase-3 Devour is `devour_weakest`.

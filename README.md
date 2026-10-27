@@ -8,7 +8,7 @@ Screenshots are not committed. After `bunx playwright test tests/e2e/screens.spe
 
 - Prototype (Act 1, web): feature-complete with generated pixel art (PixelLab batch 1) and generated audio (ElevenLabs, 4 music loops and 35 SFX). Manual QA is pending; see `docs/reports/2026-10-26-qa-prototype.md`.
 - Alpha in progress: Act 2, event and treasure nodes, the Legacy skill tree. Specs in `docs/sdd/` (SDD-20 to SDD-22).
-- Web build only (Phaser 4, TypeScript, Bun). Electron and Android come at the end of the Beta. The working title is not cleared for release (see `docs/gdd.md`, Q-NAME-CHECK).
+- Web (Phaser 4, TypeScript, Bun), Windows desktop (Electron) and Android (Capacitor) builds from the same code. The working title is not cleared for release (see `docs/store-page.md`).
 
 ## Quick start
 

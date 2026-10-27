@@ -36,7 +36,7 @@ Fix the layers, the file layout and the single data flow of the game: the player
 
 ```text
 src/
-├── main.ts              Phaser.Game config (pixelArt, Scale.NONE, 640×360, zoom from platform/zoom.ts)
+├── main.ts              Phaser.Game config (1920×1080, Scale.FIT, camera zoom 3 over 640×360 layout; ADR 0015)
 ├── core/                Sonnet  pure rules (current files on 2026-10-26: types, rng, ops, cards, combat, map, rewards)
 │   ├── types.ts         RunState, CombatState, HeroState, Enemy, Command, DomainEvent unions
 │   ├── rng.ts           seeded PRNG + streams (SDD-02)

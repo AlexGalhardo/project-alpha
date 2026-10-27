@@ -25,7 +25,7 @@
 		"desktop:dev": "bun run build && electron .",
 		"desktop:build": "bun run build && electron-builder --win portable",
 		"android:sync": "bun run build && cap sync android",
-		"android:build": "bun run android:sync && cd android && gradlew.bat assembleDebug"
+		"android:build": "bun run android:sync && cd android && ./gradlew.bat assembleDebug"
 	},
 	"dependencies": {
 		"@capacitor/android": "8.5.3",

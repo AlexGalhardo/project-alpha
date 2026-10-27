@@ -113,7 +113,7 @@ Embers → skill tree branches and unlocks (options, not raw power, B21–B22).
 | Term | Definition |
 |---|---|
 | Run | One attempt from party select to victory or party wipe. |
-| Act | 10 rounds; the prototype has Act 1 only. |
+| Act | 10 rounds. The game ships 3 acts (§23.1); between acts the Sanctum offers one recovery (§23.1, §23.6). |
 | Round | One map node. Round number = map row (1–10). Every node counts (B09). |
 | Combat turn | One player turn + one enemy turn inside a combat. |
 
@@ -200,7 +200,7 @@ Exclusive choice of one:
 
 Turn queue: enemies sorted by **Speed** descending, ties → lower rank first. The queue is always visible (top bar).
 
-A combat that reaches the 60-turn cap counts as a loss.
+**Enrage and turn cap ⚖.** From combat turn 10, at the start of each player turn every enemy gains +1 Might (shown as the "Enraged" warning in the top bar, announced from turn 8). It is applied before the player acts, so the intents on screen already include it (P3). A combat that reaches turn 30 counts as a loss. Why: a stalemate (for example two Lantern Leeches draining against a healer) used to run to a 60-turn cap and end the run after about 30 minutes at 1x (QA playtest 1, P2-9); enrage turns the stall into visible, rising pressure.
 
 ### 5.3 Cards, energy and piles ⚖
 
@@ -251,7 +251,7 @@ heal      = min(amount, maxHP - HP)        // healing never exceeds max HP; fall
 
 ## 6. Statuses and keywords
 
-### 6.1 Statuses (8) ⚖
+### 6.1 Statuses (9) ⚖
 
 | Status | Applies to | Effect | Decay |
 |---|---|---|---|
@@ -262,6 +262,7 @@ heal      = min(amount, maxHP - HP)        // healing never exceeds max HP; fall
 | Bleed N | all | Loses N HP at the start of the owner's turn. | Then N −1. |
 | Burn N | all | Loses N HP at the end of the owner's turn. | Then N = floor(N / 2). |
 | Ward N | all | Negates the next N debuff applications (Marked, Weakened, Bleed, Burn, Stunned). | −1 per negation. |
+| Enraged | enemies (combat-wide) | From combat turn 10, +1 Might at the start of each player turn (§5.2). | Lasts the combat. |
 | Stunned | enemies only | Its next intent is skipped and consumed; the cycle advances. Immune to Stun until its next performed action. | When the skipped intent is consumed. |
 
 Status icons pair a color with a distinct shape (Art Bible). Stacks show as a number in the icon corner.
@@ -313,8 +314,10 @@ Status icons pair a color with a distinct shape (Art Bible). Stacks show as a nu
 | `shieldbearer` | Shieldbearer | tank | H1 | 60 | Block, Taunt, protects allies |
 | `marksman` | Marksman | single-target damage | H2–H3 | 42 | Marked, precision, reach any rank |
 | `arcanist` | Arcanist | area damage | H2–H3 | 38 | Burn, area hits, pays in stress (Dread) |
-| `confessor` | Confessor | support/healer | H2–H3 | 44 | Heal, Ward, stress relief |
+| `confessor` | Confessor | support/healer | H2–H3 | 52 | Heal, Ward, stress relief |
 | `bombardier` | Bombardier | artillery | H3 | 48 | Splash, back-rank hits, Stun |
+
+Anti-dominance pass ⚖ (QA playtest 1, P2-8): parties without the Shieldbearer won 5.8% of 2-act runs. Confessor 44 → 52 HP; Ash Veil and Sanctuary 5 → 10 Block (13 upgraded); Sandbags gives the adjacent hero 3 → 6 Block. Result and method: `docs/reports/2026-10-26-sim-prototype.md`.
 
 Party: choose 3 of 5 in Party select and assign ranks H1–H3 (B02). Default suggestion for the first run: Shieldbearer (H1), Confessor (H2), Marksman (H3).
 
@@ -383,7 +386,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | Id | Name | Cost | Type | Rarity | From | Target | Effect | + |
 |---|---|---|---|---|---|---|---|---|
 | arc_ember_bolt | Ember Bolt | 1 | Attack | starter ×2 | H2–3 | any | 7 damage | 10 |
-| arc_ash_veil | Ash Veil | 1 | Skill | starter | any | ally | 5 Block | 8 |
+| arc_ash_veil | Ash Veil | 1 | Skill | starter | any | ally | 10 Block | 13 |
 | arc_rift_spark | Rift Spark | 2 | Attack | starter | H2–3 | all | 5 damage to each enemy; Dread 1 | 7 |
 | arc_burn_hex | Burn Hex | 1 | Skill | common | H2–3 | any | 4 Burn | 6 |
 | arc_channel | Channel | 1 | Skill | common | any | self | Next turn +2 energy; Exhaust | cost 0 |
@@ -397,7 +400,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | Id | Name | Cost | Type | Rarity | From | Target | Effect | + |
 |---|---|---|---|---|---|---|---|---|
 | cnf_censer_strike | Censer Strike | 1 | Attack | starter ×2 | H1–3 | E1–2 | 5 damage; heal the lowest-HP hero 2 | 7 / 3 |
-| cnf_sanctuary | Sanctuary | 1 | Skill | starter | any | ally | 5 Block; Ward 1 | 8 |
+| cnf_sanctuary | Sanctuary | 1 | Skill | starter | any | ally | 10 Block; Ward 1 | 13 |
 | cnf_mend | Mend | 1 | Skill | starter | any | ally | Heal 6 | 9 |
 | cnf_absolve | Absolve | 1 | Skill | common | any | ally | Remove all debuffs; −2 stress | −3 stress |
 | cnf_litany | Litany | 1 | Skill | common | any | all heroes | 3 Block and −1 stress to each hero | 5 Block |
@@ -411,7 +414,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | Id | Name | Cost | Type | Rarity | From | Target | Effect | + |
 |---|---|---|---|---|---|---|---|---|
 | bmb_grapeshot | Grapeshot | 1 | Attack | starter ×2 | H2–3 | E1 + E2 | 4 damage to each | 6 |
-| bmb_sandbags | Sandbags | 1 | Skill | starter | any | self | 6 Block to self; 3 Block to the adjacent hero | 9 / 4 |
+| bmb_sandbags | Sandbags | 1 | Skill | starter | any | self | 6 Block to self; 6 Block to the adjacent hero | 9 / 7 |
 | bmb_shell | Shell | 2 | Attack | starter | H3 | E2–4 | 11 damage; Splash 4 | 15 / 6 |
 | bmb_incendiary | Incendiary | 1 | Attack | common | H2–3 | any | 3 damage and 3 Burn to target and adjacent enemies | 4 / 4 |
 | bmb_reload | Reload | 0 | Skill | common | any | self | Draw 1; each hit of this hero's next attack card this turn +4 damage | +6 |
@@ -849,6 +852,16 @@ Everything here is ⚖. Numbers below are the shipped data after the sim pass of
 ### 23.1 Run flow with three acts
 
 - `ACT_RULES.acts = 3` ships. After the Act 2 boss reward the camp opens, then the Act 3 map starts at row 1; between acts every hero heals 50% of max HP and loses any injury (§22.1).
+- **Sanctum** (between acts, replaces the flat 50% heal when `ACT_RULES.sanctum` is on): after every non-final boss reward, every hero loses any injury, then the player takes exactly **one** of four recoveries, then the camp opens as before:
+
+  | Option | Effect | Needs |
+  |---|---|---|
+  | Rest | Every hero to full HP | — |
+  | Purge | Remove 2 cards of your choice from the deck | 2 cards in the deck |
+  | Temper | Upgrade 2 cards of your choice | 2 cards not upgraded yet (or as many as remain) |
+  | Tithe | +60 gold | — |
+
+  Command: `sanctumChoose { option: 'heal' | 'remove' | 'upgrade' | 'gold', cardUids? }` (`SANCTUM` in `src/data/economy.ts`). Phase `sanctum`, screen key `sanctum`, scene key `Sanctum`.
 - Victory = Act 3 boss defeated; the run summary shows the final epilogue (`boss.rift_mother.epilogue`).
 - Act scaling (§4.3, `ACT_RULES`): non-boss enemies get HP × (1 + 0.2 × (act − 1)) and damage × (1 + 0.1 × (act − 1)), so Act 3 is HP × 1.4 and damage × 1.2. Boss HP is final.
 - Setting: **the Iron Sepulchre**, the vault under the cathedral where the Rift was first sealed and where it is born again.
@@ -901,3 +914,27 @@ Rite 10 (§13.3) adds Embrace to her phase-2 and phase-3 cycles.
 ### 23.5 Epilogue (text budget §16.2)
 
 Three short paragraphs on the victory summary: the Rift closes from the inside; the sepulchre falls silent and the Order seals it with the party's names; the last line keeps the run-based tone (the cathedral bell rings once, and no one rings it).
+
+### 23.6 Sanctum screen (for the UI owner)
+
+- Scene `Sanctum` (session maps the `sanctum` screen to it). Backdrop `bg.menu` dimmed 0.6, music `music.map`.
+- Title (h2, gold2) "Sanctum" and one line (tiny, ash5): "Injuries are healed. Choose one blessing." Keys `sanctum.title`, `sanctum.text`.
+- Four option tiles in one row (x 40 + i × 144, y 96, 128 × 160 in 640×360 space), each with a shape + colour icon (Rest: cross, rot2; Purge: X, blood2; Temper: anvil bar, gold2; Tithe: coin circle, gold2), a name (`sanctum.heal|remove|upgrade|gold`, ui) and the exact outcome under it (`sanctum.<option>Text`, tiny, wrapped to 116): e.g. "Every hero to full HP (Shieldbearer 34 → 60 …)" — the preview shows the real numbers.
+- Tap a tile to select (gold frame), tap again or press its button to confirm; keys 1–4 select, Enter confirms. Purge and Temper open the existing card picker twice (second pick excludes the first; Temper lists only cards not upgraded); Back cancels without spending the choice.
+- After the command the scene goes to Camp (`goNext`). Test ids: `sanctum-heal`, `sanctum-remove`, `sanctum-upgrade`, `sanctum-gold`, picker prefix `sanctum-card`.
+- Turning on: set `ACT_RULES.sanctum = true` in the same change as the scene, and step Act 3 damage up as in §23.7.
+
+### 23.7 Tuning with the Sanctum (sim, 2026-10-26)
+
+`bun run sim -- --runs 200 --seed 1 --set ACT_RULES.sanctum=1`, act clear rates are of the runs that entered the act:
+
+| Act 3 damage (× first draft) | Sanctum | Win | Act 1 | Act 2 | Act 3 |
+|---|---|---|---|---|---|
+| 0.50 (shipped v0.0.6) | off | 21.0% | 64.7% | 48.1% | 67.5% |
+| 0.50 | on | 23.9% | 64.7% | 51.9% | 71.1% |
+| 0.55 | on | 19.5% | 58.2% | 51.8% | 64.7% |
+| 0.60 | on | 16.7% | 58.2% | 51.8% | 55.4% |
+| 0.65 | on | 14.5% | 58.2% | 51.8% | 48.3% |
+| 0.75 | on | 10.9% | 64.7% | 51.9% | 32.4% |
+
+(100-run rows: 0.50 and 0.75; the others 200 runs.) The two goals conflict with the current Acts 1–2: the run win is Act 1 × Act 2 × Act 3 clear, so with Act 1 ≈ 58% and Act 2 ≈ 52% the run can only reach 18% if Act 3 clears ≥ 60%, i.e. easier than Act 2. Decision for the switch-on: Act 3 damage 0.55 (Toll-Hammer 5, Execution 10, Drip 3, Drag 3, Embrace 8, Devour 10 / 11; the rest unchanged), win 19.5%. To make Act 3 the hardest act as well, raise the Act 2 clear rate toward 60% first (Act 2 data, Sonnet).

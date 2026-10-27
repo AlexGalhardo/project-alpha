@@ -460,7 +460,8 @@ Top bar:
 
 | Element | Rect | Notes |
 |---|---|---|
-| Act and round | 8, 4, 142, 16 | "Act 1 · Round 3/10" in `font.ui` + 10 round dots (6 px; done / current / boss by shape) |
+| Act and round | 8, 4, 142, 16 | "Act 1 · Round 3/10 · Turn 4" in `font.ui` + 10 round dots (6 px; done / current / boss by shape) |
+| Enrage warning | 360, 6 | From turn 8: "Enemies enrage in n", from turn 10 "Enraged" (`ember3`); tap = rule tooltip (GDD §5.2) |
 | Turn queue | 160, 2, 154, 20 | Up to 7 portraits 20×20, 2 px gap; next actor has a 2 px `gold2` frame and a ▼ marker; `ally` square frame, `enemy` notched frame |
 | Gold | 488, 4, 56, 16 | Coin glyph + `font.ui` |
 | Relics | 548, 4, 56, 16 | 3 × 16×16; "+n" chip when more |
@@ -473,7 +474,8 @@ Units row (slot width 80, 8 px between hero slots):
 | Hero slots | x 16 + i × 88, i = 0..2 (rank 3, 2, 1 left to right), y 24, 80, 198 | Rank 1 is the rightmost hero (x 192) |
 | Centre gap | 272, 24, 32, 198 | Targeting lines and pop-ups pass here |
 | Enemy slots | x 304 + i × 80, i = 0..3 (rank 1..4 left to right), y 24, 80, 198 | Boss: slots 2–3 merged (384, 24, 160, 198) when alone; with adds, slots 1–2 for the boss |
-| Intent strip | slot x, y 24, 80, 20 | Intent icon 12×12 + number `font.ui`, centred |
+| Intent strip | slot x, y 24, 80, 20 | Intent icon 12×12 + number `font.ui`, centred; tap = intent tooltip (unit tap zones start at y 44 so the strip keeps its taps) |
+| Incoming (heroes) | hero slot, y 24, 80, 20 | Total incoming hit damage from all shown intents: red ▼ + number; stress icon + "+n" when targeted by stress |
 | Sprite box | slot x, y 44, 80, 146 | Feet on y 190, centred |
 | HP bar | slot x + 8, y 192, 64, 5 | `hp` token; block overlay on the right end |
 | HP text | slot centre, y 198 | "68/85" `font.ui` digits |

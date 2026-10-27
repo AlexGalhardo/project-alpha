@@ -198,7 +198,7 @@ Exclusive choice of one:
 | Enemy phase | Enemy Block → 0 at the start of each enemy's own action; each enemy performs its intent in **turn-queue order**; end-of-action ticks per enemy. |
 | New intents | At the end of the enemy phase every living enemy reveals its next intent (§10.1). |
 
-**Vanguard** ⚖: at the start of each player turn, after Block resets, the hero in rank 1 gains 4 Block (`RULES.vanguardBlock`) if that hero is not a natural front-liner (`frontOrder > 1`, i.e. anyone but the Shieldbearer). It is shown like any Block (number on the hero) and the HUD labels its source "Vanguard". Rationale and lenses: §8.3.
+**Vanguard** ⚖: at the start of each player turn, after Block resets, the hero in rank 1 gains 4 Block (`RULES.vanguardBlock`) if that hero is not a natural front-liner (`frontOrder > 1`, i.e. anyone but the Shieldbearer). The same hero may also play its cards **from any rank** while it holds rank 1 (`RULES.vanguardAnyRank`), so a back-liner pushed to the front has no dead cards. Both effects are shown: the Block like any Block with a "Vanguard" label, and the cards as playable (`HeroView.vanguard` marks the hero). Rationale and lenses: §8.3.
 
 Turn queue: enemies sorted by **Speed** descending, ties → lower rank first. The queue is always visible (top bar).
 
@@ -341,6 +341,8 @@ Smallest rule that fixes it: **Vanguard** (§5.2), 4 Block per player turn to a 
 - **#29 Balance (no dominant strategy):** measured, not guessed (`docs/reports/2026-10-26-sim-vanguard.md`): no-Shieldbearer win 2.6% → 24.3%; every hero is in ≥ 39% of wins.
 - **#55 Visible information (P3):** the Block is granted at the start of the player turn, so the shown intents and the incoming-damage preview already include it.
 
+Second step (same day, after the auto-battle policy improved): the Confessor was in 92–93% of wins. Gutting every Confessor card (no heal, Block or stress relief) still left 77%, and halving heals or Rekindle moved it by 1–3 points, so the cause was structural: every Confessor card plays from any rank (H1–3), while Marksman, Arcanist and Bombardier cards are H2–3 and a party without Shieldbearer or Confessor had to put a back-liner with dead cards in rank 1. Fix: Vanguard any-rank play (above). With it the shares fell into 49–74%; the run became easier, so a global enemy damage scale (`RULES.enemyDamageMul` = 1.25, shown in every intent) restores the 18–35% win, and Sanctuary went back to 5 Block (8 upgraded) because the 10-Block Ward version kept the Confessor at 76%. Lenses: **#29 Balance** (no dominant hero: shares 49–74%), **#33 Triangularity** (every trio has a real plan), **#55 Visible information** (the scale is applied before intents are shown).
+
 Rejected: a per-hero front stance (a new card or keyword per hero: more content and UI for the same effect) and nerfing the Shieldbearer (lowers the floor of every party instead of raising the no-tank floor).
 
 ## 9. Cards
@@ -416,7 +418,7 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 | Id | Name | Cost | Type | Rarity | From | Target | Effect | + |
 |---|---|---|---|---|---|---|---|---|
 | cnf_censer_strike | Censer Strike | 1 | Attack | starter ×2 | H1–3 | E1–2 | 5 damage; heal the lowest-HP hero 2 | 7 / 3 |
-| cnf_sanctuary | Sanctuary | 1 | Skill | starter | any | ally | 10 Block; Ward 1 | 13 |
+| cnf_sanctuary | Sanctuary | 1 | Skill | starter | any | ally | 5 Block; Ward 1 | 8 |
 | cnf_mend | Mend | 1 | Skill | starter | any | ally | Heal 6 | 9 |
 | cnf_absolve | Absolve | 1 | Skill | common | any | ally | Remove all debuffs; −2 stress | −3 stress |
 | cnf_litany | Litany | 1 | Skill | common | any | all heroes | 3 Block and −1 stress to each hero | 5 Block |
@@ -442,6 +444,8 @@ Notation: `E1–2` enemy ranks; `any` any enemy; `ally` any hero; `self` owner; 
 ## 10. Enemies, elites and boss
 
 ### 10.1 Intent rules
+
+- Enemy damage numbers in §10, §22 and §23 are base values. Every enemy hit is scaled by `RULES.enemyDamageMul` (1.25 since 2026-10-26) together with the act, elite and Rite multipliers, rounded per hit; the intent always shows the final number (P3).
 
 - Each enemy has a fixed **intent cycle**; the boss starts at its first intent; other enemies start at a seeded index. The next intent is revealed at the end of the enemy phase (and at combat start).
 - An intent shows: icon (shape + color), exact number(s) after modifiers, and target marker on the hero(es).
@@ -490,7 +494,7 @@ Elite = base enemy with: HP × 1.25 (round; was 1.75 before the 2026-10-26 balan
 | Elite | Trait |
 |---|---|
 | rust_templar (elite) — "Templar Captain" | *Oathwall*: whenever it gains Block, every other enemy gains 5 Block. |
-| ossified_brute (elite) — "Calcified Brute" | *Calcified*: takes −2 damage per hit (min 1). |
+| ossified_brute (elite) — "Calcified Brute" | *Calcified*: takes −1 damage per hit (min 1; −2 before the 2026-10-26 elite-length pass). |
 
 ### 10.5 Boss: Bell-Maw (B13) ⚖
 

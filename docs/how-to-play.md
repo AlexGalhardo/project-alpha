@@ -87,7 +87,7 @@ Rites are a Beta feature in the GDD; the selector is in the build for playtestin
 ## Known limitations of this build
 
 - Act 3 is the hardest act by design (GDD §23). Act 2 and Act 3 are new and their balance is a first pass (Act 3 sim: 21.9% of 3-act runs win, GDD §23.7 baseline, 200 runs; target 18–35%). Report anything that feels wrong.
-- Some Act 3 intent ids are shared with Act 1 or 2 and their text may not match Act 3 behaviour (for example Dirge). A fix is planned.
+- Some Act 3 intent ids are shared with Act 1 or 2 and their text may not match Act 3 behavior (for example Dirge). A fix is planned.
 - Sprites are generated for most units; some screens still use placeholder art.
 - UI text scale is not done. Long tooltips may need scrolling on phones.
 - Tested in Chromium only (desktop and phone-sized emulation). Safari, Firefox and real phones are not verified.

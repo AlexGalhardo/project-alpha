@@ -482,7 +482,7 @@ export const en = {
 		},
 		eq_bell_clapper: {
 			name: 'Bell Clapper',
-			effect: 'Once per turn, if a hero has 7 or more stress, gain 1 energy.',
+			effect: 'Once per turn, if a hero has 7 or more stress, the party gains 1 energy.',
 		},
 	},
 	equip: {
@@ -862,7 +862,7 @@ export const en = {
 		},
 		bmb_incendiary: {
 			name: 'Incendiary',
-			text: 'Deal {damage} damage. Apply 3 Burn to the target and its neighbours.',
+			text: 'Deal {damage} damage. Apply 3 Burn to the target and its neighbors.',
 		},
 		bmb_reload: {
 			name: 'Reload',
@@ -878,7 +878,7 @@ export const en = {
 		},
 		bmb_powder_keg: {
 			name: 'Powder Keg',
-			text: 'Plant a keg. Its next hit also hits neighbours for 10.',
+			text: 'Plant a keg. Its next hit also hits neighbors for 10.',
 		},
 		bmb_siege_mortar: {
 			name: 'Siege Mortar',
@@ -906,7 +906,7 @@ export const en = {
 		},
 		arc_inferno: {
 			name: 'Inferno',
-			text: 'Deal {damage} damage three times to each enemy. Exhaust.',
+			text: 'Deal {damage} damage three times to each enemy. Dread 3. Exhaust.',
 		},
 		cnf_penance: {
 			name: 'Penance',

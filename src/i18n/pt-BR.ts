@@ -245,7 +245,7 @@ export const ptBR: Strings = {
 			tooltip: 'Ao ser jogada, o dono ganha este tanto de estresse.',
 		},
 		push: {
-			name: 'Empurrar',
+			name: 'Empurrão',
 			tooltip: 'Move o inimigo alvo para trás o número indicado de posições.',
 		},
 		pull: {
@@ -731,7 +731,7 @@ export const ptBR: Strings = {
 		},
 		shb_shove: {
 			name: 'Empurrão',
-			text: 'Causa {damage} de dano. Empurrar 1.',
+			text: 'Causa {damage} de dano. Empurrão 1.',
 		},
 		shb_bulwark: {
 			name: 'Baluarte',
@@ -911,7 +911,7 @@ export const ptBR: Strings = {
 		},
 		arc_inferno: {
 			name: 'Inferno',
-			text: 'Causa {damage} de dano três vezes em cada inimigo. Exaustão.',
+			text: 'Causa {damage} de dano três vezes em cada inimigo. Temor 3. Exaustão.',
 		},
 		cnf_penance: {
 			name: 'Penitência',

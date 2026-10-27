@@ -63,7 +63,7 @@ Asset scripts (`scripts/assets/`). They read API keys from the environment; keys
 
 Generated assets live in `public/assets/`. Generation logs (prompts, parameters, dates, status) and raw takes live in `art-src/`.
 
-Colour-vision audit: `bun scripts/a11y/colorblind.ts` writes `docs/reports/2026-10-26-colorblind.md`.
+Color-vision audit: `bun scripts/a11y/colorblind.ts` writes `docs/reports/2026-10-26-colorblind.md`.
 
 ## Controls
 

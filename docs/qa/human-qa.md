@@ -11,7 +11,7 @@ The prototype script (203 items) is archived as `docs/qa/human-qa-prototype.md`;
 | S1 | Crash, save loss or corruption, or the run cannot be finished. Stop and report at once. |
 | S2 | A main flow is blocked, or a rule is wrong with no way out. |
 | S3 | Works, but with a visible error or poor feedback. |
-| S4 | Cosmetic: text, alignment, colour with no effect on reading. |
+| S4 | Cosmetic: text, alignment, color with no effect on reading. |
 
 ## Environment
 

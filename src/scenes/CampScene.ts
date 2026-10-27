@@ -14,7 +14,17 @@ import { cardName, cardText } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { session } from '../view/session';
-import { Button, backdrop, fitCamera, fitText, itemIcon, label, panel, portrait } from '../view/ui';
+import {
+	Button,
+	backdrop,
+	fitCamera,
+	fitText,
+	itemIcon,
+	keyNav,
+	label,
+	panel,
+	portrait,
+} from '../view/ui';
 
 /**
  * Camp after every round except the boss (GDD §4.4, docs/art-bible.md §11.8): swap a hero, buy one
@@ -33,6 +43,7 @@ export class CampScene extends Phaser.Scene {
 
 	create(): void {
 		fitCamera(this);
+		keyNav(this, { activate: [' '] });
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, 'bg.menu', 0.6);

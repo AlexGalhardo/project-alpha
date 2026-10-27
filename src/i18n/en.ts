@@ -45,6 +45,13 @@ export const en = {
 		reduceFlashes: 'Reduce flashes',
 		fullscreen: 'Fullscreen',
 		textScale: 'Text size',
+		reset: 'Reset progress',
+		resetTitle: 'Erase all progress?',
+		resetText:
+			'Embers, Legacy nodes, unlocked Rites and the saved run are erased. Settings are kept. This cannot be undone.',
+		resetCancel: 'Cancel',
+		resetConfirm: 'Erase',
+		resetDone: 'Progress erased.',
 		on: 'On',
 		off: 'Off',
 		back: 'Back',
@@ -84,6 +91,12 @@ export const en = {
 		from: 'From',
 		target: 'Target',
 		unplayable: 'Unplayable',
+		reason: {
+			'wrong-rank': 'Its hero is not in a rank this card can be played from.',
+			'no-energy': 'Not enough energy.',
+			'owner-fallen': 'Its hero has fallen.',
+			'no-target': 'No valid target.',
+		},
 		teamTurn: 'Your turn',
 		enemyTurn: 'Enemy turn',
 		victory: 'Victory',
@@ -196,7 +209,7 @@ export const en = {
 		vanguard: {
 			name: 'Vanguard',
 			tooltip:
-				'In rank 1, a hero who is not a front-liner braces: +{block} Block at the start of each turn.',
+				'In rank 1, a hero who is not a front-liner braces: +{block} Block at the start of each turn, and can play their cards from rank 1.',
 		},
 		enraged: {
 			name: 'Enraged',

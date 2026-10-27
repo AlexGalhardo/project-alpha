@@ -11,14 +11,24 @@ import {
 	preview,
 	type Target,
 } from '../core';
-import { ACT_RULES, CARDS, HEROES, RULES } from '../data';
+import { ACT_RULES, CARDS, RULES } from '../data';
 import { app } from '../view/app';
 import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardKeywords, cardName, cardText, drawCard } from '../view/cards';
 import { enemyName, t } from '../view/i18n';
 import { css, P, type PaletteKey } from '../view/palette';
 import { session } from '../view/session';
-import { Button, backdrop, fitCamera, label, panel, portrait, sized, standing } from '../view/ui';
+import {
+	Button,
+	backdrop,
+	fitCamera,
+	label,
+	panel,
+	portrait,
+	sized,
+	standing,
+	tapArea,
+} from '../view/ui';
 
 const HERO_X = (rank: number): number => 16 + (3 - rank) * 88;
 const ENEMY_X = (rank: number): number => 304 + (rank - 1) * 80;
@@ -44,6 +54,12 @@ interface UnitSnapshot {
 }
 
 const STATUS_KEYS = ['might', 'marked', 'weakened', 'bleed', 'burn', 'ward'] as const;
+
+/** Player text for a core unplayable reason (`hud.reason.<id>`), with a generic fallback. */
+function reasonText(reason: string | null): string {
+	const key = `hud.reason.${reason}`;
+	return reason && t(key) !== key ? t(key) : t('hud.unplayable');
+}
 
 /** Named elites (i18n `elite.<id>.name`) by their base enemy. */
 const ELITE_NAME: Record<string, string> = {
@@ -301,10 +317,17 @@ export class CombatScene extends Phaser.Scene {
 				? t('hud.enraged')
 				: t('hud.enrageIn', { n: v.enrageTurn - v.turn });
 			const warn = label(this, 360, 6, text, 'ui', 'ember3');
-			warn.setInteractive().on('pointerup', () =>
-				this.tooltip(t('status.enraged.tooltip', { turn: v.enrageTurn })),
-			);
-			this.layer.add(warn);
+			this.layer.add([
+				warn,
+				tapArea(
+					this,
+					warn.x + warn.width / 2,
+					warn.y + warn.height / 2,
+					warn.width,
+					warn.height,
+					() => this.tooltip(t('status.enraged.tooltip', { turn: v.enrageTurn })),
+				),
+			]);
 		}
 		v.queue.forEach((uid, i) => {
 			const e = v.enemies.find((x) => x.uid === uid);
@@ -315,14 +338,14 @@ export class CombatScene extends Phaser.Scene {
 				.setOrigin(0)
 				.setStrokeStyle(1, i === 0 ? P.gold2 : P.ash3);
 			const img = portrait(this, `enemy.${e.key}`, x + 1, 3, 18, 18);
-			frame.setInteractive().on('pointerup', () => {
+			const tap = tapArea(this, x + 10, 12, 22, 24, () => {
 				const order = v.queue
 					.map((u) => v.enemies.find((x) => x.uid === u))
 					.filter((x): x is EnemyView => !!x)
 					.map((x) => enemyName(x.key));
 				this.tooltip(`${t('hud.turnQueue')}: ${order.join(' → ')}`);
 			});
-			this.layer.add([frame, img]);
+			this.layer.add([frame, img, tap]);
 		});
 		this.layer.add(label(this, 488, 6, `${t('hud.gold')} ${state?.gold ?? 0}`, 'ui', 'gold2'));
 	}
@@ -344,19 +367,25 @@ export class CombatScene extends Phaser.Scene {
 			const ix = x + i * 18;
 			const icon = sized(this.add.image(ix, y, `icon.status.${key}`).setOrigin(0));
 			const num = label(this, ix + 10, y - 1, `${n}`, 'tiny', 'bone2');
-			icon.setInteractive().on('pointerup', () => this.tooltip(t(`status.${key}.tooltip`)));
-			this.layer.add([icon, num]);
+			const tap = tapArea(this, ix + 8, y + 4, 18, 9, () =>
+				this.tooltip(t(`status.${key}.tooltip`)),
+			);
+			this.layer.add([icon, num, tap]);
 			i++;
 		}
 		// Vanguard (GDD 5.2): a non-front-liner in rank 1 braces every turn; say why it has Block.
 		if (vanguard) {
 			const tag = label(this, x + i * 18, y - 1, t('status.vanguard.name'), 'tiny', 'ward1');
-			tag.setInteractive()
-				.setName('vanguard')
-				.on('pointerup', () =>
-					this.tooltip(t('status.vanguard.tooltip', { block: RULES.vanguardBlock })),
-				);
-			this.layer.add(tag);
+			const tap = tapArea(
+				this,
+				tag.x + tag.width / 2,
+				tag.y + tag.height / 2,
+				tag.width,
+				tag.height,
+				() => this.tooltip(t('status.vanguard.tooltip', { block: RULES.vanguardBlock })),
+				'vanguard',
+			);
+			this.layer.add([tag, tap]);
 		}
 	}
 
@@ -391,8 +420,7 @@ export class CombatScene extends Phaser.Scene {
 		}
 		this.layer.add(pips);
 		this.hpBar(x + 8, 193, h.hp, h.maxHP, h.status.block);
-		const vanguard = h.rank === 1 && RULES.vanguardBlock > 0 && HEROES[h.id].frontOrder > 1;
-		this.statusRow(x + 4, 210, h.status, vanguard);
+		this.statusRow(x + 4, 210, h.status, h.vanguard);
 		// The zone starts below the intent strip (y 24–44) so intent icons keep their own taps.
 		const zone = this.add
 			.zone(x, 44, SLOT_W, FLOOR_Y - 44)
@@ -543,7 +571,9 @@ export class CombatScene extends Phaser.Scene {
 		const cx = x + w / 2;
 		const icon = sized(this.add.image(cx - 14, 32, `icon.intent.${kind}`));
 		const txt = label(this, cx - 6, 26, parts.join(' '), 'ui', 'bone2');
-		icon.setInteractive().on('pointerup', () => this.tooltip(t(`intent.${it.intentId}`)));
+		this.layer.add(
+			tapArea(this, cx - 14, 32, 12, 12, () => this.tooltip(t(`intent.${it.intentId}`))),
+		);
 		this.layer.add([icon, txt]);
 		let nx = txt.x + txt.width + 8;
 		// Debuffs ride along as "<status icon> n" (core sends "<status> <amount>").
@@ -721,13 +751,17 @@ export class CombatScene extends Phaser.Scene {
 			const bg = this.add
 				.rectangle(kx, bottom - 1, chip.width + 6, chip.height + 2, P.ash0, 0.9)
 				.setOrigin(0)
-				.setStrokeStyle(1, P.gold0)
-				.setInteractive()
-				.setName(`keyword-${k}`);
-			bg.on('pointerup', () =>
-				this.tooltip(`${t(`keyword.${k}.name`)}: ${t(`keyword.${k}.tooltip`)}`),
+				.setStrokeStyle(1, P.gold0);
+			const tap = tapArea(
+				this,
+				kx + bg.width / 2,
+				bg.y + bg.height / 2,
+				bg.width,
+				bg.height,
+				() => this.tooltip(`${t(`keyword.${k}.name`)}: ${t(`keyword.${k}.tooltip`)}`),
+				`keyword-${k}`,
 			);
-			this.layer.add([bg, chip]);
+			this.layer.add([bg, chip, tap]);
 			kx += chip.width + 10;
 			chipH = chip.height + 6;
 		}
@@ -739,7 +773,7 @@ export class CombatScene extends Phaser.Scene {
 			bottom = l.y + l.height + 2;
 		}
 		const hint = !card.playable
-			? (card.reason ?? t('hud.unplayable'))
+			? reasonText(card.reason)
 			: card.autoTarget
 				? t('hud.tapAgain')
 				: t('hud.chooseTarget');

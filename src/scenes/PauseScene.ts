@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { BASE_WIDTH } from '../platform/zoom';
 import { t } from '../view/i18n';
 import { session } from '../view/session';
-import { Button, fitCamera, label, panel } from '../view/ui';
+import { Button, fitCamera, keyNav, label, panel } from '../view/ui';
 
 export class PauseScene extends Phaser.Scene {
 	private returnTo = 'Map';
@@ -19,6 +19,7 @@ export class PauseScene extends Phaser.Scene {
 
 	create(): void {
 		fitCamera(this);
+		keyNav(this);
 		this.add.rectangle(0, 0, 640, 360, 0x0e0d12, 0.8).setOrigin(0).setInteractive();
 		panel(this, 220, 60, 200, 240);
 		label(this, BASE_WIDTH / 2, 72, t('pause.title'), 'h2', 'gold2').setOrigin(0.5, 0);

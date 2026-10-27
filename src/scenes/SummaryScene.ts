@@ -6,7 +6,7 @@ import { playMusic, stopMusic } from '../view/audio';
 import { enemyName, t } from '../view/i18n';
 import { loadProfile, saveProfile } from '../view/profile';
 import { session } from '../view/session';
-import { Button, backdrop, fitCamera, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, keyNav, label, panel } from '../view/ui';
 
 /** i18n text if the key exists, else null (t() echoes unknown keys). */
 function maybe(key: string): string | null {
@@ -21,6 +21,7 @@ export class SummaryScene extends Phaser.Scene {
 
 	create(): void {
 		fitCamera(this);
+		keyNav(this);
 		this.cameras.main.setBackgroundColor('#0e0d12');
 		backdrop(this, 'bg.menu', 0.6);
 		const state = session.state;

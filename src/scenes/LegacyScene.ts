@@ -6,7 +6,7 @@ import { playMusic } from '../view/audio';
 import { cardName } from '../view/cards';
 import { t } from '../view/i18n';
 import { loadProfile, saveProfile } from '../view/profile';
-import { Button, backdrop, fitCamera, fitText, label, panel, sized } from '../view/ui';
+import { Button, backdrop, fitCamera, fitText, keyNav, label, panel, sized } from '../view/ui';
 
 const HEROES: HeroClass[] = ['shieldbearer', 'marksman', 'arcanist', 'confessor', 'bombardier'];
 
@@ -20,6 +20,7 @@ export class LegacyScene extends Phaser.Scene {
 
 	create(): void {
 		fitCamera(this);
+		keyNav(this);
 		this.profile = loadProfile();
 		playMusic(this, 'music.menu');
 		this.render();

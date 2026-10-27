@@ -177,6 +177,14 @@ export function drawCard(
 	if (chipY === 54)
 		c.add(label(scene, 4, 68, t(`hero.${def.owner}.name`), 'tiny', 'ash5', false));
 	c.setSize(CARD_W, CARD_H);
+	// Unplayable now (wrong rank, fallen owner, no energy): the whole face dims and a cross marks it,
+	// so it reads without colour (GDD 5.4).
+	if (opts.playable === false) {
+		c.add(scene.add.rectangle(0, 0, CARD_W, CARD_H, P.ash0, 0.55).setOrigin(0));
+		const x = scene.add.graphics().lineStyle(3, P.blood2, 0.9);
+		x.lineBetween(CARD_W - 16, 4, CARD_W - 4, 16).lineBetween(CARD_W - 4, 4, CARD_W - 16, 16);
+		c.add(x);
+	}
 	return c;
 }
 

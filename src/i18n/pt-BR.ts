@@ -43,6 +43,13 @@ export const ptBR: Strings = {
 		reduceFlashes: 'Reduzir flashes',
 		fullscreen: 'Tela cheia',
 		textScale: 'Tamanho do texto',
+		reset: 'Apagar progresso',
+		resetTitle: 'Apagar todo o progresso?',
+		resetText:
+			'Brasas, nós do Legado, Ritos liberados e a run salva serão apagados. As configurações ficam. Não há como desfazer.',
+		resetCancel: 'Cancelar',
+		resetConfirm: 'Apagar',
+		resetDone: 'Progresso apagado.',
 		on: 'Ligado',
 		off: 'Desligado',
 		back: 'Voltar',
@@ -83,6 +90,12 @@ export const ptBR: Strings = {
 		from: 'De',
 		target: 'Alvo',
 		unplayable: 'Não jogável',
+		reason: {
+			'wrong-rank': 'O herói não está numa posição de onde esta carta pode ser jogada.',
+			'no-energy': 'Energia insuficiente.',
+			'owner-fallen': 'O herói desta carta caiu.',
+			'no-target': 'Nenhum alvo válido.',
+		},
 		teamTurn: 'Seu turno',
 		enemyTurn: 'Turno inimigo',
 		victory: 'Vitória',
@@ -195,7 +208,7 @@ export const ptBR: Strings = {
 		vanguard: {
 			name: 'Vanguarda',
 			tooltip:
-				'Na posição 1, um herói que não é da linha de frente se prepara: +{block} de Bloqueio no início de cada turno.',
+				'Na posição 1, um herói que não é da linha de frente se prepara: +{block} de Bloqueio no início de cada turno e pode jogar suas cartas da posição 1.',
 		},
 		enraged: {
 			name: 'Enfurecido',

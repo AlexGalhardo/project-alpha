@@ -184,6 +184,10 @@ export class Button extends Phaser.GameObjects.Container {
 		if (this.text.width > this.maxText) this.text.setScale(this.maxText / this.text.width);
 	}
 
+	isEnabled(): boolean {
+		return this.enabled;
+	}
+
 	setEnabled(enabled: boolean): this {
 		this.enabled = enabled;
 		this.draw(false);
@@ -324,4 +328,95 @@ export function fitText(text: UiText, maxW: number, maxH: number): UiText {
 	text.setScale(1);
 	const k = Math.min(1, maxW / Math.max(1, text.width), maxH / Math.max(1, text.height));
 	return text.setScale(k);
+}
+
+/**
+ * Invisible tap area of at least 24×24 layout px (Art Bible §3.3 tertiary target) centred on a
+ * small visual (status icon, intent icon, chip), so the visual itself can stay small.
+ */
+export function tapArea(
+	scene: Phaser.Scene,
+	cx: number,
+	cy: number,
+	w: number,
+	h: number,
+	onTap: () => void,
+	name = '',
+): Phaser.GameObjects.Zone {
+	return scene.add
+		.zone(cx, cy, Math.max(24, w), Math.max(24, h))
+		.setInteractive()
+		.setName(name)
+		.on('pointerup', onTap);
+}
+
+/**
+ * Keyboard navigation for screens built from named interactive objects (Buttons, tiles): Tab /
+ * arrows move a focus mark (Art Bible §9.2: ember3 corner brackets, keyboard only), and the
+ * `activate` keys press the focused object. The list is re-read on every key, so screens that
+ * redraw keep working. Screens that already use Enter for something else pass `activate: [' ']`.
+ */
+export function keyNav(scene: Phaser.Scene, opts: { activate?: string[] } = {}): void {
+	const activate = opts.activate ?? ['Enter', ' '];
+	// An index, not an object: after a press the screen may redraw, and the focus stays in place.
+	let idx = -1;
+	// Screens that clear all their children (Legacy) destroy the mark; it is recreated on demand.
+	let mark: Phaser.GameObjects.Graphics | null = null;
+	type Obj = Phaser.GameObjects.GameObject &
+		Phaser.GameObjects.Components.Visible & { getBounds(): Phaser.Geom.Rectangle };
+	const items = (): Obj[] =>
+		// The plugin keeps its interactive objects in _list (no public accessor in Phaser 4.2).
+		((scene.input as unknown as { _list: Obj[] })._list ?? [])
+			.filter((o) => o.name && o.visible && o.input?.enabled && o.active)
+			.filter((o) => !(o instanceof Button) || o.isEnabled())
+			.sort((a, b) => {
+				const ra = a.getBounds();
+				const rb = b.getBounds();
+				return Math.abs(ra.y - rb.y) > 6 ? ra.y - rb.y : ra.x - rb.x;
+			});
+	const draw = (): void => {
+		if (!mark?.scene) mark = scene.add.graphics().setDepth(90);
+		mark.clear();
+		const list = items();
+		if (idx < 0 || !list.length) return;
+		idx = Math.min(idx, list.length - 1);
+		const o = list[idx] as Obj;
+		// A Button's bounds would hug its caption (Graphics have no bounds): use its own size.
+		const r =
+			o instanceof Button
+				? new Phaser.Geom.Rectangle(o.x, o.y, o.width, o.height)
+				: o.getBounds();
+		const L = 5;
+		mark.fillStyle(P.ember3);
+		for (const [x, y, sx, sy] of [
+			[r.left - 2, r.top - 2, 1, 1],
+			[r.right + 2, r.top - 2, -1, 1],
+			[r.left - 2, r.bottom + 2, 1, -1],
+			[r.right + 2, r.bottom + 2, -1, -1],
+		] as const) {
+			mark.fillRect(sx > 0 ? x : x - L, sy > 0 ? y : y - 1, L, 1);
+			mark.fillRect(sx > 0 ? x : x - 1, sy > 0 ? y : y - L, 1, L);
+		}
+	};
+	scene.input.keyboard?.on('keydown', (e: KeyboardEvent) => {
+		if (!scene.scene.isActive()) return;
+		const list = items();
+		if (!list.length) return;
+		const back =
+			e.key === 'ArrowUp' || e.key === 'ArrowLeft' || (e.key === 'Tab' && e.shiftKey);
+		const next = e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'Tab';
+		const n = list.length;
+		if (back || next) {
+			e.preventDefault();
+			idx = idx < 0 ? (back ? n - 1 : 0) : (Math.min(idx, n - 1) + (back ? n - 1 : 1)) % n;
+			draw();
+		} else if (activate.includes(e.key) && idx >= 0) {
+			e.preventDefault();
+			const o = list[Math.min(idx, n - 1)];
+			o?.emit('pointerdown');
+			o?.emit('pointerup');
+			// Redraw on the next frame, once the screen has re-rendered.
+			scene.time.delayedCall(0, () => scene.scene.isActive() && draw());
+		}
+	});
 }

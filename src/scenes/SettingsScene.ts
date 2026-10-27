@@ -1,10 +1,13 @@
 import Phaser from 'phaser';
+import { emptyProfile } from '../core';
 import { BASE_WIDTH } from '../platform/zoom';
 import { app } from '../view/app';
 import { setMusicVolume } from '../view/audio';
 import { t } from '../view/i18n';
+import { saveProfile } from '../view/profile';
+import { session } from '../view/session';
 import type { Speed, TextScale } from '../view/settings';
-import { Button, fitCamera, label, panel } from '../view/ui';
+import { Button, fitCamera, fitText, keyNav, label, panel } from '../view/ui';
 
 interface SettingsData {
 	returnTo: string;
@@ -24,6 +27,7 @@ export class SettingsScene extends Phaser.Scene {
 
 	create(): void {
 		fitCamera(this);
+		keyNav(this);
 		this.add.rectangle(0, 0, 640, 360, 0x0e0d12, 0.85).setOrigin(0).setInteractive();
 		panel(this, 120, 24, 400, 312);
 		label(this, BASE_WIDTH / 2, 36, t('settings.title'), 'h2', 'gold2').setOrigin(0.5, 0);
@@ -116,10 +120,70 @@ export class SettingsScene extends Phaser.Scene {
 				{ w: 128, h: 24, testId: `settings-${i}` },
 			).setData('row', true);
 		});
-		new Button(this, BASE_WIDTH / 2 - 60, 302, t('settings.back'), () => this.close(), {
-			sfx: 'sfx.ui.cancel',
-			testId: 'settings-back',
-		}).setData('row', true);
+		// From the main menu only: resetting inside a run would pull the run out from under the player.
+		const fromMenu = this.returnTo === 'Menu';
+		new Button(
+			this,
+			fromMenu ? 136 : BASE_WIDTH / 2 - 60,
+			302,
+			t('settings.back'),
+			() => this.close(),
+			{ sfx: 'sfx.ui.cancel', testId: 'settings-back' },
+		).setData('row', true);
+		if (fromMenu)
+			new Button(this, 384, 302, t('settings.reset'), () => this.confirmReset(), {
+				danger: true,
+				testId: 'settings-reset',
+			}).setData('row', true);
+	}
+
+	/** In-game confirm step (no browser dialog): Erase wipes Embers, Legacy, Rites and the run save. */
+	private confirmReset(): void {
+		const box = this.add.container(0, 0).setDepth(20);
+		const shade = this.add
+			.rectangle(0, 0, 640, 360, 0x0e0d12, 0.8)
+			.setOrigin(0)
+			.setInteractive();
+		box.add([shade, panel(this, 160, 112, 320, 136, 'ash2', 'blood1')]);
+		box.add(
+			label(this, BASE_WIDTH / 2, 124, t('settings.resetTitle'), 'h2', 'blood2').setOrigin(
+				0.5,
+				0,
+			),
+		);
+		box.add(
+			fitText(
+				label(this, BASE_WIDTH / 2, 152, t('settings.resetText'), 'tiny', 'bone2')
+					.setOrigin(0.5, 0)
+					.setWordWrapWidth(296)
+					.setAlign('center'),
+				296,
+				40,
+			),
+		);
+		box.add(
+			new Button(this, 176, 204, t('settings.resetCancel'), () => box.destroy(), {
+				sfx: 'sfx.ui.cancel',
+				testId: 'settings-reset-cancel',
+			}),
+		);
+		box.add(
+			new Button(
+				this,
+				344,
+				204,
+				t('settings.resetConfirm'),
+				() => {
+					saveProfile(emptyProfile());
+					session.clear();
+					box.destroy();
+					label(this, BASE_WIDTH / 2, 286, t('settings.resetDone'), 'tiny', 'ember3')
+						.setOrigin(0.5, 0)
+						.setData('row', true);
+				},
+				{ danger: true, testId: 'settings-reset-confirm' },
+			),
+		);
 	}
 
 	private close(): void {

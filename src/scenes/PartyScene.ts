@@ -8,7 +8,7 @@ import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { loadProfile } from '../view/profile';
 import { session } from '../view/session';
-import { Button, backdrop, fitCamera, label, panel, sized } from '../view/ui';
+import { Button, backdrop, fitCamera, keyNav, label, panel, sized } from '../view/ui';
 
 const ROSTER: HeroClass[] = ['shieldbearer', 'marksman', 'arcanist', 'confessor', 'bombardier'];
 
@@ -25,6 +25,7 @@ export class PartyScene extends Phaser.Scene {
 
 	create(): void {
 		fitCamera(this);
+		keyNav(this);
 		playMusic(this, 'music.menu');
 		this.picked = ['shieldbearer', 'confessor', 'marksman'];
 		this.rite = loadProfile().unlockedRite;

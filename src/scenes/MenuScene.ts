@@ -4,7 +4,7 @@ import { playMusic } from '../view/audio';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { session } from '../view/session';
-import { Button, backdrop, fitCamera, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, keyNav, label, panel } from '../view/ui';
 
 export class MenuScene extends Phaser.Scene {
 	private credits: Phaser.GameObjects.Container | null = null;
@@ -16,6 +16,7 @@ export class MenuScene extends Phaser.Scene {
 	create(): void {
 		this.credits = null;
 		fitCamera(this);
+		keyNav(this);
 		playMusic(this, 'music.menu');
 		this.cameras.main.setBackgroundColor('#1b1a22');
 		backdrop(this, 'bg.menu', 0.4);

@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.8] - 2026-10-27
+
+### Added
+
+- **auto:** Value energy, draw, Reload, Rekindle and Dread risk in auto battle ([9bd7bba](https://github.com/AlexGalhardo/project-alpha/commit/9bd7bba743f57081643173cbec266ebdcb18da51))
+
+### Fixed
+
+- **view:** Size Act 2 enemies and the Gilded Penitent correctly, stack damage pops, show Vanguard ([7098403](https://github.com/AlexGalhardo/project-alpha/commit/70984031fd817c763ffe0d600889cc1a8c216a12))
+
+### Documentation
+
+- **reports:** Add the card usage report ([08f0e50](https://github.com/AlexGalhardo/project-alpha/commit/08f0e50ea493d32c30f7fb1174c753ff896afc8b))
+- **reports:** Add the second QA playtest across three acts ([e5cc019](https://github.com/AlexGalhardo/project-alpha/commit/e5cc019d5dccbe6c657cf8bf280e57c135ecb121))
+
 ## [0.0.7] - 2026-10-27
 
 ### Added
@@ -178,6 +193,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **books:** Apply Pixel Logic and The Art of Game Design to this genre ([f23593e](https://github.com/AlexGalhardo/project-alpha/commit/f23593e4a6fe9161b8ffef7d51a3aaae6b15eff1))
 - Keep the project kickoff prompt ([a45f73b](https://github.com/AlexGalhardo/project-alpha/commit/a45f73b2c5647b12cc2903c6a90d387d74d06e99))
 - **skills:** Retarget project skills from the previous tactics game to this deckbuilder ([f535621](https://github.com/AlexGalhardo/project-alpha/commit/f535621369a0d22543be6643489eff4cf8b0c8cf))
+[0.0.8]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.7...v0.0.8>
 [0.0.7]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.6...v0.0.7>
 [0.0.6]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.5...v0.0.6>
 [0.0.5]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.4...v0.0.5>

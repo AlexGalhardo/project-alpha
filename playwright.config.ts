@@ -1,6 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORT = 4173;
+// Dedicated port: 4173 (Vite's default preview port) is often taken by other local servers,
+// and reusing one of them would test a stale build.
+const PORT = 4188;
 
 export default defineConfig({
 	testDir: 'tests',
@@ -15,9 +17,9 @@ export default defineConfig({
 		trace: 'retain-on-failure',
 	},
 	webServer: {
-		command: 'bun run build && bun run preview',
+		command: `bun run build && bunx vite preview --port ${PORT} --strictPort`,
 		url: `http://localhost:${PORT}`,
-		reuseExistingServer: true,
+		reuseExistingServer: false,
 		timeout: 120_000,
 	},
 	projects: [

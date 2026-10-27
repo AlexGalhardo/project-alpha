@@ -140,13 +140,13 @@ Edge rules:
 - Every node is reachable from row 1 and reaches row 10.
 - Hover-free: the full map is visible from the start; the current row is highlighted.
 
-Resulting path: 7 combats + up to 2 elites + 1–2 shops + 1 rest + 1 boss. Elites are always optional (a combat sibling exists). Every path has at least 6 fights before the boss: rows 1, 2, 3 and 6 are combat-only and rows 4 and 7 are combat or elite; the map validator asserts this minimum (SDD-07).
+Resulting path: 7 combats + up to 2 elites + 1–2 shops + 1 rest + 1 boss. Elites are always optional (a combat sibling exists). Every path has at least 6 fights before the boss in the prototype layout: rows 1, 2, 3 and 6 are combat-only and rows 4 and 7 are combat or elite. With events (Alpha), a row may turn one combat into an event, so the minimum is 5 fights (`EVENT_MAP.minFights`, §22.4).
 
 ### 4.3 Encounter selection ⚖
 
 - Encounters come from two pools: **Tier A** (rows 1–3) and **Tier B** (rows 4–8) (§10.3).
 - Selection rule: pick the encounter of the row's tier (rows 1–3 Tier A, rows 4–8 Tier B) with the most enemy types the run has not seen yet, weighting types that appear in few encounters higher; ties → seeded pick. Measured: 72.6% of paths with ≥ 6 combats see all 10 types by row 8 (4,000 seeds, `docs/reports/2026-10-26-sim-prototype.md`). Decision 2026-10-26: keep the difficulty ramp of strict tiers over full coverage; `ENCOUNTER_RULES.offTierWeight` = 0.8 would reach ≥ 95% but puts Tier B fights in rows 1–3 (B11 relaxed).
-- Act scaling for Acts 2–3 (Alpha/Beta): enemy HP × (1 + 0.5 × (act − 1)), enemy damage × (1 + 0.3 × (act − 1)), rounded.
+- Act scaling for Acts 2–3 (Alpha/Beta): enemy HP × (1 + 0.2 × (act − 1)), enemy damage × (1 + 0.1 × (act − 1)), rounded (`ACT_RULES.hpPerAct`, `dmgPerAct`; §23.1).
 
 ### 4.4 Camp (B10) ⚖
 
@@ -197,6 +197,8 @@ Exclusive choice of one:
 | End turn | Button or `Space`. Unplayed cards go to discard. End-of-turn statuses tick for heroes (Burn, Marked/Weakened decay). |
 | Enemy phase | Enemy Block → 0 at the start of each enemy's own action; each enemy performs its intent in **turn-queue order**; end-of-action ticks per enemy. |
 | New intents | At the end of the enemy phase every living enemy reveals its next intent (§10.1). |
+
+**Vanguard** ⚖: at the start of each player turn, after Block resets, the hero in rank 1 gains 4 Block (`RULES.vanguardBlock`) if that hero is not a natural front-liner (`frontOrder > 1`, i.e. anyone but the Shieldbearer). It is shown like any Block (number on the hero) and the HUD labels its source "Vanguard". Rationale and lenses: §8.3.
 
 Turn queue: enemies sorted by **Speed** descending, ties → lower rank first. The queue is always visible (top bar).
 
@@ -326,6 +328,20 @@ Personal names and backstories: open question Q-HERO (owner coordinator, GDD v0.
 ### 8.2 Hero data model
 
 `id`, `classKey`, `maxHP`, `HP`, `stress`, `injured`, `rank`, `equipment.weapon`, `equipment.relic`, `cardPool[]` (9 card ids), `starterCards[]` (4 ids).
+
+### 8.3 Party balance: the Vanguard rule (2026-10-26)
+
+Problem (3-act sim, 4,000 runs, Sanctum on, before the rule): parties without the Shieldbearer won 2.6%, the Shieldbearer was in 92.6% of wins and the Confessor in 89.7%; a party without a front-liner almost never won. The roster promises five viable heroes (§8.1, B35), so "always take the Shieldbearer" was a dominant strategy (a top-priority defect, `.claude/rules/game-design.md`).
+
+Smallest rule that fixes it: **Vanguard** (§5.2), 4 Block per player turn to a non-tank hero standing in rank 1. Lenses, answered:
+
+- **#11 Unification / #1 Essential experience:** the fantasy is "a squad holding a ruined line". Whoever is pushed to the front braces; the rule says that without a new screen or currency.
+- **#30 Fairness and #31 Challenge:** enemy targeting already punishes rank 1 (§10.1); the rule gives that rank a fixed answer, so a no-tank party is weaker, not hopeless.
+- **#35 Meaningful choices / #33 Triangularity:** the Shieldbearer stays the strongest front (its own Block and Taunt are larger), but taking him is a choice again: no-tank parties trade safety for damage or sustain.
+- **#29 Balance (no dominant strategy):** measured, not guessed (`docs/reports/2026-10-26-sim-vanguard.md`): no-Shieldbearer win 2.6% → 24.3%; every hero is in ≥ 39% of wins.
+- **#55 Visible information (P3):** the Block is granted at the start of the player turn, so the shown intents and the incoming-damage preview already include it.
+
+Rejected: a per-hero front stance (a new card or keyword per hero: more content and UI for the same effect) and nerfing the Shieldbearer (lowers the floor of every party instead of raising the no-tank floor).
 
 ## 9. Cards
 
@@ -520,7 +536,7 @@ Pity: each offer without a rare raises the rare chance by +2 percentage points (
 | Boss | 1 legendary equipment |
 | Camp / shop | for sale (§4.4, §4.6) |
 
-After the boss reward is taken, the run ends in victory.
+After the final act's boss reward the run ends in victory (Act 1 and Act 2 bosses lead to the next act, §22.1 and §23.1).
 
 ## 12. Equipment
 
@@ -748,12 +764,12 @@ Playtest questions: Did you understand why you took damage? Which hero did you m
 
 ## 22. Alpha content (specified 2026-10-26, coordinator)
 
-Everything here is ⚖ and enters behind the same rules as §4–§14. Act scaling of §4.3 applies to Act 2 enemies (HP × 1.5, damage × 1.3, rounded); boss HP below is final, not scaled.
+Everything here is ⚖ and enters behind the same rules as §4–§14. Act scaling of §4.3 applies to Act 2 enemies (HP × 1.2, damage × 1.1, rounded); boss HP below is final, not scaled.
 
 ### 22.1 Run flow with two acts
 
 - After the Act 1 boss reward the camp opens, then the Act 2 map starts at row 1. Between acts every hero heals 50% of max HP and loses any injury.
-- Victory = Act 2 boss defeated. The prototype flag `ACTS = 1` keeps the old flow; Alpha sets `ACTS = 2`.
+- Victory = the final act's boss defeated. The shipped data uses `ACT_RULES.acts = 3` (§23.1); the prototype flow used 1 act (`ACTS = 1`).
 
 ### 22.2 Act 2 enemies (10)
 
@@ -788,7 +804,7 @@ Everything here is ⚖ and enters behind the same rules as §4–§14. Act scali
 | EL2-2 | Elite row 7 | chain_golem (elite, Calcified), flesh_organ |
 | BOSS2 | Row 10 | gilded_penitent (E1+E2) |
 
-Boss **Gilded Penitent** (`gilded_penitent`): a giant reliquary-statue of a kneeling saint, gold leaf over rot. HP 140, Speed 3, phase 2 at HP ≤ 70 with +2 Might on entering.
+Boss **Gilded Penitent** (`gilded_penitent`): a giant reliquary-statue of a kneeling saint, gold leaf over rot. HP 110, Speed 3, phase 2 at HP ≤ 55 with +2 Might on entering (was 140 / 70 before the 2026-10-26 boss-length pass, §23.7).
 
 | Phase | Intent cycle |
 |---|---|
@@ -847,7 +863,7 @@ Card A / card B per hero, in table order: Shieldbearer rampart/riposte, Marksman
 
 ## 23. Act 3 and the final boss (1.0 content, specified 2026-10-26)
 
-Everything here is ⚖. Numbers below are the shipped data after the act-balance pass of 2026-10-26 (Act 3 HP × 0.75 and damage × 0.65 of the first draft, final boss 160 HP, Sanctum on): a 3-act run wins 21.3%, and Act 3 is the hardest act (clear 48.5% vs Act 2 61.4% and Act 1 71.4%; `docs/reports/2026-10-26-sim-act-balance.md`).
+Everything here is ⚖. Numbers below are the shipped data after the Vanguard and boss-length pass of 2026-10-26 (Act 3 HP × 0.75 of the first draft, damage back to the first draft, final boss 100 HP; Vanguard on, Sanctum on): a 3-act run wins 26.8%, parties without the Shieldbearer 24.3%, and Act 3 is the hardest act (clear 40.7% vs Act 2 78.8% and Act 1 83.7%; `docs/reports/2026-10-26-sim-vanguard.md`).
 
 ### 23.1 Run flow with three acts
 
@@ -870,16 +886,16 @@ Everything here is ⚖. Numbers below are the shipped data after the act-balance
 
 | Key | Name | Ranks | HP | Speed | Intent cycle |
 |---|---|---|---|---|---|
-| iron_mourner | Iron Mourner | E1 | 27 | 2 | Toll-Hammer 6 (front) → Brace: 10 Block → Toll-Hammer 6 + 1 stress (front) |
-| grave_cur | Grave Cur | E1–2 | 18 | 7 | Snap 3 ×2 (front) → Rend 3 + 3 Bleed (lowest-HP) → Snap 3 ×2 |
-| ash_cantor | Ash Cantor | E3–4 | 16 | 3 | Lament: +2 stress (highest-stress) → Kindle: +1 Might to all enemies → Ember 4 (back) |
-| bronze_scribe | Bronze Scribe | E2–3 | 20 | 4 | Mark the Name: 2 Marked (front) → Etch 5 (marked) → Seal: 1 Ward to every enemy |
+| iron_mourner | Iron Mourner | E1 | 27 | 2 | Toll-Hammer 9 (front) → Brace: 10 Block → Toll-Hammer 9 + 1 stress (front) |
+| grave_cur | Grave Cur | E1–2 | 18 | 7 | Snap 4 ×2 (front) → Rend 4 + 3 Bleed (lowest-HP) → Snap 4 ×2 |
+| ash_cantor | Ash Cantor | E3–4 | 16 | 3 | Lament: +2 stress (highest-stress) → Kindle: +1 Might to all enemies → Ember 6 (back) |
+| bronze_scribe | Bronze Scribe | E2–3 | 20 | 4 | Mark the Name: 2 Marked (front) → Etch 8 (marked) → Seal: 1 Ward to every enemy |
 | hollow_choir | Hollow Choir | E4 | 22 | 1 | Dirge: +1 stress to every hero → Hush: 1 Weakened to every hero → Dirge |
-| sepulchre_knight | Sepulchre Knight | E1 | 36 | 2 | Wind-up (telegraph) → Execution 12 (front) → Iron Wall: 14 Block |
-| wax_saint | Wax Saint | E2–4 | 15 | 5 | Drip 3 + 2 Bleed (lowest-HP) → Mend Wax: heals itself 8 → Drip |
-| chain_wraith | Chain Wraith | E2–3 | 16 | 6 | Drag 3, swaps H1 and H2 (front) → Lash 4 to H1 and H2 → Fade: 8 Block, moves to E4 |
-| marrow_butcher | Marrow Butcher | E1–2 | 24 | 4 | Cleave 5 to H1 and H2 → Frenzy: +2 Might → Cleave 5 to H1 and H2 |
-| rift_spawn | Rift Spawn | E1–3 | 8 | 6 | Bite 2 ×2 (front) |
+| sepulchre_knight | Sepulchre Knight | E1 | 36 | 2 | Wind-up (telegraph) → Execution 18 (front) → Iron Wall: 14 Block |
+| wax_saint | Wax Saint | E2–4 | 15 | 5 | Drip 5 + 2 Bleed (lowest-HP) → Mend Wax: heals itself 8 → Drip |
+| chain_wraith | Chain Wraith | E2–3 | 16 | 6 | Drag 5, swaps H1 and H2 (front) → Lash 6 to H1 and H2 → Fade: 8 Block, moves to E4 |
+| marrow_butcher | Marrow Butcher | E1–2 | 24 | 4 | Cleave 7 to H1 and H2 → Frenzy: +2 Might → Cleave 7 to H1 and H2 |
+| rift_spawn | Rift Spawn | E1–3 | 8 | 6 | Bite 3 ×2 (front) |
 
 ### 23.3 Act 3 encounters and elites
 
@@ -901,13 +917,13 @@ Everything here is ⚖. Numbers below are the shipped data after the act-balance
 
 ### 23.4 Final boss: the Rift Mother
 
-The Rift Mother (`rift_mother`, "A Mãe da Fenda"): the wound itself grown a body, a cathedral-sized mass of bone, wax and machinery cradled in the sepulchre's iron ribs. Occupies E1+E2, HP 160 (final), Speed 3. She is the only enemy with **three phases** (allowed for the final boss only). Each phase change clears her debuffs, grants +2 Might and replaces the current intent with the new phase's first intent, shown before the player continues (§10.5); one hit that crosses both thresholds enters phase 3 directly (both banners play).
+The Rift Mother (`rift_mother`, "A Mãe da Fenda"): the wound itself grown a body, a cathedral-sized mass of bone, wax and machinery cradled in the sepulchre's iron ribs. Occupies E1+E2, HP 100 (final; was 160 before the boss-length pass), Speed 3. She is the only enemy with **three phases** (allowed for the final boss only). Each phase change clears her debuffs, grants +2 Might and replaces the current intent with the new phase's first intent, shown before the player continues (§10.5); one hit that crosses both thresholds enters phase 3 directly (both banners play).
 
 | Phase | Trigger | Intent cycle |
 |---|---|---|
-| 1 | start | Embrace 9 (front) → Wail: +2 stress to every hero → Coil: 15 Block |
-| 2 | HP ≤ 110 | Rend the Veil 4 to every hero → Devour 12 (highest-stress) → Wail |
-| 3 | HP ≤ 55 | Unmaking: 5 to every hero and +1 stress each → Devour 13 (lowest-HP) → Heartbeat: heals 15, 10 Block |
+| 1 | start | Embrace 12 (front) → Wail: +2 stress to every hero → Coil: 15 Block |
+| 2 | HP ≤ 66 | Rend the Veil 5 to every hero → Devour 15 (highest-stress) → Wail |
+| 3 | HP ≤ 33 | Unmaking: 6 to every hero and +1 stress each → Devour 16 (lowest-HP) → Heartbeat: heals 8, 10 Block |
 
 Rite 10 (§13.3) adds Embrace to her phase-2 and phase-3 cycles.
 
@@ -924,14 +940,16 @@ Three short paragraphs on the victory summary: the Rift closes from the inside; 
 - After the command the scene goes to Camp (`goNext`). Test ids: `sanctum-heal`, `sanctum-remove`, `sanctum-upgrade`, `sanctum-gold`, picker prefix `sanctum-card`.
 - Shipped on (2026-10-26): `ACT_RULES.sanctum = true` with `SanctumScene` (e2e `tests/e2e/sanctum.spec.ts`). Picker titles `sanctum.pickRemove|pickUpgrade` ("Temper: choose card 1 of 2"); Back in the picker cancels the whole choice. With the Act 3 damage at 0.55 and the P2-8 hero changes, a 3-act run won 27.4% (200 runs per party, seed 1); Act 3 tuning continues in §23.7.
 
-### 23.7 Tuning with the Sanctum (sim, 2026-10-26)
+### 23.7 Tuning with the Sanctum and the Vanguard (sim, 2026-10-26)
 
-`bun run sim -- --runs 400 --seed 1` with the Sanctum on and the Act 1–2 changes committed the same day (turn-limit enrage, Rite 2 tweak, P2-8 buffs). Act clear rates are of the runs that entered the act:
+`bun run sim -- --runs 400 --seed 1`, Sanctum on. Act clear rates are of the runs that entered the act.
 
-| Act 3 damage (× first draft) | Win | Act 1 | Act 2 | Act 3 |
-|---|---|---|---|---|
-| 0.55 | 27.8% | 71.4% | 61.4% | 63.5% |
-| **0.65 (shipped)** | **21.3%** | 71.4% | 61.4% | **48.5%** |
-| 0.75 | 15.4% | 71.4% | 61.4% | 35.3% |
+| Build | Win | No Shieldbearer | Act 1 | Act 2 | Act 3 | Boss turns (mean / p90) |
+|---|---|---|---|---|---|---|
+| Act 3 damage × 0.65, no Vanguard, bosses 140 / 160 HP (v0.0.7 candidate) | 21.3% | 6.4% | 71.4% | 61.4% | 48.5% | 10.4 / 15 |
+| Same data, Vanguard off, bosses retuned, Act 3 damage × 1.0 | 13.8% | 2.6% | 71.4% | 64.4% | 29.9% | 8.3 / 12 |
+| **Shipped: Vanguard 4, bosses retuned, Act 3 damage × 1.0** | **26.8%** | **24.3%** | 83.7% | 78.8% | **40.7%** | **8.1 / 12** |
 
-Act 2 already clears about 60%, so no Act 2 change was needed. At 0.65 every goal holds: the run wins 18–35% and Act 3 is the hardest act. Shared intent ids were split so each id has one meaning: Act 3 uses `choir_dirge`, `cur_rend`, `chain_lash`, `wraith_fade`, `wax_drip`, and the Rift Mother's phase-3 Devour is `devour_weakest`.
+Per boss (shipped, 40 runs per composition): Bell-Maw 9.6 turns (p90 14), Gilded Penitent 8.7 (p90 12), Rift Mother 10.2 (median 9, p90 18). Boss-length changes: Gilded Penitent HP 140 → 110 (phase 2 at ≤ 55); Rift Mother HP 160 → 100 (phases at ≤ 66 and ≤ 33), Heartbeat heal 15 → 8, damage up (Embrace 12, Rend the Veil 5, Devour 15 / 16, Unmaking 6) so the shorter fight stays dangerous.
+
+Shared intent ids were split so each id has one meaning: Act 3 uses `choir_dirge`, `cur_rend`, `chain_lash`, `wraith_fade`, `wax_drip`, and the Rift Mother's phase-3 Devour is `devour_weakest`. Intent damage on screen comes from a projection of the enemy phase (`projectEnemyPhase`), so Might from an earlier enemy's Kindle, Marked decaying before the hit, swaps and retargets are all included (GDD P3).

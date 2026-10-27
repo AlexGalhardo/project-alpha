@@ -9,6 +9,7 @@ import {
 	REST,
 	RITES,
 	RULES,
+	SANCTUM,
 } from '../data/index.ts';
 import { cardDef } from './cards.ts';
 import { endTurn, playCard, startCombat } from './combat.ts';
@@ -155,6 +156,12 @@ function afterReward(c: Ctx): void {
 		s.phase = 'victory';
 		return;
 	}
+	if (boss && ACT_RULES.sanctum) {
+		// Sanctum (GDD 23.1): injuries always clear; the player picks one recovery, then the camp.
+		for (const h of s.party) h.injured = false;
+		s.phase = 'sanctum';
+		return;
+	}
 	if (boss) healBetweenActs(s);
 	enterCamp(c);
 }
@@ -177,6 +184,40 @@ function startNextAct(s: RunState): void {
 	s.cursor = null;
 	s.currentNode = null;
 	s.seenEnemies = [];
+}
+
+function sanctumChoose(c: Ctx, cmd: Extract<Command, { type: 'sanctumChoose' }>): void {
+	const s = c.s;
+	if (s.phase !== 'sanctum') {
+		invalid(c, 'not-in-sanctum');
+		return;
+	}
+	const uids = cmd.cardUids ?? [];
+	if (cmd.option === 'remove' || cmd.option === 'upgrade') {
+		const upgrade = cmd.option === 'upgrade';
+		const eligible = s.deck.filter((x) => !upgrade || !x.upgraded);
+		const need = Math.min(
+			upgrade ? SANCTUM.upgradeCount : SANCTUM.removeCount,
+			eligible.length,
+		);
+		const ok =
+			need > 0 &&
+			uids.length === need &&
+			new Set(uids).size === need &&
+			uids.every((u) => eligible.some((x) => x.uid === u));
+		if (!ok) {
+			invalid(c, 'bad-cards');
+			return;
+		}
+		if (upgrade) for (const x of s.deck) x.upgraded ||= uids.includes(x.uid);
+		else s.deck = s.deck.filter((x) => !uids.includes(x.uid));
+	} else if (cmd.option === 'heal') {
+		for (const h of s.party) h.hp = maxHP(h);
+	} else {
+		s.gold += SANCTUM.gold;
+		s.stats.goldEarned += SANCTUM.gold;
+	}
+	enterCamp(c);
 }
 
 function campBuy(c: Ctx, cmd: Extract<Command, { type: 'campBuy' }>): void {
@@ -508,6 +549,9 @@ function dispatch(c: Ctx, cmd: Command): void {
 			else enterCamp(c);
 			return;
 		}
+		case 'sanctumChoose':
+			sanctumChoose(c, cmd);
+			return;
 		case 'claimTreasure':
 			if (!claimTreasure(c)) return;
 			s.roundsCleared += 1;

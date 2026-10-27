@@ -129,7 +129,7 @@ describe('statuses (GDD 6.1)', () => {
 		Object.assign(fx, { bleed: 3, burn: 5, marked: 1, weakened: 1 });
 		s = run(s, { type: 'endTurn' }).s;
 		const hero = s.party.find((h) => h.id === 'confessor');
-		expect(hero?.hp).toBe(44 - 5 - 3);
+		expect(hero?.hp).toBe(HEROES.confessor.maxHP - 5 - 3);
 		const after = combat(s).heroFx.confessor;
 		expect(after?.burn).toBe(2);
 		expect(after?.bleed).toBe(2);

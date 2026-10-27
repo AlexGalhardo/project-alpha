@@ -274,8 +274,8 @@ const rows: Row[] = [
 		owner: 'arcanist',
 		from: ANY,
 		target: ALLY,
-		p: { block: 5 },
-		up: { block: 8 },
+		p: { block: 10 },
+		up: { block: 13 },
 	},
 	{
 		id: 'arc_rift_spark',
@@ -386,8 +386,8 @@ const rows: Row[] = [
 		owner: 'confessor',
 		from: ANY,
 		target: ALLY,
-		p: { block: 5, ward: 1 },
-		up: { block: 8 },
+		p: { block: 10, ward: 1 },
+		up: { block: 13 },
 	},
 	{
 		id: 'cnf_mend',
@@ -497,8 +497,8 @@ const rows: Row[] = [
 		owner: 'bombardier',
 		from: ANY,
 		target: SELF,
-		p: { block: 6, blockAdjacent: 3 },
-		up: { block: 9, blockAdjacent: 4 },
+		p: { block: 6, blockAdjacent: 6 },
+		up: { block: 9, blockAdjacent: 7 },
 	},
 	{
 		id: 'bmb_shell',

@@ -215,6 +215,22 @@ export function chooseBotCommand(s: RunState): Command | null {
 			return eventCommand(s);
 		case 'treasure':
 			return { type: 'claimTreasure' };
+		case 'sanctum': {
+			// Heal unless the party is nearly full; then upgrade the two best cards; gold last.
+			if (hpFraction(s) < 0.9) return { type: 'sanctumChoose', option: 'heal' };
+			const best = s.deck
+				.filter((x) => !x.upgraded)
+				.sort(
+					(a, b) =>
+						(RARITY_WEIGHT[cardDef(b.cardId).rarity] ?? 0) -
+						(RARITY_WEIGHT[cardDef(a.cardId).rarity] ?? 0),
+				)
+				.slice(0, 2)
+				.map((x) => x.uid);
+			return best.length === 2
+				? { type: 'sanctumChoose', option: 'upgrade', cardUids: best }
+				: { type: 'sanctumChoose', option: 'gold' };
+		}
 		default:
 			return null;
 	}

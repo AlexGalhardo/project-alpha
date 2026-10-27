@@ -284,6 +284,7 @@ export type RunPhase =
 	| 'rest'
 	| 'event'
 	| 'treasure'
+	| 'sanctum'
 	| 'victory'
 	| 'defeat';
 
@@ -355,6 +356,7 @@ export type Command =
 	| { type: 'leaveShop' }
 	| { type: 'eventChoose'; index: number; cardUids?: number[] }
 	| { type: 'claimTreasure' }
+	| { type: 'sanctumChoose'; option: SanctumOption; cardUids?: number[] }
 	| { type: 'restChoose'; option: 'recover' | 'temper' | 'pray'; cardUid?: number }
 	| { type: 'equip'; heroId: HeroClass; slot: EquipSlot; item: string | null }
 	| { type: 'reorder'; order: HeroClass[] };
@@ -413,6 +415,8 @@ export interface ApplyResult {
 }
 
 // ---- view model (read-only selectors for the view layer) ----
+export type SanctumOption = 'heal' | 'remove' | 'upgrade' | 'gold';
+
 export type ScreenKey =
 	| 'map'
 	| 'combat'
@@ -422,6 +426,7 @@ export type ScreenKey =
 	| 'rest'
 	| 'event'
 	| 'treasure'
+	| 'sanctum'
 	| 'summary';
 
 export interface StatusView {

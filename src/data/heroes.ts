@@ -63,7 +63,7 @@ export const HEROES: Record<HeroClass, HeroDef> = {
 	},
 	confessor: {
 		key: 'confessor',
-		maxHP: 44,
+		maxHP: 52,
 		frontOrder: 2,
 		starters: ['cnf_censer_strike', 'cnf_censer_strike', 'cnf_sanctuary', 'cnf_mend'],
 		pool: [

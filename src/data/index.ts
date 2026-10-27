@@ -11,6 +11,7 @@ export {
 	MAP_RULES,
 	REST,
 	RULES,
+	SANCTUM,
 	SHOP,
 } from './economy.ts';
 export { ELITE, ENCOUNTERS, ENEMIES } from './enemies.ts';

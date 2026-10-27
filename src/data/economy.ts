@@ -96,9 +96,14 @@ export const MAP_RULES = { secondEdgeChance: 0.45, edgeAttempts: 300 } as const;
 /** GDD 4.3 and 22.1. `acts` is 1 for the prototype flow and 2 for Alpha (Alpha ships both acts). */
 export const ACT_RULES = {
 	acts: 3,
+	/** Between-act Sanctum (docs/gdd.md §23.1); off keeps the 50% heal below until its screen exists. */
+	sanctum: false,
 	/** Share of max HP every hero heals between acts (injuries are cleared too). */
 	betweenActHealPct: 50,
 	/** Added per act after the first, for non-boss enemies (HP x1.2, damage x1.1 in Act 2). */
 	hpPerAct: 0.2,
 	dmgPerAct: 0.1,
 };
+
+/** Sanctum options after a non-final boss (docs/gdd.md §23.1): one choice, injuries always cleared. */
+export const SANCTUM = { gold: 60, removeCount: 2, upgradeCount: 2 } as const;

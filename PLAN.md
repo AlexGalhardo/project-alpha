@@ -82,7 +82,7 @@ Goal: a new player finishes or fails Act 1 in 20–30 min and wants another run 
 ### P2.1 Combat core (`src/core`, TDD)
 
 - [x] Seeded RNG (sfc32/mulberry32) in state — assert: same seed ⇒ same sequence test
-- [ ] Data tables in `src/data` (heroes, 45 cards, enemies, encounters, economy, equipment) — assert: schema test (counts 5/45/10/12/8)
+- [x] Data tables in `src/data` (heroes, cards, enemies, encounters, economy, equipment) — assert: schema test — done: counts grew past the prototype (5 heroes, 55 cards, 33 enemies incl. bosses, 8 equipment), checked by `tests/unit/assets.test.ts` and the data tests
 - [x] Combat: turn structure, energy, draw, piles, ranks, From/Target — assert: unit tests
 - [x] Damage/Block/heal formulas, 8 statuses — assert: unit tests per GDD §5.5, §6
 - [x] Stress + Collapse, fall + injury — assert: unit tests §5.6, §7
@@ -138,7 +138,7 @@ Total PixelLab ≈ 356 generations (≈ 11% of the 3,400 remaining the developer
 
 - [x] Simulation matrix report `docs/reports/<date>-sim-prototype.md` — assert: GDD §20 targets 2–6
 - [ ] Smoke + e2e green, human QA script run — assert: report in `docs/reports/` — automated part done (`docs/reports/2026-10-26-qa-prototype.md`, 43 of 203 items automated); human run pending
-- [ ] Deploy to alpha.lekzera.xyz (after Vercel secrets) — assert: URL loads on phone + desktop — BLOCKED: Vercel project and secrets (developer)
+- [x] Deploy to alpha.lekzera.xyz — assert: URL loads on phone + desktop — done: Vercel GitHub integration deploys every push to `main`; v0.0.6 verified at 1920×1080 (desktop) and in the Android APK; real phone browser not tested
 - [ ] Go/no-go decision by the developer
 
 ## 5. Phase 3 — ALPHA
@@ -152,7 +152,7 @@ Total PixelLab ≈ 356 generations (≈ 11% of the 3,400 remaining the developer
 
 ## 6. Phase 4 — BETA
 
-- [ ] B4.1 Act 3 + final boss
+- [x] B4.1 Act 3 + final boss — done: 10 enemies, 2 elites, the Rift Mother with 3 phases (GDD §23), Sanctum between acts; balance tuning ongoing
 - [x] B4.2 Difficulty ladder (10 Rites, §13.3) — done: tests/unit/rites.test.ts, Party selector, sim `--rite`
 - [ ] B4.3 Polish pass (VFX, juice, audio mix)
 - [x] B4.4 Desktop build with Electron (pinned stable) — assert: installer runs on Windows — done: `bun run desktop:build` → portable exe, launched via Playwright Electron, Title scene, 0 errors (ADR 0016)

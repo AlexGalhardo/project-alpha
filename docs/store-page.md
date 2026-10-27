@@ -35,23 +35,29 @@ Entre as lutas você escolhe o caminho: uma rota de rodadas com combate, descans
 
 ### English
 
+- Three acts through the Iron Sepulchre, ending in the Rift Mother: a final boss with three phases and a closing epilogue.
+- The Sanctum between acts: after a boss, rest to full HP, purge two cards, temper two cards, or take 60 gold.
+- Enrage: from turn 10 every enemy grows stronger each turn, so long fights cannot be stalled.
 - Turn-based battles on a rank board: where a card is played from matters.
-- Guaranteed hits and visible enemy intents. Every card shows its result before you confirm.
-- Three acts, a final boss with three phases, and events, shops, camps and treasure on the route.
+- Guaranteed hits and visible enemy intents, with debuff amounts. Every card shows its result before you confirm.
+- Events, shops, camps and treasure on the route, with 12 events.
 - Stress and collapse: heroes who carry too much cost the party energy.
-- Permanent progression that adds options, not raw power (the Legacy skill tree).
+- Permanent progression that adds options, not raw power (the Legacy skill tree and Veteran starts).
 - Auto battle and 1x, 2x, 3x speed for long runs.
-- Pixel art and a Portuguese (PT-BR) and English interface.
+- Pixel art at 1080p for heroes, Act 1 enemies and backgrounds; interface in English and Portuguese (PT-BR).
 
 ### Português (PT-BR)
 
+- Três atos pelo Sepulcro de Ferro, terminando na Mãe da Fenda: um chefe final com três fases e um epílogo.
+- O Santuário entre os atos: depois de um chefe, descansar até a vida máxima, purgar duas cartas, temperar duas cartas ou receber 60 de ouro.
+- Fúria: a partir do turno 10, cada inimigo fica mais forte a cada turno, então lutas longas não podem ser arrastadas.
 - Batalhas por turnos num tabuleiro de posições: de onde a carta é jogada importa.
-- Golpes garantidos e intenções dos inimigos à vista. Toda carta mostra o resultado antes da confirmação.
-- Três atos, um chefe final com três fases, e eventos, lojas, acampamentos e tesouros na rota.
+- Golpes garantidos e intenções dos inimigos à vista, com as quantidades dos efeitos. Toda carta mostra o resultado antes da confirmação.
+- Eventos, lojas, acampamentos e tesouros na rota, com 12 eventos.
 - Estresse e colapso: heróis que carregam demais custam energia ao grupo.
-- Progressão permanente que dá opções, não poder bruto (a árvore de habilidades do Legado).
+- Progressão permanente que dá opções, não poder bruto (a árvore de habilidades do Legado e os inícios veteranos).
 - Batalha automática e velocidade 1x, 2x, 3x para runs longas.
-- Pixel art e interface em português (PT-BR) e inglês.
+- Pixel art em 1080p para heróis, inimigos do Ato 1 e cenários; interface em inglês e português (PT-BR).
 
 ## Screenshot captions (5)
 
@@ -78,10 +84,10 @@ Draft for the rating questionnaire. Not submitted; check the store's current cat
 
 ## Platforms
 
-- Web (current build, alpha.lekzera.xyz).
-- Windows desktop: an exe is attached to GitHub releases from v0.0.6 (Electron, not store-signed).
-- Android: APK build exists in the repo (Capacitor); it is not attached to the current release.
-- Steam and itch.io: not yet published. Steam build depends on the Beta plan (GDD §2).
+- Web: the live build at alpha.lekzera.xyz and the web tarball attached to each release.
+- Windows desktop: the `Ossuary.<version>.exe` portable build attached to GitHub releases from v0.0.6 (Electron, not code-signed).
+- Android: the APK is attached only when a release is built with the Android SDK. v0.0.6 has none.
+- Steam and itch.io: not yet published. The Steam build depends on the Beta plan (GDD §2).
 
 ## Open items before publishing
 

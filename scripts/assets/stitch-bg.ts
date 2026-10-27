@@ -12,7 +12,7 @@
 // Map backgrounds are a procedural top-down slab floor with glowing joints (the map is a plan view); no generation.
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { apiKey, appendLog, type Img, paletteImage, snap } from './pixellab.ts';
+import { apiKey, appendLog, type Img, snap } from './pixellab.ts';
 import {
 	b64Image,
 	CONCEPT_DIR,
@@ -30,7 +30,6 @@ const OUT = join(ROOT, 'public', 'assets', 'sprites');
 const W = 1920;
 const H = 1080;
 const FLOOR_Y = 810; // top of the floor band: bottom 25 % of the screen
-const HORIZON_Y = 594; // 55 %
 
 interface Theme {
 	key: string;
@@ -144,14 +143,6 @@ function flipH(img: Img): Img {
 				(y * img.w + (img.w - 1 - x)) * 4,
 			);
 		}
-	}
-	return o;
-}
-
-function flipV(img: Img): Img {
-	const o = blank(img.w, img.h);
-	for (let y = 0; y < img.h; y++) {
-		o.d.set(img.d.subarray(y * img.w * 4, (y + 1) * img.w * 4), (img.h - 1 - y) * img.w * 4);
 	}
 	return o;
 }

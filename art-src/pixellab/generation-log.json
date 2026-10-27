@@ -5722,5 +5722,625 @@
       "generations": 10
     },
     "status": "ok"
+  },
+  {
+    "key": "card.bmb_siege_mortar",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Mortar firing upward, bright flash. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Mortar firing upward, bright flash. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:01:06.144Z",
+    "httpStatus": 200,
+    "jobId": "d73979d0-96dc-4e4b-9547-fff43d6b9670",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.arc_unseal",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A broken wax seal on an ancient tome, violet light leaking from the crack. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A broken wax seal on an ancient tome, violet light leaking from the crack. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:01:09.108Z",
+    "httpStatus": 200,
+    "jobId": "fd6031ae-e796-425d-a5e9-c587cdeb640e",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.arc_rift_rupture",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A rupture of violet light in the air. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A rupture of violet light in the air. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:01:27.269Z",
+    "httpStatus": 200,
+    "jobId": "a5d27c91-0aa8-4136-ad99-14525c3d3e8a",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.arc_rift_rupture",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A rupture of violet light in the air. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A rupture of violet light in the air. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:01:41.340Z",
+    "httpStatus": 200,
+    "jobId": "c2a239b7-58b2-43c9-b701-dea8f881ec13",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.cnf_censer_strike",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Swinging censer leaving a smoke arc. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Swinging censer leaving a smoke arc. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:02:01.677Z",
+    "httpStatus": 200,
+    "jobId": "2607ecf0-3e93-4152-a648-cc571b624a79",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.cnf_censer_strike",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Swinging censer leaving a smoke arc. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Swinging censer leaving a smoke arc. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:02:22.423Z",
+    "httpStatus": 200,
+    "jobId": "2fae6258-f812-4969-afb2-7e912bc4a499",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.cnf_sanctuary",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Pale circle of light around a figure. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Pale circle of light around a figure. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:02:35.537Z",
+    "httpStatus": 200,
+    "jobId": "3c9c7b0c-a27b-41b8-81fc-10b782615930",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.cnf_sanctuary",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Pale circle of light around a figure. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Pale circle of light around a figure. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:02:48.152Z",
+    "httpStatus": 200,
+    "jobId": "709c8d55-d92b-4951-8111-bcf893327c6b",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.cnf_mend",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Hands stitching a wound with thread of light. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Hands stitching a wound with thread of light. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:03:12.298Z",
+    "httpStatus": 200,
+    "jobId": "c70e7974-1b75-4973-889d-538709cd85cd",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.cnf_mend",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Hands stitching a wound with thread of light. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Hands stitching a wound with thread of light. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:03:19.273Z",
+    "httpStatus": 200,
+    "jobId": "5786b9b8-39c4-4f91-a410-6c85dd68d558",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.shb_rampart",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A low wall of tower shields lined up across a corridor. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A low wall of tower shields lined up across a corridor. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:03:55.264Z",
+    "httpStatus": 200,
+    "jobId": "6428d43b-53b2-4511-b939-77ded9ab02b5",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.shb_riposte",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A shield catching a blade with sparks, a counter-thrust below. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A shield catching a blade with sparks, a counter-thrust below. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:04:43.148Z",
+    "httpStatus": 200,
+    "jobId": "b2d0453c-c037-4a46-9b94-c8a08072096c",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.mrk_ricochet",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A bolt bouncing off two stone walls with sparks. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A bolt bouncing off two stone walls with sparks. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:05:12.240Z",
+    "httpStatus": 200,
+    "jobId": "67a0faef-e2d1-4049-a5fc-391ed9338108",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.mrk_deadeye",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Several glowing red marks over a group of shadowy figures seen through a lens. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Several glowing red marks over a group of shadowy figures seen through a lens. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:05:51.016Z",
+    "httpStatus": 200,
+    "jobId": "3e825dbc-cd17-458e-83c4-c7a542b943fd",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.arc_cinder_ward",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A ring of drifting embers around a raised hand over a shield of ash. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A ring of drifting embers around a raised hand over a shield of ash. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:06:12.691Z",
+    "httpStatus": 200,
+    "jobId": "44aa3994-cf82-4019-a7b4-e7d620431a71",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.arc_inferno",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A wide wall of fire sweeping across a hall, silhouettes engulfed. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A wide wall of fire sweeping across a hall, silhouettes engulfed. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:06:50.456Z",
+    "httpStatus": 200,
+    "jobId": "e0a031bf-b1de-4fc9-9501-4c1712097726",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.cnf_penance",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A kneeling figure striking a censer into its own palm, smoke rising. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A kneeling figure striking a censer into its own palm, smoke rising. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:07:11.340Z",
+    "httpStatus": 200,
+    "jobId": "0c52dfe5-e70c-4509-952a-df5836fa14c2",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.cnf_last_rites",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Hands closing a wounded soldier eyes by candlelight. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. Hands closing a wounded soldier eyes by candlelight. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:07:58.086Z",
+    "httpStatus": 200,
+    "jobId": "5b04fd48-e855-41c7-a1ea-7915b51450f9",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.bmb_shrapnel",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A shell burst scattering metal shards across a battlefield. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A shell burst scattering metal shards across a battlefield. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:08:21.488Z",
+    "httpStatus": 200,
+    "jobId": "c2892931-66c5-414d-85cb-7e3eba4d61dc",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
+  },
+  {
+    "key": "card.bmb_flashbang",
+    "endpoint": "/create-image-pixflux-background",
+    "prompt": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A white flash blinding a line of silhouettes, long shadows. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+    "params": {
+      "description": "Pixel art illustration for a card, wide landscape composition, one clear focal point. A white flash blinding a line of silhouettes, long shadows. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.",
+      "image_size": {
+        "width": 180,
+        "height": 120
+      },
+      "no_background": false,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-cards.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T01:09:13.423Z",
+    "httpStatus": 200,
+    "jobId": "010aa592-4eaa-4de2-99ed-0b96e169ee4d",
+    "usage": {
+      "type": "generations",
+      "generations": 1
+    },
+    "status": "ok"
   }
 ]

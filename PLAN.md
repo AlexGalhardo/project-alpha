@@ -156,7 +156,7 @@ Total PixelLab ≈ 356 generations (≈ 11% of the 3,400 remaining the developer
 - [x] B4.2 Difficulty ladder (10 Rites, §13.3) — done: tests/unit/rites.test.ts, Party selector, sim `--rite`
 - [ ] B4.3 Polish pass (VFX, juice, audio mix)
 - [x] B4.4 Desktop build with Electron (pinned stable) — assert: installer runs on Windows — done: `bun run desktop:build` → portable exe, launched via Playwright Electron, Title scene, 0 errors (ADR 0016)
-- [ ] B4.5 Android build with Capacitor (pinned stable) — assert: APK runs on a device — APK builds (`bun run android:build`, debug, 14 MB); device run NOT verified yet
+- [x] B4.5 Android build with Capacitor (pinned stable) — assert: APK runs on a device — done: debug APK installed on the Android 13 emulator (omega-api33), immersive landscape, Title → Menu by touch, 0 JS errors in logcat; real phone not tested
 - [ ] B4.6 Beta gate: sim matrix, e2e, human QA on web/desktop/Android
 
 ## 7. Phase 5 — 1.0 RC

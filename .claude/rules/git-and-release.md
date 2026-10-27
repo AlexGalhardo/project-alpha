@@ -26,3 +26,9 @@
 ## Destructive operations
 
 - `git reset --hard`, `push --force`, deleting a branch or tag: only with the developer's explicit request.
+
+## Releasing while agents work
+
+- Parallel agents keep editing the working tree. Never run `git stash`, `git rebase --autostash` or any command that rewrites working files while they work: it reverts their uncommitted edits.
+- Release from a scratchpad clone instead: `git clone <repo> <scratchpad>/relclone`, `git remote set-url origin https://github.com/AlexGalhardo/project-alpha.git`, `bun install --frozen-lockfile`, `bun node_modules/electron/install.js`, then `bun run release`. Bring the release commit back with `git fetch origin && git merge origin/main`.
+- Each release attaches the web `.tar.gz`, the Windows exe, the Android APK (when `ANDROID_HOME` is set) and `checksums.txt`. Add a short "Highlights" paragraph at the top of the notes (`gh release edit`).

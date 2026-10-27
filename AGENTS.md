@@ -7,7 +7,7 @@
 ## Start of every session
 
 1. Load the skills `karpathy-guidelines` and `caveman`.
-2. Read `PLAN.md` → section **Current status** (phase, group, next step).
+2. Read `PLAN.md` → section **Current status** (phase, group, next step) and the latest `docs/sessions/` handoff.
 3. Read the rules in `.claude/rules/` that touch the task.
 
 ## Documentation
@@ -21,6 +21,8 @@
 | Architecture decisions | `docs/adrs/` |
 | Research and brainstorming | `docs/web-research.md`, `docs/research/`, `docs/brainstorming.md` (task 2) |
 | Rules for agents | `.claude/rules/` (engineering, design, assets, IP and tone, git) |
+| Session handoffs, next-session prompts | `docs/sessions/`, `docs/prompts-game-director.md` |
+| Reports (QA, sims, performance) | `docs/reports/` |
 
 ## Mandatory references
 
@@ -46,4 +48,4 @@
 - Asset scripts in `scripts/assets/` read keys from the environment (`ELEVEN_LABS_API_KEY`, `PIXELLAB_KEY_OVERRIDE` or `PIXELLAB_API_KEY`). Never print, log or commit a key.
 - Generated assets: `public/assets/`. Generation logs and raw takes: `art-src/`. After a batch, rerun `scripts/assets/prompts-doc.ts` to refresh `docs/assets-prompts-used.md`.
 - Not sure? Ask. Do not invent data; mark it "not verified".
-- Parallel agents: the coordinator (main session) delegates to three fixed agents (Opus review, Sonnet code, Haiku text/i18n/tests/simulations), integrates and commits. No worktrees unless explicitly requested.
+- Parallel agents: the coordinator (main session) delegates to fixed agents with folder ownership (QA playtester: scenes/view; core/balance; art and audio; text/i18n/tests/sims), integrates and commits. No worktrees unless explicitly requested. Release from a scratchpad clone while they work.

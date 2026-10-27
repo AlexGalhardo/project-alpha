@@ -66,6 +66,21 @@ Keys are stable and identical across every art set.
 6. No art dependency or external tool is added without asking.
 7. `references/` is third-party study material: never copy, crop, trace or ship it.
 
+## Native 1080p pipeline (2026-10-26)
+
+- Units, bosses: PixelLab REST `/generate-image-v2` (Pro) with a concept-art crop from
+  `references/concept-arts/` as `style_image` (style reference only, never shipped), palette-snapped,
+  transparent, at 3× the logical slot (`scripts/assets/pro-units.ts`). About 10 generations each.
+  One prompt template: side view, heroes face east (right), enemies face west (left); mirror
+  horizontally when a take faces the wrong way.
+- Backgrounds: 1920×1080 composed from Pro pieces (far/mid layers, ~25 generations each) plus a
+  procedural floor by `scripts/assets/stitch-bg.ts`; the floor line sits at y 810 (270 of 360).
+- Cards: `/create-image-pixflux` at 180×120 (1 generation each).
+- Animation: `/animate-pixminimax` (1 generation per call); `scripts/assets/animate.ts` is a draft
+  for the old sizes and must be updated before use.
+- After each group: `bun scripts/assets/manifest.ts`, a contact sheet ≤ 4096 px wide in
+  `art-src/pixellab/sheets/`, and `bun scripts/assets/prompts-doc.ts`.
+
 ## Review checklist (every asset, whatever its origin)
 
 - [ ] Canvas and anchor match the Art Bible; the anchor is the same in every frame.

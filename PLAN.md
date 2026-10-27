@@ -6,12 +6,12 @@ The onboarding document for every session and agent. Read **Current status** fir
 
 | Field | Value |
 |---|---|
-| Phase | 2 PROTOTYPE — Act 1 playable end to end in the browser with placeholder art and synthesized SFX |
-| Current group | A3 Alpha content (Act 2, events, skill tree done; Rites in progress) |
-| Version | 0.0.5 (live at <https://alpha.lekzera.xyz>) |
-| Last change | Render overhaul (B40, 2026-10-26): FIT scaling, Roboto, 2× art. ADR 0015 pending (Opus). Scene footer credit in `MenuScene.ts` still names Jersey and Tiny5 (coordinator to fix). |
-| Next step | Balance pass to GDD §20 targets (`docs/reports/`), then asset generation once `docs/asset-request.md` is approved |
-| Blockers | Paid asset generation waits for developer approval (`docs/asset-request.md`, `questions-to-dev.md` local only); Vercel secrets missing (no deploy); 1.0 RC items (Acts 2–3, Electron, Android, Steam) are later phases |
+| Phase | 4 BETA → 1.0 RC — all 1.0 content in (3 acts, final boss, Sanctum, Legacy, Rites), native 1080p art, desktop and Android builds |
+| Current group | Polish and balance toward the 1.0 RC (next: game director review, `docs/prompts-game-director.md`) |
+| Version | 0.0.9 (live at <https://alpha.lekzera.xyz>; release assets: web, Windows exe, Android APK) |
+| Last change | 2026-10-26 session, see `docs/sessions/2026-10-26-handoff.md` |
+| Next step | Director review (prompt 1), then the improvement session (prompt 2): Rite ladder, icons/portraits, animations, card art check, playtest 3 |
+| Blockers | Developer decisions in `questions-to-dev.md` (name, Steam, code signing, PixelLab key reset, design review of Vanguard and ×1.25 enemy damage, human QA and go/no-go) |
 
 Update this table at the end of every group (it is part of the group's assert).
 
@@ -35,7 +35,9 @@ Phase → group (one push + one release) → task → micro-task (one commit). E
 | Balance simulation | `bun run sim -- --runs 1000 --seed 1` (end of phase, and before/after any ⚖ change) |
 | Smoke / e2e | `bun run test:smoke`, `bun run test:e2e` (Playwright; end of phase) |
 | Human QA script | `docs/qa/human-qa.md` (end of phase) |
-| Release | `bun run release` (push + GitHub release; end of group) |
+| Release | `bun run release` (push + GitHub release with web, exe and APK assets; end of group). With agents editing the tree, run it from a scratchpad clone |
+| Gate simulation | `bun scripts/sim-gate.ts` (3 acts × Rites × all parties; writes `docs/reports/<date>-sim-gate.md`) |
+| Desktop / Android | `bun run desktop:build` (portable exe) / `bun run android:build` (debug APK; JDK 21 + `ANDROID_HOME`) |
 
 ### 1.3 Quality rhythm
 

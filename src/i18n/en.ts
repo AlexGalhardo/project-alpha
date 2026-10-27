@@ -506,7 +506,7 @@ export const en = {
 		ev_weeping_font: {
 			title: 'The Weeping Font',
 			text: 'A stone font stands in the nave. Water runs down its face and never stops.\nThe water is cold and tastes of salt. Someone left empty vials beside it.\nThe party can drink, fill the vials, or walk on.',
-			choice1: 'Drink: each hero heals {heal}% max HP and gains {stress} stress.',
+			choice1: 'Drink: each hero heals {heal}% of max HP and gains {stress} stress.',
 			choice2: 'Fill the vials: gain {gold} gold.',
 			choice3: 'Leave.',
 		},
@@ -870,7 +870,7 @@ export const en = {
 		},
 		bmb_concussion_round: {
 			name: 'Concussion Round',
-			text: 'Deal {damage} damage. Stun.',
+			text: 'Deal {damage} damage. Apply Stunned.',
 		},
 		bmb_barrage: {
 			name: 'Barrage',

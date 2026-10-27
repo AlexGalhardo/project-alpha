@@ -481,7 +481,7 @@ export const ptBR: Strings = {
 		},
 		eq_bell_clapper: {
 			name: 'Badalo do Sino',
-			effect: 'Uma vez por turno, se um herói tiver 7 ou mais de estresse, ganha 1 de energia.',
+			effect: 'Uma vez por turno, se um herói tiver 7 ou mais de estresse, o grupo ganha 1 de energia.',
 		},
 	},
 	equip: {
@@ -506,7 +506,7 @@ export const ptBR: Strings = {
 			title: 'A Fonte que Chora',
 			text: 'Uma pia de pedra fica na nave. A água escorre pelo rosto dela sem parar.\nA água é fria e tem gosto de sal. Alguém deixou frascos vazios ao lado.\nO grupo pode beber, encher os frascos ou seguir em frente.',
 			choice1: 'Beber: cada herói cura {heal}% da vida máxima e ganha {stress} de estresse.',
-			choice2: 'Encher os frascos: ganhe {gold} de ouro.',
+			choice2: 'Encher os frascos: ganhar {gold} de ouro.',
 			choice3: 'Sair.',
 		},
 		ev_ossuary_shrine: {
@@ -514,35 +514,35 @@ export const ptBR: Strings = {
 			text: 'Ossos empilhados formam um santuário, cada um com um nome riscado.\nUm sino votivo pende acima, em silêncio. Há uma bandeja de moedas na base.\nUm osso solto fica na frente. Ninguém o reivindicou.',
 			choice1: 'Oferecer {gold} de ouro: cada herói perde {relief} de estresse.',
 			choice2:
-				'Pegar um osso: ganhe uma relíquia comum aleatória; o primeiro herói ganha {stress} de estresse.',
+				'Pegar um osso: ganhar uma relíquia comum aleatória; o primeiro herói ganha {stress} de estresse.',
 			choice3: 'Sair.',
 		},
 		ev_chained_penitent: {
 			title: 'O Penitente Acorrentado',
 			text: 'Um homem ajoelha com os pulsos presos ao chão. Ele não levanta a cabeça.\nPede para ser libertado. Diz que já pagou por isso.\nA corrente é de bom ferro. Poderia ser levada.',
 			choice1:
-				'Libertá-lo: o primeiro herói perde {cost} de vida; escolha 1 de 3 cartas incomuns.',
-			choice2: 'Pegar a corrente dele: aprimore uma carta aleatória.',
+				'Libertá-lo: o primeiro herói perde {cost} de vida; escolher 1 de 3 cartas incomuns.',
+			choice2: 'Pegar a corrente dele: aprimorar uma carta aleatória.',
 			choice3: 'Sair.',
 		},
 		ev_forgotten_armory: {
 			title: 'Armaria Esquecida',
 			text: 'Uma porta atrás do altar abre para prateleiras de equipamento antigo, com ferrugem em cada lâmina.\nAlgo se move na escuridão entre as prateleiras.\nUma boa peça pode ainda estar sob a poeira. Algo mais também pode.',
 			choice1:
-				'Vasculhar: ganhe um equipamento comum; o herói com menos vida perde {cost} de vida.',
+				'Vasculhar: ganhar um equipamento comum; o herói com menos vida perde {cost} de vida.',
 			choice2: 'Sair.',
 		},
 		ev_whispering_choir: {
 			title: 'Coro Sussurrante',
 			text: 'Vozes zumbem nas paredes de uma capela vazia. Cantam um hino sem palavras.\nAs palavras estão na sua cabeça, e são suas.\nO coro oferece levar uma lembrança do seu baralho.',
 			choice1:
-				'Ouvir: remova uma carta (você escolhe); cada herói ganha {stress} de estresse.',
+				'Ouvir: remover uma carta (você escolhe); cada herói ganha {stress} de estresse.',
 			choice2: 'Sair.',
 		},
 		ev_ember_pilgrim: {
 			title: 'Peregrino da Brasa',
 			text: 'Um peregrino senta junto a um fogo de brasas que nunca se apagam.\nCaminhou muito e quer descansar.\nTroca o fogo por ouro ou divide-o de graça.',
-			choice1: 'Trocar: pague {gold} de ouro; aprimore duas cartas (você escolhe).',
+			choice1: 'Trocar: pagar {gold} de ouro; aprimorar duas cartas (você escolhe).',
 			choice2: 'Dividir o fogo: cada herói cura {heal} de vida.',
 			choice3: 'Sair.',
 		},
@@ -552,14 +552,14 @@ export const ptBR: Strings = {
 			choice1:
 				'Mergulhar: o primeiro herói perde {cost} de vida e ganha um equipamento comum.',
 			choice2:
-				'Puxar a corrente: o herói com menos vida perde {cost} de vida; ganhe {gold} de ouro.',
+				'Puxar a corrente: o herói com menos vida perde {cost} de vida; ganhar {gold} de ouro.',
 			choice3: 'Sair.',
 		},
 		ev_bone_cartographer: {
 			title: 'O Cartógrafo de Ossos',
 			text: 'Um homem senta numa tenda costurada de pele pálida, desenhando mapas sobre osso.\nOs mapas mostram a Fenda como era, e as estradas como serão.\nEle não pede que você compre. Apenas oferece.',
-			choice1: 'Comprar um mapa: pague {gold} de ouro; escolha 1 de 3 cartas incomuns.',
-			choice2: 'Vender uma página: remova 1 carta (você escolhe) e ganhe {gold} de ouro.',
+			choice1: 'Comprar um mapa: pagar {gold} de ouro; escolher 1 de 3 cartas incomuns.',
+			choice2: 'Vender uma página: remover 1 carta (você escolhe) e ganhar {gold} de ouro.',
 			choice3: 'Sair.',
 		},
 		ev_ashen_vigil: {
@@ -575,16 +575,16 @@ export const ptBR: Strings = {
 			title: 'Procissão dos Flagelantes',
 			text: 'Penitentes andam pela nave com as costas nuas, cantando uma nota só.\nNão olham para você. Pedem que caminhe com eles, sem prometer nada.\nNão se sabe se saem da capela ou trazem algo para dentro.',
 			choice1:
-				'Caminhar com eles: cada herói ganha {stress} de estresse; aprimore 2 cartas (você escolhe).',
-			choice2: 'Dar esmolas: pague {gold} de ouro; cada herói perde {relief} de estresse.',
+				'Caminhar com eles: cada herói ganha {stress} de estresse; aprimorar 2 cartas (você escolhe).',
+			choice2: 'Dar esmolas: pagar {gold} de ouro; cada herói perde {relief} de estresse.',
 			choice3: 'Sair.',
 		},
 		ev_gravewright: {
 			title: 'O Gravador de Túmulos',
 			text: 'Um artesão talha nomes em lajes que não têm túmulo debaixo.\nSua bancada tem uma bandeja de pequenas relíquias, ainda mornas.\nPergunta o que você quer enterrar e o que prefere guardar.',
 			choice1:
-				'Enterrar uma lembrança: o herói com menos vida perde {cost} de vida; remova 1 carta (você escolhe).',
-			choice2: 'Comprar uma relíquia: pague {gold} de ouro e ganhe a relíquia comum.',
+				'Enterrar uma lembrança: o herói com menos vida perde {cost} de vida; remover 1 carta (você escolhe).',
+			choice2: 'Comprar uma relíquia: pagar {gold} de ouro e ganhar a relíquia comum.',
 			choice3: 'Sair.',
 		},
 		ev_sealed_grille: {
@@ -592,7 +592,7 @@ export const ptBR: Strings = {
 			text: 'Uma grade selada com cera e barras de ferro fecha um nicho na parede.\nAtrás dela, algo respira devagar e diz o nome do primeiro herói.\nOferece uma confissão ou uma escuta, e não pede mais nada.',
 			choice1: 'Confessar: o primeiro herói perde {relief} de estresse e {cost} de vida.',
 			choice2:
-				'Escutar na grade: aprimore 2 cartas aleatórias (visíveis); cada herói ganha {stress} de estresse.',
+				'Escutar na grade: aprimorar 2 cartas aleatórias (visíveis); cada herói ganha {stress} de estresse.',
 			choice3: 'Sair.',
 		},
 	},
@@ -810,7 +810,7 @@ export const ptBR: Strings = {
 			text: 'Causa {damage} de dano em cada inimigo. Temor 2.',
 		},
 		arc_unseal: {
-			name: 'Desselar',
+			name: 'Romper Selo',
 			text: 'Compra {draw}. Temor 1.',
 		},
 		arc_rift_rupture: {
@@ -907,7 +907,7 @@ export const ptBR: Strings = {
 		},
 		arc_cinder_ward: {
 			name: 'Guarda de Brasa',
-			text: 'Dá {block} de bloqueio a um aliado. Aplica {stacks} Queimadura à frente.',
+			text: 'Dá {block} de bloqueio a um aliado. {stacks} de Queimadura na frente.',
 		},
 		arc_inferno: {
 			name: 'Inferno',
@@ -915,7 +915,7 @@ export const ptBR: Strings = {
 		},
 		cnf_penance: {
 			name: 'Penitência',
-			text: 'Cause {damage} de dano. O dono perde {stress} de estresse.',
+			text: 'Causa {damage} de dano. O dono perde {stress} de estresse.',
 		},
 		cnf_last_rites: {
 			name: 'Últimos Ritos',

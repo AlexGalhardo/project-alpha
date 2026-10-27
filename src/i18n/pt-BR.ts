@@ -249,7 +249,7 @@ export const ptBR: Strings = {
 			tooltip: 'Move o inimigo alvo para trás o número indicado de posições.',
 		},
 		pull: {
-			name: 'Puxar',
+			name: 'Puxão',
 			tooltip: 'Move o inimigo alvo para frente o número indicado de posições.',
 		},
 		swap: {

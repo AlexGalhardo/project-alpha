@@ -126,3 +126,52 @@ Win rate by composition, two acts (tuned):
 | confessor + arcanist + bombardier | 10.3% |
 
 Hero share of winning parties: Shieldbearer 89.8%, Confessor 82.7%, Arcanist 43.9%, Marksman 43.0%, Bombardier 40.6% (all above 15%). Parties without the Shieldbearer win 7.5% over two acts; the gap grows with the second act, so the front-rank rule is the next balance topic. Defeats by act and row: Act 1 rows 4-10 (388, 229, 386, 1147, 697, 1093), Act 2 rows 4-10 (243, 330, 502, 1080, 517, 443).
+
+## Enrage, turn cap and anti-dominance pass (QA playtest 1)
+
+Requested by the coordinator after `docs/reports/2026-10-26-qa-playtest-1.md` (P2-8, P2-9). All runs: `bun run sim -- --seed 1 --acts 2`, greedy bot, Rite 0.
+
+### Changes
+
+| Change | Where | Why |
+|---|---|---|
+| Enrage: from combat turn 10, every enemy gains +1 Might at the start of each player turn | `RULES.enrageTurn`, `RULES.enrageMight`, `src/core/combat.ts` | A 60-turn stalemate (Lantern Leech drain vs a healer) ended a run in the playtest |
+| Turn cap 60 → 30 | `RULES.turnCap` | Same; with enrage no common fight should reach it |
+| Ash Veil and Sanctuary 5 → 10 Block (upgraded 8 → 13) | `src/data/cards.ts` | Ally-protecting starters of non-tank heroes keep the front rank alive |
+| Sandbags adjacent Block 3 → 6 (upgraded 4 → 7) | `src/data/cards.ts` | Same |
+| Confessor 44 → 52 max HP | `src/data/heroes.ts` | The Confessor stands in front when the Shieldbearer is absent |
+
+Rejected in screening (60–100 runs per party, in-process harness): +3 or doubled **self** Block on Sidestep / Ash Veil / Sandbags (no change to parties without the Shieldbearer, 6%); all non-tanks ×1.25 HP (run win 43.5%, above the 25–40% target); Shieldbearer 60 → 50 HP (lowers every party, does not help the others).
+
+### Result
+
+| Metric | Before (enrage only, 1000/party) | After (1000/party) | After (200/party) | Target |
+|---|---|---|---|---|
+| Run win rate (2 acts) | 27.4% | 39.1% | 37.5% | 25–40% |
+| Parties without the Shieldbearer win | 7.1% | 23.0% | 21.1% | ≥ 20% |
+| Act 1 cleared | 60.0% | 72.1% | 71.0% | — |
+| Runs with ≥ 1 Collapse | 73.0% | 78.4% | 77.5% | ≥ 40% |
+| Hero falls per run | 3.30 | 2.84 | 2.90 | — |
+| Turns: common / elite / boss (median) | 4 / 6 / 9 | 4 / 6 / 9 | 4 / 6 / 9 | 3–6 / 5–7 / 7–10 |
+| Share of winning parties: Shieldbearer | 89.6% | 76.5% | 77.5% | every hero ≥ 15% |
+| Marksman / Arcanist / Confessor / Bombardier | 44.8 / 43.6 / 82.5 / 39.5% | 45.9 / 50.0 / 85.0 / 42.7% | 45.9 / 49.0 / 85.4 / 42.2% | ≥ 15% |
+
+Enrage alone (200/party, before the data change): run win 28.4% → 26.5%, combat medians unchanged.
+
+| Party (1000 runs each) | Before | After |
+|---|---|---|
+| shieldbearer + marksman + arcanist | 17.8% | 24.0% |
+| shieldbearer + confessor + marksman | 69.5% | 81.2% |
+| shieldbearer + marksman + bombardier | 15.2% | 15.4% |
+| shieldbearer + confessor + arcanist | 65.2% | 81.7% |
+| shieldbearer + arcanist + bombardier | 14.7% | 19.1% |
+| shieldbearer + confessor + bombardier | 63.0% | 78.1% |
+| confessor + marksman + arcanist | 13.3% | 37.6% |
+| marksman + arcanist + bombardier | 0.2% | 0.2% |
+| confessor + marksman + bombardier | 6.8% | 21.2% |
+| confessor + arcanist + bombardier | 8.3% | 33.0% |
+
+### Open points
+
+- The Confessor is now the most-present winner (85% of winning parties; 55.5% win rate when present). Parties with neither Shieldbearer nor Confessor (Marksman + Arcanist + Bombardier) still win 0.2%: nobody can hold rank 1. The next pass should look at the front-rank rule, not more numbers on the back rank.
+- Shieldbearer parties without the Confessor stay at 15–24%: healing, not Block, is the other gate.

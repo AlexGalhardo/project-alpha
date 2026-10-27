@@ -378,13 +378,13 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		speed: 2,
 		size: 1,
 		intents: [
-			atk('toll_hammer', 4),
+			atk('toll_hammer', 6),
 			{ id: 'brace', target: 'front', effects: [{ kind: 'selfBlock', amount: 10 }] },
 			{
 				id: 'toll_hammer',
 				target: 'front',
 				effects: [
-					{ kind: 'damage', amount: 4 },
+					{ kind: 'damage', amount: 6 },
 					{ kind: 'stress', amount: 1 },
 				],
 			},
@@ -396,16 +396,16 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		speed: 7,
 		size: 1,
 		intents: [
-			atk('snap', 2, 2),
+			atk('snap', 3, 2),
 			{
-				id: 'rend',
+				id: 'cur_rend',
 				target: 'lowestHP',
 				effects: [
-					{ kind: 'damage', amount: 2 },
+					{ kind: 'damage', amount: 3 },
 					{ kind: 'status', status: 'bleed', amount: 3 },
 				],
 			},
-			atk('snap', 2, 2),
+			atk('snap', 3, 2),
 		],
 	},
 	ash_cantor: {
@@ -416,7 +416,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		intents: [
 			{ id: 'lament', target: 'highestStress', effects: [{ kind: 'stress', amount: 2 }] },
 			{ id: 'kindle', target: 'front', effects: [{ kind: 'mightAllEnemies', amount: 1 }] },
-			atk('ember', 3, undefined, 'back'),
+			atk('ember', 4, undefined, 'back'),
 		],
 	},
 	bronze_scribe: {
@@ -430,7 +430,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 				target: 'front',
 				effects: [{ kind: 'status', status: 'marked', amount: 2 }],
 			},
-			atk('etch', 4, undefined, 'marked'),
+			atk('etch', 5, undefined, 'marked'),
 			{ id: 'seal', target: 'front', effects: [{ kind: 'wardAllEnemies', amount: 1 }] },
 		],
 	},
@@ -440,13 +440,13 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		speed: 1,
 		size: 1,
 		intents: [
-			{ id: 'dirge', target: 'all', effects: [{ kind: 'stress', amount: 1 }] },
+			{ id: 'choir_dirge', target: 'all', effects: [{ kind: 'stress', amount: 1 }] },
 			{
 				id: 'hush',
 				target: 'all',
 				effects: [{ kind: 'status', status: 'weakened', amount: 1 }],
 			},
-			{ id: 'dirge', target: 'all', effects: [{ kind: 'stress', amount: 1 }] },
+			{ id: 'choir_dirge', target: 'all', effects: [{ kind: 'stress', amount: 1 }] },
 		],
 	},
 	sepulchre_knight: {
@@ -456,7 +456,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		size: 1,
 		intents: [
 			{ id: 'wind_up', target: 'front', effects: [{ kind: 'telegraph' }] },
-			atk('execution', 9),
+			atk('execution', 12),
 			{ id: 'iron_wall', target: 'front', effects: [{ kind: 'selfBlock', amount: 14 }] },
 		],
 	},
@@ -467,19 +467,19 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		size: 1,
 		intents: [
 			{
-				id: 'drip',
+				id: 'wax_drip',
 				target: 'lowestHP',
 				effects: [
-					{ kind: 'damage', amount: 2 },
+					{ kind: 'damage', amount: 3 },
 					{ kind: 'status', status: 'bleed', amount: 2 },
 				],
 			},
 			{ id: 'mend_wax', target: 'front', effects: [{ kind: 'selfHeal', amount: 8 }] },
 			{
-				id: 'drip',
+				id: 'wax_drip',
 				target: 'lowestHP',
 				effects: [
-					{ kind: 'damage', amount: 2 },
+					{ kind: 'damage', amount: 3 },
 					{ kind: 'status', status: 'bleed', amount: 2 },
 				],
 			},
@@ -494,11 +494,11 @@ export const ENEMIES: Record<string, EnemyDef> = {
 			{
 				id: 'drag',
 				target: 'front',
-				effects: [{ kind: 'damage', amount: 2 }, { kind: 'swapFrontHeroes' }],
+				effects: [{ kind: 'damage', amount: 3 }, { kind: 'swapFrontHeroes' }],
 			},
-			atk('lash', 3, undefined, 'frontTwo'),
+			atk('chain_lash', 4, undefined, 'frontTwo'),
 			{
-				id: 'fade',
+				id: 'wraith_fade',
 				target: 'front',
 				effects: [{ kind: 'selfBlock', amount: 8 }, { kind: 'moveToBack' }],
 			},
@@ -510,9 +510,9 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		speed: 4,
 		size: 1,
 		intents: [
-			atk('cleave', 4, undefined, 'frontTwo'),
+			atk('cleave', 5, undefined, 'frontTwo'),
 			{ id: 'frenzy', target: 'front', effects: [{ kind: 'selfMight', amount: 2 }] },
-			atk('cleave', 4, undefined, 'frontTwo'),
+			atk('cleave', 5, undefined, 'frontTwo'),
 		],
 	},
 	rift_spawn: {
@@ -534,13 +534,13 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		phase3Hp: 55,
 		phase3Might: 2,
 		intents: [
-			atk('embrace', 7),
+			atk('embrace', 9),
 			{ id: 'wail', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
 			{ id: 'coil', target: 'front', effects: [{ kind: 'selfBlock', amount: 15 }] },
 		],
 		phase2Intents: [
-			atk('rend_the_veil', 3, undefined, 'all'),
-			atk('devour', 9, undefined, 'highestStress'),
+			atk('rend_the_veil', 4, undefined, 'all'),
+			atk('devour', 12, undefined, 'highestStress'),
 			{ id: 'wail', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
 		],
 		phase3Intents: [
@@ -548,11 +548,11 @@ export const ENEMIES: Record<string, EnemyDef> = {
 				id: 'unmaking',
 				target: 'all',
 				effects: [
-					{ kind: 'damage', amount: 4 },
+					{ kind: 'damage', amount: 5 },
 					{ kind: 'stress', amount: 1 },
 				],
 			},
-			atk('devour', 10, undefined, 'lowestHP'),
+			atk('devour_weakest', 13, undefined, 'lowestHP'),
 			{
 				id: 'heartbeat',
 				target: 'front',

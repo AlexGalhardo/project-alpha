@@ -3,7 +3,7 @@ import { BASE_WIDTH } from '../platform/zoom';
 import { app } from '../view/app';
 import { setMusicVolume } from '../view/audio';
 import { t } from '../view/i18n';
-import type { Speed } from '../view/settings';
+import type { Speed, TextScale } from '../view/settings';
 import { Button, fitCamera, label, panel } from '../view/ui';
 
 interface SettingsData {
@@ -83,6 +83,15 @@ export class SettingsScene extends Phaser.Scene {
 				() => app.update({ reduceFlashes: !s.reduceFlashes }),
 			],
 			[
+				t('settings.textScale'),
+				`${s.textScale}%`,
+				() => {
+					const next: TextScale =
+						s.textScale === 100 ? 125 : s.textScale === 125 ? 150 : 100;
+					app.update({ textScale: next });
+				},
+			],
+			[
 				t('settings.fullscreen'),
 				onOff(s.fullscreen),
 				() => {
@@ -93,7 +102,7 @@ export class SettingsScene extends Phaser.Scene {
 			],
 		];
 		rows.forEach(([name, value, action], i) => {
-			const y = 64 + i * 28;
+			const y = 64 + i * 26;
 			label(this, 136, y + 6, name, 'ui').setData('row', true);
 			new Button(
 				this,
@@ -107,7 +116,7 @@ export class SettingsScene extends Phaser.Scene {
 				{ w: 128, h: 24, testId: `settings-${i}` },
 			).setData('row', true);
 		});
-		new Button(this, BASE_WIDTH / 2 - 60, 296, t('settings.back'), () => this.close(), {
+		new Button(this, BASE_WIDTH / 2 - 60, 302, t('settings.back'), () => this.close(), {
 			sfx: 'sfx.ui.cancel',
 			testId: 'settings-back',
 		}).setData('row', true);

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { VIEW_ZOOM } from '../platform/zoom';
+import { app } from './app';
 import { play } from './audio';
 import { FONT_FAMILY, FONT_PX, FONT_WEIGHT, type FontToken } from './fonts';
 import { css, P, type PaletteKey } from './palette';
@@ -10,6 +11,15 @@ export type { FontToken } from './fonts';
 /** UI text: Roboto via Phaser Text, rendered at the camera zoom so glyphs stay sharp (ADR 0015). */
 export type UiText = Phaser.GameObjects.Text;
 
+/**
+ * Size of a font token in layout px. The A3.5 text scale (Settings: 100/125/150%) applies to body
+ * text (tiny, ui); titles and big numbers keep their size so screens keep their structure.
+ */
+export function fontPx(font: FontToken, scalable = true): number {
+	const scaled = scalable && (font === 'tiny' || font === 'ui');
+	return scaled ? (FONT_PX[font] * app.settings.textScale) / 100 : FONT_PX[font];
+}
+
 export function label(
 	scene: Phaser.Scene,
 	x: number,
@@ -17,11 +27,13 @@ export function label(
 	text: string,
 	font: FontToken = 'ui',
 	color: PaletteKey = 'bone2',
+	/** false for fixed-size faces (cards) that must not follow the text-size setting. */
+	scalable = true,
 ): UiText {
 	return scene.add
 		.text(x, y, text, {
 			fontFamily: FONT_FAMILY,
-			fontSize: `${FONT_PX[font]}px`,
+			fontSize: `${fontPx(font, scalable)}px`,
 			fontStyle: FONT_WEIGHT[font] === '400' ? 'normal' : FONT_WEIGHT[font],
 			color: css(color),
 			resolution: VIEW_ZOOM,
@@ -112,6 +124,7 @@ export class Button extends Phaser.GameObjects.Container {
 	readonly w: number;
 	readonly h: number;
 	private readonly danger: boolean;
+	private maxText = 0;
 
 	constructor(
 		scene: Phaser.Scene,
@@ -136,6 +149,8 @@ export class Button extends Phaser.GameObjects.Container {
 			text = label(scene, cx, this.h / 2, caption, 'tiny').setOrigin(0.5);
 		}
 		this.text = text;
+		this.maxText = this.w - pad - 6;
+		this.fit();
 		this.add([this.bg, this.text]);
 		if (iconKey) this.add(sized(scene.add.image(12, Math.round(this.h / 2), iconKey)));
 		this.setSize(this.w, this.h);
@@ -159,7 +174,14 @@ export class Button extends Phaser.GameObjects.Container {
 
 	setCaption(caption: string): this {
 		this.text.setText(caption);
+		this.fit();
 		return this;
+	}
+
+	/** Still too wide (large text size, long PT-BR caption): shrink the caption to fit. */
+	private fit(): void {
+		this.text.setScale(1);
+		if (this.text.width > this.maxText) this.text.setScale(this.maxText / this.text.width);
 	}
 
 	setEnabled(enabled: boolean): this {
@@ -281,10 +303,25 @@ export function standing(
 }
 
 /** Full-scene background shown at 640×360 whatever its texture size, with an optional dim layer. */
-export function backdrop(scene: Phaser.Scene, keys: string | string[], dim = 0): void {
+export function backdrop(
+	scene: Phaser.Scene,
+	keys: string | string[],
+	dim = 0,
+): Phaser.GameObjects.Image | null {
 	// First key that is loaded (per-act art falls back to Act 1 until it is in the manifest).
 	const key = (Array.isArray(keys) ? keys : [keys]).find((k) => scene.textures.exists(k));
-	if (!key) return;
-	scene.add.image(0, 0, key).setOrigin(0).setDisplaySize(640, 360).setDepth(-2);
+	if (!key) return null;
+	const img = scene.add.image(0, 0, key).setOrigin(0).setDisplaySize(640, 360).setDepth(-2);
 	if (dim > 0) scene.add.rectangle(0, 0, 640, 360, P.ash0, dim).setOrigin(0).setDepth(-1);
+	return img;
+}
+
+/**
+ * Shrinks a (wrapped) text so it fits its box; used where the larger text sizes (A3.5) would spill
+ * out of a fixed panel. The text keeps its wrap width, so it only gets smaller, never wider.
+ */
+export function fitText(text: UiText, maxW: number, maxH: number): UiText {
+	text.setScale(1);
+	const k = Math.min(1, maxW / Math.max(1, text.width), maxH / Math.max(1, text.height));
+	return text.setScale(k);
 }

@@ -14,7 +14,7 @@ import { cardName, cardText } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { session } from '../view/session';
-import { Button, backdrop, fitCamera, itemIcon, label, panel, portrait } from '../view/ui';
+import { Button, backdrop, fitCamera, fitText, itemIcon, label, panel, portrait } from '../view/ui';
 
 /**
  * Camp after every round except the boss (GDD §4.4, docs/art-bible.md §11.8): swap a hero, buy one
@@ -182,6 +182,9 @@ export class CampScene extends Phaser.Scene {
 				'ash5',
 			).setWordWrapWidth(290),
 		);
+		// The hint must stay above the swap buttons at every text size (A3.5).
+		const hint = this.layer.last as Phaser.GameObjects.Text;
+		fitText(hint, 290, 23);
 		view.swapCandidates.forEach((id, i) => {
 			const b = new Button(
 				this,
@@ -258,10 +261,17 @@ export class CampScene extends Phaser.Scene {
 					'tiny',
 					'bone2',
 				).setWordWrapWidth(ic ? 56 : 78);
+				fitText(n, ic ? 56 : 78, 20);
 				this.layer.add(n);
-				ey = Math.max(ey + n.height, ic ? ty + 36 : 0) + 2;
+				ey = Math.max(ey + n.displayHeight, ic ? ty + 36 : 0) + 2;
 			}
-			this.layer.add(label(this, x + 6, ey, o.effect, 'tiny', 'ash5').setWordWrapWidth(78));
+			this.layer.add(
+				fitText(
+					label(this, x + 6, ey, o.effect, 'tiny', 'ash5').setWordWrapWidth(78),
+					78,
+					ty + 73 - ey,
+				),
+			);
 			const caption = o.sold ? t('shop.soldOut') : t('camp.price', { gold: o.price });
 			const b = new Button(this, x + 88, ty + 18, caption, () => this.buy(o.key), {
 				w: 52,

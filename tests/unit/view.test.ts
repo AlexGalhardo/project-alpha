@@ -129,6 +129,20 @@ describe('loadSettings validation', () => {
 		expect(loadSettings(fallback).defaultSpeed).toBe(3);
 	});
 
+	// A3.5 text scale: 100, 125 or 150 percent, default 100.
+	test('text scale defaults to 100 and keeps 125 or 150', () => {
+		expect(fallback.textScale).toBe(100);
+		store.set(KEY, JSON.stringify({ textScale: 150 }));
+		expect(loadSettings(fallback).textScale).toBe(150);
+		store.set(KEY, JSON.stringify({ textScale: 125 }));
+		expect(loadSettings(fallback).textScale).toBe(125);
+	});
+
+	test('any other text scale falls back to the default', () => {
+		store.set(KEY, JSON.stringify({ textScale: 300 }));
+		expect(loadSettings(fallback).textScale).toBe(100);
+	});
+
 	test('an unknown locale falls back to the default locale', () => {
 		store.set(KEY, JSON.stringify({ locale: 'fr' }));
 		expect(loadSettings(fallback).locale).toBe(fallback.locale);

@@ -2,6 +2,8 @@ import { readText, writeText } from '../platform/storage';
 import type { Locale } from './i18n';
 
 export type Speed = 1 | 2 | 3;
+/** UI text size in percent (A3.5). */
+export type TextScale = 100 | 125 | 150;
 
 export interface Settings {
 	locale: Locale;
@@ -12,6 +14,7 @@ export interface Settings {
 	reduceShake: boolean;
 	reduceFlashes: boolean;
 	fullscreen: boolean;
+	textScale: TextScale;
 }
 
 const KEY = 'ossuary.settings.v1';
@@ -26,7 +29,12 @@ export function defaultSettings(locale: Locale): Settings {
 		reduceShake: false,
 		reduceFlashes: false,
 		fullscreen: false,
+		textScale: 100,
 	};
+}
+
+function isTextScale(value: unknown): value is TextScale {
+	return value === 100 || value === 125 || value === 150;
 }
 
 function isSpeed(value: unknown): value is Speed {
@@ -53,6 +61,7 @@ export function loadSettings(fallback: Settings): Settings {
 			reduceShake: bool(d.reduceShake, fallback.reduceShake),
 			reduceFlashes: bool(d.reduceFlashes, fallback.reduceFlashes),
 			fullscreen: bool(d.fullscreen, fallback.fullscreen),
+			textScale: isTextScale(d.textScale) ? d.textScale : fallback.textScale,
 		};
 	} catch {
 		return fallback;

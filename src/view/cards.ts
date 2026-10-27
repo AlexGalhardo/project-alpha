@@ -99,11 +99,25 @@ export function drawCard(
 		c.add(gem);
 	}
 	c.add(
-		label(scene, 8, 8, `${opts.cost ?? costOf(cardId, upgraded)}`, 'ui', 'ash0').setOrigin(0.5),
+		label(
+			scene,
+			8,
+			8,
+			`${opts.cost ?? costOf(cardId, upgraded)}`,
+			'ui',
+			'ash0',
+			false,
+		).setOrigin(0.5),
 	);
-	const name = label(scene, 4, 41, cardName(cardId, upgraded), 'tiny', 'bone2').setWordWrapWidth(
-		CARD_W - 8,
-	);
+	const name = label(
+		scene,
+		4,
+		41,
+		cardName(cardId, upgraded),
+		'tiny',
+		'bone2',
+		false,
+	).setWordWrapWidth(CARD_W - 8);
 	c.add(name);
 	// Value chips: shape + colour + number (art bible §5 tokens), so the card reads without its text.
 	const v = cardValues(cardId, upgraded);
@@ -154,13 +168,14 @@ export function drawCard(
 			);
 		else if (kind === 'energy') cg.fillCircle(x + 3, chipY + 4, 3);
 		else cg.fillRect(x + 1, chipY, 4, 7);
-		const t2 = label(scene, x + 8, chipY - 1, text, 'tiny', 'bone2');
+		const t2 = label(scene, x + 8, chipY - 1, text, 'tiny', 'bone2', false);
 		c.add(t2);
 		x += 10 + t2.width + 2;
 	}
 	c.add(cg);
 	// Owner name only when the card name fits on one line; the owner band always shows.
-	if (chipY === 54) c.add(label(scene, 4, 68, t(`hero.${def.owner}.name`), 'tiny', 'ash5'));
+	if (chipY === 54)
+		c.add(label(scene, 4, 68, t(`hero.${def.owner}.name`), 'tiny', 'ash5', false));
 	c.setSize(CARD_W, CARD_H);
 	return c;
 }

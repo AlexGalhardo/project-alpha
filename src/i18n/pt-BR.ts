@@ -42,6 +42,7 @@ export const ptBR: Strings = {
 		reduceShake: 'Reduzir tremor da tela',
 		reduceFlashes: 'Reduzir flashes',
 		fullscreen: 'Tela cheia',
+		textScale: 'Tamanho do texto',
 		on: 'Ligado',
 		off: 'Desligado',
 		back: 'Voltar',

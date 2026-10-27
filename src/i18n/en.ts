@@ -44,6 +44,7 @@ export const en = {
 		reduceShake: 'Reduce screen shake',
 		reduceFlashes: 'Reduce flashes',
 		fullscreen: 'Fullscreen',
+		textScale: 'Text size',
 		on: 'On',
 		off: 'Off',
 		back: 'Back',

@@ -6,7 +6,7 @@ import { playMusic } from '../view/audio';
 import { cardName } from '../view/cards';
 import { t } from '../view/i18n';
 import { loadProfile, saveProfile } from '../view/profile';
-import { Button, backdrop, fitCamera, label, panel, sized } from '../view/ui';
+import { Button, backdrop, fitCamera, fitText, label, panel, sized } from '../view/ui';
 
 const HEROES: HeroClass[] = ['shieldbearer', 'marksman', 'arcanist', 'confessor', 'bombardier'];
 
@@ -56,7 +56,8 @@ export class LegacyScene extends Phaser.Scene {
 				const mark = state === 'owned' ? '◆' : state === 'next' ? '▲' : '·';
 				const color = state === 'owned' ? 'gold2' : state === 'next' ? 'bone2' : 'ash4';
 				label(this, x + 6, y, `${mark} ${TREE.nodeCosts[n]}`, 'tiny', color);
-				label(this, x + 30, y, text, 'tiny', color).setWordWrapWidth(80);
+				// Each row has 32 px; larger text sizes (A3.5) shrink to stay above the next row.
+				fitText(label(this, x + 30, y, text, 'tiny', color).setWordWrapWidth(80), 80, 32);
 			});
 			const cost = nextNodeCost(this.profile, hero);
 			const caption = cost === null ? t('legacy.owned') : `${t('legacy.buy')} ${cost}`;

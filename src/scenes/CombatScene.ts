@@ -148,7 +148,14 @@ export class CombatScene extends Phaser.Scene {
 	create(): void {
 		fitCamera(this);
 		this.cameras.main.setBackgroundColor('#1b1a22');
-		backdrop(this, [`bg.combat.act${session.state?.act ?? 1}`, 'bg.combat.act1'], 0.55);
+		const bg = backdrop(
+			this,
+			[`bg.combat.act${session.state?.act ?? 1}`, 'bg.combat.act1'],
+			0.35,
+		);
+		// Stitched 1080p backdrops (scripts/assets/stitch-bg.ts) have their floor line at 270 of 360:
+		// lift them so it meets the units' feet (FLOOR_Y); the empty sky above leaves the screen.
+		if (bg && bg.texture.getSourceImage().height >= 1080) bg.setY(FLOOR_Y - 270);
 		app.applySpeed(this);
 		this.layer = this.add.container(0, 0);
 		this.buildStatic();
@@ -361,8 +368,6 @@ export class CombatScene extends Phaser.Scene {
 		this.layer.add(pips);
 		this.hpBar(x + 8, 193, h.hp, h.maxHP, h.status.block);
 		this.statusRow(x + 4, 210, h.status);
-		if (h.status.block > 0)
-			this.layer.add(label(this, x + 66, 182, `${h.status.block}`, 'tiny', 'ward1'));
 		// The zone starts below the intent strip (y 24–44) so intent icons keep their own taps.
 		const zone = this.add
 			.zone(x, 44, SLOT_W, FLOOR_Y - 44)
@@ -389,8 +394,6 @@ export class CombatScene extends Phaser.Scene {
 			);
 		this.hpBar(x + (w - 64) / 2, 193, e.hp, e.maxHP, e.status.block);
 		this.statusRow(x + 4, 210, e.status);
-		if (e.status.block > 0)
-			this.layer.add(label(this, x + w - 14, 182, `${e.status.block}`, 'tiny', 'ward1'));
 		if (e.intent) this.drawIntent(e, x, w);
 		const zone = this.add
 			.zone(x, 44, w, FLOOR_Y - 44)

@@ -69,52 +69,52 @@ const enemyStyle = 'style-enemies.png';
 const ACT3: [string, [number, number], string][] = [
 	[
 		'iron_mourner',
-		[192, 240],
+		[64, 80],
 		'A hooded giant in riveted iron plate, carrying a huge funeral bell on a hammer haft.',
 	],
 	[
 		'grave_cur',
-		[240, 192],
+		[80, 64],
 		'An emaciated hound wrapped in grey burial cloth, glowing seams of ember light along the wrappings.',
 	],
 	[
 		'ash_cantor',
-		[192, 240],
+		[64, 80],
 		'A robed singer with a stitched-shut mouth, ash pouring from the long sleeves.',
 	],
 	[
 		'bronze_scribe',
-		[192, 240],
+		[64, 80],
 		'A bronze automaton monk with a quill blade in one hand and a heavy ledger in the other.',
 	],
 	[
 		'hollow_choir',
-		[240, 336],
+		[80, 112],
 		'Three fused hollow-faced choristers standing on one stone plinth, mouths open, robes melded together.',
 	],
 	[
 		'sepulchre_knight',
-		[240, 336],
+		[80, 112],
 		'A tomb-effigy knight risen from its slab, stone and iron plate, carrying a huge greatsword.',
 	],
 	[
 		'wax_saint',
-		[192, 240],
+		[64, 80],
 		'A melting wax saint statue with a dripping halo, hands folded, wax running down the robes.',
 	],
 	[
 		'chain_wraith',
-		[192, 240],
+		[64, 80],
 		'A translucent pale wraith bound in hanging iron chains, hollow eyes.',
 	],
 	[
 		'marrow_butcher',
-		[192, 240],
+		[64, 80],
 		'A hunched bone-plated butcher holding twin cleavers, a stained leather apron.',
 	],
 	[
 		'rift_spawn',
-		[144, 144],
+		[48, 48],
 		'A small wet rift larva with many eyes, glistening skin, a ragged mouth.',
 	],
 ];

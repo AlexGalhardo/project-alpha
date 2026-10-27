@@ -4693,5 +4693,1034 @@
       "generations": 10
     },
     "status": "ok"
+  },
+  {
+    "key": "enemy.iron_mourner.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hooded giant in riveted iron plate, carrying a huge funeral bell on a hammer haft. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hooded giant in riveted iron plate, carrying a huge funeral bell on a hammer haft. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 576,
+        "height": 720
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:11.396Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":720,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.grave_cur.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. An emaciated hound wrapped in grey burial cloth, glowing seams of ember light along the wrappings. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. An emaciated hound wrapped in grey burial cloth, glowing seams of ember light along the wrappings. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 720,
+        "height": 576
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:14.577Z",
+    "httpStatus": 400,
+    "status": "failed",
+    "error": "{\"detail\":\"image_size must be between 16x16 and 576x464 for this aspect ratio. Got 720x576\"}"
+  },
+  {
+    "key": "enemy.ash_cantor.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A robed singer with a stitched-shut mouth, ash pouring from the long sleeves. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A robed singer with a stitched-shut mouth, ash pouring from the long sleeves. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 576,
+        "height": 720
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:17.169Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":720,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.bronze_scribe.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A bronze automaton monk with a quill blade in one hand and a heavy ledger in the other. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A bronze automaton monk with a quill blade in one hand and a heavy ledger in the other. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 576,
+        "height": 720
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:21.318Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":720,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.hollow_choir.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. Three fused hollow-faced choristers standing on one stone plinth, mouths open, robes melded together. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. Three fused hollow-faced choristers standing on one stone plinth, mouths open, robes melded together. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 720,
+        "height": 1008
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:25.000Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":1008,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.sepulchre_knight.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A tomb-effigy knight risen from its slab, stone and iron plate, carrying a huge greatsword. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A tomb-effigy knight risen from its slab, stone and iron plate, carrying a huge greatsword. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 720,
+        "height": 1008
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:31.892Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":1008,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.wax_saint.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A melting wax saint statue with a dripping halo, hands folded, wax running down the robes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A melting wax saint statue with a dripping halo, hands folded, wax running down the robes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 576,
+        "height": 720
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:35.024Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":720,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.chain_wraith.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A translucent pale wraith bound in hanging iron chains, hollow eyes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A translucent pale wraith bound in hanging iron chains, hollow eyes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 576,
+        "height": 720
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:38.013Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":720,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.marrow_butcher.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hunched bone-plated butcher holding twin cleavers, a stained leather apron. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hunched bone-plated butcher holding twin cleavers, a stained leather apron. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 576,
+        "height": 720
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:44.634Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":720,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.flesh_organ.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A tall pulsing mass of flesh shaped like a church organ, rows of pipes grown from bone, veins and bellows, faint mouths along the pipes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A tall pulsing mass of flesh shaped like a church organ, rows of pipes grown from bone, veins and bellows, faint mouths along the pipes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 240,
+        "height": 336
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:34:36.132Z",
+    "httpStatus": 200,
+    "jobId": "f47627c8-a82f-4dde-9371-25851942e187",
+    "usage": {
+      "type": "generations",
+      "generations": 15
+    },
+    "status": "ok"
+  },
+  {
+    "key": "bg.combat.act2.far",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Distant crypt vault arches and rows of tombs fading into green haze, no floor, no foreground, everything far away and low contrast. Pixel art background piece, strict side view, flat orthographic camera, grimdark dark fantasy, dark desaturated palette of ash greys, dark iron and deep crimson, light from the upper left, no characters, no text, no UI, no frame.",
+    "params": {
+      "image_size": {
+        "width": 688,
+        "height": 384
+      },
+      "style_concept": "batle-5.png",
+      "style_crop": [
+        0,
+        330,
+        700,
+        200
+      ],
+      "palette": "master 33",
+      "composition": "see scripts/assets/stitch-bg.ts"
+    },
+    "date": "2026-10-27T00:34:22.915Z",
+    "httpStatus": 200,
+    "jobId": "6e76cf19-a142-4aea-b50e-bac23a6d2c2e",
+    "usage": {
+      "type": "generations",
+      "generations": 25
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.gutter_crawler.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A low flat many-legged sewer scavenger with a pale elongated body and a snapping jaw. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A low flat many-legged sewer scavenger with a pale elongated body and a snapping jaw. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 144,
+        "height": 144
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:39:17.187Z",
+    "httpStatus": 200,
+    "jobId": "f8bb1be2-f86e-4a24-bbc4-fbeeef1ec312",
+    "usage": {
+      "type": "generations",
+      "generations": 15
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.rift_spawn.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A small wet rift larva with many eyes, glistening skin, a ragged mouth. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A small wet rift larva with many eyes, glistening skin, a ragged mouth. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 432,
+        "height": 432
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:37:47.052Z",
+    "httpStatus": 200,
+    "jobId": "650f3c37-4ccb-483a-bbe3-351fee77c019",
+    "usage": {
+      "type": "generations",
+      "generations": 25
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.iron_mourner.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hooded giant in riveted iron plate, carrying a huge funeral bell on a hammer haft. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hooded giant in riveted iron plate, carrying a huge funeral bell on a hammer haft. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:39:26.958Z",
+    "httpStatus": 200,
+    "jobId": "eb9faec8-c51e-4d78-93dc-ce32a5330105",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.relic_thief.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A lean hunched thief in a patched hood, a long curved knife, a sack of stolen relics on the back, a glint of gold in one hand. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A lean hunched thief in a patched hood, a long curved knife, a sack of stolen relics on the back, a glint of gold in one hand. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:41:20.660Z",
+    "httpStatus": 200,
+    "jobId": "fdb5260c-1308-49cb-aa4f-131a43f32c01",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.mirror_saint.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A saint statue come alive, polished silver skin like a mirror, a cracked halo, hands open in blessing, long robes of metal. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A saint statue come alive, polished silver skin like a mirror, a cracked halo, hands open in blessing, long robes of metal. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:42:42.730Z",
+    "httpStatus": 200,
+    "jobId": "fdc8f6a2-caa7-4e9e-9f14-93017583044b",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.grave_cur.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. An emaciated hound wrapped in grey burial cloth, glowing seams of ember light along the wrappings. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. An emaciated hound wrapped in grey burial cloth, glowing seams of ember light along the wrappings. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 240,
+        "height": 192
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:42:36.482Z",
+    "httpStatus": 200,
+    "jobId": "00fab86f-fab2-4ece-9ef9-8cbc9d5993eb",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.hollow_bishop.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A tall bishop in torn ceremonial vestments with a crooked staff and a tall broken mitre, a dark empty hole where the face should be. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A tall bishop in torn ceremonial vestments with a crooked staff and a tall broken mitre, a dark empty hole where the face should be. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:43:31.653Z",
+    "httpStatus": 200,
+    "jobId": "e39234e7-2f11-4b58-8019-8f94be6571d3",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.ash_cantor.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A robed singer with a stitched-shut mouth, ash pouring from the long sleeves. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A robed singer with a stitched-shut mouth, ash pouring from the long sleeves. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:43:38.334Z",
+    "httpStatus": 200,
+    "jobId": "1c6b878a-b907-4931-99fa-34ad05c4e6ae",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "bg.combat.act3.mid",
+    "endpoint": "/generate-image-v2",
+    "prompt": "An iron sepulchre vault: huge curved iron ribs like a ribcage, stone tombs with iron doors, a violet rift light glowing between the ribs, rubble at the base, a flat floor at the very bottom. The space between the ribs is empty. Pixel art background piece, strict side view, flat orthographic camera, grimdark dark fantasy, dark desaturated palette of ash greys, dark iron and deep crimson, light from the upper left, no characters, no text, no UI, no frame.",
+    "params": {
+      "image_size": {
+        "width": 688,
+        "height": 384
+      },
+      "style_concept": "batle-4.png",
+      "style_crop": [
+        0,
+        330,
+        700,
+        200
+      ],
+      "palette": "master 33",
+      "composition": "see scripts/assets/stitch-bg.ts"
+    },
+    "date": "2026-10-27T00:40:45.872Z",
+    "httpStatus": 200,
+    "jobId": "e8fba81b-10e6-49f2-b100-3e8a4d2f0679",
+    "usage": {
+      "type": "generations",
+      "generations": 25
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.bronze_scribe.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A bronze automaton monk with a quill blade in one hand and a heavy ledger in the other. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A bronze automaton monk with a quill blade in one hand and a heavy ledger in the other. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:44:22.445Z",
+    "httpStatus": 200,
+    "jobId": "3f0ec869-bab0-4f15-b4d6-aa2fefcae85f",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.rift_mother.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A colossal mass of bone, wax and machinery cradled in iron ribs, an open rift womb glowing from within, seen from the side. A huge boss that fills the canvas. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A colossal mass of bone, wax and machinery cradled in iron ribs, an open rift womb glowing from within, seen from the side. A huge boss that fills the canvas. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 480,
+        "height": 432
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:41:52.914Z",
+    "httpStatus": 200,
+    "jobId": "52e8db66-52e2-43e8-9753-f1507d1b0a5d",
+    "usage": {
+      "type": "generations",
+      "generations": 25
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.hollow_choir.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. Three fused hollow-faced choristers standing on one stone plinth, mouths open, robes melded together. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. Three fused hollow-faced choristers standing on one stone plinth, mouths open, robes melded together. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 240,
+        "height": 336
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:45:14.760Z",
+    "httpStatus": 200,
+    "jobId": "77bd2057-f617-454b-85db-cfa0d1510d24",
+    "usage": {
+      "type": "generations",
+      "generations": 15
+    },
+    "status": "ok"
+  },
+  {
+    "key": "bg.combat.act3.far",
+    "endpoint": "/generate-image-v2",
+    "prompt": "Distant iron ribs and tomb towers fading into violet haze, no floor, no foreground, everything far away and low contrast. Pixel art background piece, strict side view, flat orthographic camera, grimdark dark fantasy, dark desaturated palette of ash greys, dark iron and deep crimson, light from the upper left, no characters, no text, no UI, no frame.",
+    "params": {
+      "image_size": {
+        "width": 688,
+        "height": 384
+      },
+      "style_concept": "batle-4.png",
+      "style_crop": [
+        0,
+        330,
+        700,
+        200
+      ],
+      "palette": "master 33",
+      "composition": "see scripts/assets/stitch-bg.ts"
+    },
+    "date": "2026-10-27T00:44:33.121Z",
+    "httpStatus": 200,
+    "jobId": "84ad2b59-a090-4ce0-8af5-82ece7e456ee",
+    "usage": {
+      "type": "generations",
+      "generations": 25
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.chain_golem.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A huge golem made of bound chains and iron plates, a heavy chain whip in each hand, rust and bone. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A huge golem made of bound chains and iron plates, a heavy chain whip in each hand, rust and bone. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 240,
+        "height": 336
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:44:16.059Z",
+    "httpStatus": 200,
+    "jobId": "395da98e-318c-4dbe-badb-7add6f6f13e6",
+    "usage": {
+      "type": "generations",
+      "generations": 15
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.sepulchre_knight.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A tomb-effigy knight risen from its slab, stone and iron plate, carrying a huge greatsword. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A tomb-effigy knight risen from its slab, stone and iron plate, carrying a huge greatsword. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 240,
+        "height": 336
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:47:19.442Z",
+    "httpStatus": 200,
+    "jobId": "02c2c54d-59a0-4477-96ac-dff5db24b01b",
+    "usage": {
+      "type": "generations",
+      "generations": 15
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.wax_saint.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A melting wax saint statue with a dripping halo, hands folded, wax running down the robes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A melting wax saint statue with a dripping halo, hands folded, wax running down the robes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:49:17.393Z",
+    "httpStatus": 200,
+    "jobId": "dfb18d00-8f21-499a-9e9c-90b19d58b116",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.rot_cherub.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A small rotten winged cherub with a swollen belly and torn wings, black fluid dripping from its mouth. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A small rotten winged cherub with a swollen belly and torn wings, black fluid dripping from its mouth. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 144,
+        "height": 144
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:48:50.634Z",
+    "httpStatus": 200,
+    "jobId": "4d6fb6b5-a2a7-43eb-9ef5-cfde8fae12d7",
+    "usage": {
+      "type": "generations",
+      "generations": 15
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.chain_wraith.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A translucent pale wraith bound in hanging iron chains, hollow eyes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A translucent pale wraith bound in hanging iron chains, hollow eyes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 576,
+        "height": 720
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:50:51.583Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":720,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "enemy.chain_wraith.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A translucent pale wraith bound in hanging iron chains, hollow eyes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A translucent pale wraith bound in hanging iron chains, hollow eyes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:50:09.537Z",
+    "httpStatus": 200,
+    "jobId": "fb7a2f3c-be6d-4388-b89e-20297ed4cc92",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.chain_wraith.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A translucent pale wraith bound in hanging iron chains, hollow eyes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A translucent pale wraith bound in hanging iron chains, hollow eyes. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:50:24.724Z",
+    "httpStatus": 200,
+    "jobId": "b1ab9d84-bbab-4653-932c-3eba63080989",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.marrow_butcher.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hunched bone-plated butcher holding twin cleavers, a stained leather apron. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hunched bone-plated butcher holding twin cleavers, a stained leather apron. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 576,
+        "height": 720
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:50:57.162Z",
+    "httpStatus": 422,
+    "status": "failed",
+    "error": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"image_size\",\"height\"],\"msg\":\"Input should be less than or equal to 688\",\"input\":720,\"ctx\":{\"le\":688}}]}"
+  },
+  {
+    "key": "bg.title.mid",
+    "endpoint": "/generate-image-v2",
+    "prompt": "A ruined gothic citadel with broken towers and bridges on a cliff, chains hanging from the towers, a dark red moon rising behind, a flat stone overlook at the very bottom. The sky is empty. Pixel art background piece, strict side view, flat orthographic camera, grimdark dark fantasy, dark desaturated palette of ash greys, dark iron and deep crimson, light from the upper left, no characters, no text, no UI, no frame.",
+    "params": {
+      "image_size": {
+        "width": 688,
+        "height": 384
+      },
+      "style_concept": "menu-1.png",
+      "style_crop": [
+        700,
+        60,
+        900,
+        500
+      ],
+      "palette": "master 33",
+      "composition": "see scripts/assets/stitch-bg.ts"
+    },
+    "date": "2026-10-27T00:47:56.607Z",
+    "httpStatus": 200,
+    "jobId": "9e7ee9f9-e350-45fb-871d-cc100561dd73",
+    "usage": {
+      "type": "generations",
+      "generations": 25
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.marrow_butcher.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hunched bone-plated butcher holding twin cleavers, a stained leather apron. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hunched bone-plated butcher holding twin cleavers, a stained leather apron. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:51:00.120Z",
+    "httpStatus": 200,
+    "jobId": "c3d0da3d-cf94-4583-93fc-37722f9a5a8f",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
+  },
+  {
+    "key": "enemy.marrow_butcher.idle",
+    "endpoint": "/generate-image-v2",
+    "prompt": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hunched bone-plated butcher holding twin cleavers, a stained leather apron. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+    "params": {
+      "description": "2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the left edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing left. A hunched bone-plated butcher holding twin cleavers, a stained leather apron. Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.",
+      "image_size": {
+        "width": 192,
+        "height": 240
+      },
+      "no_background": true,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "style_concept": "batle-1.png",
+      "style_file": "style-enemies.png",
+      "subject_ref": null,
+      "palette": "master 33"
+    },
+    "date": "2026-10-27T00:50:57.690Z",
+    "httpStatus": 200,
+    "jobId": "d3064bc2-d441-40c2-9ac4-4ea61c19e0f1",
+    "usage": {
+      "type": "generations",
+      "generations": 10
+    },
+    "status": "ok"
   }
 ]

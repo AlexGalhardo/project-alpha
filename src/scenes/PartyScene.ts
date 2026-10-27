@@ -104,9 +104,9 @@ export class PartyScene extends Phaser.Scene {
 	private drawRiteRow(): void {
 		const unlocked = loadProfile().unlockedRite;
 		const y = 270;
-		new Button(this, 232, y, '◀', () => this.setRite(this.rite - 1), {
+		new Button(this, 232, y - 2, '◀', () => this.setRite(this.rite - 1), {
 			w: 28,
-			h: 20,
+			h: 24,
 			font: 'tiny',
 			testId: 'party-rite-down',
 		}).setEnabled(this.rite > 0);
@@ -120,9 +120,9 @@ export class PartyScene extends Phaser.Scene {
 		)
 			.setOrigin(0.5, 0)
 			.setName('party-rite');
-		new Button(this, 380, y, '▶', () => this.setRite(this.rite + 1), {
+		new Button(this, 380, y - 2, '▶', () => this.setRite(this.rite + 1), {
 			w: 28,
-			h: 20,
+			h: 24,
 			font: 'tiny',
 			testId: 'party-rite-up',
 		}).setEnabled(this.rite < unlocked);

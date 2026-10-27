@@ -7,9 +7,10 @@ import {
 	type HeroState,
 	maxHP,
 } from '../core';
+import { CARDS } from '../data/cards';
 import { EQUIPMENT } from '../data/equipment';
 import { play, playMusic } from '../view/audio';
-import { cardName } from '../view/cards';
+import { cardName, cardText } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { session } from '../view/session';
@@ -204,23 +205,29 @@ export class CampScene extends Phaser.Scene {
 			key: 'card' | 'equipment' | 'service';
 			title: string;
 			name: string;
+			/** What it does, so the purchase is a decision (GDD 19). */
+			effect: string;
 			price: number;
 			sold: boolean;
 			item?: string;
 		}[] = [];
-		if (view.card)
+		if (view.card) {
+			const owner = CARDS[view.card.cardId]?.owner;
 			tiles.push({
 				key: 'card',
 				title: t('camp.cardForSale'),
-				name: cardName(view.card.cardId, false),
+				name: `${cardName(view.card.cardId, false)}${owner ? ` · ${t(`hero.${owner}.name`)}` : ''}`,
+				effect: cardText(view.card.cardId, false),
 				price: view.card.price,
 				sold: view.card.sold,
 			});
+		}
 		if (view.equipment)
 			tiles.push({
 				key: 'equipment',
 				title: t('camp.equipmentForSale'),
 				name: t(`item.${view.equipment.item}.name`),
+				effect: t(`item.${view.equipment.item}.effect`),
 				item: view.equipment.item,
 				price: view.equipment.price,
 				sold: view.equipment.sold,
@@ -229,24 +236,34 @@ export class CampScene extends Phaser.Scene {
 		tiles.push({
 			key: 'service',
 			title: svc.kind === 'bind' ? t('camp.serviceBind') : t('camp.serviceVigil'),
-			name: svc.kind === 'bind' ? t('camp.serviceBindText') : t('camp.serviceVigilText'),
+			name: '',
+			effect: svc.kind === 'bind' ? t('camp.serviceBindText') : t('camp.serviceVigilText'),
 			price: svc.price,
 			sold: svc.sold,
 		});
 		tiles.forEach((o, i) => {
 			const x = 300 + (i % 2) * 152;
-			const ty = y + Math.floor(i / 2) * 64;
-			this.layer.add(panel(this, x, ty, 144, 58, 'ash1'));
+			const ty = y + Math.floor(i / 2) * 80;
+			this.layer.add(panel(this, x, ty, 144, 76, 'ash1'));
 			this.layer.add(label(this, x + 6, ty + 4, o.title, 'tiny', 'ash5'));
 			const ic = o.item ? itemIcon(this, x + 6, ty + 16, o.item) : null;
 			if (ic) this.layer.add(ic);
-			this.layer.add(
-				label(this, x + (ic ? 26 : 6), ty + 18, o.name, 'tiny', 'bone2').setWordWrapWidth(
-					ic ? 60 : 80,
-				),
-			);
+			let ey = ty + 16;
+			if (o.name) {
+				const n = label(
+					this,
+					x + (ic ? 26 : 6),
+					ey,
+					o.name,
+					'tiny',
+					'bone2',
+				).setWordWrapWidth(ic ? 56 : 78);
+				this.layer.add(n);
+				ey = Math.max(ey + n.height, ic ? ty + 36 : 0) + 2;
+			}
+			this.layer.add(label(this, x + 6, ey, o.effect, 'tiny', 'ash5').setWordWrapWidth(78));
 			const caption = o.sold ? t('shop.soldOut') : t('camp.price', { gold: o.price });
-			const b = new Button(this, x + 88, ty + 14, caption, () => this.buy(o.key), {
+			const b = new Button(this, x + 88, ty + 18, caption, () => this.buy(o.key), {
 				w: 52,
 				h: 40,
 				font: 'tiny',

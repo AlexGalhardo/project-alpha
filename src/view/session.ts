@@ -25,6 +25,8 @@ const SCENE_FOR: Record<ScreenKey, string> = {
 	rest: 'Rest',
 	event: 'Event',
 	treasure: 'Treasure',
+	// Built by the QA agent (docs/gdd.md §23.1); unreachable while ACT_RULES.sanctum is false.
+	sanctum: 'Sanctum',
 	summary: 'Summary',
 };
 

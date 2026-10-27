@@ -279,8 +279,10 @@ export function standing(
 }
 
 /** Full-scene background shown at 640×360 whatever its texture size, with an optional dim layer. */
-export function backdrop(scene: Phaser.Scene, key: string, dim = 0): void {
-	if (!scene.textures.exists(key)) return;
+export function backdrop(scene: Phaser.Scene, keys: string | string[], dim = 0): void {
+	// First key that is loaded (per-act art falls back to Act 1 until it is in the manifest).
+	const key = (Array.isArray(keys) ? keys : [keys]).find((k) => scene.textures.exists(k));
+	if (!key) return;
 	scene.add.image(0, 0, key).setOrigin(0).setDisplaySize(640, 360).setDepth(-2);
 	if (dim > 0) scene.add.rectangle(0, 0, 640, 360, P.ash0, dim).setOrigin(0).setDepth(-1);
 }

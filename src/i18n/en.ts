@@ -18,6 +18,8 @@ export const en = {
 		settings: 'Settings',
 		credits: 'Credits',
 		creditsFonts: 'Font: Roboto (SIL OFL 1.1) · Engine: Phaser 4',
+		creditsArt: 'Pixel art: generated with PixelLab, then cleaned and edited for the game.',
+		creditsAudio: 'Sound effects and music: generated with ElevenLabs.',
 		tapToBegin: 'Tap to begin',
 		version: 'Version {version}',
 		legacy: 'Legacy',
@@ -63,6 +65,9 @@ export const en = {
 		tapAgain: 'Tap the card again to play it.',
 		round: 'Round {round}/10',
 		act: 'Act {act}',
+		turn: 'Turn {turn}',
+		enraged: 'Enraged: enemies +1 Might each turn',
+		enrageIn: 'Enemies enrage in {n}',
 		turnQueue: 'Turn queue',
 		gold: 'Gold',
 		stash: 'Stash',
@@ -100,7 +105,8 @@ export const en = {
 		swapFor: 'Swap for {hero}',
 		title: 'Camp',
 		swapHero: 'Swap a hero',
-		swapHint: 'Choose one of the two heroes not in the party.',
+		swapHint:
+			'The selected hero leaves with all their cards; the new one joins at full HP with their 4 starter cards.',
 		cardForSale: 'Card for sale',
 		equipmentForSale: 'Equipment for sale',
 		serviceBind: 'Bind wounds',
@@ -152,6 +158,11 @@ export const en = {
 		embers: 'Embers earned: {count}',
 		mainMenu: 'Main menu',
 		riteWon: 'Rite {n} conquered. Rite {next} unlocked.',
+		firstRite: 'First victory: Rite 1 unlocked.',
+		party: 'The party',
+		hero: '{name}: {hp}/{max} HP · {stress} stress',
+		injured: 'injured',
+		fellTo: 'Fell to: {enemies}',
 	},
 	stress: {
 		label: 'Stress',
@@ -348,6 +359,50 @@ export const en = {
 			name: 'Rot Cherub',
 			lore: "A child's shape with wings of mould.",
 		},
+		iron_mourner: {
+			name: 'Iron Mourner',
+			lore: 'Beats an iron bell for a funeral that never ends.',
+		},
+		grave_cur: {
+			name: 'Grave Cur',
+			lore: 'Still digging for the bones it was buried with.',
+		},
+		ash_cantor: {
+			name: 'Ash Cantor',
+			lore: 'Sings the names of the burned, slowly, and forgets one each time.',
+		},
+		bronze_scribe: {
+			name: 'Bronze Scribe',
+			lore: 'Writes each hero in bronze, then marks the ones who will not last.',
+		},
+		hollow_choir: {
+			name: 'Hollow Choir',
+			lore: 'Forty voices, one throat, and none of them alive.',
+		},
+		sepulchre_knight: {
+			name: 'Sepulchre Knight',
+			lore: 'Guards the iron tomb behind a wall of plate that never falls.',
+		},
+		wax_saint: {
+			name: 'Wax Saint',
+			lore: 'A saint melted slowly so the Rift could wear its face.',
+		},
+		chain_wraith: {
+			name: 'Chain Wraith',
+			lore: 'The chains it was bound with are still tightening.',
+		},
+		marrow_butcher: {
+			name: 'Marrow Butcher',
+			lore: 'Works the bones for their marrow and never looks up.',
+		},
+		rift_spawn: {
+			name: 'Rift Spawn',
+			lore: 'Small, hungry, and born in the wound.',
+		},
+		rift_mother: {
+			name: 'The Rift Mother',
+			lore: 'The wound itself, grown a body.',
+		},
 	},
 	elite: {
 		templar_captain: {
@@ -372,6 +427,13 @@ export const en = {
 			phase2: 'THE GILT SPLITS',
 			epilogue:
 				'The gold comes off in sheets. Under it, the same wood as before.\nThe party carries nothing out of the chapel.\nThe Rift keeps the rest.',
+		},
+		rift_mother: {
+			name: 'The Rift Mother',
+			phase2: 'THE VEIL TEARS',
+			phase3: 'THE SEPULCHRE OPENS',
+			epilogue:
+				'The Rift closes from the inside, the way a wound does when nothing is left to feed it.\nThe sepulchre falls silent. The Order seals the iron doors and carves the names of the party into them, one under another, until there is no room left.\nIn the cathedral above, the bell rings once. No one is in the tower to ring it.',
 		},
 	},
 	item: {
@@ -532,6 +594,9 @@ export const en = {
 	},
 	act: {
 		transition: 'The descent continues. Act {act}.',
+		3: {
+			name: 'The Iron Sepulchre',
+		},
 	},
 	rite: {
 		'1': 'Elites have 20% more HP.',
@@ -596,6 +661,26 @@ export const en = {
 		confession: 'Forces a confession: every hero gains stress.',
 		gild: 'Gilds itself: gains Block and Might.',
 		scourge: 'Scourges every hero.',
+		toll_hammer: 'Swings a toll-hammer at the front hero.',
+		snap: 'Snaps at the front hero, twice.',
+		lament: 'Laments for the most stressed hero.',
+		ember: 'Hurls an ember at the back heroes.',
+		mark_the_name: 'Marks the front hero by name.',
+		etch: 'Etches the marked hero into the stone.',
+		seal: 'Seals the wards: every enemy gains Ward.',
+		hush: 'Hushes every hero until they weaken.',
+		execution: 'Executes the front hero.',
+		iron_wall: 'Raises an iron wall and gains Block.',
+		mend_wax: 'Mends its wax body and heals itself.',
+		drag: 'Drags the front heroes, swapping the first two.',
+		frenzy: 'Falls into a frenzy and gains Might.',
+		embrace: 'Embraces the front hero.',
+		wail: 'Wails: every hero gains stress.',
+		coil: 'Coils in on itself and gains Block.',
+		rend_the_veil: 'Rends the veil: every hero takes damage.',
+		devour: 'Devours the most stressed hero.',
+		unmaking: 'Unmaking: every hero takes damage and gains stress.',
+		heartbeat: 'Heartbeat: heals itself and gains Block.',
 	},
 	card: {
 		shb_hack: {

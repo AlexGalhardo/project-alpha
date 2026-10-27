@@ -47,26 +47,40 @@ export class EventScene extends Phaser.Scene {
 		}
 		panel(this, 32, 16, 576, 328);
 		label(this, 320, 24, t(`event.${ev.id}.title`), 'h2', 'gold2').setOrigin(0.5, 0);
-		label(this, 48, 52, t(`event.${ev.id}.text`), 'tiny', 'bone2').setWordWrapWidth(544);
-
-		const top = 360 - 16 - def.choices.length * 52;
+		const story = label(
+			this,
+			48,
+			52,
+			t(`event.${ev.id}.text`),
+			'tiny',
+			'bone2',
+		).setWordWrapWidth(544);
+		// Choices follow the text (no empty band), but never run off the panel.
+		const top = Math.min(360 - 16 - def.choices.length * 52, story.y + story.height + 24);
 		def.choices.forEach((choice, i) => {
 			const y = top + i * 52;
 			const ok = choiceAvailable(state, i);
-			new Button(this, 48, y, `${i + 1}`, () => this.choose(i), {
-				w: 40,
+			// "Verb: outcome." → the verb is the button caption, the outcome sits beside it.
+			const full = t(`event.${ev.id}.choice${i + 1}`, choiceVars(choice));
+			const cut = full.indexOf(':');
+			const verb = cut > 0 ? full.slice(0, cut) : full.replace(/\.$/, '');
+			const after = cut > 0 ? full.slice(cut + 1).trim() : '';
+			const rest = after.charAt(0).toUpperCase() + after.slice(1);
+			new Button(this, 48, y, verb, () => this.choose(i), {
+				w: 152,
 				h: 44,
+				font: 'tiny',
 				sfx: i === def.choices.length - 1 ? 'sfx.ui.cancel' : 'sfx.ui.confirm',
 				testId: `event-choice-${i}`,
 			}).setEnabled(ok);
 			const text = label(
 				this,
-				96,
+				208,
 				y + 2,
-				t(`event.${ev.id}.choice${i + 1}`, choiceVars(choice)),
+				rest,
 				'tiny',
 				ok ? 'bone2' : 'ash4',
-			).setWordWrapWidth(496);
+			).setWordWrapWidth(384);
 			// An unavailable choice says why: the price, or nothing left to give.
 			const poor = (choice.cost ?? 0) > state.gold;
 			const detail = ok
@@ -77,12 +91,12 @@ export class EventScene extends Phaser.Scene {
 			if (detail)
 				label(
 					this,
-					96,
+					208,
 					text.y + text.height + 3,
 					detail,
 					'tiny',
 					ok ? 'gold2' : 'ash4',
-				).setWordWrapWidth(496);
+				).setWordWrapWidth(384);
 		});
 
 		this.input.keyboard?.on('keydown', (e: KeyboardEvent) => {
@@ -97,8 +111,17 @@ export class EventScene extends Phaser.Scene {
 		const ev = session.state?.event;
 		if (!ev) return '';
 		const parts: string[] = [];
+		const party = session.state?.party ?? [];
 		for (const e of choice.effects) {
-			if ((e.kind === 'relic' || e.kind === 'equipment') && ev.item)
+			// Name the hero who pays, as it is now (same rule as src/core/events.ts).
+			if (e.kind === 'damageH1' || e.kind === 'damageLowest' || e.kind === 'stressH1') {
+				const h =
+					e.kind === 'damageLowest'
+						? [...party].sort((a, b) => a.hp - b.hp)[0]
+						: party[0];
+				const name = h ? t(`hero.${h.id}.name`) : '';
+				if (name && !parts.includes(name)) parts.push(name);
+			} else if ((e.kind === 'relic' || e.kind === 'equipment') && ev.item)
 				parts.push(t(`item.${ev.item}.name`));
 			else if (e.kind === 'cardOffer')
 				parts.push(ev.cards.map((c) => cardName(c, false)).join(', '));

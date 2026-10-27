@@ -28,7 +28,7 @@ export class MapScene extends Phaser.Scene {
 		fitCamera(this);
 		playMusic(this, 'music.map');
 		this.cameras.main.setBackgroundColor('#1b1a22');
-		backdrop(this, session.state?.act === 2 ? 'bg.map.act2' : 'bg.map.act1', 0.4);
+		backdrop(this, [`bg.map.act${session.state?.act ?? 1}`, 'bg.map.act1'], 0.4);
 		this.focus = 0;
 		const state = session.state;
 		const view = state ? mapView(state) : null;

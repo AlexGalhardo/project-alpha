@@ -30,3 +30,10 @@ export function t(key: string, vars: Record<string, string | number> = {}): stri
 		name in vars ? String(vars[name]) : match,
 	);
 }
+
+/** Display name of an enemy key; bosses keep their names under `boss.<key>`. */
+export function enemyName(key: string): string {
+	const k = `enemy.${key}.name`;
+	const name = t(k);
+	return name === k ? t(`boss.${key}.name`) : name;
+}

@@ -16,6 +16,8 @@ export const ptBR: Strings = {
 		settings: 'Configurações',
 		credits: 'Créditos',
 		creditsFonts: 'Fonte: Roboto (SIL OFL 1.1) · Motor: Phaser 4',
+		creditsArt: 'Pixel art: gerada com PixelLab, depois limpa e editada para o jogo.',
+		creditsAudio: 'Efeitos sonoros e música: gerados com ElevenLabs.',
 		tapToBegin: 'Toque para começar',
 		version: 'Versão {version}',
 		legacy: 'Legado',
@@ -62,6 +64,9 @@ export const ptBR: Strings = {
 		tapAgain: 'Toque na carta de novo para jogá-la.',
 		round: 'Rodada {round}/10',
 		act: 'Ato {act}',
+		turn: 'Turno {turn}',
+		enraged: 'Enfurecidos: inimigos +1 de Força por turno',
+		enrageIn: 'Inimigos enfurecem em {n}',
 		turnQueue: 'Fila de turnos',
 		gold: 'Ouro',
 		stash: 'Depósito',
@@ -99,7 +104,8 @@ export const ptBR: Strings = {
 		swapFor: 'Trocar por {hero}',
 		title: 'Acampamento',
 		swapHero: 'Trocar um herói',
-		swapHint: 'Escolha um dos dois heróis que não estão no grupo.',
+		swapHint:
+			'O herói selecionado sai com todas as suas cartas; o novo entra com vida cheia e suas 4 cartas iniciais.',
 		cardForSale: 'Carta à venda',
 		equipmentForSale: 'Equipamento à venda',
 		serviceBind: 'Enfaixar feridas',
@@ -151,6 +157,11 @@ export const ptBR: Strings = {
 		embers: 'Brasas ganhas: {count}',
 		mainMenu: 'Menu principal',
 		riteWon: 'Rito {n} conquistado. Rito {next} desbloqueado.',
+		firstRite: 'Primeira vitória: Rito 1 desbloqueado.',
+		party: 'O grupo',
+		hero: '{name}: {hp}/{max} de vida · {stress} de estresse',
+		injured: 'ferido',
+		fellTo: 'Caiu diante de: {enemies}',
 	},
 	stress: {
 		label: 'Estresse',
@@ -347,6 +358,50 @@ export const ptBR: Strings = {
 			name: 'Querubim Podre',
 			lore: 'Forma de criança com asas de mofo.',
 		},
+		iron_mourner: {
+			name: 'Carpideiro de Ferro',
+			lore: 'Bate um sino de ferro num funeral que nunca termina.',
+		},
+		grave_cur: {
+			name: 'Cão de Cova',
+			lore: 'Ainda escava atrás dos ossos com que foi enterrado.',
+		},
+		ash_cantor: {
+			name: 'Cantor de Cinza',
+			lore: 'Canta os nomes dos queimados, devagar, e esquece um a cada vez.',
+		},
+		bronze_scribe: {
+			name: 'Escriba de Bronze',
+			lore: 'Escreve cada herói em bronze e marca os que não vão durar.',
+		},
+		hollow_choir: {
+			name: 'Coro Oco',
+			lore: 'Quarenta vozes, uma garganta, e nenhuma delas viva.',
+		},
+		sepulchre_knight: {
+			name: 'Cavaleiro do Sepulcro',
+			lore: 'Guarda o túmulo de ferro atrás de uma parede de placas que nunca cai.',
+		},
+		wax_saint: {
+			name: 'Santo de Cera',
+			lore: 'Um santo derretido devagar para que a Fenda vestisse seu rosto.',
+		},
+		chain_wraith: {
+			name: 'Espectro de Correntes',
+			lore: 'As correntes com que foi preso ainda estão apertando.',
+		},
+		marrow_butcher: {
+			name: 'Açougueiro de Medula',
+			lore: 'Trabalha os ossos atrás da medula e nunca levanta os olhos.',
+		},
+		rift_spawn: {
+			name: 'Cria da Fenda',
+			lore: 'Pequena, faminta, nascida da ferida.',
+		},
+		rift_mother: {
+			name: 'A Mãe da Fenda',
+			lore: 'A própria ferida, com corpo.',
+		},
 	},
 	elite: {
 		templar_captain: {
@@ -371,6 +426,13 @@ export const ptBR: Strings = {
 			phase2: 'O OURO SE PARTE',
 			epilogue:
 				'O ouro se solta em lâminas. Por baixo, a mesma madeira de antes.\nO grupo não leva nada da capela.\nA Fenda guarda o resto.',
+		},
+		rift_mother: {
+			name: 'A Mãe da Fenda',
+			phase2: 'O VÉU RASGA',
+			phase3: 'O SEPULCRO SE ABRE',
+			epilogue:
+				'A Fenda se fecha por dentro, como uma ferida que não tem mais o que comer.\nO sepulcro cala. A Ordem sela as portas de ferro e grava nelas os nomes do grupo, um sob o outro, até não restar espaço.\nNa catedral, o sino toca uma vez. Ninguém está na torre para tocá-lo.',
 		},
 	},
 	item: {
@@ -537,6 +599,9 @@ export const ptBR: Strings = {
 	},
 	act: {
 		transition: 'A descida continua. Ato {act}.',
+		3: {
+			name: 'O Sepulcro de Ferro',
+		},
 	},
 	rite: {
 		'1': 'Elites têm 20% mais vida.',
@@ -601,6 +666,26 @@ export const ptBR: Strings = {
 		confession: 'Força uma confissão: todos os heróis ganham estresse.',
 		gild: 'Recobre-se de ouro: ganha bloqueio e Força.',
 		scourge: 'Açoita todos os heróis.',
+		toll_hammer: 'Balança um martelo de sino contra o herói da frente.',
+		snap: 'Dá botes no herói da frente, duas vezes.',
+		lament: 'Lamenta pelo herói mais estressado.',
+		ember: 'Lança uma brasa contra os heróis de trás.',
+		mark_the_name: 'Marca o herói da frente pelo nome.',
+		etch: 'Grava o herói marcado na pedra.',
+		seal: 'Sela: todos os inimigos ganham Proteção.',
+		hush: 'Cala todos os heróis até enfraquecerem.',
+		execution: 'Executa o herói da frente.',
+		iron_wall: 'Ergue uma muralha de ferro e ganha bloqueio.',
+		mend_wax: 'Remenda o corpo de cera e se cura.',
+		drag: 'Arrasta os heróis da frente e troca os dois primeiros.',
+		frenzy: 'Entra em frenesi e ganha Força.',
+		embrace: 'Envolve o herói da frente.',
+		wail: 'Geme: todos os heróis ganham estresse.',
+		coil: 'Enrola-se e ganha bloqueio.',
+		rend_the_veil: 'Rasga o véu: todos os heróis sofrem dano.',
+		devour: 'Devora o herói mais estressado.',
+		unmaking: 'Desfaz: todos os heróis sofrem dano e ganham estresse.',
+		heartbeat: 'Batimento: cura a si mesma e ganha bloqueio.',
 	},
 	card: {
 		shb_hack: {

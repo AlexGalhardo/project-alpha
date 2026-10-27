@@ -1,11 +1,11 @@
 import Phaser from 'phaser';
-import type { CardInst, Command } from '../core';
+import { type CardInst, type Command, maxHP } from '../core';
 import { playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
 import { t } from '../view/i18n';
 import { P } from '../view/palette';
 import { goNext, session } from '../view/session';
-import { Button, backdrop, fitCamera, label, panel } from '../view/ui';
+import { Button, backdrop, fitCamera, label, panel, portrait } from '../view/ui';
 
 const GRID_X = 24;
 const GRID_Y = 40;
@@ -223,6 +223,22 @@ export class RestScene extends Phaser.Scene {
 				testId: `rest-${o.option}`,
 			});
 			if (o.option === 'temper' && upgradable.length === 0) btn.setEnabled(false);
+		});
+		// Party strip: the choice depends on who is hurt, injured or stressed.
+		state.party.forEach((h, i) => {
+			const x = 56 + i * 184;
+			panel(this, x, 268, 160, 56, 'ash1');
+			portrait(this, `hero.${h.id}`, x + 6, 274, 32, 44);
+			label(this, x + 44, 274, t(`hero.${h.id}.name`), 'ui', 'bone2');
+			label(
+				this,
+				x + 44,
+				290,
+				`${h.hp}/${maxHP(h)}${h.injured ? ` · ${t('summary.injured')}` : ''}`,
+				'tiny',
+				h.injured ? 'blood2' : 'bone2',
+			);
+			label(this, x + 44, 304, `${t('stress.label')} ${h.stress}/10`, 'tiny', 'rift2');
 		});
 		// Keys: 1 Recover, 2 Temper (opens the picker), 3 Pray; the picker handles its own keys.
 		this.picker = null;

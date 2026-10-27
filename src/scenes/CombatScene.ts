@@ -14,8 +14,8 @@ import {
 import { app } from '../view/app';
 import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
-import { t } from '../view/i18n';
-import { type css, P, type PaletteKey } from '../view/palette';
+import { enemyName, t } from '../view/i18n';
+import { css, P, type PaletteKey } from '../view/palette';
 import { session } from '../view/session';
 import { Button, backdrop, fitCamera, label, panel, portrait, sized, standing } from '../view/ui';
 
@@ -44,6 +44,12 @@ interface UnitSnapshot {
 
 const STATUS_KEYS = ['might', 'marked', 'weakened', 'bleed', 'burn', 'ward'] as const;
 
+/** i18n entry that holds each elite trait's text. */
+const TRAIT_KEY: Record<NonNullable<EnemyView['trait']>, string> = {
+	oathwall: 'templar_captain',
+	calcified: 'calcified_brute',
+};
+
 function snapshots(view: CombatView | null): Map<UnitKey, UnitSnapshot> {
 	const out = new Map<UnitKey, UnitSnapshot>();
 	if (!view) return out;
@@ -57,7 +63,7 @@ function snapshots(view: CombatView | null): Map<UnitKey, UnitSnapshot> {
 		});
 	for (const e of view.enemies)
 		out.set(`e:${e.uid}`, {
-			name: t(`enemy.${e.key}.name`),
+			name: enemyName(e.key),
 			hp: e.hp,
 			block: e.status.block,
 			stress: 0,
@@ -123,6 +129,9 @@ export class CombatScene extends Phaser.Scene {
 	/** One command tapped during an animation; it runs when the animation ends (latest wins). */
 	private queued: Command | null = null;
 	private unitPos = new Map<UnitKey, { x: number; y: number; w: number }>();
+	/** Unit sprites of the current frame: pop-ups start at their top, lunges move them. */
+	private unitImg = new Map<UnitKey, Phaser.GameObjects.Image>();
+	private tipObjs: Phaser.GameObjects.GameObject[] = [];
 	private autoTimer: Phaser.Time.TimerEvent | null = null;
 	private speedBtn!: Button;
 	private autoBtn!: Button;
@@ -138,7 +147,7 @@ export class CombatScene extends Phaser.Scene {
 	create(): void {
 		fitCamera(this);
 		this.cameras.main.setBackgroundColor('#1b1a22');
-		backdrop(this, session.state?.act === 2 ? 'bg.combat.act2' : 'bg.combat.act1', 0.55);
+		backdrop(this, [`bg.combat.act${session.state?.act ?? 1}`, 'bg.combat.act1'], 0.55);
 		app.applySpeed(this);
 		this.layer = this.add.container(0, 0);
 		this.buildStatic();
@@ -168,6 +177,17 @@ export class CombatScene extends Phaser.Scene {
 		g.fillStyle(P.ash1).fillRect(0, 222, 640, 138);
 		g.fillStyle(P.ash0).fillRect(0, 222, 640, 1);
 		g.fillStyle(P.ash0).fillRect(0, FLOOR_Y, 640, 1);
+		// Tapping the stage outside any unit cancels the selected card (GDD 15.3).
+		this.add
+			.zone(0, 24, 640, 198)
+			.setOrigin(0)
+			.setDepth(-1)
+			.setInteractive()
+			.on('pointerup', () => {
+				if (!this.selected || this.busy) return;
+				this.selected = null;
+				this.refresh();
+			});
 		new Button(this, 608, 0, 'II', () => this.openPause(), {
 			w: 32,
 			h: 24,
@@ -228,10 +248,12 @@ export class CombatScene extends Phaser.Scene {
 			this.selected = null;
 		this.layer.removeAll(true);
 		this.unitPos.clear();
+		this.unitImg.clear();
 		this.drawTopBar();
 		this.computePreviews();
 		for (const h of view.heroes) this.drawHero(h);
 		for (const e of view.enemies) this.drawEnemy(e);
+		this.drawIncoming();
 		this.drawPreviewChips();
 		this.drawActionBand();
 		if (this.selected) this.drawDetail(this.selected);
@@ -246,10 +268,21 @@ export class CombatScene extends Phaser.Scene {
 				this,
 				8,
 				6,
-				`${t('hud.act', { act: session.state?.act ?? 1 })} · ${t('hud.round', { round: v.round })}`,
+				`${t('hud.act', { act: session.state?.act ?? 1 })} · ${t('hud.round', { round: v.round })} · ${t('hud.turn', { turn: v.turn })}`,
 				'ui',
 			),
 		);
+		// Enrage (GDD 5.2) is announced two turns ahead, then stays on screen while it lasts.
+		if (v.turn >= v.enrageTurn - 2) {
+			const text = v.enraged
+				? t('hud.enraged')
+				: t('hud.enrageIn', { n: v.enrageTurn - v.turn });
+			const warn = label(this, 360, 6, text, 'ui', 'ember3');
+			warn.setInteractive().on('pointerup', () =>
+				this.tooltip(t('status.enraged.tooltip', { turn: v.enrageTurn })),
+			);
+			this.layer.add(warn);
+		}
 		v.queue.forEach((uid, i) => {
 			const e = v.enemies.find((x) => x.uid === uid);
 			if (!e) return;
@@ -308,6 +341,7 @@ export class CombatScene extends Phaser.Scene {
 		const x = HERO_X(h.rank);
 		this.unitPos.set(`h:${h.id}`, { x, y: 24, w: SLOT_W });
 		const img = standing(this, `hero.${h.id}`, x + 40, FLOOR_Y);
+		this.unitImg.set(`h:${h.id}`, img);
 		this.layer.add(img);
 		if (h.taunt)
 			this.layer.add(this.add.rectangle(x + 40, 104, 70, 150).setStrokeStyle(1, P.gold1));
@@ -320,8 +354,9 @@ export class CombatScene extends Phaser.Scene {
 		this.statusRow(x + 4, 210, h.status);
 		if (h.status.block > 0)
 			this.layer.add(label(this, x + 66, 182, `${h.status.block}`, 'tiny', 'ward1'));
+		// The zone starts below the intent strip (y 24–44) so intent icons keep their own taps.
 		const zone = this.add
-			.zone(x, 24, SLOT_W, 166)
+			.zone(x, 44, SLOT_W, FLOOR_Y - 44)
 			.setOrigin(0)
 			.setInteractive()
 			.setName(`hero-${h.id}`);
@@ -337,6 +372,7 @@ export class CombatScene extends Phaser.Scene {
 		// Enemy sprites are drawn facing left; a size-2 boss is centred across its two slots.
 		const img = standing(this, `enemy.${e.key}`, x + Math.floor(w / 2), FLOOR_Y);
 		if (e.trait) img.setTint(P.ember3);
+		this.unitImg.set(`e:${e.uid}`, img);
 		this.layer.add(img);
 		if (e.trait)
 			this.layer.add(
@@ -348,7 +384,7 @@ export class CombatScene extends Phaser.Scene {
 			this.layer.add(label(this, x + w - 14, 182, `${e.status.block}`, 'tiny', 'ward1'));
 		if (e.intent) this.drawIntent(e, x, w);
 		const zone = this.add
-			.zone(x, 24, w, 166)
+			.zone(x, 44, w, FLOOR_Y - 44)
 			.setOrigin(0)
 			.setInteractive()
 			.setName(`enemy-${e.uid}`);
@@ -479,18 +515,75 @@ export class CombatScene extends Phaser.Scene {
 			const sTxt = label(this, sx + 8, 26, `+${it.stress}`, 'ui', 'rift2');
 			this.layer.add([sIcon, sTxt]);
 		}
-		// Target markers on heroes: a small downward triangle above each targeted hero.
-		for (const target of it.targets) {
-			const pos = this.unitPos.get(`h:${target}`) ?? this.heroSlot(target);
-			if (!pos) continue;
-			const tri = this.add.triangle(pos.x + 40, 44, 0, 0, 10, 0, 5, 7, P.blood2);
-			this.layer.add(tri);
+	}
+
+	/** Damage and stress each hero will take from the shown intents, as "▼ 7" / "+2" over the hero. */
+	private drawIncoming(): void {
+		for (const h of this.view.heroes) {
+			let dmg = 0;
+			let stress = 0;
+			for (const e of this.view.enemies) {
+				const it = e.intent;
+				if (!it) continue;
+				for (const d of it.damage) if (d.target === h.id) dmg += d.perHit * d.hits;
+				if (it.stress > 0 && it.targets.includes(h.id)) stress += it.stress;
+			}
+			if (dmg === 0 && stress === 0) continue;
+			// Row centred on the hero at y 26–38: red ▼ + damage, then stress icon + "+n".
+			const row = this.add.container(0, 0);
+			let x = 0;
+			if (dmg > 0) {
+				row.add(this.add.triangle(x, 30, 0, 0, 10, 0, 5, 7, P.blood2).setOrigin(0));
+				const n = label(this, x + 12, 26, `${dmg}`, 'ui', 'blood2');
+				row.add(n);
+				x += 12 + n.width + 6;
+			}
+			if (stress > 0) {
+				row.add(sized(this.add.image(x + 5, 33, 'icon.intent.stress')));
+				const n = label(this, x + 12, 26, `+${stress}`, 'ui', 'rift2');
+				row.add(n);
+				x += 12 + n.width;
+			}
+			row.x = Math.round(HERO_X(h.rank) + SLOT_W / 2 - x / 2);
+			this.layer.add(row);
 		}
 	}
 
-	private heroSlot(id: string): { x: number; y: number; w: number } | null {
-		const h = this.view.heroes.find((x) => x.id === id);
-		return h ? { x: HERO_X(h.rank), y: 24, w: SLOT_W } : null;
+	/** Detail for a tapped unit when no card is selected (docs/art-bible.md §11.6). */
+	private unitInfo(target: Target): void {
+		if (!target) return;
+		const lines: string[] = [];
+		const statusLine = (s: HeroView['status']): void => {
+			for (const k of STATUS_KEYS)
+				if (s[k] > 0) lines.push(`${t(`status.${k}.name`)} ${s[k]}`);
+			if (s.block > 0) lines.push(`${t('status.block.name')} ${s.block}`);
+		};
+		if (target.type === 'enemy') {
+			const e = this.view.enemies.find((x) => x.uid === target.uid);
+			if (!e) return;
+			lines.push(`${enemyName(e.key)} — ${e.hp}/${e.maxHP}`);
+			const it = e.intent;
+			if (it) {
+				const hits = it.damage.map(
+					(d) =>
+						`${d.hits > 1 ? `${d.perHit}×${d.hits}` : d.perHit} → ${t(`hero.${d.target}.name`)}`,
+				);
+				lines.push(`${t(`intent.${it.intentId}`)} ${hits.join(', ')}`.trim());
+				if (it.stress > 0)
+					lines.push(
+						`+${it.stress} ${t('stress.label')} → ${it.targets.map((h) => t(`hero.${h}.name`)).join(', ')}`,
+					);
+			}
+			if (e.trait) lines.push(t(`elite.${TRAIT_KEY[e.trait]}.trait`));
+			statusLine(e.status);
+		} else {
+			const h = this.view.heroes.find((x) => x.id === target.id);
+			if (!h) return;
+			lines.push(`${t(`hero.${h.id}.name`)} — ${h.hp}/${h.maxHP}`);
+			lines.push(`${t('stress.label')} ${h.stress}/10`);
+			statusLine(h.status);
+		}
+		this.tooltip(lines.join('\n'), 4000);
 	}
 
 	private drawActionBand(): void {
@@ -626,8 +719,18 @@ export class CombatScene extends Phaser.Scene {
 	}
 
 	private onUnitTap(target: Target): void {
-		if (!this.selected) return;
+		if (!this.selected) {
+			this.unitInfo(target);
+			return;
+		}
 		if (this.validTargetFor(target)) this.play(this.selected, target);
+		else {
+			// Not a target of this card: drop the selection and show the unit instead.
+			this.selected = null;
+			if (this.busy) this.raiseSelected();
+			else this.refresh();
+			this.unitInfo(target);
+		}
 	}
 
 	private play(card: HandCardView, target: Target): void {
@@ -695,10 +798,20 @@ export class CombatScene extends Phaser.Scene {
 
 	private animate(events: GameEvent[]): void {
 		this.busy = true;
-		const step = app.ms(110);
+		// Durations are at 1x: the scene clock already runs at app.speed (applySpeed), so
+		// app.ms() here would speed them up twice.
+		const step = 110;
 		let delay = 0;
 		let lastHit: string | null = null;
 		for (const ev of events) {
+			if (ev.type === 'enemyAction') {
+				// Each enemy acts on its own beat: a pause, then a lunge towards the heroes.
+				delay += 250;
+				const at = delay;
+				this.time.delayedCall(at, () => this.lunge(`e:${ev.uid}`));
+				delay += 140;
+				continue;
+			}
 			const d = delay;
 			const pos = this.eventPos(ev);
 			// Consecutive hits from one source on one target are one multi-hit card or intent.
@@ -714,7 +827,7 @@ export class CombatScene extends Phaser.Scene {
 				this.time.delayedCall(d, () => play(this, 'sfx.card.exhaust'));
 			}
 		}
-		this.time.delayedCall(delay + app.ms(150), () => {
+		this.time.delayedCall(delay + 150, () => {
 			this.busy = false;
 			if (
 				events.some(
@@ -726,9 +839,7 @@ export class CombatScene extends Phaser.Scene {
 				)
 			) {
 				this.queued = null;
-				this.time.delayedCall(app.ms(500), () =>
-					this.scene.start(session.sceneForScreen()),
-				);
+				this.time.delayedCall(500, () => this.scene.start(session.sceneForScreen()));
 				return;
 			}
 			this.refresh();
@@ -762,7 +873,27 @@ export class CombatScene extends Phaser.Scene {
 			key = `e:${ev.uid}`;
 		if (!key) return null;
 		const p = this.unitPos.get(key);
-		return p ? { x: p.x + p.w / 2, y: 100 } : null;
+		if (!p) return null;
+		// Pop-ups start just above the sprite's head, below the intent strip.
+		const img = this.unitImg.get(key);
+		const top = img ? img.y : 100;
+		return { x: p.x + p.w / 2, y: Math.max(56, top - 4) };
+	}
+
+	/** Art Bible §12.1 lunge: back 2 px, forward 8 px towards the heroes, return. */
+	private lunge(key: UnitKey): void {
+		const img = this.unitImg.get(key);
+		if (!img) return;
+		const x0 = img.x;
+		const dir = key.startsWith('e:') ? -1 : 1;
+		this.tweens.chain({
+			targets: img,
+			tweens: [
+				{ x: x0 - 2 * dir, duration: 90, ease: 'Quad.easeOut' },
+				{ x: x0 + 8 * dir, duration: 50, ease: 'Cubic.easeIn' },
+				{ x: x0, duration: 140, ease: 'Quad.easeInOut' },
+			],
+		});
 	}
 
 	private popFor(ev: GameEvent, pos: { x: number; y: number }, multi = false): void {
@@ -811,8 +942,8 @@ export class CombatScene extends Phaser.Scene {
 			text = t('fallen.label');
 			color = 'blood2';
 		} else if (ev.type === 'bossPhase') {
-			// Per-boss banner (boss.<key>.phase2) with the generic one as fallback.
-			const key = `boss.${this.view.enemies.find((e) => e.uid === ev.uid)?.key}.phase2`;
+			// Per-boss banner (boss.<key>.phase<n>) with the generic phase-2 line as fallback.
+			const key = `boss.${this.view.enemies.find((e) => e.uid === ev.uid)?.key}.phase${ev.phase}`;
 			this.phaseBanner(t(key) === key ? t('boss.phase2') : t(key));
 			this.shake(true);
 			this.flashAt(pos, true);
@@ -821,13 +952,17 @@ export class CombatScene extends Phaser.Scene {
 			color = 'ash5';
 		}
 		if (!text) return;
-		const pop = label(this, pos.x, pos.y, text, 'ui', color).setOrigin(0.5);
+		// Art Bible §12.1 number pop: h2, rise 12 px in 600 ms, hold 200 ms, fade 200 ms.
+		const pop = label(this, pos.x, pos.y, text, 'h2', color)
+			.setOrigin(0.5, 1)
+			.setStroke(css('ash0'), 4)
+			.setDepth(40);
+		this.tweens.add({ targets: pop, y: pos.y - 12, duration: 600, ease: 'Cubic.easeOut' });
 		this.tweens.add({
 			targets: pop,
-			y: pos.y - 24,
 			alpha: 0,
-			duration: 700,
-			ease: 'Cubic.easeOut',
+			delay: 800,
+			duration: 200,
 			onComplete: () => pop.destroy(),
 		});
 	}
@@ -846,8 +981,8 @@ export class CombatScene extends Phaser.Scene {
 		this.tweens.add({
 			targets: [band, line, line2, banner],
 			alpha: 0,
-			delay: app.ms(1400),
-			duration: app.ms(300),
+			delay: 1400,
+			duration: 300,
 			onComplete: () => {
 				for (const o of [band, line, line2, banner]) o.destroy();
 			},
@@ -865,19 +1000,24 @@ export class CombatScene extends Phaser.Scene {
 		});
 	}
 
-	private tooltip(text: string): void {
-		const tip = label(this, 320, 196, text, 'tiny', 'bone2')
-			.setOrigin(0.5)
+	/** One tooltip at a time, top-centre over the stage (below the intent strip). */
+	private tooltip(text: string, ms = 2500): void {
+		for (const o of this.tipObjs) o.destroy();
+		const tip = label(this, 320, 52, text, 'tiny', 'bone2')
+			.setOrigin(0.5, 0)
 			.setWordWrapWidth(300);
 		const bg = this.add
-			.rectangle(320, 196, tip.width + 8, tip.height + 4, P.ash1)
+			.rectangle(320, 49, tip.width + 12, tip.height + 6, P.ash1, 0.92)
+			.setOrigin(0.5, 0)
 			.setStrokeStyle(1, P.gold1);
 		tip.setDepth(51);
 		bg.setDepth(50);
-		this.time.delayedCall(2500, () => {
+		this.tipObjs = [bg, tip];
+		// Real-time, so the tooltip reads the same at every game speed.
+		window.setTimeout(() => {
 			tip.destroy();
 			bg.destroy();
-		});
+		}, ms);
 	}
 
 	// ---------- auto battle ----------
@@ -885,7 +1025,7 @@ export class CombatScene extends Phaser.Scene {
 		this.autoTimer?.remove();
 		this.autoTimer = null;
 		if (!app.auto || this.busy || this.view?.phase !== 'player') return;
-		this.autoTimer = this.time.delayedCall(app.ms(350), () => {
+		this.autoTimer = this.time.delayedCall(350, () => {
 			const state = session.state;
 			if (!state || this.busy || !app.auto) return;
 			const cmd = chooseAutoCommand(state);

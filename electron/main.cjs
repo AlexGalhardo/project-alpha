@@ -11,6 +11,7 @@ function createWindow() {
 		backgroundColor: '#0e0d12',
 		autoHideMenuBar: true,
 		title: 'Ossuary',
+		icon: path.join(__dirname, 'icon.png'),
 		webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true },
 	});
 	win.maximize();

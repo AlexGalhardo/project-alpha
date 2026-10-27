@@ -7,6 +7,7 @@ import {
 	EQUIPMENT_DROP,
 	EQUIPMENT_NUMBERS,
 	GOLD,
+	HEROES,
 	RITES,
 	RULES,
 } from '../data/index.ts';
@@ -39,6 +40,7 @@ import type {
 	CombatState,
 	Enemy,
 	EnemyEffect,
+	GameEvent,
 	HeroClass,
 	HeroFx,
 	IntentDef,
@@ -406,6 +408,11 @@ function beginPlayerTurn(c: Ctx): void {
 			if (l) gainBlock(c, heroRef(l), blockBonus(c, p.owner, v));
 		}
 	}
+	// Vanguard (GDD 5.2): a hero who is not a natural front-liner (frontOrder > 1) but holds rank 1
+	// braces for the enemy phase, so a party without a tank can still hold the line.
+	const vanguard = k.lineup[0];
+	if (vanguard && RULES.vanguardBlock > 0 && HEROES[vanguard].frontOrder > 1)
+		gainBlock(c, heroRef(vanguard), RULES.vanguardBlock);
 	if (k.turn === 1) {
 		for (const id of k.lineup) {
 			if (heroOf(c.s, id).relic === 'eq_iron_rosary')
@@ -442,14 +449,9 @@ export function playCard(c: Ctx, cardUid: number, target: Target): boolean {
 	return true;
 }
 
-export function endTurn(c: Ctx): boolean {
+/** End-of-turn hero ticks (GDD 5.2): Burn, then Marked and Weakened decay. */
+function endOfPlayerTurn(c: Ctx): void {
 	const k = cs(c);
-	if (k.phase !== 'player') {
-		c.ev.push({ type: 'invalid', reason: 'combat-over' });
-		return false;
-	}
-	k.discard.push(...k.hand);
-	k.hand = [];
 	for (const id of [...k.lineup]) {
 		const fx = k.heroFx[id] as HeroFx;
 		if (fx.burn > 0) {
@@ -460,6 +462,30 @@ export function endTurn(c: Ctx): boolean {
 		fx.marked = Math.max(0, fx.marked - 1);
 		fx.weakened = Math.max(0, fx.weakened - 1);
 	}
+}
+
+/**
+ * Plays the coming end of turn and enemy phase on a copy and returns its events (GDD P3: what is
+ * shown equals what happens). Intents shown from this include Might from earlier enemies' actions,
+ * Marked decaying before the hits, swaps and retargets after a fall.
+ */
+export function projectEnemyPhase(s: RunState): GameEvent[] {
+	if (s.combat?.phase !== 'player') return [];
+	const c: Ctx = { s: structuredClone(s), ev: [], dry: true };
+	endOfPlayerTurn(c);
+	if (cs(c).phase === 'player') enemyPhase(c);
+	return c.ev;
+}
+
+export function endTurn(c: Ctx): boolean {
+	const k = cs(c);
+	if (k.phase !== 'player') {
+		c.ev.push({ type: 'invalid', reason: 'combat-over' });
+		return false;
+	}
+	k.discard.push(...k.hand);
+	k.hand = [];
+	endOfPlayerTurn(c);
 	if (k.phase === 'player') enemyPhase(c);
 	if (k.phase === 'player' && k.turn >= RULES.turnCap) k.phase = 'lost';
 	if (k.phase === 'player') beginPlayerTurn(c);

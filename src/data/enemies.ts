@@ -347,11 +347,11 @@ export const ENEMIES: Record<string, EnemyDef> = {
 	// Act 2 boss (docs/gdd.md 22.3): HP is final, not scaled by act.
 	gilded_penitent: {
 		key: 'gilded_penitent',
-		hp: 140,
+		hp: 110,
 		speed: 3,
 		size: 2,
 		fixedStart: true,
-		phase2Hp: 70,
+		phase2Hp: 55,
 		phase2Might: 2,
 		intents: [
 			atk('lash', 12),
@@ -378,13 +378,13 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		speed: 2,
 		size: 1,
 		intents: [
-			atk('toll_hammer', 6),
+			atk('toll_hammer', 9),
 			{ id: 'brace', target: 'front', effects: [{ kind: 'selfBlock', amount: 10 }] },
 			{
 				id: 'toll_hammer',
 				target: 'front',
 				effects: [
-					{ kind: 'damage', amount: 6 },
+					{ kind: 'damage', amount: 9 },
 					{ kind: 'stress', amount: 1 },
 				],
 			},
@@ -396,16 +396,16 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		speed: 7,
 		size: 1,
 		intents: [
-			atk('snap', 3, 2),
+			atk('snap', 4, 2),
 			{
 				id: 'cur_rend',
 				target: 'lowestHP',
 				effects: [
-					{ kind: 'damage', amount: 3 },
+					{ kind: 'damage', amount: 4 },
 					{ kind: 'status', status: 'bleed', amount: 3 },
 				],
 			},
-			atk('snap', 3, 2),
+			atk('snap', 4, 2),
 		],
 	},
 	ash_cantor: {
@@ -416,7 +416,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		intents: [
 			{ id: 'lament', target: 'highestStress', effects: [{ kind: 'stress', amount: 2 }] },
 			{ id: 'kindle', target: 'front', effects: [{ kind: 'mightAllEnemies', amount: 1 }] },
-			atk('ember', 4, undefined, 'back'),
+			atk('ember', 6, undefined, 'back'),
 		],
 	},
 	bronze_scribe: {
@@ -430,7 +430,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 				target: 'front',
 				effects: [{ kind: 'status', status: 'marked', amount: 2 }],
 			},
-			atk('etch', 5, undefined, 'marked'),
+			atk('etch', 8, undefined, 'marked'),
 			{ id: 'seal', target: 'front', effects: [{ kind: 'wardAllEnemies', amount: 1 }] },
 		],
 	},
@@ -456,7 +456,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		size: 1,
 		intents: [
 			{ id: 'wind_up', target: 'front', effects: [{ kind: 'telegraph' }] },
-			atk('execution', 12),
+			atk('execution', 18),
 			{ id: 'iron_wall', target: 'front', effects: [{ kind: 'selfBlock', amount: 14 }] },
 		],
 	},
@@ -470,7 +470,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 				id: 'wax_drip',
 				target: 'lowestHP',
 				effects: [
-					{ kind: 'damage', amount: 3 },
+					{ kind: 'damage', amount: 5 },
 					{ kind: 'status', status: 'bleed', amount: 2 },
 				],
 			},
@@ -479,7 +479,7 @@ export const ENEMIES: Record<string, EnemyDef> = {
 				id: 'wax_drip',
 				target: 'lowestHP',
 				effects: [
-					{ kind: 'damage', amount: 3 },
+					{ kind: 'damage', amount: 5 },
 					{ kind: 'status', status: 'bleed', amount: 2 },
 				],
 			},
@@ -494,9 +494,9 @@ export const ENEMIES: Record<string, EnemyDef> = {
 			{
 				id: 'drag',
 				target: 'front',
-				effects: [{ kind: 'damage', amount: 3 }, { kind: 'swapFrontHeroes' }],
+				effects: [{ kind: 'damage', amount: 5 }, { kind: 'swapFrontHeroes' }],
 			},
-			atk('chain_lash', 4, undefined, 'frontTwo'),
+			atk('chain_lash', 6, undefined, 'frontTwo'),
 			{
 				id: 'wraith_fade',
 				target: 'front',
@@ -510,9 +510,9 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		speed: 4,
 		size: 1,
 		intents: [
-			atk('cleave', 5, undefined, 'frontTwo'),
+			atk('cleave', 7, undefined, 'frontTwo'),
 			{ id: 'frenzy', target: 'front', effects: [{ kind: 'selfMight', amount: 2 }] },
-			atk('cleave', 5, undefined, 'frontTwo'),
+			atk('cleave', 7, undefined, 'frontTwo'),
 		],
 	},
 	rift_spawn: {
@@ -520,27 +520,27 @@ export const ENEMIES: Record<string, EnemyDef> = {
 		hp: 8,
 		speed: 6,
 		size: 1,
-		intents: [atk('bite', 2, 2)],
+		intents: [atk('bite', 3, 2)],
 	},
 	// Final boss (docs/gdd.md §23.4): the only enemy with three phases. HP is final.
 	rift_mother: {
 		key: 'rift_mother',
-		hp: 160,
+		hp: 100,
 		speed: 3,
 		size: 2,
 		fixedStart: true,
-		phase2Hp: 110,
+		phase2Hp: 66,
 		phase2Might: 2,
-		phase3Hp: 55,
+		phase3Hp: 33,
 		phase3Might: 2,
 		intents: [
-			atk('embrace', 9),
+			atk('embrace', 12),
 			{ id: 'wail', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
 			{ id: 'coil', target: 'front', effects: [{ kind: 'selfBlock', amount: 15 }] },
 		],
 		phase2Intents: [
-			atk('rend_the_veil', 4, undefined, 'all'),
-			atk('devour', 12, undefined, 'highestStress'),
+			atk('rend_the_veil', 5, undefined, 'all'),
+			atk('devour', 15, undefined, 'highestStress'),
 			{ id: 'wail', target: 'all', effects: [{ kind: 'stress', amount: 2 }] },
 		],
 		phase3Intents: [
@@ -548,16 +548,16 @@ export const ENEMIES: Record<string, EnemyDef> = {
 				id: 'unmaking',
 				target: 'all',
 				effects: [
-					{ kind: 'damage', amount: 5 },
+					{ kind: 'damage', amount: 6 },
 					{ kind: 'stress', amount: 1 },
 				],
 			},
-			atk('devour_weakest', 13, undefined, 'lowestHP'),
+			atk('devour_weakest', 16, undefined, 'lowestHP'),
 			{
 				id: 'heartbeat',
 				target: 'front',
 				effects: [
-					{ kind: 'selfHeal', amount: 15 },
+					{ kind: 'selfHeal', amount: 8 },
 					{ kind: 'selfBlock', amount: 10 },
 				],
 			},

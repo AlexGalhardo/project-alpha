@@ -69,14 +69,14 @@ describe('Act 3 data (GDD 23)', () => {
 });
 
 describe('The Rift Mother: three phases (GDD 23.4)', () => {
-	test('HP is final; phase 2 at <= 110 and phase 3 at <= 55, +2 Might each, new cycles', () => {
+	test('HP is final; phase 2 at <= 66 and phase 3 at <= 33, +2 Might each, new cycles', () => {
 		let s = act3Run('BOSS3', 'boss');
 		const boss = combat(s).enemies[0];
 		if (!boss) throw new Error('no boss');
-		expect(boss.maxHP).toBe(160);
+		expect(boss.maxHP).toBe(100);
 		expect(boss.size).toBe(2);
 		expect(intentOf(boss).id).toBe('embrace');
-		boss.hp = 114;
+		boss.hp = 70;
 		const [a] = setHand(s, ['mrk_aimed_shot']);
 		let r = run(s, { type: 'playCard', cardUid: a as number, target: enemyTarget(boss.uid) });
 		s = r.s;
@@ -85,7 +85,7 @@ describe('The Rift Mother: three phases (GDD 23.4)', () => {
 		expect(b?.phase).toBe(2);
 		expect(b?.fx.might).toBe(2);
 		expect(intentView(s, b ?? boss).intentId).toBe('rend_the_veil');
-		(b as { hp: number }).hp = 60;
+		(b as { hp: number }).hp = 38;
 		const [c] = setHand(s, ['mrk_aimed_shot']);
 		r = run(s, { type: 'playCard', cardUid: c as number, target: enemyTarget(boss.uid) });
 		s = r.s;
@@ -96,11 +96,11 @@ describe('The Rift Mother: three phases (GDD 23.4)', () => {
 		expect(intentView(s, b ?? boss).intentId).toBe('unmaking');
 	});
 
-	test('one big hit from phase 1 to <= 55 goes through phase 2 into phase 3', () => {
+	test('one big hit from phase 1 to <= 33 goes through phase 2 into phase 3', () => {
 		const s = act3Run('BOSS3', 'boss');
 		const boss = combat(s).enemies[0];
 		if (!boss) throw new Error('no boss');
-		boss.hp = 60;
+		boss.hp = 38;
 		const [a] = setHand(s, ['mrk_aimed_shot']);
 		const r = run(s, { type: 'playCard', cardUid: a as number, target: enemyTarget(boss.uid) });
 		const phases = r.ev

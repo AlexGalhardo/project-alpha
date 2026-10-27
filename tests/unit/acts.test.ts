@@ -73,7 +73,7 @@ describe('Act 2 data (GDD 22.2, 22.3)', () => {
 		expect(act2.filter((e) => e.pool === 'elite')).toHaveLength(2);
 		expect(ENCOUNTERS.BOSS2?.enemies[0]?.key).toBe('gilded_penitent');
 		const boss = ENEMIES.gilded_penitent;
-		expect(boss).toMatchObject({ hp: 140, speed: 3, size: 2, phase2Hp: 70, phase2Might: 2 });
+		expect(boss).toMatchObject({ hp: 110, speed: 3, size: 2, phase2Hp: 55, phase2Might: 2 });
 	});
 
 	test('every Act 2 type shows up in the act pools', () => {
@@ -99,10 +99,10 @@ describe('Act scaling (GDD 4.3 and 22)', () => {
 		expect(combat(a1).enemies[0]?.maxHP).toBe(18);
 	});
 
-	test('the Act 2 boss HP is final (140) and scaling does not apply to its damage', () => {
+	test('the Act 2 boss HP is final (110) and scaling does not apply to its damage', () => {
 		const s = act2Run('BOSS2', 'boss');
 		const boss = combat(s).enemies[0];
-		expect(boss?.maxHP).toBe(140);
+		expect(boss?.maxHP).toBe(110);
 		expect(boss?.dmgMul).toBe(1);
 	});
 
@@ -115,11 +115,11 @@ describe('Act scaling (GDD 4.3 and 22)', () => {
 });
 
 describe('Act 2 enemies and boss', () => {
-	test('Gilded Penitent phase 2 at HP <= 70 with +2 Might, new intent cycle', () => {
+	test('Gilded Penitent phase 2 at HP <= 55 with +2 Might, new intent cycle', () => {
 		const s = act2Run('BOSS2', 'boss');
 		const boss = combat(s).enemies[0];
 		if (!boss) throw new Error('no boss');
-		boss.hp = 74;
+		boss.hp = 59;
 		const [uid] = setHand(s, ['mrk_aimed_shot']);
 		const r = run(s, {
 			type: 'playCard',

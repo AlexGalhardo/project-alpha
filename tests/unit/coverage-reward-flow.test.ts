@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test } from 'bun:test';
 import { maxHP } from '../../src/core/ops.ts';
-import { apply, createRun } from '../../src/core/run.ts';
+import { createRun } from '../../src/core/run.ts';
 import type { HeroState, RunState } from '../../src/core/types.ts';
 import { ACT_RULES, SANCTUM } from '../../src/data/index.ts';
 import { invalidOf, PARTY, run } from './helpers.ts';

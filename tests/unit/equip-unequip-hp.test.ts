@@ -9,11 +9,10 @@ function at<T>(xs: readonly T[], i: number): T {
 	return v;
 }
 
-// BUG (found by coverage-run-rules): run.ts equip() returns early when unequipping
+// Regression (found by coverage-run-rules, fixed): run.ts equip() returns early when unequipping
 // (item === null), before the clamp `h.hp = Math.min(h.hp, maxHP(h))` that the item path has.
 // Expected: HP never stays above the new max after a relic that gave max HP is removed.
-// Keep failing until src/core/run.ts is fixed; do not weaken this test.
-test('BUG: unequipping a max-HP relic clamps HP to the new maximum', () => {
+test('unequipping a max-HP relic clamps HP to the new maximum', () => {
 	const s = createRun(1, PARTY);
 	s.stash = [];
 	at(s.party, 0).relic = 'eq_bone_reliquary';

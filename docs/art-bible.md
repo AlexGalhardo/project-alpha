@@ -728,28 +728,46 @@ Rules: never "in the style of" a work, studio or artist; always state canvas siz
 
 ### 15.1 PixelLab
 
-Character (hero or enemy):
+The game renders at 1920×1080 and every PixelLab asset is generated at its native size, never upscaled: heroes and medium enemies 192×240, small enemies 144×144, wide enemies 240×192, large enemies 240×336, bosses up to 480×432 (Bell-Maw 400×360), card art 180×120, backgrounds 1920×1080. Units come from PixelLab Pro (`/generate-image-v2`, 10 generations each) with a concept-art crop as `style_image` and the master palette as `target_palette`. Card art uses pixflux (`/create-image-pixflux-background`, 1 generation). Scripts: `scripts/assets/pro-units.ts` (units, cards), `scripts/assets/stitch-bg.ts` (backgrounds), `scripts/assets/manifest.ts`.
+
+Unit template (one template for every hero, enemy and boss; `{facing}` is `right` for heroes and `left` for enemies, `{description}` is the per-unit sentence):
 
 ```text
-Side-view pixel art character, {W}x{H} px canvas, full body, standing ready pose, facing {right|left}.
-{Description: silhouette, armour/clothing, weapon, signature detail}.
-Dark fantasy, grim and worn. Limited palette of at most 16 colours: cold ash greys, dark iron,
-{accent ramp: bone and worn gold | sickly green and violet}. No pure black, no pure white.
-Single light from the upper left. 1 px selective outline, darker on the shadow side.
-No anti-aliasing on the outer edge, no dithering. Transparent background. Readable silhouette at 1x.
+2D side-scroller game sprite of a single character in strict side profile, like a fighting game
+character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile,
+the head and face are in profile pointing to the {facing} edge of the image, only one shoulder and
+the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body
+visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted
+on a flat ground line near the bottom edge of the canvas, facing {facing}. {description}
+Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left,
+muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure
+black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.
 ```
 
-Example (`enemy.rust_templar.idle`, 64×80, facing left): "Side-view pixel art character, 64x80 px canvas, full body, standing ready pose, facing left. A hollow knight in rust-eaten plate, helmet fused shut, a broken processional banner used as a spear, chains wound around the left arm. …"
+Call parameters: `image_size` = native canvas, `no_background: true`, `style_options: { color_palette: false, outline: true, detail: true, shading: true }`, `style_image` = crop of `references/concept-arts/batle-1.png` (heroes: the knight; enemies: the enemy group), `target_palette` = the 33 master colours. Do not pass a front-facing concept crop as `reference_images`: it pulls the pose to the camera. After generation each file is palette snapped, trimmed to its bounding box and bottom aligned in the canvas (consistent feet baseline, natural scale). Every unit is checked on a contact sheet for facing, side profile, full body and scale; failures are regenerated with a rewritten `{description}` (for example "standing upright and calm, not lunging").
 
-Card art:
+Card art template (pixflux, 180×120, `outline: lineless`, `shading: medium shading`, `detail: highly detailed`, master palette as `color_image`):
 
 ```text
-Pixel art illustration, 60x40 px, no border, no text.
-{Scene: the action of the card, one clear focal point}.
-Palette of at most 16 colours from cold ash greys, dark iron, bone, ember orange, worn gold{, sickly green, violet}.
-Light from the upper left, strong value contrast at the focal point, dark vignette edges.
-No anti-aliasing on the outer edge, no dithering.
+Pixel art illustration for a card, wide landscape composition, one clear focal point. {scene}.
+Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value
+contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame,
+no text, no letters, no stars, no pentagrams, no eight-pointed symbols.
 ```
+
+Background pieces (Pro, 688×384, the largest 16:9 size the endpoint allows):
+
+```text
+{piece: mid = the architecture of the stage, far = distant silhouettes}. Pixel art background piece,
+strict side view, flat orthographic camera, grimdark dark fantasy, dark desaturated palette of ash
+greys, dark iron and deep crimson, light from the upper left, no characters, no text, no UI, no frame.
+```
+
+Backgrounds are composed by `scripts/assets/stitch-bg.ts` into 1920×1080: a far layer (darkened, mirror tiled so seams are continuous), a mid layer (mirror tiled, base on the floor line), a procedural flagstone floor in the bottom 25 % (y 810 to 1080, flat, where units stand), a glow band above the floor line, global grading (desaturate, tint, vignette) and palette snapping. Horizon at 55 % (y 594); the middle 60 % holds no focal subject. Map backgrounds are a procedural top-down slab floor. Outpainting every 1920×1080 with `/inpaint-v3` would cost about 700 generations per background (25 per 512 px window), which is why pieces are composed by code.
+
+Costs measured on the account (generations): Pro unit 10, Pro 688×384 piece 25, inpaint-v3 window 25, pixflux 1, Pro Flash 6 to 9.
+
+Hand-off rule: the generated draft goes through palette snapping and, when needed, hand cleanup (`aseprite-pixel-assets`). Every call is logged in `art-src/pixellab/generation-log.json` with prompt, parameters, concept file used, date and usage.
 
 UI piece:
 

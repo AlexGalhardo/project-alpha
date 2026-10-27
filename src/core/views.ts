@@ -1,7 +1,7 @@
 // Read-only selectors for the view layer. Pure functions of RunState.
 import { CAMP, HERO_CLASSES, RULES } from '../data/index.ts';
 import { costOf, playableReason, validTargets } from './cards.ts';
-import { intentView, turnQueue } from './combat.ts';
+import { intentView, projectEnemyPhase, turnQueue } from './combat.ts';
 import { availableNodes } from './map.ts';
 import { enemyRank, maxHP } from './ops.ts';
 import { removalPrice } from './rewards.ts';
@@ -15,6 +15,7 @@ import type {
 	HeroClass,
 	HeroFx,
 	HeroView,
+	IntentView,
 	MapView,
 	RewardView,
 	RunState,
@@ -87,9 +88,29 @@ export function selectParty(s: RunState): HeroView[] {
 	});
 }
 
-function enemyView(s: RunState, e: Enemy): EnemyView {
+type Damage = IntentView['damage'];
+
+/**
+ * Damage each enemy will really deal this enemy phase, from a projection of it (GDD P3). Consecutive
+ * equal hits on one hero merge into "perHit x hits".
+ */
+function projectedDamage(s: RunState): Map<number, Damage> {
+	const out = new Map<number, Damage>();
+	for (const ev of projectEnemyPhase(s)) {
+		if (ev.type !== 'hit' || ev.source?.side !== 'enemy' || ev.target.side !== 'hero') continue;
+		const list = out.get(ev.source.uid) ?? [];
+		const last = list[list.length - 1];
+		if (last && last.target === ev.target.id && last.perHit === ev.amount) last.hits += 1;
+		else list.push({ target: ev.target.id, perHit: ev.amount, hits: 1 });
+		out.set(ev.source.uid, list);
+	}
+	return out;
+}
+
+function enemyView(s: RunState, e: Enemy, damage: Map<number, Damage>): EnemyView {
 	const k = s.combat;
 	if (!k) throw new Error('no combat');
+	const intent = e.fx.stunned ? null : intentView(s, e);
 	return {
 		uid: e.uid,
 		key: e.key,
@@ -99,7 +120,7 @@ function enemyView(s: RunState, e: Enemy): EnemyView {
 		maxHP: e.maxHP,
 		speed: e.speed,
 		status: statusView(e.fx),
-		intent: e.fx.stunned ? null : intentView(s, e),
+		intent: intent && { ...intent, damage: damage.get(e.uid) ?? [] },
 		trait: e.trait,
 		keg: e.keg,
 		phase: e.phase,
@@ -110,6 +131,7 @@ function enemyView(s: RunState, e: Enemy): EnemyView {
 export function combatView(s: RunState): CombatView | null {
 	const k = s.combat;
 	if (!k) return null;
+	const damage = projectedDamage(s);
 	return {
 		turn: k.turn,
 		enraged: k.turn >= RULES.enrageTurn,
@@ -120,7 +142,7 @@ export function combatView(s: RunState): CombatView | null {
 		collapsePending: k.collapsePending,
 		heroes: k.lineup.map((id, i) => heroView(s, id, i + 1)),
 		fallen: k.fallen.map((id) => heroView(s, id, 0)),
-		enemies: k.enemies.map((e) => enemyView(s, e)),
+		enemies: k.enemies.map((e) => enemyView(s, e, damage)),
 		hand: k.hand.map((inst) => {
 			const reason = playableReason(s, inst);
 			const targets = validTargets(s, inst);

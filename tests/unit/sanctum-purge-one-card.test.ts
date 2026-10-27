@@ -12,7 +12,6 @@ afterEach(() => {
 // docs/gdd.md §23.1 lists Purge (remove 2 cards) as needing "2 cards in the deck".
 // sanctumChoose computes need = min(removeCount, eligible.length), so with one card in the deck
 // Purge removes that card instead of being unavailable. Expected: Purge is refused with fewer
-// than removeCount cards. Keep failing until src/core/run.ts is fixed; do not weaken this test.
 test('Purge with a one-card deck is refused (GDD 23.1 needs 2 cards)', () => {
 	ACT_RULES.sanctum = true;
 	const s: RunState = createRun(1, PARTY);

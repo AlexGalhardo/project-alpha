@@ -140,6 +140,10 @@ Ideas kept for later phases. "Smaller version" is what entered the prototype ins
 | Chaptered campaign | Brainstorm bank | Large writing scope |
 | Named final boss from the concepts | DR (concept 10) | Name and concept go through IP review |
 
+### B41 Vanguard: the front rank braces (decided 2026-10-26, shipped)
+
+Problem: in 3-act sims the Shieldbearer was in 93% of wins and parties without him won 2.6%. Options: (a) **Vanguard**: the rank-1 hero gains Block each player turn unless it is a natural front-liner; (b) a front stance card for every hero; (c) nerf the Shieldbearer. Chose (a): one data number (`RULES.vanguardBlock` = 4), no new UI mode, shown as ordinary Block. Result: no-Shieldbearer 24.3%, overall 26.8% (GDD §5.2, §8.3). Open: the Confessor is still in 92% of wins (a sustain-side dominance, next balance item).
+
 ## Discarded ideas
 
 | Idea | Origin | Reason |

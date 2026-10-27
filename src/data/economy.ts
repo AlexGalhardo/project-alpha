@@ -15,6 +15,8 @@ export const RULES = {
 	// From this combat turn every enemy gains enrageMight Might at the start of each turn (GDD 5.2).
 	enrageTurn: 10,
 	enrageMight: 1,
+	/** Block the rank-1 hero gains at the start of each player turn (Vanguard, GDD 5.2). */
+	vanguardBlock: 4,
 	stashMax: 6,
 	partySize: 3,
 	rows: 10,

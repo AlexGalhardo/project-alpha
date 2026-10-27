@@ -108,7 +108,7 @@ Goal: a new player finishes or fails Act 1 in 20–30 min and wants another run 
 - [x] Auto battle toggle + speed 1x/2x/3x in HUD and Settings — assert: e2e same seed same result at 1x/3x
 - [x] Reward, camp, shop, rest, run summary — assert: e2e full Act 1 with auto battle at 3x
 - [x] i18n EN/PT-BR wired (`src/i18n`) — assert: test every key exists in both locales; language switch e2e
-- [ ] Code-driven feedback (flash, shake, lunge, number pop) scaled by speed — assert: visual check + reduce-shake setting test
+- [x] Code-driven feedback (flash, shake, lunge, number pop) scaled by speed — assert: visual check + reduce-shake setting test — done: `tests/e2e/feedback.spec.ts`
 
 ### P2.4 Prototype assets (static, cost gate)
 
@@ -147,7 +147,7 @@ Total PixelLab ≈ 356 generations (≈ 11% of the 3,400 remaining the developer
 - [x] A3.2 Events and treasure nodes, 12 events EN/PT-BR + treasure — GDD §22.4 lists all 12; i18n EN and PT-BR for all 12 and treasure; tests/unit/events.test.ts, tests/unit/i18n.test.ts, tests/e2e/alpha.spec.ts (event, treasure)
 - [x] A3.3 Skill tree + Embers spending (§13.2) — skill tree v1 (GDD §22.5): Legacy screen, Veteran start, tests/unit/meta.test.ts + tests/e2e/legacy.spec.ts
 - [ ] A3.4 Animations (idle, attack, hit) per Art Bible
-- [ ] A3.5 Text scale + colorblind check — colorblind audit done (`docs/reports/2026-10-26-colorblind.md`), text scale pending
+- [x] A3.5 Text scale + colorblind check — done: colorblind audit (`docs/reports/2026-10-26-colorblind.md`), text size 100/125/150% verified on every screen at 1920×1080 and 1280×720
 - [ ] A3.6 Alpha gate: sim matrix, e2e, human QA, deploy
 
 ## 6. Phase 4 — BETA

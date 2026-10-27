@@ -5,6 +5,55 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.7] - 2026-10-27
+
+### Added
+
+- **combat:** Add the visible enrage from turn 10, the Sanctum core and the Rite 2 tweak ([dce8dc6](https://github.com/AlexGalhardo/project-alpha/commit/dce8dc6953be2742b77ed14738635dc0c57f29fb))
+- **ui:** Add unit info, incoming damage, credits overlay and readable enemy turns ([6803e30](https://github.com/AlexGalhardo/project-alpha/commit/6803e3027edd242bc6255195cebaa2340d5a5559))
+- **audio:** Add Act 2 and Act 3 combat music, final boss and ending themes, enrage and phase stings ([a80abca](https://github.com/AlexGalhardo/project-alpha/commit/a80abcafcb3f38caf1c8a54b8629699764f9f386))
+- **android:** Run full screen in immersive landscape ([06bfd20](https://github.com/AlexGalhardo/project-alpha/commit/06bfd2079ddd4aa834fcee03a29ddbfe6b5ae21e))
+- **sanctum:** Add the between-acts Sanctum screen and stream all audio after boot ([49c87d5](https://github.com/AlexGalhardo/project-alpha/commit/49c87d593b1e26d80223ec5256cf96fa7b24a38e))
+- **balance:** Give Act 3 its own intents and make it the hardest act with the Sanctum on ([48aa984](https://github.com/AlexGalhardo/project-alpha/commit/48aa984b7351c509fc4c8b33156051aa43fdc599))
+- **art:** Add native 1080p heroes, Act 1 enemies, the Bell-Maw and stitched backgrounds ([2c8bfeb](https://github.com/AlexGalhardo/project-alpha/commit/2c8bfebc35187f4104efca4016797a6a704047c6))
+- **combat:** Add card fly, hero lunge, knockback, hit-stop on heavy hits and death fade ([8f8959d](https://github.com/AlexGalhardo/project-alpha/commit/8f8959dfb3e8912dfe02bec0cb34145efab01303))
+- **build:** Add the app icon for Windows and Android ([7f6b165](https://github.com/AlexGalhardo/project-alpha/commit/7f6b165575a8852227272099122f5b788e86d615))
+- **settings:** Add a text size option (100/125/150%) and seat units on the 1080p combat floor ([525e0e6](https://github.com/AlexGalhardo/project-alpha/commit/525e0e621de5d7627a4944f528541c7429cd991a))
+- **ui:** Add keyword chips, act title cards, fall and collapse explanations and turn banners ([30ef84e](https://github.com/AlexGalhardo/project-alpha/commit/30ef84e32ddcf1e6491dac3f57e169f95db42453))
+- **combat:** Add the Vanguard block and project intents through the enemy phase ([bace88e](https://github.com/AlexGalhardo/project-alpha/commit/bace88e8b10c1af3ae5bbbe3147cd5c6092ab33f))
+- **art:** Add native Act 3 enemies, the Rift Mother, Act 2 enemies and new combat backgrounds ([8de7efe](https://github.com/AlexGalhardo/project-alpha/commit/8de7efecccf02cb2ba20c144e6c572c9e0669ae4))
+
+### Changed
+
+- Self-host Roboto and split Phaser into its own chunk (boot 2.1 s to 0.6 s) ([a130947](https://github.com/AlexGalhardo/project-alpha/commit/a130947fe2ed1e406c7bfd03f956a9d150e9216c))
+
+### Fixed
+
+- **view:** Draw placeholders for Act 3 enemies and the Rift Mother until their art lands ([7dd82c6](https://github.com/AlexGalhardo/project-alpha/commit/7dd82c68087d0558e6de6a69817acff0984e2e7b))
+- **run:** Clamp HP when a max-HP relic is unequipped; cover camp, shop, rest and swap rules ([8369a29](https://github.com/AlexGalhardo/project-alpha/commit/8369a29c9cb837c512d8cf369f16843014948684))
+- **core:** Show the Bleed amount on intents and require two cards for the Sanctum purge ([f1b7cbe](https://github.com/AlexGalhardo/project-alpha/commit/f1b7cbed5d36be2131b9bf40fbe2617428c0f265))
+- **i18n:** Polish card, item and event texts in English and Portuguese ([399a489](https://github.com/AlexGalhardo/project-alpha/commit/399a489ce95506c369addeed0f2a42caf859db4d))
+- **i18n:** Show Dread 3 on Inferno, use noun keywords and US spelling; test keyword names ([2f818cd](https://github.com/AlexGalhardo/project-alpha/commit/2f818cdd52bc016eeda7e1c2a738375494627def))
+- **i18n:** Name the Pull keyword Puxão to match Empurrão ([62d0b4a](https://github.com/AlexGalhardo/project-alpha/commit/62d0b4a851fbd759eb68e6be58c1f5ce87f1026c))
+
+### Documentation
+
+- Add the performance report, Sanctum spec and enrage rules ([a22593c](https://github.com/AlexGalhardo/project-alpha/commit/a22593c2e49a4a573ff93120a295b28ad94fb10b))
+- **reports:** Record the enrage and anti-dominance balance pass ([4810ee5](https://github.com/AlexGalhardo/project-alpha/commit/4810ee5555da4a01f89e044bf11b3ed69c625644))
+- Add the store page draft, player install steps and three-act how-to-play ([a3f97a8](https://github.com/AlexGalhardo/project-alpha/commit/a3f97a804ff289c7d6fea13853efb2e21c7f689b))
+- **plan:** Mark deploy, data tables and Act 3 as done ([62b508e](https://github.com/AlexGalhardo/project-alpha/commit/62b508e1e06edfab2b09491b0fc596711a0635a2))
+- Add the Sanctum shipped note, the front-rank design item and Sanctum texts ([e98db83](https://github.com/AlexGalhardo/project-alpha/commit/e98db831c52530b41ff6896e0a9a7140fc751642))
+- **adr:** Record the decision not to add a spell checker for 1.0 ([3ecce6a](https://github.com/AlexGalhardo/project-alpha/commit/3ecce6a36d8a46eb7e31e0952fdbb1b5fa5d7c22))
+- Align agents guide, readme and architecture with the 1080p render and native builds ([fcb2201](https://github.com/AlexGalhardo/project-alpha/commit/fcb2201589352773d8a6a03424d0b87a2f125b37))
+- **reports:** Add the docs and rules coherence audit ([1ca865b](https://github.com/AlexGalhardo/project-alpha/commit/1ca865b038721b05ac70c40076916ece723bc141))
+- Add the act balance report and the font and chunk follow-up ([92d3b93](https://github.com/AlexGalhardo/project-alpha/commit/92d3b93a4c68f451d29193f7aeea3bcd756d690c))
+- **qa:** Add the 1.0 human QA script and update how-to-play for the Sanctum and intents ([84ba8a6](https://github.com/AlexGalhardo/project-alpha/commit/84ba8a63d11986357d1e0600dc05e4ba5582dc3f))
+- Note the desktop and Android builds in the agents guide summary ([6e5534b](https://github.com/AlexGalhardo/project-alpha/commit/6e5534b1736bd590c1f6aea1f415ffedeb5050b1))
+- Refresh the store page features for three acts and the Sanctum ([68dc4bb](https://github.com/AlexGalhardo/project-alpha/commit/68dc4bb69484cdfd6255d3dca7738833b41f9f30))
+- Reword the enrage rationale and add playtest errata ([949f149](https://github.com/AlexGalhardo/project-alpha/commit/949f149e46407b4c795851483919a6d767aa9340))
+- **plan:** Mark text scale and combat feedback as done ([7596e6c](https://github.com/AlexGalhardo/project-alpha/commit/7596e6c138b30f9c43e099d63b0fb2c78b687067))
+- **gdd:** Match act scaling, victory rule and fight counts to the shipped data ([b053b53](https://github.com/AlexGalhardo/project-alpha/commit/b053b532ab0cb56e341b30fe54bc3493c54c29ea))
+
 ## [0.0.6] - 2026-10-26
 
 ### Added
@@ -129,6 +178,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **books:** Apply Pixel Logic and The Art of Game Design to this genre ([f23593e](https://github.com/AlexGalhardo/project-alpha/commit/f23593e4a6fe9161b8ffef7d51a3aaae6b15eff1))
 - Keep the project kickoff prompt ([a45f73b](https://github.com/AlexGalhardo/project-alpha/commit/a45f73b2c5647b12cc2903c6a90d387d74d06e99))
 - **skills:** Retarget project skills from the previous tactics game to this deckbuilder ([f535621](https://github.com/AlexGalhardo/project-alpha/commit/f535621369a0d22543be6643489eff4cf8b0c8cf))
+[0.0.7]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.6...v0.0.7>
 [0.0.6]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.5...v0.0.6>
 [0.0.5]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.4...v0.0.5>
 [0.0.4]: <https://github.com/AlexGalhardo/project-alpha/compare/v0.0.3...v0.0.4>

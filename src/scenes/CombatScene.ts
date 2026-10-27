@@ -11,7 +11,7 @@ import {
 	preview,
 	type Target,
 } from '../core';
-import { ACT_RULES } from '../data';
+import { ACT_RULES, CARDS } from '../data';
 import { app } from '../view/app';
 import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
@@ -517,9 +517,19 @@ export class CombatScene extends Phaser.Scene {
 		const txt = label(this, cx - 6, 26, parts.join(' '), 'ui', 'bone2');
 		icon.setInteractive().on('pointerup', () => this.tooltip(t(`intent.${it.intentId}`)));
 		this.layer.add([icon, txt]);
+		let nx = txt.x + txt.width + 8;
+		// Debuffs ride along as "<status icon> n" (core sends "<status> <amount>").
+		for (const d of it.debuffs) {
+			const [status, n] = d.split(' ');
+			if (!status || !this.textures.exists(`icon.status.${status}`)) continue;
+			const dIcon = sized(this.add.image(nx, 32, `icon.status.${status}`));
+			const dTxt = label(this, nx + 7, 26, n ?? '', 'ui', 'gold2');
+			this.layer.add([dIcon, dTxt]);
+			nx = dTxt.x + dTxt.width + 8;
+		}
 		// Stress on top of another intent gets its own stress icon + "+n" (shape, not a letter).
 		if (kind !== 'stress' && it.stress > 0) {
-			const sx = txt.x + txt.width + 8;
+			const sx = nx;
 			const sIcon = sized(this.add.image(sx, 32, 'icon.intent.stress'));
 			const sTxt = label(this, sx + 8, 26, `+${it.stress}`, 'ui', 'rift2');
 			this.layer.add([sIcon, sTxt]);
@@ -578,6 +588,11 @@ export class CombatScene extends Phaser.Scene {
 						`${d.hits > 1 ? `${d.perHit}×${d.hits}` : d.perHit} → ${t(`hero.${d.target}.name`)}`,
 				);
 				lines.push(`${t(`intent.${it.intentId}`)} ${hits.join(', ')}`.trim());
+				const debuffs = it.debuffs.map((d) => {
+					const [status, n] = d.split(' ');
+					return `${t(`status.${status}.name`)}${n ? ` ${n}` : ''}`;
+				});
+				if (debuffs.length) lines.push(`+ ${debuffs.join(', ')}`);
 				if (it.stress > 0)
 					lines.push(
 						`+${it.stress} ${t('stress.label')} → ${it.targets.map((h) => t(`hero.${h}.name`)).join(', ')}`,
@@ -745,7 +760,28 @@ export class CombatScene extends Phaser.Scene {
 	private play(card: HandCardView, target: Target): void {
 		this.selected = null;
 		if (this.busy) this.raiseSelected();
+		else this.flyCard(card, target);
 		this.send({ type: 'playCard', cardUid: card.uid, target });
+	}
+
+	/** Art Bible §12.1 card fly: the played card travels to its target (or up) and fades. */
+	private flyCard(card: HandCardView, target: Target): void {
+		const i = this.view.hand.findIndex((c) => c.uid === card.uid);
+		const obj = this.layer.getByName(`card-${i}`) as Phaser.GameObjects.Container | null;
+		if (!obj) return;
+		const key = targetKey(target);
+		const pos = key ? this.unitPos.get(key) : undefined;
+		const tx = pos ? pos.x + pos.w / 2 - CARD_W / 2 : obj.x;
+		obj.disableInteractive();
+		this.tweens.add({
+			targets: obj,
+			x: tx,
+			y: pos ? 110 : obj.y - 40,
+			scale: 0.6,
+			alpha: 0,
+			duration: 180,
+			ease: 'Quad.easeIn',
+		});
 	}
 
 	/** Moves the selected hand card up without a full redraw (used while an animation runs). */
@@ -825,8 +861,14 @@ export class CombatScene extends Phaser.Scene {
 				delay += 140;
 				continue;
 			}
+			if (ev.type === 'cardPlayed' && CARDS[ev.cardId]?.type === 'attack') {
+				// The attacking hero steps forward as the card lands.
+				this.time.delayedCall(delay, () => this.lunge(`h:${ev.owner}`));
+				delay += 90;
+			}
 			const d = delay;
 			const pos = this.eventPos(ev);
+			if (ev.type === 'hit' && pos && this.isBigHit(ev)) delay += 50; // hit-stop beat
 			// Consecutive hits from one source on one target are one multi-hit card or intent.
 			const hitKey = ev.type === 'hit' ? JSON.stringify([ev.source, ev.target]) : null;
 			const multi = hitKey !== null && hitKey === lastHit;
@@ -893,6 +935,37 @@ export class CombatScene extends Phaser.Scene {
 		return { x: p.x + p.w / 2, y: Math.max(56, top - 4) };
 	}
 
+	/** Heavy hit (Art Bible §12.1): HP lost ≥ 25% of the target's max HP. */
+	private isBigHit(ev: Extract<GameEvent, { type: 'hit' }>): boolean {
+		const t = ev.target;
+		const max =
+			t.side === 'hero'
+				? this.view.heroes.find((h) => h.id === t.id)?.maxHP
+				: this.view.enemies.find((e) => e.uid === t.uid)?.maxHP;
+		return max !== undefined && ev.hpLost >= max * 0.25;
+	}
+
+	/** Knockback 3 px away from the attacker in 80 ms, back in 120 ms. */
+	private knockback(key: UnitKey, dir: number): void {
+		const img = this.unitImg.get(key);
+		if (!img || this.tweens.isTweening(img)) return;
+		const x0 = img.x;
+		this.tweens.chain({
+			targets: img,
+			tweens: [
+				{ x: x0 + 3 * dir, duration: 80, ease: 'Cubic.easeOut' },
+				{ x: x0, duration: 120, ease: 'Quad.easeInOut' },
+			],
+		});
+	}
+
+	/** Hit-stop: every tween freezes for 50 ms of real time on a heavy hit (skipped at 3x). */
+	private hitStop(): void {
+		if (app.speed === 3) return;
+		this.tweens.pauseAll();
+		window.setTimeout(() => this.tweens?.resumeAll(), 50);
+	}
+
 	/** Art Bible §12.1 lunge: back 2 px, forward 8 px towards the heroes, return. */
 	private lunge(key: UnitKey): void {
 		const img = this.unitImg.get(key);
@@ -930,7 +1003,13 @@ export class CombatScene extends Phaser.Scene {
 		if (ev.type === 'hit') {
 			text = ev.hpLost > 0 ? `-${ev.hpLost}` : `(${ev.absorbed})`;
 			color = ev.hpLost > 0 ? 'blood2' : 'ward1';
-			this.shake();
+			const key = ev.target.side === 'hero' ? `h:${ev.target.id}` : `e:${ev.target.uid}`;
+			this.knockback(key, ev.target.side === 'hero' ? -1 : 1);
+			// Small camera shake only on heavy hits (≥ 25% max HP); every hit flashes.
+			if (this.isBigHit(ev)) {
+				this.shake();
+				this.hitStop();
+			}
 			this.flashAt(pos);
 		} else if (ev.type === 'dot') {
 			text = `-${ev.hpLost}`;
@@ -963,6 +1042,16 @@ export class CombatScene extends Phaser.Scene {
 		} else if (ev.type === 'enemyDied') {
 			text = '†';
 			color = 'ash5';
+			// Art Bible §12.1 death: sink and fade.
+			const img = this.unitImg.get(`e:${ev.uid}`);
+			if (img)
+				this.tweens.add({
+					targets: img,
+					alpha: 0,
+					y: img.y + 4,
+					duration: 350,
+					ease: 'Quad.easeIn',
+				});
 		}
 		if (!text) return;
 		// Art Bible §12.1 number pop: h2, rise 12 px in 600 ms, hold 200 ms, fade 200 ms.

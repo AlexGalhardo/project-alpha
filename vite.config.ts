@@ -11,5 +11,12 @@ export default defineConfig({
 	build: {
 		target: 'es2022',
 		chunkSizeWarningLimit: 2000,
+		rollupOptions: {
+			// Phaser in its own chunk: game updates re-download only the game code (perf report R5.2).
+			output: {
+				manualChunks: (id: string): string | undefined =>
+					/node_modules[\\/]phaser[\\/]/.test(id) ? 'phaser' : undefined,
+			},
+		},
 	},
 });

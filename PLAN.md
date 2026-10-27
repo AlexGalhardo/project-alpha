@@ -65,7 +65,7 @@ Coordinator (main session) + Opus (review/audit), Sonnet (code), Haiku (text, i1
 
 ### S1.1 Review of agent setup
 
-- [ ] Re-read every skill, rule, workflow and doc for coherence with the GDD (Opus) — assert: audit report with 0 blockers
+- [x] Re-read every skill, rule, workflow and doc for coherence with the GDD (Opus) — assert: audit report with 0 blockers — done: `docs/reports/2026-10-26-coherence-audit.md`
 - [x] Decide typo checker (ADR 0001 alternative) — assert: ADR updated — done: no spell checker for 1.0, parity test + human read (ADR 0001)
 
 ### S1.2 Project skeleton

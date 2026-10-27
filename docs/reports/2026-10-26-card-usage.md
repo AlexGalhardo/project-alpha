@@ -1,6 +1,6 @@
 # Card usage report (2026-10-26)
 
-Bot runs: 2000 (3 acts, all 10 party compositions, 200 runs each, seed 1). Win rate: 17.2% of all runs. Measured in 86.6 s by a scratch script that calls the core commands the bot issues.
+Bot runs: 2000 (3 acts, all 10 party compositions, 200 runs each, seed 1). Win rate: 36.2% of all runs. Measured in 108.2 s by a scratch script that calls the core commands the bot issues.
 
 ## Method
 
@@ -20,67 +20,69 @@ Bot runs: 2000 (3 acts, all 10 party compositions, 200 runs each, seed 1). Win r
 
 | Card | Offered | Picked | Pick rate | Plays per combat (owned) | Runs took it | Win % took it | Win % not | Lift (pts) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `shb_last_bastion` | 4647 | 2381 | 51.2 | 0.20 | 1024 | 21.3 | 12.9 | 8.4 |
-| `mrk_killshot` | 4226 | 2014 | 47.7 | 0.63 | 957 | 15.5 | 18.8 | -3.3 |
-| `arc_rift_rupture` | 4239 | 1932 | 45.6 | 0.79 | 929 | 15.6 | 18.6 | -3.0 |
-| `bmb_siege_mortar` | 4469 | 1945 | 43.5 | 0.98 | 919 | 23.0 | 12.3 | 10.7 |
-| `cnf_rekindle` | 5650 | 2436 | 43.1 | 0.00 | 1105 | 26.5 | 5.7 | 20.8 |
-| `shb_bulwark` | 4321 | 1635 | 37.8 | 0.34 | 922 | 21.1 | 13.8 | 7.3 |
-| `shb_vow_of_iron` | 4604 | 1684 | 36.6 | 0.66 | 887 | 22.5 | 12.9 | 9.6 |
-| `mrk_volley` | 4034 | 1462 | 36.2 | 0.62 | 851 | 13.5 | 19.9 | -6.4 |
-| `mrk_hunters_focus` | 4392 | 1581 | 36.0 | 0.76 | 884 | 14.4 | 19.4 | -5.1 |
-| `arc_unseal` | 4276 | 1528 | 35.7 | 0.00 | 881 | 14.3 | 19.5 | -5.2 |
+| `shb_last_bastion` | 5142 | 2623 | 51.0 | 0.22 | 1047 | 37.4 | 34.8 | 2.6 |
+| `mrk_killshot` | 4759 | 2241 | 47.1 | 0.68 | 996 | 32.4 | 39.9 | -7.5 |
+| `arc_rift_rupture` | 4970 | 2178 | 43.8 | 0.77 | 958 | 39.8 | 32.9 | 6.9 |
+| `bmb_siege_mortar` | 5044 | 2136 | 42.3 | 0.96 | 965 | 39.0 | 33.6 | 5.3 |
+| `cnf_rekindle` | 6559 | 2706 | 41.3 | 0.15 | 1121 | 59.5 | 6.5 | 53.0 |
+| `shb_bulwark` | 4584 | 1744 | 38.0 | 0.38 | 943 | 38.1 | 34.5 | 3.5 |
+| `mrk_hunters_focus` | 4729 | 1699 | 35.9 | 0.83 | 919 | 31.7 | 40.1 | -8.4 |
+| `arc_firestorm` | 4610 | 1655 | 35.9 | 0.44 | 900 | 36.9 | 35.6 | 1.3 |
+| `shb_vow_of_iron` | 4872 | 1748 | 35.9 | 0.76 | 912 | 38.2 | 34.6 | 3.6 |
+| `mrk_volley` | 4311 | 1536 | 35.6 | 0.64 | 871 | 31.6 | 39.8 | -8.2 |
 
 ## Bottom 10 by pick rate (offered at least once)
 
 | Card | Offered | Picked | Pick rate | Plays per combat (owned) | Runs took it | Win % took it | Win % not | Lift (pts) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `cnf_litany` | 6737 | 298 | 4.4 | 1.01 | 272 | 22.1 | 16.4 | 5.6 |
-| `cnf_rebuke` | 6763 | 310 | 4.6 | 1.26 | 287 | 30.3 | 15.0 | 15.3 |
-| `bmb_incendiary` | 5780 | 300 | 5.2 | 1.06 | 266 | 19.9 | 16.8 | 3.1 |
-| `cnf_absolve` | 6840 | 369 | 5.4 | 0.66 | 330 | 18.8 | 16.9 | 1.9 |
-| `arc_cinder_lance` | 5376 | 291 | 5.4 | 0.60 | 270 | 13.7 | 17.7 | -4.0 |
-| `arc_channel` | 5348 | 299 | 5.6 | 0.00 | 272 | 12.5 | 17.9 | -5.4 |
-| `shb_shield_slam` | 6017 | 337 | 5.6 | 0.34 | 314 | 18.2 | 17.0 | 1.1 |
-| `bmb_reload` | 5536 | 317 | 5.7 | 0.00 | 282 | 14.9 | 17.6 | -2.7 |
-| `shb_iron_stance` | 5675 | 331 | 5.8 | 0.51 | 289 | 25.6 | 15.8 | 9.8 |
-| `mrk_pinning_shot` | 5416 | 317 | 5.9 | 0.56 | 292 | 12.0 | 18.1 | -6.1 |
+| `cnf_litany` | 7399 | 303 | 4.1 | 1.01 | 277 | 51.6 | 33.7 | 17.9 |
+| `cnf_rebuke` | 7487 | 309 | 4.1 | 1.23 | 287 | 58.5 | 32.5 | 26.1 |
+| `bmb_incendiary` | 6260 | 302 | 4.8 | 1.03 | 271 | 32.8 | 36.7 | -3.9 |
+| `cnf_absolve` | 7583 | 373 | 4.9 | 0.61 | 333 | 43.8 | 34.7 | 9.2 |
+| `arc_cinder_lance` | 5981 | 295 | 4.9 | 0.68 | 276 | 36.6 | 36.1 | 0.5 |
+| `arc_channel` | 5908 | 297 | 5.0 | 0.77 | 273 | 33.7 | 36.6 | -2.9 |
+| `shb_shield_slam` | 6387 | 336 | 5.3 | 0.35 | 314 | 36.6 | 36.1 | 0.5 |
+| `mrk_pinning_shot` | 5758 | 308 | 5.3 | 0.58 | 285 | 31.9 | 36.9 | -5.0 |
+| `bmb_reload` | 6017 | 328 | 5.5 | 1.37 | 284 | 33.5 | 36.7 | -3.2 |
+| `mrk_quick_draw` | 5749 | 317 | 5.5 | 0.71 | 284 | 29.6 | 37.3 | -7.7 |
 
 ## Top 10 by win lift (taken in 30+ runs)
 
 | Card | Offered | Picked | Pick rate | Plays per combat (owned) | Runs took it | Win % took it | Win % not | Lift (pts) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `cnf_steadfast_hymn` | 5346 | 1779 | 33.3 | 0.90 | 947 | 29.0 | 6.6 | 22.5 |
-| `cnf_mass_mend` | 5214 | 1815 | 34.8 | 0.76 | 948 | 28.8 | 6.7 | 22.0 |
-| `cnf_rekindle` | 5650 | 2436 | 43.1 | 0.00 | 1105 | 26.5 | 5.7 | 20.8 |
-| `cnf_rebuke` | 6763 | 310 | 4.6 | 1.26 | 287 | 30.3 | 15.0 | 15.3 |
-| `bmb_concussion_round` | 5701 | 345 | 6.1 | 0.81 | 307 | 26.7 | 15.5 | 11.2 |
-| `bmb_powder_keg` | 4461 | 1452 | 32.5 | 0.66 | 841 | 23.5 | 12.6 | 10.9 |
-| `bmb_siege_mortar` | 4469 | 1945 | 43.5 | 0.98 | 919 | 23.0 | 12.3 | 10.7 |
-| `shb_iron_stance` | 5675 | 331 | 5.8 | 0.51 | 289 | 25.6 | 15.8 | 9.8 |
-| `shb_vow_of_iron` | 4604 | 1684 | 36.6 | 0.66 | 887 | 22.5 | 12.9 | 9.6 |
-| `shb_last_bastion` | 4647 | 2381 | 51.2 | 0.20 | 1024 | 21.3 | 12.9 | 8.4 |
+| `cnf_rekindle` | 6559 | 2706 | 41.3 | 0.15 | 1121 | 59.5 | 6.5 | 53.0 |
+| `cnf_mass_mend` | 5795 | 1950 | 33.6 | 0.76 | 992 | 60.4 | 12.4 | 48.0 |
+| `cnf_steadfast_hymn` | 5898 | 1947 | 33.0 | 0.91 | 997 | 59.6 | 13.0 | 46.6 |
+| `cnf_rebuke` | 7487 | 309 | 4.1 | 1.23 | 287 | 58.5 | 32.5 | 26.1 |
+| `cnf_litany` | 7399 | 303 | 4.1 | 1.01 | 277 | 51.6 | 33.7 | 17.9 |
+| `cnf_absolve` | 7583 | 373 | 4.9 | 0.61 | 333 | 43.8 | 34.7 | 9.2 |
+| `bmb_powder_keg` | 4797 | 1545 | 32.2 | 0.63 | 869 | 40.2 | 33.2 | 7.0 |
+| `arc_rift_rupture` | 4970 | 2178 | 43.8 | 0.77 | 958 | 39.8 | 32.9 | 6.9 |
+| `shb_iron_stance` | 6019 | 334 | 5.5 | 0.52 | 293 | 41.0 | 35.4 | 5.6 |
+| `bmb_siege_mortar` | 5044 | 2136 | 42.3 | 0.96 | 965 | 39.0 | 33.6 | 5.3 |
 
 ## Bottom 10 by win lift (taken in 30+ runs)
 
 | Card | Offered | Picked | Pick rate | Plays per combat (owned) | Runs took it | Win % took it | Win % not | Lift (pts) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `arc_burn_hex` | 5477 | 367 | 6.7 | 0.72 | 328 | 10.7 | 18.5 | -7.8 |
-| `mrk_volley` | 4034 | 1462 | 36.2 | 0.62 | 851 | 13.5 | 19.9 | -6.4 |
-| `mrk_pinning_shot` | 5416 | 317 | 5.9 | 0.56 | 292 | 12.0 | 18.1 | -6.1 |
-| `arc_firestorm` | 4130 | 1471 | 35.6 | 0.51 | 844 | 13.9 | 19.6 | -5.8 |
-| `arc_channel` | 5348 | 299 | 5.6 | 0.00 | 272 | 12.5 | 17.9 | -5.4 |
-| `arc_unseal` | 4276 | 1528 | 35.7 | 0.00 | 881 | 14.3 | 19.5 | -5.2 |
-| `mrk_quick_draw` | 5304 | 312 | 5.9 | 0.64 | 281 | 12.8 | 17.9 | -5.1 |
-| `mrk_hunters_focus` | 4392 | 1581 | 36.0 | 0.76 | 884 | 14.4 | 19.4 | -5.1 |
-| `mrk_piercing_bolt` | 5551 | 352 | 6.3 | 0.50 | 318 | 13.2 | 18.0 | -4.7 |
-| `arc_cinder_lance` | 5376 | 291 | 5.4 | 0.60 | 270 | 13.7 | 17.7 | -4.0 |
+| `mrk_piercing_bolt` | 6083 | 358 | 5.9 | 0.50 | 321 | 25.2 | 38.3 | -13.1 |
+| `mrk_hunters_focus` | 4729 | 1699 | 35.9 | 0.83 | 919 | 31.7 | 40.1 | -8.4 |
+| `mrk_volley` | 4311 | 1536 | 35.6 | 0.64 | 871 | 31.6 | 39.8 | -8.2 |
+| `mrk_quick_draw` | 5749 | 317 | 5.5 | 0.71 | 284 | 29.6 | 37.3 | -7.7 |
+| `mrk_killshot` | 4759 | 2241 | 47.1 | 0.68 | 996 | 32.4 | 39.9 | -7.5 |
+| `arc_burn_hex` | 6056 | 371 | 6.1 | 0.80 | 332 | 31.6 | 37.1 | -5.5 |
+| `mrk_pinning_shot` | 5758 | 308 | 5.3 | 0.58 | 285 | 31.9 | 36.9 | -5.0 |
+| `bmb_barrage` | 4698 | 1630 | 34.7 | 0.98 | 921 | 33.9 | 38.2 | -4.3 |
+| `bmb_incendiary` | 6260 | 302 | 4.8 | 1.03 | 271 | 32.8 | 36.7 | -3.9 |
+| `bmb_reload` | 6017 | 328 | 5.5 | 1.37 | 284 | 33.5 | 36.7 | -3.2 |
 
 ## Dead cards: offered but never picked (0)
 
 None.
 
 ## Never offered (10)
+
+Expected: these are Legacy skill-tree unlocks (GDD 22.5). The sim runs have no meta profile, so they are never added to the reward pool. Not a data problem.
 
 - `shb_rampart` (Rampart)
 - `shb_riposte` (Riposte)
@@ -93,16 +95,67 @@ None.
 - `bmb_shrapnel` (Shrapnel)
 - `bmb_flashbang` (Flashbang)
 
-## Bot blind spots: cards with zero plays
+## All cards
 
-The bot's combat policy (`src/core/auto.ts`, `scoreCardPlay`) scores a play by damage, Block, healing, stress relieved, status stacks and kills. A card with none of these scores zero or below and is never played, even when it is playable. Measured: `arc_channel` was playable in hand 549 times in 40 runs and never played. Cards with zero plays per combat:
+| Card | Offered | Picked | Pick rate | Plays per combat (owned) | Runs took it | Win % took it | Win % not | Lift (pts) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `arc_burn_hex` | 6056 | 371 | 6.1 | 0.80 | 332 | 31.6 | 37.1 | -5.5 |
+| `arc_channel` | 5908 | 297 | 5.0 | 0.77 | 273 | 33.7 | 36.6 | -2.9 |
+| `arc_cinder_lance` | 5981 | 295 | 4.9 | 0.68 | 276 | 36.6 | 36.1 | 0.5 |
+| `arc_cinder_ward` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `arc_firestorm` | 4610 | 1655 | 35.9 | 0.44 | 900 | 36.9 | 35.6 | 1.3 |
+| `arc_inferno` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `arc_rift_rupture` | 4970 | 2178 | 43.8 | 0.77 | 958 | 39.8 | 32.9 | 6.9 |
+| `arc_unseal` | 4756 | 1642 | 34.5 | 1.50 | 887 | 37.9 | 34.9 | 3.0 |
+| `bmb_barrage` | 4698 | 1630 | 34.7 | 0.98 | 921 | 33.9 | 38.2 | -4.3 |
+| `bmb_concussion_round` | 6144 | 351 | 5.7 | 0.80 | 312 | 37.5 | 36.0 | 1.5 |
+| `bmb_flashbang` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `bmb_incendiary` | 6260 | 302 | 4.8 | 1.03 | 271 | 32.8 | 36.7 | -3.9 |
+| `bmb_powder_keg` | 4797 | 1545 | 32.2 | 0.63 | 869 | 40.2 | 33.2 | 7.0 |
+| `bmb_reload` | 6017 | 328 | 5.5 | 1.37 | 284 | 33.5 | 36.7 | -3.2 |
+| `bmb_shrapnel` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `bmb_siege_mortar` | 5044 | 2136 | 42.3 | 0.96 | 965 | 39.0 | 33.6 | 5.3 |
+| `cnf_absolve` | 7583 | 373 | 4.9 | 0.61 | 333 | 43.8 | 34.7 | 9.2 |
+| `cnf_last_rites` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `cnf_litany` | 7399 | 303 | 4.1 | 1.01 | 277 | 51.6 | 33.7 | 17.9 |
+| `cnf_mass_mend` | 5795 | 1950 | 33.6 | 0.76 | 992 | 60.4 | 12.4 | 48.0 |
+| `cnf_penance` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `cnf_rebuke` | 7487 | 309 | 4.1 | 1.23 | 287 | 58.5 | 32.5 | 26.1 |
+| `cnf_rekindle` | 6559 | 2706 | 41.3 | 0.15 | 1121 | 59.5 | 6.5 | 53.0 |
+| `cnf_steadfast_hymn` | 5898 | 1947 | 33.0 | 0.91 | 997 | 59.6 | 13.0 | 46.6 |
+| `mrk_deadeye` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `mrk_hunters_focus` | 4729 | 1699 | 35.9 | 0.83 | 919 | 31.7 | 40.1 | -8.4 |
+| `mrk_killshot` | 4759 | 2241 | 47.1 | 0.68 | 996 | 32.4 | 39.9 | -7.5 |
+| `mrk_piercing_bolt` | 6083 | 358 | 5.9 | 0.50 | 321 | 25.2 | 38.3 | -13.1 |
+| `mrk_pinning_shot` | 5758 | 308 | 5.3 | 0.58 | 285 | 31.9 | 36.9 | -5.0 |
+| `mrk_quick_draw` | 5749 | 317 | 5.5 | 0.71 | 284 | 29.6 | 37.3 | -7.7 |
+| `mrk_ricochet` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `mrk_volley` | 4311 | 1536 | 35.6 | 0.64 | 871 | 31.6 | 39.8 | -8.2 |
+| `shb_bulwark` | 4584 | 1744 | 38.0 | 0.38 | 943 | 38.1 | 34.5 | 3.5 |
+| `shb_iron_stance` | 6019 | 334 | 5.5 | 0.52 | 293 | 41.0 | 35.4 | 5.6 |
+| `shb_last_bastion` | 5142 | 2623 | 51.0 | 0.22 | 1047 | 37.4 | 34.8 | 2.6 |
+| `shb_rampart` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `shb_riposte` | 0 | 0 | 0.0 | 0.00 | 0 | 0.0 | 36.2 | -36.2 |
+| `shb_shield_slam` | 6387 | 336 | 5.3 | 0.35 | 314 | 36.6 | 36.1 | 0.5 |
+| `shb_shove` | 5967 | 376 | 6.3 | 0.64 | 340 | 33.8 | 36.7 | -2.9 |
+| `shb_vow_of_iron` | 4872 | 1748 | 35.9 | 0.76 | 912 | 38.2 | 34.6 | 3.6 |
 
-- `arc_channel`: next-turn energy only. Playable, never played by the bot.
-- `bmb_reload`: draw and a bonus on the next attack. Never played.
-- `arc_unseal`: draw plus 1 Dread. Dread costs stress, so the score is negative. Never played.
-- `cnf_rekindle`: only a fallen hero can be the target. The bot has no fallen target most of the time, so 0 plays is expected in a few runs; it is not a bot decision problem alone.
+## Auto policy change: before and after
 
-These four cards are not evidence that the cards are weak. Judge them by hand in a playtest. Their pick rate reflects the bot's pick rule (it scores offers by its own rule), not how a human would value them.
+The bot is the auto policy (`chooseBotCommand` uses `chooseAutoCommand`). The scoring in `src/core/auto.ts` gained four terms: energy for next turn (`ENERGY_VALUE` 6 per point), a value per card drawn (`CARD_VALUE` 4), a Reload bonus worth 0.8 of its size when the owner has an attack in hand, a Rekindle return value (15 plus 0.8 of the HP restored), and a 50-point penalty for a Dread play that collapses its owner.
+
+| Measure | Before | After |
+| --- | --- | --- |
+| 3-act win rate (all runs) | 17.2% | 36.2% |
+| Plays per combat: `arc_channel` | 0.00 | 0.77 |
+| Plays per combat: `bmb_reload` | 0.00 | 1.37 |
+| Plays per combat: `arc_unseal` | 0.00 | 1.50 |
+| Plays per combat: `cnf_rekindle` | 0.00 | 0.15 |
+| Win % of runs that took `cnf_rekindle` | 26.5% | 59.5% |
+
+The win rate roughly doubled. The change in scoring is large, and this run does not isolate the cause. Rekindle's win rate among runs that took it moved most (26.5% to 59.5%), so the return value probably drives many more hero returns. Treat 36.2% as the new baseline only after checking the cause. Every balance number and every sim gate tuned under the old 17% bot (`docs/reports/2026-10-26-sim-gate.md`, `2026-10-26-sim-rites.md`) needs a re-run.
+
+The four cards that had zero plays under the old policy are no longer blind spots. The blind-spot note in the first version of this report is superseded.
 
 ## Recommendations (not applied)
 

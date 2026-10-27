@@ -1,6 +1,6 @@
 # AGENTS.md
 
-**project-alpha** (working name): roguelite + deckbuilding + RPG in grimdark dark fantasy, pixel art, Phaser 4, web first (Electron and Android only at the end of Beta). Structure inspired by Darkest Dungeon and Slay the Spire; gothic-military horror tone, without copying names or symbols from other works.
+**project-alpha** (working name): roguelite + deckbuilding + RPG in grimdark dark fantasy, pixel art, Phaser 4, web first, with Windows (Electron) and Android (Capacitor) builds. Structure inspired by Darkest Dungeon and Slay the Spire; gothic-military horror tone, without copying names or symbols from other works.
 
 **Language:** English for all repository content (docs, code, comments, keys, commits). Portuguese (PT-BR) appears only as in-game localization in `src/i18n/` and in verbatim quotes of reference material (with an English gloss); English is the default locale.
 

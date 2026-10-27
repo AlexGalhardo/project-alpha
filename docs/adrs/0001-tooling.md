@@ -33,5 +33,5 @@ Neither Bun nor Biome has a native spell checker (typos): no subcommand in `bun 
 
 ## Consequences
 
-- Typos in text are not caught automatically until the `typos-cli`/`cspell` decision.
+- Typos in text are not caught by a spell checker. Decision (2026-10-26): no `typos-cli`/`cspell` for 1.0. Both would be new dependencies, and their EN dictionaries flag most PT-BR text and the game's invented terms. The guard is the i18n parity test (same keys in EN and PT-BR), the mechanical text checks in the text review (double spaces, missing PT-BR accents) and a human read before 1.0 (PLAN R5.2). Revisit if players report typos.
 - The GitHub and local CI run the same script.

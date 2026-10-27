@@ -14,6 +14,7 @@ The developer playtest of v0.0.5 found three problems: the game did not fill the
 - Keep the 640×360 layout space: every scene calls `fitCamera()` (`setZoom(3).centerOn(320, 180)`). Pointer input goes through the camera, so hit areas did not change.
 - `pixelArt: false` so text renders smooth; every pixel-art texture gets `NEAREST` filtering at boot (`BootScene`).
 - Text is Phaser `Text` in Roboto (400/500/700) at `resolution: 3`; the 1-bit font builder is removed. Boot waits for the font (3 s timeout).
+- Roboto is self-hosted (update 2026-10-26): variable woff2 files for the Latin, Latin Extended and symbol subsets in `public/fonts/` with the OFL licence, declared with `@font-face` in `index.html` and the Latin file preloaded. No request goes to Google; median cold boot fell from 2.1 s to 0.57 s (`docs/reports/2026-10-26-performance.md`).
 - Art is size-agnostic: textures are shown at their logical size (`logicalSize`, `sized`, `standing`, `portrait`, `backdrop`), so 3× art is 1:1 at Full HD and 1× placeholders still work.
 
 ## Consequences

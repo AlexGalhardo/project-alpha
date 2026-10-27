@@ -30,7 +30,7 @@ When this file and the GDD disagree on a visual or audio number, this file wins;
 
 | Id | Decision (from `docs/brainstorming.md`) | Where |
 |---|---|---|
-| B28 | Base resolution 640×360; `Scale.NONE` + zoom snapped to whole device pixels | §3 |
+| B28 | Layout space 640×360, rendered at 1920×1080 with `Scale.FIT` and camera zoom 3 (ADR 0015 supersedes the integer-zoom rule) | §3 |
 | B36 | Art direction "ash and ember" | §4, §6 |
 | B29 | Card in hand: cost, short name, keyword icons, main number, origin/target ranks; 168×120 detail panel on first tap | §10, §11.6 |
 | B30 | Input: tap selects + previews, tap a valid target confirms, long press = tooltip, keyboard 1–9 and Space | §9.4, §11 |
@@ -261,7 +261,7 @@ Elites have no new body art: the elite version is the base sprite + a palette ti
 | Relic icon, small | 16×16 | Top bar relic slots; a separate drawing, not a downscale |
 | Status icon, small | 9×9 | Unit status row, card keyword row |
 | Status icon, large | 12×12 | Detail panel, tooltips |
-| Intent icon | 12×12 | Above enemies, followed by a Jersey 10 number |
+| Intent icon | 12×12 | Above enemies, followed by a Roboto number |
 | Action icon (card keyword) | 9×9 | Attack, block, heal, stress, push, pull, draw, energy |
 | Map node icon | 24×24 | Combat, elite, rest, shop, boss, current, visited |
 | Energy orb | 44×44 | Number drawn by the UI font |
@@ -297,7 +297,7 @@ Elites have no new body art: the elite version is the base sprite + a palette ti
 
 ## 8. Typography
 
-Superseded 2026-10-26 by ADR 0015: the 1-bit bitmap fonts (ADR 0010) are replaced by **Roboto** (Google Fonts, SIL OFL 1.1, weights 400/500/700, `display=swap`) for readability. Text is Phaser `Text` rendered at `resolution: 3`, so it stays sharp under the ×3 camera at 1920×1080. The game waits for `document.fonts.load` (3 s timeout, then the system sans-serif) before the Title scene, so text measures with the real font.
+Superseded 2026-10-26 by ADR 0015: the 1-bit bitmap fonts (ADR 0010) are replaced by **Roboto** (SIL OFL 1.1, weights 400–700, self-hosted variable woff2 in `public/fonts/`, `font-display: swap`) for readability. Text is Phaser `Text` rendered at `resolution: 3`, so it stays sharp under the ×3 camera at 1920×1080. The game waits for `document.fonts.load` (3 s timeout, then the system sans-serif) before the Title scene, so text measures with the real font.
 
 | Token | Size (640×360 space) | Weight | Use |
 |---|---|---|---|
@@ -819,5 +819,5 @@ Totals: about 175 image assets (about 76 through PixelLab: 5 + 10 + 1 + 45 + 8 +
 
 | Item | Owner | Due |
 |---|---|---|
-| Measure Jersey 10 average advance on the real atlas and confirm 58 px name-strip fits ≥ 9 characters; otherwise set `card.<id>.short` rules | Sonnet agent | First atlas build (PROTOTYPE group 1) |
+| Confirm with Roboto at the `tiny` size that 58 px name-strip fits ≥ 9 characters; otherwise set `card.<id>.short` rules | Sonnet agent | First atlas build (PROTOTYPE group 1) |
 | Zoom spike on real phones (Safari iOS, Chrome Android) with browser UI visible | Sonnet agent | PROTOTYPE group 1 |

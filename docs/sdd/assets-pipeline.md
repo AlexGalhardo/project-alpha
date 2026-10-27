@@ -22,7 +22,7 @@ Produce, validate and publish every visual, font and audio asset under the Art B
 - R-1 Keys and sizes: every asset key and canvas size from the Art Bible §7, §14; files in `public/assets/` named by key.
 - R-2 Placeholders (ADR 0014): `src/view/placeholders.ts` draws every key procedurally with the same size and shape+colour token; a missing file falls back to its placeholder.
 - R-3 Palette: every shipped image uses only the 31 master colours + transparency; alpha 0/255; colour budget per asset type (Art Bible §4.1).
-- R-4 Fonts (ADR 0015): Roboto from Google Fonts (400/500/700, `display=swap`), loaded by `index.html` and awaited at boot; no font atlas is built. The former Jersey/Tiny5 BMFont pipeline (ADR 0010) is retired.
+- R-4 Fonts (ADR 0015): Roboto, self-hosted variable woff2 (Latin, Latin Extended, symbols) in `public/fonts/` with `OFL.txt`, declared in `index.html` and awaited at boot; no font atlas is built. The former Jersey/Tiny5 BMFont pipeline (ADR 0010) is retired.
 - R-5 Art: PixelLab drafts (cost gate first) → palette snap and cleanup in Aseprite (Lua, batch) → validators → publish; prompts from Art Bible §15; every generation logged in `art-src/` (prompt, parameters, date, cost).
 - R-6 Audio: ElevenLabs (cost gate first) → normalise to Art Bible §13.3 targets → `ogg` + `mp3` → publish; log in `art-src/audio-log.jsonl`.
 - R-7 Generation scripts are idempotent: an existing key is skipped unless `--force`.

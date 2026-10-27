@@ -31,3 +31,17 @@ No frame-rate or memory work is needed for 1.0 on this evidence.
 ## How to reproduce
 
 A temporary spec (not committed) used `requestAnimationFrame` sampling inside `page.evaluate` for 10 s, the CDP `HeapProfiler.collectGarbage` + `Runtime.getHeapUsage` pair after each run or combat, and `performance.getEntriesByType('resource')` for boot. Runs used the `__startRun`, `__botStep` and `__game` test hooks; auto battle was switched on through the Combat scene.
+
+## Follow-up: fixes 1 and 2 applied (same day)
+
+- **Roboto self-hosted:** `public/fonts/roboto-{latin,latin-ext,symbols}.woff2` (the variable Roboto from Google Fonts v51, weights 400–700 in one file per subset; 43 + 29 + 21 kB) with `public/fonts/OFL.txt`. `index.html` declares three `@font-face` rules with the Google unicode ranges and preloads the Latin file; the Google Fonts stylesheet and preconnects are gone.
+- **Phaser chunk:** `vite.config.ts` `manualChunks` (a function, as Vite 8 / Rolldown requires) puts Phaser in its own file: `phaser-*.js` 1,367 kB (357 kB gzip) and the game `index-*.js` 215 kB (67 kB gzip).
+
+Boot to Title, cold cache, 5 fresh browser contexts each, 1920×1080, `bun run preview`:
+
+| Build | Title active (ms) | Font files done (ms) |
+|---|---|---|
+| Before (Google Fonts, one chunk) | 4165, 1423, 1623, 3851, 2066 (median 2066) | 2010, 248, 483, 256, 950 |
+| After (self-hosted, Phaser chunk) | 1012, 561, 581, 568, 551 (median 568) | 34, 21, 23, 23, 19 |
+
+Median boot drops by about 3.6× and the slow tail (CDN latency) is gone. Remaining items: 3 (SFX preload after Title) and 5 (Button guard) for the UI owner; 4 is a pipeline decision.

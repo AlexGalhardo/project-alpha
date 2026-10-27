@@ -12,6 +12,7 @@ import { PartyScene } from './scenes/PartyScene';
 import { PauseScene } from './scenes/PauseScene';
 import { RestScene } from './scenes/RestScene';
 import { RewardScene } from './scenes/RewardScene';
+import { SanctumScene } from './scenes/SanctumScene';
 import { SettingsScene } from './scenes/SettingsScene';
 import { ShopScene } from './scenes/ShopScene';
 import { SummaryScene } from './scenes/SummaryScene';
@@ -41,6 +42,7 @@ const game = new Phaser.Game({
 		CampScene,
 		ShopScene,
 		RestScene,
+		SanctumScene,
 		EventScene,
 		TreasureScene,
 		SummaryScene,

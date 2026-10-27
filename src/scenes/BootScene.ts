@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { loadMusicInBackground, preloadAudio } from '../view/audio';
+import { loadAudioInBackground } from '../view/audio';
 import { waitForFonts } from '../view/fonts';
 import { generatePlaceholders } from '../view/placeholders';
 
@@ -21,7 +21,6 @@ export class BootScene extends Phaser.Scene {
 			frame.destroy();
 			bar.destroy();
 		});
-		preloadAudio(this);
 		// Generated art is listed in a manifest so only files that exist are requested; any key not
 		// listed keeps its procedural placeholder (same key and size, .claude/rules/assets.md).
 		this.load.json('sprite-manifest', SPRITE_MANIFEST);
@@ -45,8 +44,8 @@ export class BootScene extends Phaser.Scene {
 		// sampling keeps it sharp while the game itself renders smooth for Roboto (ADR 0015).
 		for (const key of this.textures.getTextureKeys())
 			this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
-		// Boot stays alive (it draws nothing) so its loader can stream the music in the background.
+		// Boot stays alive (it draws nothing) so its loader can stream the audio in the background.
 		void waitForFonts().then(() => this.scene.launch('Title'));
-		loadMusicInBackground(this);
+		loadAudioInBackground(this);
 	}
 }

@@ -38,6 +38,7 @@ export type {
 	RewardView,
 	RunOptions,
 	RunState,
+	SanctumOption,
 	ScreenKey,
 	ShopView,
 	SummaryView,

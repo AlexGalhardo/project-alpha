@@ -58,7 +58,11 @@ export const AUDIO_KEYS = [
 	'music.menu',
 	'music.map',
 	'music.combat',
+	'music.combat.act2',
+	'music.combat.act3',
 	'music.boss',
+	'music.boss.final',
+	'music.ending',
 	...[
 		'block.absorb',
 		'block.break',
@@ -69,6 +73,8 @@ export const AUDIO_KEYS = [
 		'card.play',
 		'card.upgrade',
 		'flow.defeat',
+		'flow.enrage',
+		'flow.phase',
 		'flow.reward',
 		'flow.victory',
 		'hit.blunt',
@@ -98,27 +104,28 @@ export const AUDIO_KEYS = [
 	].map((k) => `sfx.${k}`),
 ] as const;
 
-/** Queue the generated files; missing files only log a load error and fall back to synthesis. */
-export function preloadAudio(scene: Phaser.Scene): void {
-	// Music (~1 MB per loop) is streamed in after the title appears; only SFX block the boot.
-	for (const key of AUDIO_KEYS) {
-		if (key.startsWith('music.')) continue;
-		scene.load.audio(key, [`assets/audio/${key}.ogg`, `assets/audio/${key}.mp3`]);
-	}
-}
+let audioLoading = false;
 
-let musicLoading = false;
-
-/** Loads the music loops in the background; the requested track starts when its file arrives. */
-export function loadMusicInBackground(scene: Phaser.Scene): void {
-	if (musicLoading) return;
-	musicLoading = true;
-	for (const key of AUDIO_KEYS) {
-		if (!key.startsWith('music.') || scene.cache.audio.exists(key)) continue;
+/**
+ * Loads every sound in the background after the boot (docs/reports/2026-10-26-performance.md #3):
+ * SFX first (small; `play()` synthesizes a tone until a file arrives), then the music loops. The
+ * requested track starts, or replaces its fallback, when its file arrives. Missing files only log.
+ */
+export function loadAudioInBackground(scene: Phaser.Scene): void {
+	if (audioLoading) return;
+	audioLoading = true;
+	const keys = [...AUDIO_KEYS].sort(
+		(a, b) => Number(a.startsWith('music.')) - Number(b.startsWith('music.')),
+	);
+	for (const key of keys) {
+		if (scene.cache.audio.exists(key)) continue;
 		scene.load.audio(key, [`assets/audio/${key}.ogg`, `assets/audio/${key}.mp3`]);
 	}
 	scene.load.on('filecomplete', (key: string) => {
-		if (key === currentMusicKey && !currentMusic) playMusic(scene, key);
+		if (key !== currentMusicKey || playingKey === key) return;
+		const wanted = currentMusicKey;
+		stopMusic();
+		playMusic(scene, wanted);
 	});
 	scene.load.start();
 }
@@ -130,17 +137,29 @@ const ALIAS: Record<string, string> = {
 };
 
 let currentMusic: Phaser.Sound.BaseSound | null = null;
+/** Track the game asked for; `playingKey` is what actually plays (its fallback while it loads). */
 let currentMusicKey = '';
+let playingKey = '';
 
-/** Loops one music track for the whole game; switching keys crossfades by stopping the old one. */
-export function playMusic(scene: Phaser.Scene, key: string): void {
+/**
+ * Loops one music track for the whole game; switching keys stops the old one. `fallback` plays
+ * while `key` is not loaded (per-act tracks fall back to the Act 1 ones).
+ */
+export function playMusic(scene: Phaser.Scene, key: string, fallback?: string): void {
 	if (currentMusicKey === key && currentMusic) return;
 	currentMusic?.stop();
 	currentMusic = null;
+	playingKey = '';
 	currentMusicKey = key;
-	if (!scene.cache.audio.exists(key)) return;
+	const k = scene.cache.audio.exists(key)
+		? key
+		: fallback && scene.cache.audio.exists(fallback)
+			? fallback
+			: null;
+	if (!k) return;
+	playingKey = k;
 	const volume = app.settings.musicVolume / 100;
-	currentMusic = scene.sound.add(key, { loop: true, volume });
+	currentMusic = scene.sound.add(k, { loop: true, volume });
 	// Locked audio (no gesture yet) starts automatically on unlock; otherwise play now.
 	if (scene.sound.locked) scene.sound.once('unlocked', () => currentMusic?.play());
 	else currentMusic.play();
@@ -150,6 +169,7 @@ export function stopMusic(): void {
 	currentMusic?.stop();
 	currentMusic = null;
 	currentMusicKey = '';
+	playingKey = '';
 }
 
 export function setMusicVolume(volume: number): void {

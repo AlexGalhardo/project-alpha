@@ -175,6 +175,8 @@ export class Button extends Phaser.GameObjects.Container {
 	}
 
 	private draw(pressed: boolean): void {
+		// A destroyed button (its scene shut down) has no canvas to draw on (performance report #5).
+		if (!this.active || !this.scene) return;
 		const g = this.bg;
 		g.clear();
 		const fill = !this.enabled ? P.ash3 : this.danger ? P.blood1 : pressed ? P.iron0 : P.iron1;

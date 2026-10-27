@@ -184,12 +184,16 @@ describe('Act 2 enemies and boss', () => {
 });
 
 describe('Act flow (GDD 22.1)', () => {
+	const SHIPPED_SANCTUM = ACT_RULES.sanctum;
 	afterEach(() => {
 		ACT_RULES.acts = SHIPPED_ACTS;
+		ACT_RULES.sanctum = SHIPPED_SANCTUM;
 	});
 
-	test('ACTS=2: the Act 1 boss opens the camp, then a fresh Act 2 map; heroes heal 50% and lose injuries', () => {
+	test('ACTS=2, Sanctum off: the Act 1 boss opens the camp, then a fresh Act 2 map; heroes heal 50% and lose injuries', () => {
 		ACT_RULES.acts = 2;
+		// The flat heal is the fallback when the Sanctum is off (GDD 23.1).
+		ACT_RULES.sanctum = false;
 		let s = createRun(5, PARTY, { heroHpMul: 20 });
 		let guard = 0;
 		while (!(s.phase === 'reward' && s.reward?.boss) && guard++ < 5000) {

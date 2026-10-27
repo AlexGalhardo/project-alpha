@@ -11,6 +11,7 @@ import {
 	preview,
 	type Target,
 } from '../core';
+import { ACT_RULES } from '../data';
 import { app } from '../view/app';
 import { play, playMusic } from '../view/audio';
 import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
@@ -243,7 +244,15 @@ export class CombatScene extends Phaser.Scene {
 			return;
 		}
 		this.view = view;
-		playMusic(this, view.kind === 'boss' ? 'music.boss' : 'music.combat');
+		const act = state?.act ?? 1;
+		// Per-act tracks; the last act's boss has its own. Act 1 tracks play while they load.
+		if (view.kind === 'boss')
+			playMusic(
+				this,
+				act >= ACT_RULES.acts ? 'music.boss.final' : 'music.boss',
+				'music.boss',
+			);
+		else playMusic(this, act > 1 ? `music.combat.act${act}` : 'music.combat', 'music.combat');
 		if (this.selected && !view.hand.some((c) => c.uid === this.selected?.uid))
 			this.selected = null;
 		this.layer.removeAll(true);
@@ -803,6 +812,10 @@ export class CombatScene extends Phaser.Scene {
 		const step = 110;
 		let delay = 0;
 		let lastHit: string | null = null;
+		// The enrage sting plays once, on the turn enrage begins (later turns only pop "Enraged 1").
+		const started = events.find((e) => e.type === 'turnStarted');
+		if (started?.type === 'turnStarted' && started.turn === this.view.enrageTurn)
+			play(this, 'sfx.flow.enrage');
 		for (const ev of events) {
 			if (ev.type === 'enemyAction') {
 				// Each enemy acts on its own beat: a pause, then a lunge towards the heroes.
@@ -908,7 +921,7 @@ export class CombatScene extends Phaser.Scene {
 			collapse: 'sfx.stress.collapse',
 			fall: 'sfx.unit.fall',
 			enemyDied: 'sfx.unit.enemy_death',
-			bossPhase: 'sfx.unit.boss_phase',
+			bossPhase: 'sfx.flow.phase',
 		};
 		const key = sfx[ev.type];
 		if (key) play(this, key);

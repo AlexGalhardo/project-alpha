@@ -97,7 +97,7 @@ export const MAP_RULES = { secondEdgeChance: 0.45, edgeAttempts: 300 } as const;
 export const ACT_RULES = {
 	acts: 3,
 	/** Between-act Sanctum (docs/gdd.md §23.1); off keeps the 50% heal below until its screen exists. */
-	sanctum: false,
+	sanctum: true,
 	/** Share of max HP every hero heals between acts (injuries are cleared too). */
 	betweenActHealPct: 50,
 	/** Added per act after the first, for non-boss enemies (HP x1.2, damage x1.1 in Act 2). */

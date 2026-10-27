@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { bankRun, maxHP, recordWin, riteLevel, summaryView } from '../core';
 import { ENCOUNTERS } from '../data';
 import { BASE_WIDTH } from '../platform/zoom';
-import { stopMusic } from '../view/audio';
+import { playMusic, stopMusic } from '../view/audio';
 import { enemyName, t } from '../view/i18n';
 import { loadProfile, saveProfile } from '../view/profile';
 import { session } from '../view/session';
@@ -21,7 +21,6 @@ export class SummaryScene extends Phaser.Scene {
 
 	create(): void {
 		fitCamera(this);
-		stopMusic();
 		this.cameras.main.setBackgroundColor('#0e0d12');
 		backdrop(this, 'bg.menu', 0.6);
 		const state = session.state;
@@ -30,6 +29,9 @@ export class SummaryScene extends Phaser.Scene {
 			this.scene.start('Menu');
 			return;
 		}
+		// The ending theme on a full victory; silence after a defeat.
+		if (view.victory) playMusic(this, 'music.ending');
+		else stopMusic();
 		// Bank this run's Embers once (the profile remembers the seed).
 		const before = loadProfile();
 		const rite = riteLevel(state);

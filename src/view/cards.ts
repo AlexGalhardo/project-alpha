@@ -179,3 +179,18 @@ export function drawCard(
 	c.setSize(CARD_W, CARD_H);
 	return c;
 }
+
+/** Keywords a card carries (GDD 6.2), in display order; each has `keyword.<id>.name|tooltip`. */
+export function cardKeywords(cardId: string, upgraded: boolean): string[] {
+	const def = cardDef(cardId);
+	const p = upgraded ? { ...def.params, ...def.upgrade } : def.params;
+	const out: string[] = [];
+	if (def.type === 'power') out.push('power');
+	if (def.exhaust) out.push('exhaust');
+	if (p.dread) out.push('dread');
+	if (p.push) out.push('push');
+	if (p.splash) out.push('splash');
+	if (p.taunt) out.push('taunt');
+	if (p.swapBehind) out.push('swap');
+	return out;
+}

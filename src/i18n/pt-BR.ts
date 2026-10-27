@@ -82,8 +82,6 @@ export const ptBR: Strings = {
 		intent: 'Intenção',
 		from: 'De',
 		target: 'Alvo',
-		preview: 'Prévia',
-		noTarget: 'Nenhum alvo selecionado.',
 		unplayable: 'Não jogável',
 		teamTurn: 'Seu turno',
 		enemyTurn: 'Turno inimigo',

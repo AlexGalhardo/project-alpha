@@ -14,7 +14,7 @@ import {
 import { ACT_RULES, CARDS } from '../data';
 import { app } from '../view/app';
 import { play, playMusic } from '../view/audio';
-import { CARD_H, CARD_W, cardName, cardText, drawCard } from '../view/cards';
+import { CARD_H, CARD_W, cardKeywords, cardName, cardText, drawCard } from '../view/cards';
 import { enemyName, t } from '../view/i18n';
 import { css, P, type PaletteKey } from '../view/palette';
 import { session } from '../view/session';
@@ -44,6 +44,12 @@ interface UnitSnapshot {
 }
 
 const STATUS_KEYS = ['might', 'marked', 'weakened', 'bleed', 'burn', 'ward'] as const;
+
+/** Named elites (i18n `elite.<id>.name`) by their base enemy. */
+const ELITE_NAME: Record<string, string> = {
+	rust_templar: 'templar_captain',
+	ossified_brute: 'calcified_brute',
+};
 
 /** i18n entry that holds each elite trait's text. */
 const TRAIT_KEY: Record<NonNullable<EnemyView['trait']>, string> = {
@@ -308,6 +314,13 @@ export class CombatScene extends Phaser.Scene {
 				.setOrigin(0)
 				.setStrokeStyle(1, i === 0 ? P.gold2 : P.ash3);
 			const img = portrait(this, `enemy.${e.key}`, x + 1, 3, 18, 18);
+			frame.setInteractive().on('pointerup', () => {
+				const order = v.queue
+					.map((u) => v.enemies.find((x) => x.uid === u))
+					.filter((x): x is EnemyView => !!x)
+					.map((x) => enemyName(x.key));
+				this.tooltip(`${t('hud.turnQueue')}: ${order.join(' → ')}`);
+			});
 			this.layer.add([frame, img]);
 		});
 		this.layer.add(label(this, 488, 6, `${t('hud.gold')} ${state?.gold ?? 0}`, 'ui', 'gold2'));
@@ -583,7 +596,10 @@ export class CombatScene extends Phaser.Scene {
 		if (target.type === 'enemy') {
 			const e = this.view.enemies.find((x) => x.uid === target.uid);
 			if (!e) return;
-			lines.push(`${enemyName(e.key)} — ${e.hp}/${e.maxHP}`);
+			// Act 1 elites have their own names; other elites keep the enemy name plus the trait line.
+			const elite = e.trait ? ELITE_NAME[e.key] : undefined;
+			const name = elite ? t(`elite.${elite}.name`) : enemyName(e.key);
+			lines.push(`${name} — ${e.hp}/${e.maxHP}`);
 			const it = e.intent;
 			if (it) {
 				const hits = it.damage.map(
@@ -608,6 +624,7 @@ export class CombatScene extends Phaser.Scene {
 			if (!h) return;
 			lines.push(`${t(`hero.${h.id}.name`)} — ${h.hp}/${h.maxHP}`);
 			lines.push(`${t('stress.label')} ${h.stress}/10`);
+			if (h.injured) lines.push(`${t('fallen.injury')}: ${t('fallen.injuryText')}`);
 			statusLine(h.status);
 		}
 		this.tooltip(lines.join('\n'), 4000);
@@ -684,6 +701,25 @@ export class CombatScene extends Phaser.Scene {
 		).setWordWrapWidth(w - 12);
 		this.layer.add([name, body]);
 		let bottom = body.y + body.height + 6;
+		// Keyword chips (GDD 6.2): tap one to learn what it means.
+		let kx = px + 6;
+		let chipH = 0;
+		for (const k of cardKeywords(card.cardId, card.upgraded)) {
+			const chip = label(this, kx + 3, bottom, t(`keyword.${k}.name`), 'tiny', 'gold2');
+			const bg = this.add
+				.rectangle(kx, bottom - 1, chip.width + 6, chip.height + 2, P.ash0, 0.9)
+				.setOrigin(0)
+				.setStrokeStyle(1, P.gold0)
+				.setInteractive()
+				.setName(`keyword-${k}`);
+			bg.on('pointerup', () =>
+				this.tooltip(`${t(`keyword.${k}.name`)}: ${t(`keyword.${k}.tooltip`)}`),
+			);
+			this.layer.add([bg, chip]);
+			kx += chip.width + 10;
+			chipH = chip.height + 6;
+		}
+		bottom += chipH;
 		const line = this.previewLine();
 		if (line) {
 			const l = label(this, px + 6, bottom, line, 'tiny', 'gold2').setWordWrapWidth(w - 12);
@@ -851,12 +887,18 @@ export class CombatScene extends Phaser.Scene {
 		const step = 110;
 		let delay = 0;
 		let lastHit: string | null = null;
+		let enemyBanner = false;
 		// The enrage sting plays once, on the turn enrage begins (later turns only pop "Enraged 1").
 		const started = events.find((e) => e.type === 'turnStarted');
 		if (started?.type === 'turnStarted' && started.turn === this.view.enrageTurn)
 			play(this, 'sfx.flow.enrage');
 		for (const ev of events) {
 			if (ev.type === 'enemyAction') {
+				if (!enemyBanner) {
+					enemyBanner = true;
+					const at0 = delay;
+					this.time.delayedCall(at0, () => this.turnBanner(t('hud.enemyTurn'), 'blood2'));
+				}
 				// Each enemy acts on its own beat: a pause, then a lunge towards the heroes.
 				delay += 250;
 				const at = delay;
@@ -880,7 +922,10 @@ export class CombatScene extends Phaser.Scene {
 				this.time.delayedCall(d, () => this.popFor(ev, pos, multi));
 				delay += step;
 			} else if (ev.type === 'turnStarted') {
-				this.time.delayedCall(d, () => play(this, 'sfx.card.draw'));
+				this.time.delayedCall(d, () => {
+					play(this, 'sfx.card.draw');
+					this.turnBanner(t('hud.teamTurn'), 'gold2');
+				});
 			} else if (ev.type === 'cardExhausted') {
 				this.time.delayedCall(d, () => play(this, 'sfx.card.exhaust'));
 			}
@@ -1033,9 +1078,19 @@ export class CombatScene extends Phaser.Scene {
 			text = t('stress.collapse');
 			color = 'rift2';
 			this.shake(true);
+			// Say what a Collapse does where it happens (GDD 7.1).
+			this.tooltip(
+				`${t(`hero.${ev.target}.name`)}: ${t('stress.collapse')}. ${t('stress.collapseText')}`,
+				4000,
+			);
 		} else if (ev.type === 'fall') {
 			text = t('fallen.label');
 			color = 'blood2';
+			// GDD 5.6: falling is not death; say so when it happens.
+			this.tooltip(
+				`${t(`hero.${ev.target}.name`)}: ${t('fallen.label')}. ${t('fallen.returns')} ${t('fallen.injury')}: ${t('fallen.injuryText')}`,
+				4500,
+			);
 		} else if (ev.type === 'bossPhase') {
 			// Per-boss banner (boss.<key>.phase<n>) with the generic phase-2 line as fallback.
 			const key = `boss.${this.view.enemies.find((e) => e.uid === ev.uid)?.key}.phase${ev.phase}`;
@@ -1075,6 +1130,21 @@ export class CombatScene extends Phaser.Scene {
 	private shake(big = false): void {
 		if (app.settings.reduceShake) return;
 		this.cameras.main.shake(big ? 220 : 90, big ? 0.008 : 0.004);
+	}
+
+	/** Short "Enemy turn" / "Your turn" marker over the centre gap, so the phases read apart. */
+	private turnBanner(text: string, color: PaletteKey): void {
+		const b = label(this, 320, 132, text, 'h2', color)
+			.setOrigin(0.5)
+			.setStroke(css('ash0'), 4)
+			.setDepth(45);
+		this.tweens.add({
+			targets: b,
+			alpha: 0,
+			delay: 500,
+			duration: 250,
+			onComplete: () => b.destroy(),
+		});
 	}
 
 	/** Full-width banner over the stage for a boss phase change; it holds long enough to be read. */

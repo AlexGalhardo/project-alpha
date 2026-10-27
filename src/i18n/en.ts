@@ -83,8 +83,6 @@ export const en = {
 		intent: 'Intent',
 		from: 'From',
 		target: 'Target',
-		preview: 'Preview',
-		noTarget: 'No target selected.',
 		unplayable: 'Unplayable',
 		teamTurn: 'Your turn',
 		enemyTurn: 'Enemy turn',

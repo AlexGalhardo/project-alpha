@@ -12,6 +12,9 @@ const COL_X = (round: number): number => 40 + (round - 1) * 62 + 12;
 /** Node centres per row size: 3 nodes at y 88/152/216, 2 at 120/184, 1 (boss) at 152. */
 const NODE_Y: Record<number, number[]> = { 1: [152], 2: [120, 184], 3: [88, 152, 216] };
 const nodeY = (index: number, count: number): number => NODE_Y[count]?.[index] ?? 152;
+/** Run seed + act whose title card was shown, so returning to the map does not repeat it. */
+let shownActCard = '';
+
 const LEGEND = ['combat', 'elite', 'shop', 'rest', 'event', 'treasure', 'boss'];
 
 /** Act map: 10 columns left to right, one per round (GDD §4.2, docs/art-bible.md §11.4). */
@@ -58,6 +61,7 @@ export class MapScene extends Phaser.Scene {
 		});
 
 		panel(this, 16, 32, 608, 256, 'ash1').setAlpha(0.85);
+		this.actCard(state.seed, state.act ?? 1, view.currentRow);
 		label(this, 24, 36, t('map.choose'), 'tiny', 'ash5');
 
 		const pos = (row: number, index: number): { x: number; y: number } => {
@@ -221,6 +225,38 @@ export class MapScene extends Phaser.Scene {
 	private pick(index: number): void {
 		session.send({ type: 'selectNode', index });
 		goNext(this);
+	}
+
+	/**
+	 * Act title card (once per act of a run, before the first node): "Act N — name" and the
+	 * descent line from Act 2 on. Visual only; it fades by itself and never blocks input.
+	 */
+	private actCard(seed: number, act: number, row: number): void {
+		const key = `${seed}:${act}`;
+		if (row > 0 || shownActCard === key) return;
+		shownActCard = key;
+		const nameKey = `act.${act}.name`;
+		const name = t(nameKey) === nameKey ? '' : ` — ${t(nameKey)}`;
+		const band = this.add.rectangle(0, 128, 640, 64, P.ash0, 0.85).setOrigin(0).setDepth(80);
+		const title = label(this, 320, 136, `${t('hud.act', { act })}${name}`, 'h1', 'gold2')
+			.setOrigin(0.5, 0)
+			.setDepth(81);
+		const parts: Phaser.GameObjects.GameObject[] = [band, title];
+		if (act > 1)
+			parts.push(
+				label(this, 320, 168, t('act.transition', { act }), 'tiny', 'bone1')
+					.setOrigin(0.5, 0)
+					.setDepth(81),
+			);
+		this.tweens.add({
+			targets: parts,
+			alpha: 0,
+			delay: 1600,
+			duration: 400,
+			onComplete: () => {
+				for (const p of parts) p.destroy();
+			},
+		});
 	}
 
 	private openPause(): void {

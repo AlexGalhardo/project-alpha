@@ -67,6 +67,8 @@ const SFX: Array<[string, string, number]> = [
 	['sfx.flow.victory', 'Bell chord, short and grim', 2.0],
 	['sfx.flow.defeat', 'Low sustained drone falling away', 2.0],
 	['sfx.flow.reward', 'Rising three-note sting, dry', 1.0],
+	['sfx.flow.enrage', 'Low war horn swell with grinding metal', 1.5],
+	['sfx.flow.phase', 'Huge cracking stone and a deep bell boom', 2.0],
 ];
 
 const MUSIC: Array<[string, string]> = [
@@ -85,6 +87,22 @@ const MUSIC: Array<[string, string]> = [
 	[
 		'music.boss',
 		'Wordless full choir, pounding drums, bell tolls on the downbeat, distorted low brass, dread and urgency, 124 BPM, C# minor. Seamless loop.',
+	],
+	[
+		'music.combat.act2',
+		'Gilded cathedral dread: tolling handbells, low bowed strings, ritual taiko, hollow organ swells, steady and oppressive, 100 BPM, E Phrygian. Seamless loop.',
+	],
+	[
+		'music.combat.act3',
+		'Iron crypt: grinding metal percussion, chains, deep cello ostinato, sub drones, sparse dissonant choir, relentless, 110 BPM, B Locrian. Seamless loop.',
+	],
+	[
+		'music.boss.final',
+		'Final confrontation: massive wordless choir, pipe organ, war drums, bell clusters, distorted low brass, rising dread without release, 128 BPM, C minor. Seamless loop.',
+	],
+	[
+		'music.ending',
+		'Elegy after the last battle: solo cello over low choir pad, one distant bell, slow and exhausted, quiet relief with grief, 54 BPM, D minor. Seamless loop.',
 	],
 ];
 

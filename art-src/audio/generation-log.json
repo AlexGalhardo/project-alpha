@@ -607,5 +607,91 @@
     "httpStatus": 200,
     "bytes": 17179,
     "characterCost": "11"
+  },
+  {
+    "key": "music.combat.act2",
+    "kind": "music",
+    "endpoint": "/music",
+    "prompt": "Instrumental loop. Gilded cathedral dread: tolling handbells, low bowed strings, ritual taiko, hollow organ swells, steady and oppressive, 100 BPM, E Phrygian. Seamless loop.",
+    "params": {
+      "music_length_ms": 60000,
+      "force_instrumental": true
+    },
+    "date": "2026-10-27T00:18:32.765Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 961350
+  },
+  {
+    "key": "music.combat.act3",
+    "kind": "music",
+    "endpoint": "/music",
+    "prompt": "Instrumental loop. Iron crypt: grinding metal percussion, chains, deep cello ostinato, sub drones, sparse dissonant choir, relentless, 110 BPM, B Locrian. Seamless loop.",
+    "params": {
+      "music_length_ms": 60000,
+      "force_instrumental": true
+    },
+    "date": "2026-10-27T00:18:49.243Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 961350
+  },
+  {
+    "key": "music.boss.final",
+    "kind": "music",
+    "endpoint": "/music",
+    "prompt": "Instrumental loop. Final confrontation: massive wordless choir, pipe organ, war drums, bell clusters, distorted low brass, rising dread without release, 128 BPM, C minor. Seamless loop.",
+    "params": {
+      "music_length_ms": 60000,
+      "force_instrumental": true
+    },
+    "date": "2026-10-27T00:19:05.392Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 961350
+  },
+  {
+    "key": "music.ending",
+    "kind": "music",
+    "endpoint": "/music",
+    "prompt": "Instrumental loop. Elegy after the last battle: solo cello over low choir pad, one distant bell, slow and exhausted, quiet relief with grief, 54 BPM, D minor. Seamless loop.",
+    "params": {
+      "music_length_ms": 60000,
+      "force_instrumental": true
+    },
+    "date": "2026-10-27T00:19:24.608Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 961350
+  },
+  {
+    "key": "sfx.flow.enrage",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Low war horn swell with grinding metal, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 1.5,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-27T00:19:43.740Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 24702,
+    "characterCost": "17"
+  },
+  {
+    "key": "sfx.flow.phase",
+    "kind": "sfx",
+    "endpoint": "/sound-generation",
+    "prompt": "Huge cracking stone and a deep bell boom, close perspective, dry, no music, no voice.",
+    "params": {
+      "duration_seconds": 2,
+      "prompt_influence": 0.5
+    },
+    "date": "2026-10-27T00:19:46.338Z",
+    "status": "ok",
+    "httpStatus": 200,
+    "bytes": 33061,
+    "characterCost": "22"
   }
 ]

@@ -46,14 +46,14 @@ interface Job {
 
 // ---- unified template (docs/art-bible.md section 15.1) ----
 const UNIT_TEMPLATE = (facing: 'right' | 'left', desc: string): string =>
-	`Pixel art game sprite of a single character, strict side-view profile, flat orthographic camera at eye level, the whole body visible from head to feet, feet planted on a flat ground line at the bottom edge of the canvas, the body and face turned to the ${facing} of the image (facing ${facing}). ${desc} Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.`;
+	`2D side-scroller game sprite of a single character in strict side profile, like a fighting game character seen exactly from the side. The torso, hips and legs are turned 90 degrees in profile, the head and face are in profile pointing to the ${facing} edge of the image, only one shoulder and the near arm and leg are clearly visible, flat orthographic camera at eye level, the whole body visible from head to feet, the whole figure fits inside the canvas with a small margin, feet planted on a flat ground line near the bottom edge of the canvas, facing ${facing}. ${desc} Grimdark dark fantasy, worn and weathered. Dark tinted outline, single light from the upper left, muted master palette of ash greys, dark iron, bone, worn gold and deep crimson accents, no pure black, no pure white. No text, no background, no ground, no shadow, no frame, no other characters.`;
 
 const CARD_TEMPLATE = (scene: string): string =>
 	`Pixel art illustration for a card, wide landscape composition, one clear focal point. ${scene}. Grimdark dark fantasy, cold ash greys, dark iron, bone, ember orange and worn gold, strong value contrast at the focal point, dark vignette edges, light from the upper left. No border, no frame, no text, no letters, no stars, no pentagrams, no eight-pointed symbols.`;
 
 const HERO_DESC: Record<string, string> = {
 	shieldbearer:
-		'A heavy knight in black riveted plate armour with gold trim, a horned helm with a red plume and a red scarf, a tall kite shield with a red cross, a broad jagged sword held low, a short tattered crimson cape.',
+		'A heavy knight in black riveted plate armour with gold trim, a horned helm with a red plume and a red scarf, a tall kite shield with a red cross, a broad jagged sword held low pointing down and forward, a short tattered crimson cape. Standing upright and calm, legs side by side in profile, not lunging.',
 	marksman:
 		'A slim hooded archer in charcoal leather and scale, a narrow bone mask under the hood, a tall recurve bow held in the front hand, a quiver of arrows over the shoulder, a torn dark red sash.',
 	arcanist:
@@ -65,6 +65,59 @@ const HERO_DESC: Record<string, string> = {
 };
 const heroStyle = 'style-heroes.png';
 const enemyStyle = 'style-enemies.png';
+
+const ACT3: [string, [number, number], string][] = [
+	[
+		'iron_mourner',
+		[192, 240],
+		'A hooded giant in riveted iron plate, carrying a huge funeral bell on a hammer haft.',
+	],
+	[
+		'grave_cur',
+		[240, 192],
+		'An emaciated hound wrapped in grey burial cloth, glowing seams of ember light along the wrappings.',
+	],
+	[
+		'ash_cantor',
+		[192, 240],
+		'A robed singer with a stitched-shut mouth, ash pouring from the long sleeves.',
+	],
+	[
+		'bronze_scribe',
+		[192, 240],
+		'A bronze automaton monk with a quill blade in one hand and a heavy ledger in the other.',
+	],
+	[
+		'hollow_choir',
+		[240, 336],
+		'Three fused hollow-faced choristers standing on one stone plinth, mouths open, robes melded together.',
+	],
+	[
+		'sepulchre_knight',
+		[240, 336],
+		'A tomb-effigy knight risen from its slab, stone and iron plate, carrying a huge greatsword.',
+	],
+	[
+		'wax_saint',
+		[192, 240],
+		'A melting wax saint statue with a dripping halo, hands folded, wax running down the robes.',
+	],
+	[
+		'chain_wraith',
+		[192, 240],
+		'A translucent pale wraith bound in hanging iron chains, hollow eyes.',
+	],
+	[
+		'marrow_butcher',
+		[192, 240],
+		'A hunched bone-plated butcher holding twin cleavers, a stained leather apron.',
+	],
+	[
+		'rift_spawn',
+		[144, 144],
+		'A small wet rift larva with many eyes, glistening skin, a ragged mouth.',
+	],
+];
 
 const BOSS_SIZE: [number, number] = [400, 360];
 
@@ -82,7 +135,7 @@ function buildJobs(): Job[] {
 			subjectRef: `hero-${id}.png`,
 		});
 	}
-	for (const [id, size, desc] of [...enemies, ...enemiesAct2]) {
+	for (const [id, size, desc] of [...enemies, ...enemiesAct2, ...ACT3]) {
 		jobs.push({
 			key: `enemy.${id}.idle`,
 			group: 'enemies',
@@ -102,13 +155,17 @@ function buildJobs(): Job[] {
 			'gilded_penitent',
 			'A giant reliquary statue of a kneeling saint in gold leaf over rot, hands clasped, cracks of green rot leaking through the gold, a ruined golden halo, seen from the side.',
 		],
+		[
+			'rift_mother',
+			'A colossal mass of bone, wax and machinery cradled in iron ribs, an open rift womb glowing from within, seen from the side.',
+		],
 	];
 	for (const [id, desc] of bosses) {
 		jobs.push({
 			key: `enemy.${id}.idle`,
 			group: 'bosses',
 			prompt: UNIT_TEMPLATE('left', `${desc} A huge boss that fills the canvas.`),
-			size: BOSS_SIZE,
+			size: id === 'rift_mother' ? [480, 432] : BOSS_SIZE,
 			facing: 'left',
 			styleFile: enemyStyle,
 			concept: 'batle-1.png',
@@ -184,7 +241,7 @@ async function main(): Promise<void> {
 	let spent = 0;
 	for (const job of buildJobs()) {
 		if (group !== 'all' && job.group !== group) continue;
-		if (only && job.key !== only) continue;
+		if (only && !only.split(',').includes(job.key)) continue;
 		const rawPath = join(RAW, `${job.key}.png`);
 		if (!force && existsSync(rawPath)) {
 			skipped++;

@@ -11,6 +11,7 @@ import {
 	ENEMIES,
 	HERO_CLASSES,
 	HEROES,
+	RULES,
 } from '../../src/data/index.ts';
 import {
 	combat,
@@ -94,16 +95,18 @@ describe('Act scaling (GDD 4.3 and 22)', () => {
 		expect(warden?.maxHP).toBe(Math.round(30 * (1 + ACT_RULES.hpPerAct)));
 		if (!warden) throw new Error('no enemy');
 		const view = intentView(s, warden);
-		expect(view.damage[0]?.perHit).toBe(Math.round(7 * (1 + ACT_RULES.dmgPerAct)));
+		expect(view.damage[0]?.perHit).toBe(
+			Math.round(7 * (1 + ACT_RULES.dmgPerAct) * RULES.enemyDamageMul),
+		);
 		const a1 = combatRun('A1');
 		expect(combat(a1).enemies[0]?.maxHP).toBe(18);
 	});
 
-	test('the Act 2 boss HP is final (110) and scaling does not apply to its damage', () => {
+	test('the Act 2 boss HP is final (110) and act scaling does not apply to its damage (only the global scale)', () => {
 		const s = act2Run('BOSS2', 'boss');
 		const boss = combat(s).enemies[0];
 		expect(boss?.maxHP).toBe(110);
-		expect(boss?.dmgMul).toBe(1);
+		expect(boss?.dmgMul).toBe(RULES.enemyDamageMul);
 	});
 
 	test('elites stack the elite and the act multipliers', () => {
@@ -141,7 +144,7 @@ describe('Act 2 enemies and boss', () => {
 		const boss = combat(s).enemies[0];
 		if (!boss) throw new Error('no boss');
 		expect(intentView(s, boss).intentId).toBe('lash');
-		expect(intentView(s, boss).damage[0]?.perHit).toBe(12);
+		expect(intentView(s, boss).damage[0]?.perHit).toBe(Math.round(12 * RULES.enemyDamageMul));
 		s = run(s, { type: 'endTurn' }).s;
 		const b2 = combat(s).enemies[0];
 		expect(b2 && intentView(s, b2).intentId).toBe('confession');
@@ -165,7 +168,7 @@ describe('Act 2 enemies and boss', () => {
 		heroFx(t, 'marksman').marked = 1;
 		expect(intentView(t, saint).targets).toEqual(['marksman']);
 		// Smite 8 x act damage, rounded, then x1.5 on a Marked hero
-		const smite = Math.round(8 * (1 + ACT_RULES.dmgPerAct));
+		const smite = Math.round(8 * (1 + ACT_RULES.dmgPerAct) * RULES.enemyDamageMul);
 		expect(intentView(t, saint).damage[0]?.perHit).toBe(Math.floor(smite * 1.5));
 	});
 

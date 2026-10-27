@@ -443,6 +443,8 @@ export interface StatusView {
 export interface HeroView {
 	id: HeroClass;
 	rank: number;
+	/** Holds rank 1 without being a front-liner: Vanguard Block and any-rank play (GDD 5.2). */
+	vanguard: boolean;
 	hp: number;
 	maxHP: number;
 	stress: number;

@@ -4,7 +4,7 @@ import { intentOf, intentView, startCombat } from '../../src/core/combat.ts';
 import { chooseEncounter, markSeen } from '../../src/core/map.ts';
 import { apply, createRun } from '../../src/core/run.ts';
 import type { Command, RunState } from '../../src/core/types.ts';
-import { ACT_RULES, ENCOUNTERS, ENEMIES } from '../../src/data/index.ts';
+import { ACT_RULES, ENCOUNTERS, ENEMIES, RULES } from '../../src/data/index.ts';
 import { combat, ctxOf, enemyTarget, invalidOf, PARTY, run, setHand } from './helpers.ts';
 
 const SHIPPED_ACTS = ACT_RULES.acts;
@@ -64,7 +64,7 @@ describe('Act 3 data (GDD 23)', () => {
 		const mourner = combat(s).enemies[0];
 		const base = ENEMIES.iron_mourner?.hp as number;
 		expect(mourner?.maxHP).toBe(Math.round(base * (1 + 2 * ACT_RULES.hpPerAct)));
-		expect(mourner?.dmgMul).toBeCloseTo(1 + 2 * ACT_RULES.dmgPerAct);
+		expect(mourner?.dmgMul).toBeCloseTo((1 + 2 * ACT_RULES.dmgPerAct) * RULES.enemyDamageMul);
 	});
 });
 

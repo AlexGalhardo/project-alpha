@@ -1,6 +1,6 @@
 // Read-only selectors for the view layer. Pure functions of RunState.
 import { CAMP, HERO_CLASSES, RULES } from '../data/index.ts';
-import { costOf, playableReason, validTargets } from './cards.ts';
+import { costOf, hasVanguard, playableReason, validTargets } from './cards.ts';
 import { intentView, projectEnemyPhase, turnQueue } from './combat.ts';
 import { availableNodes } from './map.ts';
 import { enemyRank, maxHP } from './ops.ts';
@@ -56,6 +56,7 @@ function heroView(s: RunState, id: HeroClass, rank: number): HeroView {
 	return {
 		id,
 		rank,
+		vanguard: hasVanguard(id, rank),
 		hp: h.hp,
 		maxHP: maxHP(h),
 		stress: h.stress,

@@ -7,7 +7,7 @@ import { applyRite, riteLevel } from '../../src/core/rites.ts';
 import { createRun, deserialize, serialize } from '../../src/core/run.ts';
 import type { RunState } from '../../src/core/types.ts';
 import { campView } from '../../src/core/views.ts';
-import { CAMP, ELITE, ENEMIES, GOLD, HEROES, RITES, SHOP } from '../../src/data/index.ts';
+import { CAMP, ELITE, ENEMIES, GOLD, HEROES, RITES, RULES, SHOP } from '../../src/data/index.ts';
 import { combat, ctxOf, PARTY, run } from './helpers.ts';
 
 const at = (rite: number, seed = 1): RunState => applyRite(createRun(seed, PARTY), rite);
@@ -41,11 +41,11 @@ describe('Rites (GDD 13.3)', () => {
 		const s = at(2);
 		startCombat(ctxOf(s), 'EL1', 'elite');
 		const [elite, escort] = combat(s).enemies;
-		expect(elite?.dmgMul).toBe(ELITE.damageMul);
-		expect(escort?.dmgMul).toBe(RITES.commonDamageMul);
+		expect(elite?.dmgMul).toBeCloseTo(ELITE.damageMul * RULES.enemyDamageMul);
+		expect(escort?.dmgMul).toBeCloseTo(RITES.commonDamageMul * RULES.enemyDamageMul);
 		const b = at(2);
 		startCombat(ctxOf(b), 'BOSS', 'boss');
-		expect(combat(b).enemies[0]?.dmgMul).toBe(1);
+		expect(combat(b).enemies[0]?.dmgMul).toBe(RULES.enemyDamageMul);
 		expect(at(1).gold).toBe(GOLD.start);
 	});
 

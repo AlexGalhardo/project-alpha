@@ -386,8 +386,8 @@ const rows: Row[] = [
 		owner: 'confessor',
 		from: ANY,
 		target: ALLY,
-		p: { block: 10, ward: 1 },
-		up: { block: 13 },
+		p: { block: 5, ward: 1 },
+		up: { block: 8 },
 	},
 	{
 		id: 'cnf_mend',

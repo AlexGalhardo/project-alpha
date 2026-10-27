@@ -760,6 +760,6 @@ export const ENCOUNTERS: Record<string, EncounterDef> = {
 export const ELITE = {
 	hpMul: 1.25,
 	damageMul: 1.25,
-	calcifiedReduction: 2,
+	calcifiedReduction: 1,
 	oathwallBlock: 5,
 };

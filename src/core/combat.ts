@@ -7,11 +7,18 @@ import {
 	EQUIPMENT_DROP,
 	EQUIPMENT_NUMBERS,
 	GOLD,
-	HEROES,
 	RITES,
 	RULES,
 } from '../data/index.ts';
-import { cardDef, costOf, paramsOf, playableReason, resolveCard, targetMatches } from './cards.ts';
+import {
+	cardDef,
+	costOf,
+	hasVanguard,
+	paramsOf,
+	playableReason,
+	resolveCard,
+	targetMatches,
+} from './cards.ts';
 import {
 	addDebuff,
 	addStress,
@@ -90,7 +97,12 @@ export function startCombat(c: Ctx, encounterId: string, kind: CombatState['kind
 			fx,
 			intentIdx: def.fixedStart ? 0 : randInt(s, 'combat', 0, list.length - 1),
 			phase: 1,
-			dmgMul: (slot.elite ? ELITE.damageMul : 1) * actDmg * riteDmg * s.options.enemyDmgMul,
+			dmgMul:
+				(slot.elite ? ELITE.damageMul : 1) *
+				actDmg *
+				riteDmg *
+				RULES.enemyDamageMul *
+				s.options.enemyDmgMul,
 			trait: slot.elite ?? null,
 			keg: 0,
 			...(extraIntent ? { extraIntent } : {}),
@@ -411,7 +423,7 @@ function beginPlayerTurn(c: Ctx): void {
 	// Vanguard (GDD 5.2): a hero who is not a natural front-liner (frontOrder > 1) but holds rank 1
 	// braces for the enemy phase, so a party without a tank can still hold the line.
 	const vanguard = k.lineup[0];
-	if (vanguard && RULES.vanguardBlock > 0 && HEROES[vanguard].frontOrder > 1)
+	if (vanguard && RULES.vanguardBlock > 0 && hasVanguard(vanguard, 1))
 		gainBlock(c, heroRef(vanguard), RULES.vanguardBlock);
 	if (k.turn === 1) {
 		for (const id of k.lineup) {

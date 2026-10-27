@@ -5,11 +5,13 @@ import { ACT_RULES, CARDS, HEROES } from '../../src/data/index.ts';
 // won 5.8% of 2-act runs. The ally-protecting starters of the other heroes doubled their Block and
 // the Confessor got more HP; these values are the ones the simulation accepted.
 describe('anti-dominance values (GDD 8.1, 9.3)', () => {
-	test('ally-protecting starters give 10 Block (13 upgraded)', () => {
-		for (const id of ['arc_ash_veil', 'cnf_sanctuary']) {
-			expect(CARDS[id]?.params.block).toBe(10);
-			expect(CARDS[id]?.upgrade?.block).toBe(13);
-		}
+	test('ally-protecting starters give 10 Block (13 upgraded); Sanctuary 5 (8) with its Ward', () => {
+		expect(CARDS.arc_ash_veil?.params.block).toBe(10);
+		expect(CARDS.arc_ash_veil?.upgrade?.block).toBe(13);
+		// Halved back after the Vanguard pass (docs/reports/2026-10-26-sim-confessor.md): with every
+		// hero able to act from rank 1, a 10-Block Ward card kept the Confessor in 76% of wins.
+		expect(CARDS.cnf_sanctuary?.params.block).toBe(5);
+		expect(CARDS.cnf_sanctuary?.upgrade?.block).toBe(8);
 	});
 
 	test('Sandbags covers the adjacent hero with 6 Block (7 upgraded)', () => {

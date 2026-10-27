@@ -1,5 +1,8 @@
 import { describe, expect, test } from 'bun:test';
+import { playableReason } from '../../src/core/cards.ts';
+import { newCard } from '../../src/core/rewards.ts';
 import type { HeroClass } from '../../src/core/types.ts';
+import { combatView } from '../../src/core/views.ts';
 import { RULES } from '../../src/data/index.ts';
 import { combat, combatRun, heroFx, isolate, run } from './helpers.ts';
 
@@ -54,5 +57,31 @@ describe('Vanguard rule', () => {
 		const s = combatRun('A1');
 		expect(combat(s).lineup[0]).toBe('shieldbearer');
 		expect(heroFx(s, 'shieldbearer').block).toBe(0);
+	});
+
+	test('a non-tank in rank 1 may play its cards from any rank', () => {
+		const s = combatRun('A1', ['marksman', 'confessor', 'arcanist']);
+		combat(s).energy = 3;
+		expect(RULES.vanguardAnyRank).toBe(true);
+		// Aimed Shot is From H2-3; the Marksman stands in rank 1.
+		expect(playableReason(s, newCard(s, 'mrk_aimed_shot'))).toBeNull();
+	});
+
+	test('outside Vanguard the From rule still applies', () => {
+		const s = combatRun('A1');
+		combat(s).energy = 3;
+		// Shield Slam is From H1 only; the Shieldbearer in rank 2 cannot play it.
+		combat(s).lineup = ['confessor', 'shieldbearer', 'marksman'];
+		expect(playableReason(s, newCard(s, 'shb_shield_slam'))).toBe('wrong-rank');
+		combat(s).lineup = ['shieldbearer', 'confessor', 'marksman'];
+		expect(playableReason(s, newCard(s, 'shb_shield_slam'))).toBeNull();
+	});
+
+	test('the combat view marks the hero who has Vanguard', () => {
+		const s = combatRun('A1', NO_TANK);
+		const v = combatView(s);
+		expect(v?.heroes.map((h) => h.vanguard)).toEqual([true, false, false]);
+		const t = combatView(combatRun('A1'));
+		expect(t?.heroes.every((h) => !h.vanguard)).toBe(true);
 	});
 });

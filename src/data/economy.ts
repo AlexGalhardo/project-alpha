@@ -17,6 +17,10 @@ export const RULES = {
 	enrageMight: 1,
 	/** Block the rank-1 hero gains at the start of each player turn (Vanguard, GDD 5.2). */
 	vanguardBlock: 4,
+	/** A non-front-liner in rank 1 may play cards from any rank (Vanguard, GDD 5.2). */
+	vanguardAnyRank: true,
+	/** Global enemy damage scale (balance knob, applied with the act, elite and Rite multipliers). */
+	enemyDamageMul: 1.25,
 	stashMax: 6,
 	partySize: 3,
 	rows: 10,

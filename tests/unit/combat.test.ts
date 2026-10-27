@@ -13,7 +13,7 @@ import {
 	hitHero,
 } from '../../src/core/ops.ts';
 import { apply, createRun } from '../../src/core/run.ts';
-import { ENCOUNTERS, HEROES } from '../../src/data/index.ts';
+import { ELITE, ENCOUNTERS, HEROES, RULES } from '../../src/data/index.ts';
 import {
 	combat,
 	combatRun,
@@ -377,7 +377,8 @@ describe('enemies, elites and boss (GDD 10)', () => {
 		if (!t) throw new Error('no enemy');
 		t.intentIdx = 1;
 		const view = intentView(s, t);
-		expect(view.damage.map((d) => d.perHit)).toEqual([10, 10]);
+		const cleave = Math.round(8 * ELITE.damageMul * RULES.enemyDamageMul);
+		expect(view.damage.map((d) => d.perHit)).toEqual([cleave, cleave]);
 		const b = combatRun('EL2', PARTY, 1, 'elite');
 		const brute = combat(b).enemies[0];
 		expect(brute?.maxHP).toBe(58);
@@ -387,7 +388,8 @@ describe('enemies, elites and boss (GDD 10)', () => {
 			cardUid: uid as number,
 			target: enemyTarget(brute?.uid as number),
 		});
-		expect(combat(r.s).enemies[0]?.hp).toBe(58 - 4);
+		// Hack 6 minus Calcified per hit.
+		expect(combat(r.s).enemies[0]?.hp).toBe(58 - (6 - ELITE.calcifiedReduction));
 		void uid;
 	});
 

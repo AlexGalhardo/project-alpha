@@ -1,5 +1,5 @@
 // Card data access and card effect resolution (GDD 9).
-import { CARDS, EQUIPMENT_NUMBERS } from '../data/index.ts';
+import { CARDS, EQUIPMENT_NUMBERS, HEROES, RULES } from '../data/index.ts';
 import {
 	addDebuff,
 	addStress,
@@ -93,12 +93,19 @@ export function validTargets(s: RunState, inst: CardInst): Target[] {
 	}
 }
 
+/** Vanguard (GDD 5.2): the rank-1 hero when it is not a natural front-liner (frontOrder > 1). */
+export function hasVanguard(owner: HeroClass, rank: number): boolean {
+	return rank === 1 && HEROES[owner].frontOrder > 1;
+}
+
 export function playableReason(s: RunState, inst: CardInst): string | null {
 	const k = s.combat;
 	if (k?.phase !== 'player') return 'not-in-combat';
 	const rank = k.lineup.indexOf(inst.owner) + 1;
 	if (rank === 0) return 'owner-fallen';
-	if (!cardDef(inst.cardId).from.includes(rank)) return 'wrong-rank';
+	// Vanguard (GDD 5.2): a non-tank forced into rank 1 may play its cards from there.
+	const anyRank = RULES.vanguardAnyRank && hasVanguard(inst.owner, rank);
+	if (!anyRank && !cardDef(inst.cardId).from.includes(rank)) return 'wrong-rank';
 	if (costOf(inst) > k.energy) return 'no-energy';
 	if (validTargets(s, inst).length === 0) return 'no-target';
 	return null;

@@ -82,16 +82,21 @@ describe('preview equals the real result (GDD P3)', () => {
 			const s = firstCombat(seed);
 			const view = combatView(s);
 			if (!view) continue;
-			const predicted = new Map<string, number>();
-			for (const e of view.enemies) {
-				for (const d of e.intent?.damage ?? []) {
-					predicted.set(d.target, (predicted.get(d.target) ?? 0) + d.perHit * d.hits);
+			const after = apply(s, { type: 'endTurn' });
+			for (const hero of view.heroes) {
+				let block = hero.status.block;
+				let predicted = 0;
+				for (const e of view.enemies) {
+					for (const d of e.intent?.damage ?? []) {
+						if (d.target !== hero.id) continue;
+						for (let k = 0; k < d.hits; k++) {
+							const absorbed = Math.min(block, d.perHit);
+							block -= absorbed;
+							predicted += d.perHit - absorbed;
+						}
+					}
 				}
-			}
-			const r = apply(s, { type: 'endTurn' });
-			for (const h of s.party) {
-				const hits = hitsOn(r.events, h.id);
-				expect(hits).toBe(predicted.get(h.id) ?? 0);
+				expect(hitsOn(after.events, hero.id)).toBe(predicted);
 				compared++;
 			}
 		}

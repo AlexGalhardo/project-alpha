@@ -18,7 +18,7 @@ From the Map, each round is one node: Combat, Elite, Rest, Shop, Event or Treasu
 - **Turn:** you have 3 energy and draw 5 cards. Play cards while you have energy. End the turn with the button or Space. Block resets at the start of your turn.
 - **Cards:** each card has a cost, a From rank (which hero ranks can play it) and a Target. If the owner stands outside From, the card is greyed out.
 - **Playing:** tap a card, then tap a highlighted target. The preview shows the final damage or block before you confirm. Cards with no target play on the second tap.
-- **Intents:** every enemy shows its next action (icon, number, target). Enemies act in turn-queue order: Speed high to low, ties to the front rank. The queue is always visible.
+- **Intents:** every enemy shows its next action: the target heroes, the damage per hit and the number of hits, the stress or Block it gives, and the debuffs it applies with their amounts (for example "bleed 3"). Enemies act in turn-queue order: Speed high to low, ties to the front rank. The queue is always visible.
 - **Damage:** hits always land. Hit damage = (base + Might) × 1.5 if the target is Marked × 0.75 if the attacker is Weakened. Block absorbs damage before HP. Bleed and Burn ignore Block.
 - **Statuses:** Block, Might, Marked, Weakened, Bleed, Burn, Ward and Stunned. Long-press an icon for its tooltip.
 - **Stress:** each hero has 10 pips. At 10, the party loses 1 energy next turn and that hero drops to 5 stress (a Collapse).
@@ -38,9 +38,16 @@ From the Map, each round is one node: Combat, Elite, Rest, Shop, Event or Treasu
 - **Treasure:** 25 gold and one equipment, once per act.
 - **Camp:** swap a hero (30 gold), buy a card or equipment, one service (bind wounds or vigil, 12 gold), reorder ranks (free).
 
-## Sanctum (not in this build)
+## Sanctum
 
-The Sanctum is the planned choice between acts (rest, purge, temper or tithe). It is designed in GDD §23.1 and §23.6, and switched off in the data (`sanctum: false`). The build uses the plain 50% heal between acts.
+After the boss of Act 1 or 2 (not after the final boss), the Sanctum opens. Injuries clear first. Then you take exactly one of four recoveries, and the camp opens:
+
+- **Rest:** every hero to full HP.
+- **Purge:** remove 2 cards of your choice (needs 2 cards in the deck).
+- **Temper:** upgrade 2 cards of your choice.
+- **Tithe:** +60 gold.
+
+No heal happens at the Sanctum unless you choose Rest. The Sanctum replaces the plain 50% heal between acts (GDD §23.1).
 
 ## Legacy and Veteran start
 
@@ -79,9 +86,10 @@ Rites are a Beta feature in the GDD; the selector is in the build for playtestin
 
 ## Known limitations of this build
 
-- Act 2 and Act 3 are new. Their balance is a first pass (Act 3 sim: 21.9% of 3-act runs win (GDD §23.7 baseline, 200 runs); target 18–35%). Report anything that feels wrong.
+- Act 3 is the hardest act by design (GDD §23). Act 2 and Act 3 are new and their balance is a first pass (Act 3 sim: 21.9% of 3-act runs win, GDD §23.7 baseline, 200 runs; target 18–35%). Report anything that feels wrong.
 - Some Act 3 intent ids are shared with Act 1 or 2 and their text may not match Act 3 behaviour (for example Dirge). A fix is planned.
 - Sprites are generated for most units; some screens still use placeholder art.
 - UI text scale is not done. Long tooltips may need scrolling on phones.
 - Tested in Chromium only (desktop and phone-sized emulation). Safari, Firefox and real phones are not verified.
 - Autosave is per browser. What happens when the same run is open in two tabs is a manual check (QA item SV-09, not verified).
+- Known P3 mismatch (bug-kindle-intent-stale, bug-execution-shown-damage): an enemy that acts after a Kindle (+1 Might) can hit harder than its shown intent, and the Sepulchre Knight's shown Execution can exceed the hit it deals. The intent shows the damage before earlier enemies resolve. Treat the shown number as approximate until fixed.

@@ -1,6 +1,6 @@
 # Prototype QA report (2026-10-26)
 
-Scope: the prototype (Act 1 only, web), mapped item by item to `docs/qa/human-qa.md`. Scope rule from `docs/gdd.md` section 2: items for Alpha or later are N/A-PROTOTYPE.
+Scope: the prototype (Act 1 only, web), mapped item by item to `docs/qa/human-qa-prototype.md`. Scope rule from `docs/gdd.md` section 2: items for Alpha or later are N/A-PROTOTYPE.
 
 Status meanings:
 

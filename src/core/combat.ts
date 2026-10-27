@@ -195,7 +195,7 @@ export function intentView(s: RunState, e: Enemy): IntentView {
 			}
 		} else if (ef.kind === 'stress') stress += ef.amount;
 		else if (ef.kind === 'selfBlock') block += ef.amount;
-		else if (ef.kind === 'status') debuffs.push(ef.status);
+		else if (ef.kind === 'status') debuffs.push(`${ef.status} ${ef.amount}`);
 		else if (ef.kind === 'telegraph') telegraph = true;
 	}
 	return { intentId: it.id, targets, damage, stress, block, debuffs, telegraph };

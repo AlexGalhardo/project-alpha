@@ -196,10 +196,10 @@ function sanctumChoose(c: Ctx, cmd: Extract<Command, { type: 'sanctumChoose' }>)
 	if (cmd.option === 'remove' || cmd.option === 'upgrade') {
 		const upgrade = cmd.option === 'upgrade';
 		const eligible = s.deck.filter((x) => !upgrade || !x.upgraded);
-		const need = Math.min(
-			upgrade ? SANCTUM.upgradeCount : SANCTUM.removeCount,
-			eligible.length,
-		);
+		// GDD §23.1: Temper takes "as many as remain"; Purge needs the full count.
+		const need = upgrade
+			? Math.min(SANCTUM.upgradeCount, eligible.length)
+			: SANCTUM.removeCount;
 		const ok =
 			need > 0 &&
 			uids.length === need &&

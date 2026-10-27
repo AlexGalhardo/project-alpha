@@ -462,6 +462,7 @@ export interface IntentView {
 	damage: { target: HeroClass; perHit: number; hits: number }[];
 	stress: number;
 	block: number;
+	/** "<status> <amount>", e.g. "bleed 3": the amount is shown so the preview matches the tick (GDD P3). */
 	debuffs: string[];
 	telegraph: boolean;
 }

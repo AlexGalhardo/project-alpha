@@ -140,6 +140,49 @@ const ENEMIES: Spec[] = [
 	enemy('choir_thing', 80, 112, tall(P.rift1, P.rift2)),
 	enemy('ossified_brute', 80, 112, tall(P.bone0, P.ash5)),
 	enemy('rift_stalker', 80, 112, tall(P.rot0, P.rot2)),
+	// Act 3 (docs/gdd.md §23) until its generated art lands.
+	enemy(
+		'iron_mourner',
+		64,
+		80,
+		humanoid(P.iron0, P.bone1, () => undefined),
+	),
+	enemy('grave_cur', 80, 64, blob(P.ash4, P.bone1, 3)),
+	enemy(
+		'ash_cantor',
+		64,
+		80,
+		humanoid(P.ash3, P.bone2, () => undefined),
+	),
+	enemy(
+		'bronze_scribe',
+		64,
+		80,
+		humanoid(P.gold0, P.ember2, () => undefined),
+	),
+	enemy('hollow_choir', 80, 112, tall(P.bone0, P.rift2)),
+	enemy('sepulchre_knight', 80, 112, tall(P.iron0, P.ash5)),
+	enemy('wax_saint', 64, 80, tall(P.bone1, P.ember3)),
+	enemy('chain_wraith', 64, 80, tall(P.rift0, P.iron2)),
+	enemy(
+		'marrow_butcher',
+		64,
+		80,
+		humanoid(P.bone0, P.blood1, () => undefined),
+	),
+	enemy('rift_spawn', 48, 48, blob(P.rift1, P.rot2, 4)),
+	{
+		key: 'enemy.rift_mother',
+		w: 160,
+		h: 144,
+		draw: (g, w, h) => {
+			g.fillStyle(P.ash0).fillEllipse(w / 2, h / 2 + 8, w - 12, h - 20);
+			g.fillStyle(P.iron0).fillEllipse(w / 2, h / 2 + 8, w - 18, h - 26);
+			for (let i = 0; i < 6; i++) g.fillStyle(P.bone1).fillRect(20 + i * 22, 24, 6, h - 48);
+			g.fillStyle(P.rift2).fillEllipse(w / 2, h / 2 + 10, 44, 56);
+			g.fillStyle(P.rift1).fillEllipse(w / 2, h / 2 + 10, 24, 34);
+		},
+	},
 	{
 		key: 'enemy.bell_maw',
 		w: 160,

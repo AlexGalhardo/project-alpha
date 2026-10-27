@@ -1,9 +1,9 @@
 // `bun run release [patch|minor|major]`: one GitHub release per push to main (docs/adrs/0002-release-format.md).
 // Steps: gate -> bump -> CHANGELOG via git-cliff -> release commit + tag -> push -> gh release with the version's notes.
 // Re-running after a failure resumes: an existing release commit/tag is pushed and released, never bumped again.
-import { readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 
 type Bump = 'patch' | 'minor' | 'major';
 
@@ -101,3 +101,26 @@ if (succeeds(['gh', 'release', 'view', tag])) {
 	}
 	console.log(`released ${tag}`);
 }
+
+// Builds attached to every release: zipped web build always; Windows/Android when their toolchains exist.
+run(['bun', 'run', 'build'], true);
+mkdirSync('release', { recursive: true });
+const webZip = `release/ossuary-web-${tag}.tar.gz`;
+rmSync(webZip, { force: true });
+run(['tar', '-czf', webZip, '-C', 'dist', '.']);
+const assets = [webZip];
+if (process.platform === 'win32' && succeeds(['bun', 'run', 'desktop:build'])) {
+	const exe = `release/Ossuary ${tag.slice(1)}.exe`;
+	if (existsSync(exe)) assets.push(exe);
+}
+if (process.env.ANDROID_HOME && succeeds(['bun', 'run', 'android:build'])) {
+	const apk = join(tmpdir(), `ossuary-${tag}-debug.apk`);
+	copyFileSync('android/app/build/outputs/apk/debug/app-debug.apk', apk);
+	assets.push(apk);
+}
+const sums = join(tmpdir(), 'checksums.txt');
+const sha = (f: string): string =>
+	new Bun.CryptoHasher('sha256').update(readFileSync(f)).digest('hex');
+writeFileSync(sums, `${assets.map((f) => `${sha(f)}  ${basename(f)}`).join('\n')}\n`);
+run(['gh', 'release', 'upload', tag, ...assets, sums, '--clobber'], true);
+console.log(`attached ${assets.map((f) => basename(f)).join(', ')}`);
